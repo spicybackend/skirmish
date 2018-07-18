@@ -1,10 +1,10 @@
-require "granite/adapter/pg"
 require "crypto/bcrypt/password"
 
 class User < Granite::Base
   include Crypto
   adapter mysql
   primary id : Int64
+  field username : String
   field email : String
   field hashed_password : String
   timestamps
