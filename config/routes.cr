@@ -29,6 +29,7 @@ Amber::Server.configure do
   end
 
   routes :web do
+    resources "/leagues", LeagueController
     get "/profile", UserController, :show
     get "/profile/edit", UserController, :edit
     patch "/profile", UserController, :update

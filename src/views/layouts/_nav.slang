@@ -13,3 +13,5 @@ a class="nav-item #{active}" href="/" Home
   - active = context.request.path == "/signin" ? "active" : ""
   a class="nav-item nav-item-auth nav-item-auth-signin #{active}" href="/signin"
     | Sign In
+- active = context.request.path == "/leagues" ? "active" : ""
+a class="nav-item #{active}" href="/leagues" Leagues
