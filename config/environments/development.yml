@@ -1,0 +1,37 @@
+secret_key_base: mWB28yMt7tR7JTU4ZrmljTJwF1eO6LWP67BooxcwZdI
+port: 3000
+name: stratify
+logging:
+  severity: debug
+  colorize: true
+  filter:
+    - password
+    - confirm_password
+  skip:
+    -
+  context:
+    - request
+    - session
+    - headers
+    - cookies
+    - params
+
+host: 0.0.0.0
+port_reuse: true
+process_count: 1
+# ssl_key_file:
+# ssl_cert_file:
+redis_url: "redis://localhost:6379"
+database_url: mysql://root@localhost:3306/stratify_development
+session:
+  key: amber.session
+  store: signed_cookie
+  expires: 0
+
+smtp:
+  enabled: false
+
+
+secrets:
+  description: Store your development secrets credentials and settings here.
+
