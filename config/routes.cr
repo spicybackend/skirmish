@@ -10,6 +10,7 @@ Amber::Server.configure do
     plug Amber::Pipe::Session.new
     plug Amber::Pipe::Flash.new
     plug Amber::Pipe::CSRF.new
+    plug Authenticate.new
   end
 
   pipeline :api do
@@ -28,6 +29,14 @@ Amber::Server.configure do
   end
 
   routes :web do
+    get "/profile", UserController, :show
+    get "/profile/edit", UserController, :edit
+    patch "/profile", UserController, :update
+    get "/signin", SessionController, :new
+    post "/session", SessionController, :create
+    get "/signout", SessionController, :delete
+    get "/signup", RegistrationController, :new
+    post "/registration", RegistrationController, :create
     get "/", HomeController, :index
   end
 
