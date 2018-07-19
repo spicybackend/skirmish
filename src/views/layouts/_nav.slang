@@ -5,7 +5,7 @@ a class="nav-item #{active}" href="/" Home
     | Sign Out
   - active = context.request.path == "/profile" ? "active" : ""
   a class="nav-item nav-item-auth nav-item-auth-profile #{active}" href="/profile"
-    == current_user.username
+    == "@#{current_user.username}"
 - else
   - active = context.request.path == "/signup" ? "active" : ""
   a class="nav-item nav-item-auth nav-item-auth-signup #{active}" href="/signup"

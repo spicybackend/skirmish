@@ -3,11 +3,17 @@ require "crypto/bcrypt/password"
 class User < Granite::Base
   include Crypto
   adapter mysql
+
   primary id : Int64
   field username : String
   field email : String
   field hashed_password : String
+
   timestamps
+
+  def player
+    Player.find_by(user_id: id)
+  end
 
   validate :email, "is required", ->(user : User) do
     (email = user.email) ? !email.empty? : false
@@ -15,7 +21,7 @@ class User < Granite::Base
 
   validate :email, "already in use", ->(user : User) do
     existing = User.find_by email: user.email
-    !existing
+    !existing || existing.id == user.id
   end
 
   validate :password, "is too short", ->(user : User) do
