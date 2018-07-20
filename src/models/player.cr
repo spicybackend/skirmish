@@ -5,6 +5,8 @@ class Player < Granite::Base
   belongs_to :user
   has_many :memberships
   has_many :leagues, through: :memberships
+  has_many :participations
+  has_many :games, through: :participations
 
   timestamps
 
