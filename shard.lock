@@ -38,7 +38,7 @@ shards:
 
   granite:
     github: amberframework/granite
-    version: 0.12.1
+    commit: b924fa42ae6dd30cfed9e8961659f2cdc69be68e
 
   i18n:
     github: TechMagister/i18n.cr
