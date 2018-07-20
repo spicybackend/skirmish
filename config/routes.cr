@@ -29,15 +29,20 @@ Amber::Server.configure do
   end
 
   routes :web do
+    post "/leagues/:league_id/join", MembershipController, :create
+    patch "/leagues/:league_id/:leave_or_join", MembershipController, :update
     resources "/leagues", LeagueController
+
     get "/profile", UserController, :show
     get "/profile/edit", UserController, :edit
     patch "/profile", UserController, :update
+
     get "/signin", SessionController, :new
     post "/session", SessionController, :create
     get "/signout", SessionController, :delete
     get "/signup", RegistrationController, :new
     post "/registration", RegistrationController, :create
+
     get "/", HomeController, :index
   end
 

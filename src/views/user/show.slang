@@ -13,8 +13,8 @@ p
     - leagues = player.leagues
     - if leagues.any?
       ul
-        == player.leagues.each do |league|
-          li league.name
+        - player.leagues.each do |league|
+          li = league.name
         end
     - else
       | No memberships to show

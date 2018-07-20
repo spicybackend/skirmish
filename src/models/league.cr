@@ -9,4 +9,10 @@ class League < Granite::Base
   field description : String
 
   timestamps
+
+  def active_players
+    Player.all("JOIN memberships WHERE players.id = memberships.player_id
+      AND league_id = ?
+      AND left_at IS NULL", id)
+  end
 end

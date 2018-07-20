@@ -5,7 +5,13 @@ class LeagueController < ApplicationController
   end
 
   def show
-    if league = League.find params["id"]
+    if league = League.find(params["id"])
+      player = current_user.try(&.player)
+      membership = Membership.find_by(
+        player_id: player.try(&.id),
+        league_id: league.id
+      ) || Membership.new
+
       render("show.slang")
     else
       flash["warning"] = "League with ID #{params["id"]} Not Found"

@@ -7,4 +7,11 @@ class Player < Granite::Base
   has_many :leagues, through: :memberships
 
   timestamps
+
+  def in_league?(league : League)
+    !!Membership.find_by(
+      player_id: id,
+      league_id: league.id
+    ).try(&.active?)
+  end
 end
