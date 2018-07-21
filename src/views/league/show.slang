@@ -7,6 +7,9 @@ p
   == link_to("Delete", "/leagues/#{league.id}?_csrf=#{csrf_token}", "data-method": "delete", "data-confirm": "Are you sure?", class: "btn btn-danger btn-sm")
 
 h2 Members
+- if membership.active?
+  == link_to("Log Game", "/leagues/#{league.id}/games/new", class: "btn btn-primary btn-sm")
+
 - if current_user
   == render(partial: "_membership_form.slang")
 

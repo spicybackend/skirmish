@@ -31,6 +31,7 @@ Amber::Server.configure do
   routes :web do
     post "/leagues/:league_id/join", MembershipController, :create
     patch "/leagues/:league_id/:leave_or_join", MembershipController, :update
+    resources "/leagues/:league_id/games", GameController, except: [:index, :edit, :update]
     resources "/leagues", LeagueController
 
     get "/profile", UserController, :show
