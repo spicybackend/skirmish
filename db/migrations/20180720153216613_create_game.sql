@@ -1,6 +1,6 @@
 -- +micrate Up
 CREATE TABLE games (
-  id BIGINT PRIMARY KEY,
+  id BIGINT PRIMARY KEY AUTO_INCREMENT,
 
   league_id BIGINT,
   winner_id BIGINT,

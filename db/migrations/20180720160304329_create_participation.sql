@@ -1,6 +1,6 @@
 -- +micrate Up
 CREATE TABLE participations (
-  id BIGINT PRIMARY KEY,
+  id BIGINT PRIMARY KEY AUTO_INCREMENT,
 
   game_id BIGINT,
   player_id BIGINT,

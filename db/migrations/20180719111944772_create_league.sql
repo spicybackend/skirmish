@@ -1,6 +1,6 @@
 -- +micrate Up
 CREATE TABLE leagues (
-  id BIGINT PRIMARY KEY,
+  id BIGINT PRIMARY KEY AUTO_INCREMENT,
   name VARCHAR(32),
   description VARCHAR(1024),
   created_at TIMESTAMP,

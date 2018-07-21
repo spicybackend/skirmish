@@ -1,6 +1,6 @@
 -- +micrate Up
 CREATE TABLE memberships (
-  id BIGINT PRIMARY KEY,
+  id BIGINT PRIMARY KEY AUTO_INCREMENT,
 
   player_id BIGINT,
   league_id BIGINT,

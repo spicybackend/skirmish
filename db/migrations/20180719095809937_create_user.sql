@@ -1,6 +1,6 @@
 -- +micrate Up
 CREATE TABLE users (
-  id BIGINT PRIMARY KEY,
+  id BIGINT PRIMARY KEY AUTO_INCREMENT,
   email VARCHAR(255),
   hashed_password VARCHAR(60),
   created_at TIMESTAMP,

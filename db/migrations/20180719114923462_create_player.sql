@@ -1,6 +1,6 @@
 -- +micrate Up
 CREATE TABLE players (
-  id BIGINT PRIMARY KEY,
+  id BIGINT PRIMARY KEY AUTO_INCREMENT,
   user_id BIGINT,
 
   created_at TIMESTAMP,
