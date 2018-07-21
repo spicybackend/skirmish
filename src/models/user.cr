@@ -11,6 +11,8 @@ class User < Granite::Base
 
   timestamps
 
+  after_create :associate_new_player
+
   def player
     Player.find_by(user_id: id)
   end
@@ -50,4 +52,10 @@ class User < Granite::Base
   end
 
   private getter new_password : String?
+
+  private def associate_new_player
+    Player.create(
+      user_id: id
+    )
+  end
 end
