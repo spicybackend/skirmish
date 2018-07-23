@@ -26,6 +26,11 @@ class User < Granite::Base
     !existing || existing.id == user.id
   end
 
+  validate :username, "already in use", ->(user : User) do
+    existing = User.find_by username: user.username
+    !existing || existing.id == user.id
+  end
+
   validate :password, "is too short", ->(user : User) do
     user.password_changed? ? user.valid_password_size? : true
   end
