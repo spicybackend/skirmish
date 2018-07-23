@@ -1,4 +1,13 @@
 class GameController < ApplicationController
+  before_action do
+    all do
+      redirect_to(
+        location: "/signin",
+        status: 302
+      ) unless current_user
+    end
+  end
+
   def show
     if game = Game.find(params["id"])
       render("show.slang")
@@ -15,18 +24,33 @@ class GameController < ApplicationController
 
   def new
     game = Game.new
-    render("new.slang")
+    league = League.find(params["league_id"])
+    players = Player.all
+
+    if league
+      render("new.slang")
+    else
+      flash["danger"] = "Can't find league"
+      redirect_to "/leagues"
+    end
   end
 
   def create
     game = Game.new(game_params.validate!)
+    league = League.find(params["league_id"])
+    players = Player.all
 
-    if game.valid? && game.save
-      flash["success"] = "Created game successfully."
-      redirect_to "/leauges/#{game.league_id}/games/#{game.id}"
+    if league
+      if game.valid? && game.save
+        flash["success"] = "Created game successfully."
+        redirect_to "/leauges/#{game.league_id}/games/#{game.id}"
+      else
+        flash["danger"] = "Could not create game!"
+        render("new.slang")
+      end
     else
-      flash["danger"] = "Could not create game!"
-      render("new.slang")
+      flash["danger"] = "Can't find league"
+      redirect_to "/leagues"
     end
   end
 

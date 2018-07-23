@@ -1,5 +1,7 @@
 import Amber from 'amber'
 
+import "./game.js"
+
 if (!Date.prototype.toGranite) {
   (function() {
 

@@ -10,6 +10,10 @@ class Player < Granite::Base
 
   timestamps
 
+  def tag
+    user.username
+  end
+
   def in_league?(league : League)
     !!Membership.find_by(
       player_id: id,
