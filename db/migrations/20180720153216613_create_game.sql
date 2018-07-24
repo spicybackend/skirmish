@@ -10,7 +10,7 @@ CREATE TABLE games (
 
   FOREIGN KEY (league_id) REFERENCES leagues(id),
   FOREIGN KEY (winner_id) REFERENCES players(id)
-)
+);
 
 -- +micrate Down
 DROP TABLE IF EXISTS games;
