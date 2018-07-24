@@ -8,7 +8,8 @@ p
 
 h2 Members
 - if membership.active?
-  == link_to("Log Game", "/leagues/#{league.id}/games/new", class: "btn btn-primary btn-sm")
+  .form-group
+    == link_to("Log Game", "/leagues/#{league.id}/games/new", class: "btn btn-primary btn-sm")
 
 - if current_user
   == render(partial: "_membership_form.slang")
