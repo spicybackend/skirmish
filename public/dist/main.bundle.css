@@ -1,6 +1,6 @@
-div.simple-logger {
+div#simple-logger {
   display: flex; }
-  div.simple-logger span.sentence-part {
+  div#simple-logger span.sentence-part {
     line-height: 1.5;
     font-weight: 400;
     padding: .375rem .75rem; }

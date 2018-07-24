@@ -10,6 +10,10 @@ class Player < Granite::Base
 
   timestamps
 
+  def ==(other)
+    !other.nil? && self.class == other.class && self.id == other.id
+  end
+
   def tag
     user.username
   end
