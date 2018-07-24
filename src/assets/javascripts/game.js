@@ -10,14 +10,14 @@ if (document.getElementById('simple-logger')) {
       let newStatusTitle = item.innerText.trim()
 
       item.innerText = statusDropdown.innerText.trim()
-      item.setAttribute('data-status', statusField.getAttribute('content').trim())
+      item.setAttribute('data-status', statusField.getAttribute('value').trim())
 
       statusDropdown.innerText = newStatusTitle
-      statusField.setAttribute('content', newStatus)
+      statusField.setAttribute('value', newStatus)
     })
   })
 
-  let playerField = document.getElementById('other-player-id')
+  let playerField = document.getElementById('opponent-id')
   let playerDropdown = document.getElementById('player-dropdown')
   let playerDropdownOptions = document.getElementById('player-dropdown-options')
 
@@ -28,10 +28,10 @@ if (document.getElementById('simple-logger')) {
       let newPlayerName = item.innerText.trim()
 
       item.innerText = playerDropdown.innerText.trim()
-      item.setAttribute('data-player-id', playerField.getAttribute('content').trim())
+      item.setAttribute('data-player-id', playerField.getAttribute('value').trim())
 
       playerDropdown.innerText = newPlayerName
-      playerField.setAttribute('content', newPlayerId)
+      playerField.setAttribute('value', newPlayerId)
     })
   })
 }

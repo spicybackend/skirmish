@@ -1,2 +1,3 @@
 h1 | Game
 p | The winner was...
+  == game.winner.try(&.tag)

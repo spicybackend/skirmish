@@ -41,13 +41,35 @@ class GameController < ApplicationController
     league = League.find(params["league_id"])
 
     if league
+      if params[:status] == "won"
+        winner_id = current_player.try(&.id)
+        loser_id = params[:opponent_id].to_i64
+      else
+        loser_id = current_player.try(&.id)
+        winner_id = params[:opponent_id].to_i64
+      end
+
+      game.winner_id = winner_id
+
       if game.valid? && game.save
+        Participation.create!(
+          game_id: game.id,
+          player_id: winner_id,
+          winner: true
+        )
+
+        Participation.create!(
+          game_id: game.id,
+          player_id: loser_id,
+          winner: false
+        )
+
         flash["success"] = "Created game successfully."
-        redirect_to "/leauges/#{game.league_id}/games/#{game.id}"
+        redirect_to "/leagues/#{game.league_id}/games/#{game.id}"
       else
         other_players = league.active_players.reject { |player| player == current_player }
 
-        flash["danger"] = "Could not create game!"
+        flash["danger"] = "Could not create game! #{game.errors.to_s}"
         render("new.slang")
       end
     else
@@ -71,9 +93,12 @@ class GameController < ApplicationController
   end
 
   def game_params
+    params[:opponent_id] = params["opponent-id"]
+
     params.validation do
       required(:league_id) { |f| !f.nil? }
-      required(:winner_id) { |f| !f.nil? }
+      required(:opponent_id) { |f| !f.blank? }
+      required(:status) { |f| !f.blank? }
     end
   end
 end

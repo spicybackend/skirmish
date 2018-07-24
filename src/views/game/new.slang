@@ -7,7 +7,7 @@ h1 New Game
       span class="sentence-part" I
 
       div class="status-selection"
-        == hidden_field name: "status", content: "won"
+        == hidden_field name: "status", value: "won"
         button id="status-dropdown" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
           | won
         div id="status-dropdown-options" class="dropdown-menu" aria-labelledby="dropdown-status"
@@ -18,7 +18,7 @@ h1 New Game
 
       div class="player-selction"
         - first_player = other_players.shift
-        == hidden_field name: "other-player-id", content: "#{first_player.try(&.id) || -1}"
+        == hidden_field name: "opponent-id", value: "#{first_player.try(&.id)}"
         button id="player-dropdown" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
           == first_player.tag
         div id="player-dropdown-options" class="dropdown-menu" aria-labelledby="dropdown-player"
@@ -27,5 +27,5 @@ h1 New Game
               = "#{player.tag}"
 
   .form-group
-  == submit "Log Game", class: "btn btn-primary"
-  == link_to("back", "/leagues/#{league.id}", class: "btn btn-light")
+    == submit "Log Game", class: "btn btn-primary"
+    == link_to("back", "/leagues/#{league.id}", class: "btn btn-light")
