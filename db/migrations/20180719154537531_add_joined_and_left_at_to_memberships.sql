@@ -1,6 +1,6 @@
 -- +micrate Up
 ALTER TABLE memberships
-  ADD joined_at TIMESTAMP NULL DEFAULT NULL,
+  ADD joined_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   ADD left_at TIMESTAMP NULL DEFAULT NULL;
 
 UPDATE memberships
