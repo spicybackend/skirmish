@@ -29,6 +29,14 @@ class GameController < ApplicationController
     if league
       other_players = league.active_players.reject { |player| player == current_player }
 
+      if other_players.empty?
+        flash["warning"] = "There are no other players to log against"
+        redirect_to(
+          location: "/leagues/#{league.id}",
+          status: 302
+        ) && return
+      end
+
       render("new.slang")
     else
       flash["danger"] = "Can't find league"
