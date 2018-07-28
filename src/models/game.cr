@@ -12,5 +12,13 @@ class Game < Granite::Base
     Player.find(winner_id)
   end
 
+  def losers
+    players.all("AND players.id != ?", [winner_id])
+  end
+
+  def loser
+    losers.first
+  end
+
   timestamps
 end

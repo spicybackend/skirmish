@@ -12,6 +12,9 @@ class LeagueController < ApplicationController
         league_id: league.id
       ) || Membership.new
 
+      # TODO add and use confirmed_at
+      recent_games = league.games.all("ORDER BY created_at DESC LIMIT 5")
+
       render("show.slang")
     else
       flash["warning"] = "League with ID #{params["id"]} Not Found"

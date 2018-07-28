@@ -2,6 +2,7 @@ class League < Granite::Base
   adapter mysql
   table_name leagues
 
+  has_many :games
   has_many :memberships
   has_many :players, through: :memberships
 
