@@ -21,7 +21,7 @@ class LeagueController < ApplicationController
 
       render("show.slang")
     else
-      flash["warning"] = "League with ID #{params["id"]} Not Found"
+      flash["warning"] = "Can't find league"
       redirect_to "/leagues"
     end
   end
