@@ -1,4 +1,8 @@
 class MembershipController < ApplicationController
+  before_action do
+    all { redirect_signed_out_user }
+  end
+
   def create
     if league_id = params["league_id"]
       if player = Player.find_by(user_id: session[:user_id])
@@ -48,7 +52,7 @@ class MembershipController < ApplicationController
     end
   end
 
-  def membership_params
+  private def membership_params
     params.validation do
       required(:league_id) { |f| !f.nil? }
     end

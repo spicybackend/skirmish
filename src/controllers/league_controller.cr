@@ -1,4 +1,8 @@
 class LeagueController < ApplicationController
+  before_action do
+    only [:new, :create, :edit, :update, :destroy] { redirect_signed_out_user }
+  end
+
   def index
     leagues = League.all
     render("index.slang")

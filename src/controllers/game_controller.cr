@@ -1,11 +1,6 @@
 class GameController < ApplicationController
   before_action do
-    all do
-      redirect_to(
-        location: "/signin",
-        status: 302
-      ) unless current_player
-    end
+    all { redirect_signed_out_user }
   end
 
   def show
