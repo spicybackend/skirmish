@@ -1,12 +1,11 @@
 -- +micrate Up
-CREATE TABLE leagues (
+CREATE TABLE users (
   id BIGINT PRIMARY KEY AUTO_INCREMENT,
-  name VARCHAR(32),
-  description VARCHAR(1024),
+  email VARCHAR(255),
+  hashed_password VARCHAR(60),
   created_at TIMESTAMP,
   updated_at TIMESTAMP
 );
 
-
 -- +micrate Down
-DROP TABLE IF EXISTS leagues;
+DROP TABLE IF EXISTS users;

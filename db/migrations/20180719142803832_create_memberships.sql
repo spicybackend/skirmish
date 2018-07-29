@@ -8,8 +8,12 @@ CREATE TABLE memberships (
   created_at TIMESTAMP,
   updated_at TIMESTAMP,
 
-  FOREIGN KEY (player_id) REFERENCES players(id),
-  FOREIGN KEY (league_id) REFERENCES leagues(id)
+  CONSTRAINT membership_player_fk
+    FOREIGN KEY (player_id)
+    REFERENCES players(id) ON DELETE CASCADE,
+  CONSTRAINT membership_league_fk
+    FOREIGN KEY (league_id)
+    REFERENCES leagues(id) ON DELETE CASCADE
 );
 
 -- +micrate Down

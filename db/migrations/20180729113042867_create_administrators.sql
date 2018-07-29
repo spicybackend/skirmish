@@ -7,7 +7,9 @@ CREATE TABLE administrators (
   created_at TIMESTAMP,
   updated_at TIMESTAMP,
 
-  FOREIGN KEY (user_id) REFERENCES users(id)
+  CONSTRAINT administrator_user_fk
+    FOREIGN KEY (user_id)
+    REFERENCES users(id) ON DELETE CASCADE
 );
 
 -- +micrate Down

@@ -6,7 +6,9 @@ CREATE TABLE players (
   created_at TIMESTAMP,
   updated_at TIMESTAMP,
 
-  FOREIGN KEY (user_id) REFERENCES users(id)
+  CONSTRAINT player_user_fk
+    FOREIGN KEY (user_id)
+    REFERENCES users(id) ON DELETE CASCADE
 );
 
 INSERT INTO players (user_id, created_at, updated_at)

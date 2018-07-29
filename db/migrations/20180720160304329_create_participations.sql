@@ -9,8 +9,12 @@ CREATE TABLE participations (
   created_at TIMESTAMP,
   updated_at TIMESTAMP,
 
-  FOREIGN KEY (game_id) REFERENCES games(id),
-  FOREIGN KEY (player_id) REFERENCES players(id)
+  CONSTRAINT participation_game_fk
+    FOREIGN KEY (game_id)
+    REFERENCES games(id) ON DELETE CASCADE,
+  CONSTRAINT participation_player_fk
+    FOREIGN KEY (player_id)
+    REFERENCES players(id)
 );
 
 -- +micrate Down
