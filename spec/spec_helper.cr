@@ -5,6 +5,7 @@ require "micrate"
 require "garnet_spec"
 
 require "../config/*"
+require "./support/*"
 
 Micrate::DB.connection_url = Amber.settings.database_url
 
