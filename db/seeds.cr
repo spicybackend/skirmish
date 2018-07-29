@@ -6,6 +6,11 @@ admin.email = "admin@example.com"
 admin.password = "password"
 admin.save!
 
+
+Administrator.create!(
+  user_id: admin.id
+)
+
 unless Amber.env.production?
   alice = User.new
   alice.username = "Alice"

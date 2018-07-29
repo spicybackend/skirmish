@@ -13,10 +13,6 @@ class User < Granite::Base
 
   after_create :associate_new_player
 
-  def player
-    Player.find_by(user_id: id)
-  end
-
   validate :email, "is required", ->(user : User) do
     (email = user.email) ? !email.empty? : false
   end
@@ -33,6 +29,14 @@ class User < Granite::Base
 
   validate :password, "is too short", ->(user : User) do
     user.password_changed? ? user.valid_password_size? : true
+  end
+
+  def player
+    Player.find_by(user_id: id)
+  end
+
+  def admin?
+    Administrator.find_by(user_id: id)
   end
 
   def password=(password)
