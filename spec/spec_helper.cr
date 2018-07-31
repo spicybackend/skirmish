@@ -7,7 +7,7 @@ require "garnet_spec"
 require "../config/*"
 require "./support/*"
 
-Micrate::DB.connection_url = Amber.settings.database_url
+Micrate::DB.connection_url = ENV["DATABASE_URL"]? || Amber.settings.database_url
 
 # Automatically run migrations on the test database
 Micrate::Cli.run_up
