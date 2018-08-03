@@ -1,8 +1,75 @@
-$font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
-$background-color: #f4994b;
-$nav-item-color: #ffe4cd;
-
 @import "game";
+
+$font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+$brand1: #333;
+$brand2: #f6f930;
+$brand3: #3e6990;
+
+$dark-grey: #333;
+
+$red: #db2b39;
+$green: #7bc950;
+$blue: #5da9e9;
+$yellow: #f3a712;
+
+$amber-orange: #f4994b;
+
+$background-color: $brand1;
+$nav-item-color: $blue; //
+
+.btn-primary {
+  // color: #fff;
+  background-color: $blue;
+  border-color: $blue;
+
+  &:hover {
+    background-color: darken($blue, 10%);
+    border-color: darken($blue, 10%);
+  }
+}
+
+.btn-success {
+  // color: #fff;
+  background-color: $green;
+  border-color: $green;
+
+  &:hover {
+    background-color: darken($green, 10%);
+    border-color: darken($green, 10%);
+  }
+}
+
+.btn-danger {
+  // color: #fff;
+  background-color: $red;
+  border-color: $red;
+
+  &:hover {
+    background-color: darken($red, 10%);
+    border-color: darken($red, 10%);
+  }
+}
+
+.btn-light {
+  background-color: #fff;
+  border-color: #fff;
+
+  &:hover {
+    background-color: darken(#fff, 10%);
+    border-color: darken(#fff, 10%);
+  }
+}
+
+.btn-dark {
+  background-color: $dark-grey;
+  border-color: $dark-grey;
+
+  &:hover {
+    background-color: darken($dark-grey, 10%);
+    border-color: darken($dark-grey, 10%);
+  }
+}
 
 /*
  * Globals
@@ -10,6 +77,7 @@ $nav-item-color: #ffe4cd;
 body {
   font-family: $font-stack;
   color: #555;
+  background-color: #eee;
 }
 
 h1, .h1,

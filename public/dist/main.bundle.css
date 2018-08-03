@@ -5,12 +5,48 @@ div#simple-logger {
     font-weight: 400;
     padding: .375rem .75rem; }
 
+.btn-primary {
+  background-color: #5da9e9;
+  border-color: #5da9e9; }
+  .btn-primary:hover {
+    background-color: #3091e3;
+    border-color: #3091e3; }
+
+.btn-success {
+  background-color: #7bc950;
+  border-color: #7bc950; }
+  .btn-success:hover {
+    background-color: #61b036;
+    border-color: #61b036; }
+
+.btn-danger {
+  background-color: #db2b39;
+  border-color: #db2b39; }
+  .btn-danger:hover {
+    background-color: #b41f2b;
+    border-color: #b41f2b; }
+
+.btn-light {
+  background-color: #fff;
+  border-color: #fff; }
+  .btn-light:hover {
+    background-color: #e6e6e6;
+    border-color: #e6e6e6; }
+
+.btn-dark {
+  background-color: #333;
+  border-color: #333; }
+  .btn-dark:hover {
+    background-color: #1a1a1a;
+    border-color: #1a1a1a; }
+
 /*
  * Globals
  */
 body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  color: #555; }
+  color: #555;
+  background-color: #eee; }
 
 h1, .h1,
 h2, .h2,
@@ -34,7 +70,7 @@ h6, .h6 {
  * Masthead for nav
  */
 .masthead {
-  background-color: #f4994b;
+  background-color: #333;
   -webkit-box-shadow: inset 0 -2px 5px rgba(0, 0, 0, 0.1);
   box-shadow: inset 0 -2px 5px rgba(0, 0, 0, 0.1); }
 
@@ -44,7 +80,7 @@ h6, .h6 {
   display: inline-block;
   padding: 10px;
   font-weight: 500;
-  color: #ffe4cd; }
+  color: #5da9e9; }
 
 .nav-item:hover,
 .nav-item:focus {
@@ -72,7 +108,7 @@ h6, .h6 {
   padding-top: 20px; }
 
 #logo {
-  background-color: #f4994b;
+  background-color: #333;
   background-image: url(/dist/images/logo.png);
   background-size: contain;
   width: 200px;
