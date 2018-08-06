@@ -135,4 +135,15 @@ h6, .h6 {
   order: 9990;
   margin-left: auto; }
 
+tr.clickable-row {
+  cursor: pointer;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out; }
+  tr.clickable-row:hover {
+    color: white;
+    background-color: #5da9e9; }
+
+.table-striped tbody tr.clickable-row:nth-of-type(2n+1):hover {
+  color: white;
+  background-color: #5da9e9; }
+
 /*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJtYWluLmJ1bmRsZS5jc3MiLCJzb3VyY2VSb290IjoiIn0=*/

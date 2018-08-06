@@ -9,7 +9,7 @@ h2 Recent Games
         th When
     tbody
       - recent_games.each do |game|
-        tr
+        tr class="clickable-row" onclick="document.location='/leagues/#{league.id}/games/#{game.id}'"
           td = game.winner.try(&.tag)
           td = game.loser.try(&.tag)
           // TODO look into readable date options
