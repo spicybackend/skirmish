@@ -40,44 +40,40 @@ class GameController < ApplicationController
   end
 
   def create
-    game = Game.new(game_params.validate!)
-    league = League.find(params["league_id"])
+    return unless player = current_player
 
-    if league
-      if params[:status] == "won"
-        winner_id = current_player.try(&.id)
-        loser_id = params[:opponent_id].to_i64
-      else
-        loser_id = current_player.try(&.id)
-        winner_id = params[:opponent_id].to_i64
-      end
+    league = League.find(params[:league_id].to_i64)
+    other_player = Player.find(params["opponent-id"].to_i64)
 
-      game.winner_id = winner_id
-
-      if game.valid? && game.save
-        Participation.create!(
-          game_id: game.id,
-          player_id: winner_id,
-          winner: true
-        )
-
-        Participation.create!(
-          game_id: game.id,
-          player_id: loser_id,
-          winner: false
-        )
-
-        flash["success"] = "Created game successfully."
-        redirect_to "/leagues/#{game.league_id}/games/#{game.id}"
-      else
-        other_players = league.active_players.reject { |player| player == current_player }
-
-        flash["danger"] = "Could not create game! #{game.errors.to_s}"
-        render("new.slang")
-      end
-    else
+    unless league
       flash["danger"] = "Can't find league"
-      redirect_to "/leagues"
+      redirect_to("/leagues"); return
+    end
+
+    unless other_player
+      flash["danger"] = "Can't find opponent"
+      other_players = league.active_players.reject { |player| player == current_player }
+      render("new.slang")
+      return
+    end
+
+    winner, loser = params[:status] == "won" ? [player, other_player] : [other_player, player]
+
+    game_logger = LogGame.new(
+      winner: winner,
+      loser: loser,
+      league: league
+    )
+
+    game_logger.call
+
+    if game = game_logger.game
+      flash["success"] = "Game logged."
+      redirect_to "/leagues/#{league.id}/games/#{game.id}"
+    else
+      flash["danger"] = game_logger.errors.to_s
+      other_players = league.active_players.reject { |player| player == current_player }
+      render("new.slang")
     end
   end
 
@@ -96,11 +92,9 @@ class GameController < ApplicationController
   end
 
   def game_params
-    params[:opponent_id] = params["opponent-id"]
-
     params.validation do
       required(:league_id) { |f| !f.nil? }
-      required(:opponent_id) { |f| !f.blank? }
+      required("opponent-id") { |f| !f.blank? }
       required(:status) { |f| !f.blank? }
     end
   end

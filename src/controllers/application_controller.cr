@@ -13,7 +13,7 @@ class ApplicationController < Amber::Controller::Base
   end
 
   def signed_in?
-    current_user ? true : false
+    current_user && current_player ? true : false
   end
 
   private def redirect_signed_out_user
