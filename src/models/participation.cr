@@ -5,5 +5,11 @@ class Participation < Granite::Base
   belongs_to :game
   belongs_to :player
 
+  field won : Bool
+
   timestamps
+
+  def won?
+    !!won
+  end
 end
