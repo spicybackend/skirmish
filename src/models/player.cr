@@ -24,4 +24,16 @@ class Player < Granite::Base
       league_id: league.id
     ).try(&.active?)
   end
+
+  def rating_for(league : League)
+    latest_participation = Participation.first(
+      "JOIN games on participations.game_id = games.id
+      WHERE participations.player_id =?
+      AND games.league_id = ?
+      ORDER BY participations.created_at DESC",
+      [id, league.id]
+    )
+
+    latest_participation.try(&.rating) || league.start_rating || League::DEFAULT_START_RATING
+  end
 end

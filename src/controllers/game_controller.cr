@@ -59,15 +59,15 @@ class GameController < ApplicationController
 
     winner, loser = params[:status] == "won" ? [player, other_player] : [other_player, player]
 
-    game_logger = LogGame.new(
+    game_logger = League::LogGame.new(
       winner: winner,
       loser: loser,
       league: league
     )
 
-    game_logger.call
+    if game_logger.call
+      game = game_logger.game
 
-    if game = game_logger.game
       flash["success"] = "Game logged."
       redirect_to "/leagues/#{league.id}/games/#{game.id}"
     else

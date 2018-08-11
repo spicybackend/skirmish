@@ -1,9 +1,10 @@
-class LogGame
-  getter winner : Player, loser : Player, league : League
+class League::LogGame
+  getter winner, loser, league
 
-  property game : Game | Nil, errors : Array(String)
+  property game : Game, errors : Array(String)
 
-  def initialize(@winner, @loser, @league)
+  def initialize(@winner : Player, @loser : Player, @league : League)
+    @game = Game.new
     @errors = [] of String
   end
 
@@ -18,28 +19,43 @@ class LogGame
       return false
     end
 
-    game = Game.new
     game.winner_id = winner.id
     game.league = league
 
     if game.valid? && game.save
+      old_winner_rating = winner.rating_for(league)
+      old_loser_rating = loser.rating_for(league)
+
+      new_winner_rating = Rating::DetermineNewRating.new(
+        old_rating: old_winner_rating,
+        other_rating: old_loser_rating,
+        won: true,
+        league: league
+      ).call
+
+      new_loser_rating = Rating::DetermineNewRating.new(
+        old_rating: old_loser_rating,
+        other_rating: old_winner_rating,
+        won: false,
+        league: league
+      ).call
+
       Participation.create!(
         game_id: game.id,
         player_id: winner.id,
         won: true,
-        rating: league.start_rating
+        rating: new_winner_rating
       )
 
       Participation.create!(
         game_id: game.id,
         player_id: loser.id,
         won: false,
-        rating: league.start_rating
+        rating: new_loser_rating
       )
 
-      @game = game
+      return true
     else
-      raise game.errors.to_s
       @errors += game.errors.map(&.to_s).compact
 
       return false

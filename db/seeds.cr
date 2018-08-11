@@ -50,11 +50,18 @@ unless Amber.env.production?
   )
 
   [alice, bob].each_with_index do |player, index|
+    won = index == 0
+
     Participation.create!(
       game_id: logged_hotdog_game.id,
       player_id: player.id,
-      won: index == 0,
-      rating: index == 0 ? 1200 : 800
+      won: won,
+      rating: Rating::DetermineNewRating.new(
+        old_rating: hotdog_league.start_rating || League::DEFAULT_START_RATING,
+        other_rating: hotdog_league.start_rating || League::DEFAULT_START_RATING,
+        won: won,
+        league: hotdog_league
+      ).call
     )
   end
 end
