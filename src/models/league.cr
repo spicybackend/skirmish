@@ -1,4 +1,7 @@
 class League < Granite::Base
+  DEFAULT_START_RATING = 1000.to_i
+  DEFAULT_K_FACTOR = 32.to_f64
+
   adapter mysql
   table_name leagues
 
@@ -8,6 +11,8 @@ class League < Granite::Base
 
   field name : String
   field description : String
+  field start_rating : Int32, comment: "# The inital rating for a new player"
+  field k_factor : Float64
 
   timestamps
 

@@ -26,13 +26,15 @@ class LogGame
       Participation.create!(
         game_id: game.id,
         player_id: winner.id,
-        won: true
+        won: true,
+        rating: league.start_rating
       )
 
       Participation.create!(
         game_id: game.id,
         player_id: loser.id,
-        won: false
+        won: false,
+        rating: league.start_rating
       )
 
       @game = game

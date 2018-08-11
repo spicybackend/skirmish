@@ -1,13 +1,18 @@
 require "./spec_helper"
 
 def league_hash
-  {"name" => "Fake", "description" => "Fake"}
+  {
+    name: "Fake",
+    description: "Fake",
+    start_rating: League::DEFAULT_START_RATING,
+    k_factor: League::DEFAULT_K_FACTOR
+  }.to_h
 end
 
 def league_params
   params = [] of String
-  params << "name=#{league_hash["name"]}"
-  params << "description=#{league_hash["description"]}"
+  params << "name=#{league_hash[:name]}"
+  params << "description=#{league_hash[:description]}"
   params.join("&")
 end
 

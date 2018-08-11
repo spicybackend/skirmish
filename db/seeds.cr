@@ -33,6 +33,8 @@ unless Amber.env.production?
   hotdog_league = League.create!(
     name: "Hotdog Eating League (HEL)",
     description: "Down a hotdog as fast as possible!",
+    start_rating: League::DEFAULT_START_RATING,
+    k_factor: League::DEFAULT_K_FACTOR,
   )
 
   [alice, bob].each do |player|
@@ -52,6 +54,7 @@ unless Amber.env.production?
       game_id: logged_hotdog_game.id,
       player_id: player.id,
       won: index == 0,
+      rating: index == 0 ? 1200 : 800
     )
   end
 end
