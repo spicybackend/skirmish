@@ -21,10 +21,11 @@ h1 New Game
         == hidden_field name: "opponent-id", value: "#{first_player.try(&.id)}"
         button id="player-dropdown" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
           == first_player.tag
-        div id="player-dropdown-options" class="dropdown-menu" aria-labelledby="dropdown-player"
-          - other_players.each do |player|
-            a class="dropdown-item" href="#" data-player-id="#{player.id}"
-              = "#{player.tag}"
+        - if other_players.any?
+          div id="player-dropdown-options" class="dropdown-menu" aria-labelledby="dropdown-player"
+            - other_players.each do |player|
+              a class="dropdown-item" href="#" data-player-id="#{player.id}"
+                = "#{player.tag}"
 
   .form-group
     == submit "Log Game", class: "btn btn-primary"
