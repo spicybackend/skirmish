@@ -4,6 +4,8 @@ class ApplicationController < Amber::Controller::Base
   include JasperHelpers
   LAYOUT = "application.slang"
 
+  include ReadableTimeHelpers
+
   def current_user
     context.current_user
   end

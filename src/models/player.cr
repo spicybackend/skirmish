@@ -1,4 +1,6 @@
 class Player < Granite::Base
+  RECENT_GAMES_LIMIT = 3
+
   adapter mysql
   table_name players
 
@@ -35,5 +37,10 @@ class Player < Granite::Base
     )
 
     latest_participation.try(&.rating) || league.start_rating || League::DEFAULT_START_RATING
+  end
+
+  def recent_games
+    # TODO add and use confirmed_at
+    games.all("ORDER BY created_at DESC LIMIT ?", [RECENT_GAMES_LIMIT])
   end
 end

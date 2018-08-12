@@ -12,21 +12,9 @@ p
   == user.email
 
 - if player = user.player
+  h3 Recent Games
+  == render(partial: "_recent_games.slang")
+
   h3 Memberships
   - leagues = player.leagues
-  table.table.table-striped
-    thead
-      tr
-        th Name
-        th Description
-        th Rating
-        th Actions
-    tbody
-      - leagues.each do |league|
-        tr
-          td = league.name
-          td = league.description
-          td = player.rating_for(league)
-          td
-            span
-              == link_to("read", "/leagues/#{league.id}", class: "btn btn-primary btn-sm")
+  == render(partial: "_memberships.slang")
