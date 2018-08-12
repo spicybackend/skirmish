@@ -1,21 +1,22 @@
 .row
   .col-sm-11
     h2 Leagues
-  .col-sm-1
-    a.btn.btn-success.btn-sm href="/leagues/new" New
+  - if user = current_user
+    .col-sm-1
+      a.btn.btn-success.btn-sm href="/leagues/new" New
 .table-responsive
   table.table.table-striped
     thead
       tr
         th Name
         th Description
-        th Actions
+        th.right Actions
     tbody
       - leagues.each do |league|
         tr
           td = league.name
           td = league.description
-          td
+          td.right
             span
               == link_to("read", "/leagues/#{league.id}", class: "btn btn-primary btn-sm")
               - if current_user.try(&.admin?)

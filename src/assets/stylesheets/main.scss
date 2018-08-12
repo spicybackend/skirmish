@@ -22,6 +22,10 @@ form.single-btn {
   display: inline;
 }
 
+th.right, td.right {
+  text-align: right;
+}
+
 .btn-primary {
   // color: #fff;
   background-color: $blue;

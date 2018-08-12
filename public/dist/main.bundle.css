@@ -8,6 +8,9 @@ div#simple-logger {
 form.single-btn {
   display: inline; }
 
+th.right, td.right {
+  text-align: right; }
+
 .btn-primary {
   background-color: #5da9e9;
   border-color: #5da9e9; }

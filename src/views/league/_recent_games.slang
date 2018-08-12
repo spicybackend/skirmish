@@ -5,7 +5,7 @@
         th Winner
         th Loser
         th When
-        th Actions
+        th.right Actions
     tbody
       - league.recent_games.each do |game|
         tr
@@ -13,6 +13,6 @@
           td = game.loser.try(&.tag)
           // TODO look into readable date options
           td = game.created_at
-          td
+          td.right
             span
               == link_to("read", "/leagues/#{league.id}/games/#{game.id}", class: "btn btn-primary btn-sm")
