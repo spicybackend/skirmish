@@ -5,6 +5,9 @@ div#simple-logger {
     font-weight: 400;
     padding: .375rem .75rem; }
 
+form.single-btn {
+  display: inline; }
+
 .btn-primary {
   background-color: #5da9e9;
   border-color: #5da9e9; }

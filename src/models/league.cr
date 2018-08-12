@@ -2,6 +2,8 @@ class League < Granite::Base
   DEFAULT_START_RATING = 1000.to_i
   DEFAULT_K_FACTOR = 32.to_f64
 
+  RECENT_GAMES_LIMIT = 3
+
   adapter mysql
   table_name leagues
 
@@ -20,5 +22,10 @@ class League < Granite::Base
     Player.all("JOIN memberships WHERE players.id = memberships.player_id
       AND league_id = ?
       AND left_at IS NULL", id)
+  end
+
+  def recent_games
+    # TODO add and use confirmed_at
+    games.all("ORDER BY created_at DESC LIMIT ?", [RECENT_GAMES_LIMIT])
   end
 end

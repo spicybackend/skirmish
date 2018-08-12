@@ -16,7 +16,11 @@ $yellow: #f3a712;
 $amber-orange: #f4994b;
 
 $background-color: $brand1;
-$nav-item-color: $blue; //
+$nav-item-color: $blue;
+
+form.single-btn {
+  display: inline;
+}
 
 .btn-primary {
   // color: #fff;
