@@ -47,7 +47,17 @@ unless Amber.env.production?
   logged_hotdog_game = Game.create!(
     league_id: hotdog_league.id,
     winner_id: alice.id,
+    logged_by_id: alice.id
   )
+
+  # In this seeds file we're actually using user ids as the player ids...
+  # TODO Clean this up when tag is actually set on the players table instead of the users (as username)
+  if player_bob = bob.player
+    Game::Confirm.new(
+      game: logged_hotdog_game,
+      confirming_player: player_bob
+    ).call
+  end
 
   [alice, bob].each_with_index do |player, index|
     won = index == 0

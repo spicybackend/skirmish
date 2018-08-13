@@ -52,7 +52,7 @@ class GameController < ApplicationController
 
     unless other_player
       flash["danger"] = "Can't find opponent"
-      other_players = league.active_players.reject { |player| player == current_player }
+      other_players = league.active_players.reject { |other_player| other_player == player }
       render("new.slang")
       return
     end
@@ -62,7 +62,8 @@ class GameController < ApplicationController
     game_logger = League::LogGame.new(
       winner: winner,
       loser: loser,
-      league: league
+      league: league,
+      logger: player
     )
 
     if game_logger.call
@@ -72,7 +73,7 @@ class GameController < ApplicationController
       redirect_to "/leagues/#{league.id}/games/#{game.id}"
     else
       flash["danger"] = game_logger.errors.to_s
-      other_players = league.active_players.reject { |player| player == current_player }
+      other_players = league.active_players.reject { |other_player| other_player == player }
       render("new.slang")
     end
   end

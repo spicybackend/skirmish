@@ -1,9 +1,9 @@
 class League::LogGame
-  getter winner, loser, league
+  getter winner, loser, league, logger
 
   property game : Game, errors : Array(String)
 
-  def initialize(@league : League, @winner : Player, @loser : Player)
+  def initialize(@league : League, @winner : Player, @loser : Player, @logger : Player)
     @game = Game.new
     @errors = [] of String
   end
@@ -17,6 +17,7 @@ class League::LogGame
     end
 
     game.winner_id = winner.id
+    game.logged_by_id = logger.id
     game.league = league
 
     if game.valid? && game.save
