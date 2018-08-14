@@ -5,7 +5,6 @@ class User < Granite::Base
   adapter mysql
 
   primary id : Int64
-  field username : String
   field email : String
   field hashed_password : String
 
@@ -22,11 +21,6 @@ class User < Granite::Base
     !existing || existing.id == user.id
   end
 
-  validate :username, "already in use", ->(user : User) do
-    existing = User.find_by username: user.username
-    !existing || existing.id == user.id
-  end
-
   validate :password, "is too short", ->(user : User) do
     user.password_changed? ? user.valid_password_size? : true
   end
@@ -37,6 +31,10 @@ class User < Granite::Base
 
   def admin?
     Administrator.find_by(user_id: id)
+  end
+
+  def username
+    player.try(&.tag)
   end
 
   def password=(password)

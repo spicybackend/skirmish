@@ -4,6 +4,8 @@ class Player < Granite::Base
   adapter mysql
   table_name players
 
+  field tag : String
+
   belongs_to :user
   has_many :memberships
   has_many :leagues, through: :memberships
@@ -14,10 +16,6 @@ class Player < Granite::Base
 
   def ==(other)
     !other.nil? && self.class == other.class && self.id == other.id
-  end
-
-  def tag
-    user.username
   end
 
   def in_league?(league : League)
@@ -42,5 +40,10 @@ class Player < Granite::Base
   def recent_games
     # TODO add and use confirmed_at
     games.all("ORDER BY created_at DESC LIMIT ?", [RECENT_GAMES_LIMIT])
+  end
+
+  validate :tag, "already in use", ->(player : Player) do
+    existing = Player.find_by tag: player.tag
+    !existing || existing.id == player.id
   end
 end
