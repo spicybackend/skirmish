@@ -33,6 +33,10 @@ class Game < Granite::Base
     Player.find(logged_by_id)
   end
 
+  def confirmed?
+    !!confirmed_at
+  end
+
   def confirmed_by
     Player.find(confirmed_by_id)
   end
