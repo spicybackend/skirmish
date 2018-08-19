@@ -4,7 +4,7 @@ version: 0.1.0
 authors:
   - Jordane Lew <jordane.lew@gmail.com>
 
-crystal: 0.25.1
+crystal: 0.26.0
 
 license: UNLICENSED
 
@@ -18,13 +18,11 @@ targets:
 dependencies:
   amber:
     github: amberframework/amber
-    version: 0.8.0
-    #branch: master
+    branch: c497c24501ae3bcd5e673538318998e6ecb45bd2
 
   granite:
     github: amberframework/granite
-    version: ~> 0.12.1
-    branch: master
+    version: ~> 0.13.0
 
   quartz_mailer:
     github: amberframework/quartz-mailer
