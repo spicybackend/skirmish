@@ -16,7 +16,6 @@ class League::LogGame
       end
     end
 
-    game.winner_id = winner.id
     game.logged_by_id = logger.id
     game.league = league
 

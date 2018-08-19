@@ -29,14 +29,14 @@ class Game::Confirm
   end
 
   private def confirming_player_opposes_logger?
-    if winner_confirmed_game?
-      game.losers.includes?(confirming_player)
+    if game_logged_by_winner?
+      game.loser.id == confirming_player.id
     else
-      game.winner == confirming_player
+      game.winner.id == confirming_player.id
     end
   end
 
-  private def winner_confirmed_game?
-    game.confirmed_by == game.winner
+  private def game_logged_by_winner?
+    game.logged_by_id == game.winner.id
   end
 end

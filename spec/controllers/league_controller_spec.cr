@@ -210,8 +210,7 @@ describe LeagueControllerTest do
 
       context "when a game has been played" do
         game = Game.new(
-          league_id: league.id,
-          winner_id: user.try(&.player).try(&.id)
+          league_id: league.id
         )
         game.save
         game_id = game.id
