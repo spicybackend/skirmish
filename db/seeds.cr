@@ -55,22 +55,6 @@ unless Amber.env.production?
     )
   end
 
-  # logged_hotdog_game = Game.create!(
-  #   league_id: hotdog_league.id,
-  #   logged_by_id: alice.id
-  # )
-
-  # [alice, bob].each_with_index do |player, index|
-  #   won = index == 0
-
-  #   Participation.create!(
-  #     game_id: logged_hotdog_game.id,
-  #     player_id: player.id,
-  #     won: won,
-  #     rating: nil
-  #   )
-  # end
-
   game_logger = League::LogGame.new(
     league: hotdog_league,
     winner: alice,
