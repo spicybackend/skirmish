@@ -1,10 +1,21 @@
 class GameController < ApplicationController
+  CONFIRM_ACTION = "confirm"
+
   before_action do
     all { redirect_signed_out_user }
   end
 
   def show
     if game = Game.find(params["id"])
+      player_can_confirm_game = if player = current_player
+        Game::CanBeConfirmedByPlayer.new(
+          game: game,
+          player: player
+        ).call
+      else
+        false
+      end
+
       render("show.slang")
     else
       flash["warning"] = "Can't find game"
@@ -75,6 +86,45 @@ class GameController < ApplicationController
       flash["danger"] = game_logger.errors.to_s
       other_players = league.active_players.reject { |other_player| other_player == player }
       render("new.slang")
+    end
+  end
+
+  def update
+    action = params[:action]
+    game = Game.find(params[:game_id])
+
+    unless game
+      flash["danger"] = "Can't find game"
+
+      if league = League.find(params[:league_id])
+        redirect_to("/leagues/#{league.id}"); return
+      else
+        redirect_to("/leagues"); return
+      end
+    end
+
+    case action
+    when CONFIRM_ACTION
+      if confirming_player = current_player
+        game_confirmation_service = Game::Confirm.new(
+          game: game,
+          confirming_player: confirming_player
+        )
+
+        if game_confirmation_service.call
+          flash["success"] = "Confirmed game"
+          redirect_to("/leagues/#{game.league_id}/games/#{game.id}"); return
+        else
+          flash["danger"] = game_confirmation_service.errors.join(", ")
+          redirect_to("/leagues/#{game.league_id}/games/#{game.id}"); return
+        end
+      else
+        flash["danger"] = "Must be logged in to confirm"
+        redirect_to("/leagues/#{game.league_id}/games/#{game.id}"); return
+      end
+    else
+      flash["danger"] = "Unknown update action"
+      redirect_to("/leagues/#{game.league_id}/games/#{game.id}"); return
     end
   end
 

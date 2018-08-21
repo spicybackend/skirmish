@@ -6,7 +6,6 @@ class Game < Granite::Base
   has_many :participations
   has_many :players, through: :participations
 
-  field winner_id : Int64
   field logged_by_id : Int64
   field confirmed_by_id : Int64
   field confirmed_at : Time
@@ -14,15 +13,11 @@ class Game < Granite::Base
   timestamps
 
   def winner
-    Player.find(winner_id)
-  end
-
-  def losers
-    players.all("AND players.id != ?", [winner_id])
+    players.all("AND participations.won = 1 LIMIT 1").first
   end
 
   def loser
-    losers.first
+    players.all("AND participations.won = 0 LIMIT 1").first
   end
 
   def confirmed?
@@ -31,6 +26,10 @@ class Game < Granite::Base
 
   def logged_by
     Player.find(logged_by_id)
+  end
+
+  def confirmed?
+    !!confirmed_at
   end
 
   def confirmed_by

@@ -16,7 +16,6 @@ class League::LogGame
       end
     end
 
-    game.winner_id = winner.id
     game.logged_by_id = logger.id
     game.league = league
 
@@ -40,35 +39,18 @@ class League::LogGame
   end
 
   private def create_participations!
-    old_winner_rating = winner.rating_for(league)
-    old_loser_rating = loser.rating_for(league)
-
-    new_winner_rating = Rating::DetermineNewRating.new(
-      old_rating: old_winner_rating,
-      other_rating: old_loser_rating,
-      won: true,
-      league: league
-    ).call
-
-    new_loser_rating = Rating::DetermineNewRating.new(
-      old_rating: old_loser_rating,
-      other_rating: old_winner_rating,
-      won: false,
-      league: league
-    ).call
-
     winner_participation = Participation.create!(
       game_id: game.id,
       player_id: winner.id,
       won: true,
-      rating: new_winner_rating
+      rating: nil
     )
 
     loser_participation = Participation.create!(
       game_id: game.id,
       player_id: loser.id,
       won: false,
-      rating: new_loser_rating
+      rating: nil
     )
 
     [winner_participation, loser_participation]
