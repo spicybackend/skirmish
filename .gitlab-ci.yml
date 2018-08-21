@@ -1,5 +1,3 @@
-# Official language image. Look for the different tagged releases at:
-# https://hub.docker.com/r/crystallang/crystal/
 image: "amberframework/amber:v0.8.0"
 
 # Pick zero or more services to be used on all builds.
@@ -7,14 +5,11 @@ image: "amberframework/amber:v0.8.0"
 # Check out: http://docs.gitlab.com/ce/ci/docker/using_docker_images.html#what-is-a-service
 services:
   - mariadb:latest
-#   - redis:latest
-#   - postgres:latest
 
 variables:
   MYSQL_DATABASE: stratify_test
   MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
   MYSQL_ROOT_PASSWORD: ""
-  AMBER_ENV: 'test'
   DATABASE_URL: mysql://root@mariadb:3306/stratify_test
 
 # Cache shards in between builds
@@ -25,10 +20,12 @@ cache:
 # This is a basic example for a shard or script which doesn't use
 # services such as redis or postgres
 before_script:
-  - apt-get update -qq && apt-get install -y -qq crystal libxml2-dev mysql-client # curl libreadline-dev libsqlite3-dev libpq-dev libmysqlclient-dev libssl-dev libyaml-dev
+  - apt-get update -qq
+  - apt-get install -y -qq libxml2-dev mysql-client
+  - apt-get install -y -qq crystal # To update crystal to 0.26.0 until an updated amberframework version is released and an image updated
   - crystal -v # Print out Crystal version for debugging
   - shards update
-  - amber db migrate seed
+  - amber db drop create migrate seed
 
 # If you are using built-in Crystal Spec.
 spec:
