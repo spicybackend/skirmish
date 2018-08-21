@@ -7,6 +7,15 @@ class GameController < ApplicationController
 
   def show
     if game = Game.find(params["id"])
+      player_can_confirm_game = if player = current_player
+        Game::CanBeConfirmedByPlayer.new(
+          game: game,
+          player: player
+        ).call
+      else
+        false
+      end
+
       render("show.slang")
     else
       flash["warning"] = "Can't find game"

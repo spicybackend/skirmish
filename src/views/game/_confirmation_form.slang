@@ -1,4 +1,3 @@
-- unless game.confirmed?
-  == form(action: "/leagues/#{game.league.id}/games/#{game.id}/confirm", method: :patch, class: "single-btn") do
-    == csrf_tag
-    == submit("Confirm", "data-confirm": "Are you sure?", class: "btn btn-success btn-sm")
+== form(action: "/leagues/#{game.league.id}/games/#{game.id}/confirm", method: :patch, class: "single-btn") do
+  == csrf_tag
+  == submit("Confirm", "data-confirm": "Are you sure?", class: "btn btn-success btn-sm")

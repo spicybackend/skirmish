@@ -20,7 +20,7 @@ class Game::Confirm
     end
 
     if winner && loser
-      if confirming_player_opposes_logger?
+      if can_be_confirmed_by_player?
         update_game
         update_ratings
 
@@ -41,16 +41,8 @@ class Game::Confirm
     end
   end
 
-  private def confirming_player_opposes_logger?
-    if game_logged_by_winner?
-      game.loser.id == confirming_player.id
-    else
-      game.winner.id == confirming_player.id
-    end
-  end
-
-  private def game_logged_by_winner?
-    game.logged_by_id == game.winner.id
+  private def can_be_confirmed_by_player?
+    Game::CanBeConfirmedByPlayer.new(game: game, player: confirming_player).call
   end
 
   private def update_game
