@@ -18,7 +18,7 @@ targets:
 dependencies:
   amber:
     github: amberframework/amber
-    branch: c497c24501ae3bcd5e673538318998e6ecb45bd2
+    ref: c497c24501ae3bcd5e673538318998e6ecb45bd2
 
   granite:
     github: amberframework/granite

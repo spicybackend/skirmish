@@ -2,11 +2,11 @@ version: 1.0
 shards:
   amber:
     github: amberframework/amber
-    commit: c497c24501ae3bcd5e673538318998e6ecb45bd2
+    version: 0.8.0
 
   amber_router:
     github: amberframework/amber-router
-    version: 0.2.0
+    version: 0.1.0
 
   callback:
     github: mosop/callback
@@ -93,8 +93,8 @@ shards:
     version: 0.4.0
 
   shell-table:
-    github: luckyframework/shell-table.cr
-    commit: 078a04ea58ead5203bb435a3b5fff448ddabaeea
+    github: jwaldrip/shell-table.cr
+    version: 0.9.2
 
   slang:
     github: jeromegn/slang
