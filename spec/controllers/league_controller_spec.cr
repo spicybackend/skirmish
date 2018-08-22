@@ -11,8 +11,10 @@ end
 
 def league_params
   params = [] of String
-  params << "name=#{league_hash[:name]}"
-  params << "description=#{league_hash[:description]}"
+  params << "name=new_league"
+  params << "description=some_description"
+  params << "start_rating=#{League::DEFAULT_START_RATING}"
+  params << "k_factor=#{League::DEFAULT_K_FACTOR}"
   params.join("&")
 end
 
@@ -74,8 +76,8 @@ describe LeagueControllerTest do
       it "redirects back to the leagues listing" do
         response = subject.get "/leagues/99999"
 
-        response.headers["Location"].should eq "/leagues"
         response.status_code.should eq(302)
+        response.headers["Location"].should eq "/leagues"
       end
     end
   end
@@ -94,8 +96,8 @@ describe LeagueControllerTest do
       it "redirects to the login page" do
         response = subject.get "/leagues/new"
 
-        response.headers["Location"].should eq "/signin"
         response.status_code.should eq(302)
+        response.headers["Location"].should eq "/signin"
       end
     end
   end
@@ -116,8 +118,8 @@ describe LeagueControllerTest do
         league = create_league
         response = subject.get "/leagues/#{league.id}/edit"
 
-        response.headers["Location"].should eq "/signin"
         response.status_code.should eq(302)
+        response.headers["Location"].should eq "/signin"
       end
     end
   end
@@ -127,9 +129,8 @@ describe LeagueControllerTest do
       it "creates a league" do
         response = subject.post "/leagues", headers: admin_authenticated_headers, body: league_params
 
-        response.headers["Location"].should eq "/leagues"
         response.status_code.should eq(302)
-        response.body.should eq "302"
+        response.headers["Location"].should eq "/leagues"
       end
     end
 
@@ -137,8 +138,8 @@ describe LeagueControllerTest do
       it "redirects to the login page" do
         response = subject.get "/leagues/new"
 
-        response.headers["Location"].should eq "/signin"
         response.status_code.should eq(302)
+        response.headers["Location"].should eq "/signin"
       end
     end
   end
@@ -149,9 +150,8 @@ describe LeagueControllerTest do
         league = create_league
         response = subject.patch "/leagues/#{league.id}", headers: admin_authenticated_headers, body: league_params
 
-        response.headers["Location"].should eq "/leagues"
         response.status_code.should eq(302)
-        response.body.should eq "302"
+        response.headers["Location"].should eq "/leagues"
       end
     end
 
@@ -159,8 +159,8 @@ describe LeagueControllerTest do
       it "redirects to the login page" do
         response = subject.get "/leagues/new"
 
-        response.headers["Location"].should eq "/signin"
         response.status_code.should eq(302)
+        response.headers["Location"].should eq "/signin"
       end
     end
   end
@@ -172,9 +172,8 @@ describe LeagueControllerTest do
       it "deletes the league" do
         response = subject.delete "/leagues/#{league.id}", headers: admin_authenticated_headers
 
-        response.headers["Location"].should eq "/leagues"
         response.status_code.should eq(302)
-        response.body.should eq "302"
+        response.headers["Location"].should eq "/leagues"
       end
 
       context "when a game has been played" do
@@ -196,8 +195,8 @@ describe LeagueControllerTest do
       it "redirects to the login page" do
         response = subject.get "/leagues/new"
 
-        response.headers["Location"].should eq "/signin"
         response.status_code.should eq(302)
+        response.headers["Location"].should eq "/signin"
       end
     end
   end

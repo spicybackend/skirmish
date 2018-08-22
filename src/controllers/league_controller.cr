@@ -30,8 +30,6 @@ class LeagueController < ApplicationController
 
   def create
     league = League.new(league_params.validate!)
-    league.start_rating = League::DEFAULT_START_RATING
-    league.k_factor = League::DEFAULT_K_FACTOR
 
     if league.valid? && league.save
       flash["success"] = "Created League successfully."
@@ -80,6 +78,8 @@ class LeagueController < ApplicationController
     params.validation do
       required(:name) { |f| !f.nil? }
       required(:description) { |f| !f.nil? }
+      required(:start_rating) { |f| !f.nil? }
+      required(:k_factor) { |f| !f.nil? }
     end
   end
 end

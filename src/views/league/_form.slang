@@ -5,9 +5,19 @@
 
 == form(action: "/leagues/#{league.id.to_s}", method: league.id ? :patch : :post) do
   == csrf_tag
+
   .form-group
-    == text_field(name: "name", value: league.name, placeholder: "Name", class: "form-control")
+    == label(name: "name", content: "Name")
+    == text_field(name: "name", value: league.name, placeholder: "Give your league a name", class: "form-control")
   .form-group
-    == text_field(name: "description", value: league.description, placeholder: "Description", class: "form-control")
+    == label(name: "description", content: "Description")
+    == text_field(name: "description", value: league.description, placeholder: "What's it all about?", class: "form-control")
+  .form-group
+    == label(name: "start_rating", content: "Initial Rating")
+    == input_field(:number, name: "start_rating", value: league.start_rating || League::DEFAULT_START_RATING, placeholder: League::DEFAULT_START_RATING, class: "form-control")
+  .form-group
+    == label(name: "k_factor", content: "Rating Change Weight")
+    == input_field(:number, name: "k_factor", value: league.k_factor || League::DEFAULT_K_FACTOR, placeholder: League::DEFAULT_K_FACTOR, class: "form-control")
+
   == submit("Submit", class: "btn btn-primary btn-sm")
   == link_to("back", "/leagues", class: "btn btn-light btn-sm")
