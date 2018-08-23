@@ -24,7 +24,7 @@ before_script:
   - apt-get install -y -qq libxml2-dev mysql-client libreadline-dev libsqlite3-dev libpq-dev libmysqlclient-dev libssl-dev libyaml-dev
   - crystal -v # Print out Crystal version for debugging
   - shards && shards build amber
-  - bin/amber db drop create migrate seed
+  - bin/amber db drop create migrate
 
 # If you are using built-in Crystal Spec.
 spec:

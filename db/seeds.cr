@@ -13,7 +13,7 @@ Administrator.create!(
   user_id: admin.id
 )
 
-unless Amber.env.production?
+if Amber.env.development?
   alice_user = User.new
   alice_user.email = "alice@example.com"
   alice_user.password = "password"
