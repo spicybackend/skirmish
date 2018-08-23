@@ -1,4 +1,4 @@
-image: "amberframework/amber:v0.8.0"
+image: "crystallang/crystal:0.25.1"
 
 # Pick zero or more services to be used on all builds.
 # Only needed when using a docker container to run your tests in.
@@ -21,11 +21,10 @@ cache:
 # services such as redis or postgres
 before_script:
   - apt-get update -qq
-  - apt-get install -y -qq libxml2-dev mysql-client
-  - apt-get install -y -qq crystal # To update crystal to 0.26.0 until an updated amberframework version is released and an image updated
+  - apt-get install -y -qq libxml2-dev mysql-client libreadline-dev libsqlite3-dev libpq-dev libmysqlclient-dev libssl-dev libyaml-dev
   - crystal -v # Print out Crystal version for debugging
-  - shards update
-  - amber db drop create migrate seed
+  - shards && shards build amber
+  - bin/amber db drop create migrate seed
 
 # If you are using built-in Crystal Spec.
 spec:
