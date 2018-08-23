@@ -20,12 +20,6 @@ def create_league
   League.create!(league_hash)
 end
 
-# TODO split out user and auth into more helpers
-def fake_auth_headers_for(user)
-  headers = HTTP::Headers.new
-  headers.add("fake_id", user.try(&.id).to_s)
-end
-
 class LeagueControllerTest < GarnetSpec::Controller::Test
   getter handler : Amber::Pipe::Pipeline
 
@@ -69,10 +63,8 @@ describe LeagueControllerTest do
 
   describe "#show" do
     it "renders league show template" do
-      model = create_league
-      location = "/leagues/#{model.id}"
-
-      response = subject.get location
+      league = create_league
+      response = subject.get "/leagues/#{league.id}"
 
       response.status_code.should eq(200)
       response.body.should contain("League")
@@ -90,13 +82,8 @@ describe LeagueControllerTest do
 
   describe "#new" do
     context "when logged in" do
-      user = User.first
-      headers = fake_auth_headers_for(user)
-
       it "renders the new league template" do
-        location = "/leagues/new"
-
-        response = subject.get location, headers: headers
+        response = subject.get "/leagues/new", headers: admin_authenticated_headers
 
         response.status_code.should eq(200)
         response.body.should contain("New League")
@@ -105,9 +92,7 @@ describe LeagueControllerTest do
 
     context "when logged out" do
       it "redirects to the login page" do
-        location = "/leagues/new"
-
-        response = subject.get location
+        response = subject.get "/leagues/new"
 
         response.headers["Location"].should eq "/signin"
         response.status_code.should eq(302)
@@ -116,15 +101,10 @@ describe LeagueControllerTest do
   end
 
   describe "#edit" do
-    model = create_league
-    location = "/leagues/#{model.id}/edit"
-
     context "when logged in" do
-      user = User.first
-      headers = fake_auth_headers_for(user)
-
       it "renders the new league template" do
-        response = subject.get location, headers: headers
+        league = create_league
+        response = subject.get "/leagues/#{league.id}/edit", headers: admin_authenticated_headers
 
         response.status_code.should eq(200)
         response.body.should contain("Edit League")
@@ -133,7 +113,8 @@ describe LeagueControllerTest do
 
     context "when logged out" do
       it "redirects to the login page" do
-        response = subject.get location
+        league = create_league
+        response = subject.get "/leagues/#{league.id}/edit"
 
         response.headers["Location"].should eq "/signin"
         response.status_code.should eq(302)
@@ -143,11 +124,8 @@ describe LeagueControllerTest do
 
   describe "#create" do
     context "when logged in" do
-      user = User.first
-      headers = fake_auth_headers_for(user)
-
       it "creates a league" do
-        response = subject.post "/leagues", headers: headers, body: league_params
+        response = subject.post "/leagues", headers: admin_authenticated_headers, body: league_params
 
         response.headers["Location"].should eq "/leagues"
         response.status_code.should eq(302)
@@ -157,9 +135,7 @@ describe LeagueControllerTest do
 
     context "when logged out" do
       it "redirects to the login page" do
-        location = "/leagues/new"
-
-        response = subject.get location
+        response = subject.get "/leagues/new"
 
         response.headers["Location"].should eq "/signin"
         response.status_code.should eq(302)
@@ -169,12 +145,9 @@ describe LeagueControllerTest do
 
   describe "#update" do
     context "when logged in" do
-      user = User.first
-      headers = fake_auth_headers_for(user)
-
       it "updates a league" do
-        model = create_league
-        response = subject.patch "/leagues/#{model.id}", headers: headers, body: league_params
+        league = create_league
+        response = subject.patch "/leagues/#{league.id}", headers: admin_authenticated_headers, body: league_params
 
         response.headers["Location"].should eq "/leagues"
         response.status_code.should eq(302)
@@ -184,9 +157,7 @@ describe LeagueControllerTest do
 
     context "when logged out" do
       it "redirects to the login page" do
-        location = "/leagues/new"
-
-        response = subject.get location
+        response = subject.get "/leagues/new"
 
         response.headers["Location"].should eq "/signin"
         response.status_code.should eq(302)
@@ -196,12 +167,10 @@ describe LeagueControllerTest do
 
   describe "#delete" do
     context "when logged in" do
-      user = User.first
-      headers = fake_auth_headers_for(user)
       league = create_league
 
       it "deletes the league" do
-        response = subject.delete "/leagues/#{league.id}", headers: headers
+        response = subject.delete "/leagues/#{league.id}", headers: admin_authenticated_headers
 
         response.headers["Location"].should eq "/leagues"
         response.status_code.should eq(302)
@@ -216,7 +185,7 @@ describe LeagueControllerTest do
         game_id = game.id
 
         it "deletes the game as well" do
-          subject.delete "/leagues/#{league.id}", headers: headers
+          subject.delete "/leagues/#{league.id}", headers: admin_authenticated_headers
 
           Game.find(game_id).should eq nil
         end
@@ -225,9 +194,7 @@ describe LeagueControllerTest do
 
     context "when logged out" do
       it "redirects to the login page" do
-        location = "/leagues/new"
-
-        response = subject.get location
+        response = subject.get "/leagues/new"
 
         response.headers["Location"].should eq "/signin"
         response.status_code.should eq(302)
