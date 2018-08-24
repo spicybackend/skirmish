@@ -1,4 +1,4 @@
 type: app
-database: pg
+database: mysql
 language: slang
 model: granite
