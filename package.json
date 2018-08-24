@@ -1,7 +1,7 @@
 {
-  "name": "stratify",
+  "name": "skirmish",
   "version": "0.1.0",
-  "description": "Stratify with Amber",
+  "description": "A game logging app",
   "private": true,
   "author": "Jordane Lew",
   "license": "UNLICENSED",

@@ -31,7 +31,7 @@ Amber::Server.configure do |settings|
   # Name: A name that identifies this application. This is not internally
   # used by the framework.
   #
-  # settings.name = "Stratify web application."
+  settings.name = "Skirmish"
   #
   #
   # Colorize Logging: specifies whether or not to use ANSI color codes
@@ -129,7 +129,7 @@ Amber::Server.configure do |settings|
   # Logger: is the logger that Amber and other capable shards in the project will use
   # instead of writing directly to STDOUT. Supply a custom logger to write to syslog, etc.
   #
-  # settings.logger = Amber::Environment::Logger.new(File.open("stratify.log", "w"))
+  # settings.logger = Amber::Environment::Logger.new(File.open("skirmish.log", "w"))
   #
   #
 end
