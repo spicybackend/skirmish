@@ -9,17 +9,16 @@ def league_hash
   }.to_h
 end
 
-def league_params
+def params_from_hash(params_hash : Hash)
   params = [] of String
-  params << "name=new_league"
-  params << "description=some_description"
-  params << "start_rating=#{League::DEFAULT_START_RATING}"
-  params << "k_factor=#{League::DEFAULT_K_FACTOR}"
+  params_hash.each { |key, val| params << "#{key}=#{val}" }
   params.join("&")
 end
 
 def create_league
-  League.create!(league_hash)
+  league = League.new(league_hash)
+  league.save || raise league.errors.join(", ")
+  league
 end
 
 class LeagueControllerTest < GarnetSpec::Controller::Test
@@ -42,6 +41,10 @@ end
 
 describe LeagueControllerTest do
   subject = LeagueControllerTest.new
+
+  Spec.before_each do
+    delete_all_from_table("leagues")
+  end
 
   describe "#index" do
     context "with no leagues exist" do
@@ -125,18 +128,49 @@ describe LeagueControllerTest do
   end
 
   describe "#create" do
+    league_props = {
+      name: "new league",
+      description: "some description",
+      start_rating: League::DEFAULT_START_RATING,
+      k_factor: League::DEFAULT_K_FACTOR
+    }.to_h
+
+    body = params_from_hash(league_props)
+
     context "when logged in" do
       it "creates a league" do
-        response = subject.post "/leagues", headers: admin_authenticated_headers, body: league_params
+        leagues_before = League.count
+        subject.post "/leagues", headers: admin_authenticated_headers, body: body
+
+        League.count.should eq(leagues_before + 1)
+      end
+
+      it "redirects to the new league" do
+        response = subject.post "/leagues", headers: admin_authenticated_headers, body: body
+
+        league = League.all.last
 
         response.status_code.should eq(302)
-        response.headers["Location"].should eq "/leagues"
+        response.headers["Location"].should eq "/leagues/#{league.id}"
+      end
+
+      describe "the created league" do
+        it "has the properties specified in the params" do
+          subject.post "/leagues", headers: admin_authenticated_headers, body: body
+
+          league = League.all.last
+
+          league.name.should eq league_props[:name]
+          league.description.should eq league_props[:description]
+          league.start_rating.should eq league_props[:start_rating]
+          league.k_factor.should eq league_props[:k_factor]
+        end
       end
     end
 
     context "when logged out" do
       it "redirects to the login page" do
-        response = subject.get "/leagues/new"
+        response = subject.post "/leagues", body: body
 
         response.status_code.should eq(302)
         response.headers["Location"].should eq "/signin"
@@ -145,19 +179,44 @@ describe LeagueControllerTest do
   end
 
   describe "#update" do
+    league_props = {
+      name: "new league",
+      description: "some description",
+      start_rating: League::DEFAULT_START_RATING,
+      k_factor: League::DEFAULT_K_FACTOR
+    }.to_h
+
+    body = params_from_hash(league_props)
+
     context "when logged in" do
-      it "updates a league" do
+      it "redirects to the league" do
         league = create_league
-        response = subject.patch "/leagues/#{league.id}", headers: admin_authenticated_headers, body: league_params
+        response = subject.patch "/leagues/#{league.id}", headers: admin_authenticated_headers, body: body
 
         response.status_code.should eq(302)
-        response.headers["Location"].should eq "/leagues"
+        response.headers["Location"].should eq "/leagues/#{league.id}"
+      end
+
+      describe "the updated league" do
+        it "has the properties specified in the params" do
+          league = create_league
+          subject.patch "/leagues/#{league.id}", headers: admin_authenticated_headers, body: body
+
+          # reload the league
+          league = League.find!(league.id)
+
+          league.name.should eq league_props[:name]
+          league.description.should eq league_props[:description]
+          league.start_rating.should eq league_props[:start_rating]
+          league.k_factor.should eq league_props[:k_factor]
+        end
       end
     end
 
     context "when logged out" do
       it "redirects to the login page" do
-        response = subject.get "/leagues/new"
+        league = create_league
+        response = subject.patch "/leagues/#{league.id}", body: body
 
         response.status_code.should eq(302)
         response.headers["Location"].should eq "/signin"
@@ -167,9 +226,8 @@ describe LeagueControllerTest do
 
   describe "#delete" do
     context "when logged in" do
-      league = create_league
-
       it "deletes the league" do
+        league = create_league
         response = subject.delete "/leagues/#{league.id}", headers: admin_authenticated_headers
 
         response.status_code.should eq(302)
@@ -177,13 +235,15 @@ describe LeagueControllerTest do
       end
 
       context "when a game has been played" do
-        game = Game.new(
-          league_id: league.id
-        )
-        game.save
-        game_id = game.id
-
         it "deletes the game as well" do
+          league = create_league
+
+          game = Game.new(
+            league_id: league.id
+          )
+          game.save
+          game_id = game.id
+
           subject.delete "/leagues/#{league.id}", headers: admin_authenticated_headers
 
           Game.find(game_id).should eq nil

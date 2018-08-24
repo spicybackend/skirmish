@@ -33,7 +33,7 @@ class LeagueController < ApplicationController
 
     if league.valid? && league.save
       flash["success"] = "Created League successfully."
-      redirect_to "/leagues"
+      redirect_to "/leagues/#{league.id}"
     else
       flash["danger"] = "Could not create League!"
       render("new.slang")
@@ -54,7 +54,7 @@ class LeagueController < ApplicationController
       league.set_attributes(league_params.validate!)
       if league.valid? && league.save
         flash["success"] = "Updated League successfully."
-        redirect_to "/leagues"
+        redirect_to "/leagues/#{league.id}"
       else
         flash["danger"] = "Could not update League!"
         render("edit.slang")
