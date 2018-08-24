@@ -3,10 +3,10 @@ version: '2'
 services:
   app:
     build: .
-    image: stratify
+    image: skirmish
     command: amber watch
     environment:
-      DATABASE_URL: mysql://admin:password@db:3306/stratify_development
+      DATABASE_URL: mysql://admin:password@db:3306/skirmish_development
     ports:
       - 3000:3000
     links:
@@ -18,10 +18,10 @@ services:
 
   migrate:
     build: .
-    image: stratify
+    image: skirmish
     command: bash -c 'while ! nc -q 1 db 3306 </dev/null; do sleep 1; done && amber db migrate seed'
     environment:
-      DATABASE_URL: mysql://admin:password@db:3306/stratify_development
+      DATABASE_URL: mysql://admin:password@db:3306/skirmish_development
     volumes:
       - .:/app
     links:
@@ -32,7 +32,7 @@ services:
     environment:
       MYSQL_USER: admin
       MYSQL_PASSWORD: password
-      MYSQL_DATABASE: stratify_development
+      MYSQL_DATABASE: skirmish_development
       MYSQL_RANDOM_ROOT_PASSWORD: 'yes'
     volumes:
     - db:/var/lib/mysql

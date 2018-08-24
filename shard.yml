@@ -1,4 +1,4 @@
-name: stratify
+name: skirmish
 version: 0.1.0
 
 authors:
@@ -9,8 +9,8 @@ crystal: 0.25.1
 license: UNLICENSED
 
 targets:
-  stratify:
-    main: src/stratify.cr
+  skirmish:
+    main: src/skirmish.cr
 
   amber:
     main: lib/amber/src/amber/cli.cr
