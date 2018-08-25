@@ -1,5 +1,5 @@
 class Membership < Granite::Base
-  adapter mysql
+  adapter postgres
   table_name memberships
 
   belongs_to :player

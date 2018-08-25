@@ -4,7 +4,7 @@ class League < Granite::Base
 
   RECENT_GAMES_LIMIT = 3
 
-  adapter mysql
+  adapter postgres
   table_name leagues
 
   has_many :games
@@ -56,8 +56,8 @@ class League < Granite::Base
   end
 
   def active_players
-    Player.all("JOIN memberships WHERE players.id = memberships.player_id
-      AND league_id = ?
+    Player.all("JOIN memberships ON players.id = memberships.player_id
+      WHERE league_id = ?
       AND left_at IS NULL", id)
   end
 

@@ -7,8 +7,8 @@ class Game::Confirm
     @winner = game.winner
     @loser = game.loser
 
-    @winner_participation = game.participations.all("AND participations.won = 1 LIMIT 1").first
-    @loser_participation = game.participations.all("AND participations.won = 0 LIMIT 1").first
+    @winner_participation = game.participations.all("AND participations.won = true LIMIT 1").first
+    @loser_participation = game.participations.all("AND participations.won = false LIMIT 1").first
 
     @errors = [] of String
   end

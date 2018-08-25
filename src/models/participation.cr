@@ -1,5 +1,5 @@
 class Participation < Granite::Base
-  adapter mysql
+  adapter postgres
   table_name participations
 
   belongs_to :game

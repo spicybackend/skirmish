@@ -1,7 +1,7 @@
 class Player < Granite::Base
   RECENT_GAMES_LIMIT = 3
 
-  adapter mysql
+  adapter postgres
   table_name players
 
   field tag : String
@@ -27,7 +27,7 @@ class Player < Granite::Base
 
   def rating_for(league : League)
     latest_participation = Participation.first(
-      "JOIN games on participations.game_id = games.id
+      "JOIN games ON participations.game_id = games.id
       WHERE participations.player_id = ?
       AND games.league_id = ?
       AND participations.rating IS NOT NULL

@@ -1,5 +1,5 @@
 class Game < Granite::Base
-  adapter mysql
+  adapter postgres
   table_name games
 
   belongs_to :league
@@ -13,11 +13,11 @@ class Game < Granite::Base
   timestamps
 
   def winner
-    players.all("AND participations.won = 1 LIMIT 1").first
+    players.all("AND participations.won = true LIMIT 1").first
   end
 
   def loser
-    players.all("AND participations.won = 0 LIMIT 1").first
+    players.all("AND participations.won = false LIMIT 1").first
   end
 
   def confirmed?

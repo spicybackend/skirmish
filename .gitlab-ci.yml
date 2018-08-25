@@ -4,13 +4,14 @@ image: "crystallang/crystal:0.25.1"
 # Only needed when using a docker container to run your tests in.
 # Check out: http://docs.gitlab.com/ce/ci/docker/using_docker_images.html#what-is-a-service
 services:
-  - mariadb:latest
+  - postgres:latest
 
 variables:
-  MYSQL_DATABASE: skirmish_test
-  MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
-  MYSQL_ROOT_PASSWORD: ""
-  DATABASE_URL: mysql://root@mariadb:3306/skirmish_test
+  POSTGRES_DB: skirmish_test
+  POSTGRES_USER: runner
+  POSTGRES_PASSWORD: ""
+
+  DATABASE_URL: postgres://runner:@postgres:5432/skirmish_test
 
 # Cache shards in between builds
 cache:

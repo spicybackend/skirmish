@@ -1,19 +1,15 @@
 -- +micrate Up
 CREATE TABLE memberships (
-  id BIGINT PRIMARY KEY AUTO_INCREMENT,
+  id BIGSERIAL PRIMARY KEY,
 
-  player_id BIGINT,
-  league_id BIGINT,
+  player_id BIGSERIAL REFERENCES players(id) ON DELETE CASCADE,
+  league_id BIGSERIAL REFERENCES leagues(id) ON DELETE CASCADE,
+
+  joined_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  left_at TIMESTAMP,
 
   created_at TIMESTAMP,
-  updated_at TIMESTAMP,
-
-  CONSTRAINT membership_player_fk
-    FOREIGN KEY (player_id)
-    REFERENCES players(id) ON DELETE CASCADE,
-  CONSTRAINT membership_league_fk
-    FOREIGN KEY (league_id)
-    REFERENCES leagues(id) ON DELETE CASCADE
+  updated_at TIMESTAMP
 );
 
 -- +micrate Down
