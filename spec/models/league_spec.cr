@@ -21,9 +21,9 @@ end
 
 describe League do
   Spec.before_each do
-    delete_all_from_table("leagues")
-    delete_all_from_table("players")
-    delete_all_from_table("memberships")
+    League.clear
+    Player.clear
+    Membership.clear
   end
 
   describe "validations" do

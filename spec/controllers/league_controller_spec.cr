@@ -43,7 +43,7 @@ describe LeagueControllerTest do
   subject = LeagueControllerTest.new
 
   Spec.before_each do
-    delete_all_from_table("leagues")
+    League.clear
   end
 
   describe "#index" do
