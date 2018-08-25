@@ -195,7 +195,7 @@ describe League do
     context "when there is a player with a membership in the league" do
       it "has an active player" do
         league = create_league!
-        player = Player.create!(tag: "player_one")
+        player = create_player_with_mock_user("player_one")
         membership = Membership.create!(
           league_id: league.id,
           player_id: player.id
@@ -207,7 +207,7 @@ describe League do
       context "but the membership is expired" do
         it "has no active players" do
           league = create_league!
-          player = Player.create!(tag: "player_one")
+          player = create_player_with_mock_user("player_one")
           membership = Membership.create!(
             league_id: league.id,
             player_id: player.id,
