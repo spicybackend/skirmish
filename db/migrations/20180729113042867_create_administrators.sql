@@ -1,15 +1,11 @@
 -- +micrate Up
 -- SQL in section 'Up' is executed when this migration is applied
 CREATE TABLE administrators (
-  id BIGINT PRIMARY KEY AUTO_INCREMENT,
-  user_id BIGINT NOT NULL,
+  id BIGSERIAL PRIMARY KEY,
+  user_id BIGSERIAL REFERENCES users(id) ON DELETE CASCADE,
 
   created_at TIMESTAMP,
-  updated_at TIMESTAMP,
-
-  CONSTRAINT administrator_user_fk
-    FOREIGN KEY (user_id)
-    REFERENCES users(id) ON DELETE CASCADE
+  updated_at TIMESTAMP
 );
 
 -- +micrate Down

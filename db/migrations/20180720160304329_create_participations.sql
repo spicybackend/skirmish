@@ -1,20 +1,14 @@
 -- +micrate Up
 CREATE TABLE participations (
-  id BIGINT PRIMARY KEY AUTO_INCREMENT,
+  id BIGSERIAL PRIMARY KEY,
 
-  game_id BIGINT NOT NULL,
-  player_id BIGINT NOT NULL,
+  game_id BIGSERIAL REFERENCES games(id) ON DELETE CASCADE,
+  player_id BIGSERIAL REFERENCES players(id),
   won BOOLEAN NOT NULL,
+  rating INTEGER,
 
   created_at TIMESTAMP,
-  updated_at TIMESTAMP,
-
-  CONSTRAINT participation_game_fk
-    FOREIGN KEY (game_id)
-    REFERENCES games(id) ON DELETE CASCADE,
-  CONSTRAINT participation_player_fk
-    FOREIGN KEY (player_id)
-    REFERENCES players(id)
+  updated_at TIMESTAMP
 );
 
 -- +micrate Down

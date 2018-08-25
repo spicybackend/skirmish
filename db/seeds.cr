@@ -4,13 +4,14 @@ admin_user = User.new
 admin_user.email = "admin@example.com"
 admin_user.password = "password"
 admin_user.save!
+
 admin = Player.create!(
   tag: "admin",
   user_id: admin_user.id
 )
 
 Administrator.create!(
-  user_id: admin.id
+  user_id: admin_user.id
 )
 
 if Amber.env.development?
