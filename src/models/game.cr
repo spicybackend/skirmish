@@ -1,5 +1,5 @@
 class Game < Granite::Base
-  adapter mysql
+  adapter postgres
   table_name games
 
   belongs_to :league

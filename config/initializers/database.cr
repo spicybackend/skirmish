@@ -1,7 +1,7 @@
-require "granite/adapter/mysql"
+require "granite/adapter/pg"
 
-Granite::Adapters << Granite::Adapter::Mysql.new({
-  name: "mysql",
+Granite::Adapters << Granite::Adapter::Pg.new({
+  name: "postgres",
   url: ENV["DATABASE_URL"]? || Amber.settings.database_url
 })
 

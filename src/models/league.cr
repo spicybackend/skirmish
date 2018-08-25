@@ -4,7 +4,7 @@ class League < Granite::Base
 
   RECENT_GAMES_LIMIT = 3
 
-  adapter mysql
+  adapter postgres
   table_name leagues
 
   has_many :games

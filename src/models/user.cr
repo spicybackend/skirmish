@@ -2,7 +2,7 @@ require "crypto/bcrypt/password"
 
 class User < Granite::Base
   include Crypto
-  adapter mysql
+  adapter postgres
 
   primary id : Int64
   field email : String
