@@ -8,10 +8,10 @@ services:
 
 variables:
   POSTGRES_DB: skirmish_test
-  POSTGRES_USER: postgres
+  POSTGRES_USER: runner
   POSTGRES_PASSWORD: ""
 
-  DATABASE_URL: postgres://postgres:@localhost:5432/skirmish_test
+  DATABASE_URL: postgres://runner:@postgres:5432/skirmish_test
 
 # Cache shards in between builds
 cache:
