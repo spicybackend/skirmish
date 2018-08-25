@@ -16,6 +16,12 @@ targets:
     main: lib/amber/src/amber/cli.cr
 
 dependencies:
+  pg:
+    github: yumoose/crystal-pg
+    branch: case-insensitive-client-encoding
+    # github: will/crystal-pg
+    # version: ~> 0.15.0
+
   amber:
     github: amberframework/amber
     version: 0.8.0
@@ -33,10 +39,6 @@ dependencies:
   jasper_helpers:
     github: amberframework/jasper-helpers
     version: ~> 0.2.0
-
-  pg:
-    github: will/crystal-pg
-    version: ~> 0.15.0
 
   citrine-i18n:
     github: amberframework/citrine-i18n
