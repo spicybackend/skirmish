@@ -21,8 +21,9 @@ dependencies:
     version: 0.8.0
 
   granite:
-    github: amberframework/granite
-    commit: 29ca32472f0835e1b193960e82679864e000e41c
+    github: yumoose/granite
+    branch: db-connection-reuse-pre-0.26
+    # github: amberframework/granite
     # version: ~> 0.12.1
 
   quartz_mailer:
