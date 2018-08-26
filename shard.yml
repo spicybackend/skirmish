@@ -16,13 +16,20 @@ targets:
     main: lib/amber/src/amber/cli.cr
 
 dependencies:
+  pg:
+    github: yumoose/crystal-pg
+    branch: case-insensitive-client-encoding
+    # github: will/crystal-pg
+    # version: ~> 0.15.0
+
   amber:
     github: amberframework/amber
     version: 0.8.0
 
   granite:
-    github: amberframework/granite
-    commit: 29ca32472f0835e1b193960e82679864e000e41c
+    github: yumoose/granite
+    branch: db-connection-reuse-pre-0.26
+    # github: amberframework/granite
     # version: ~> 0.12.1
 
   quartz_mailer:
@@ -32,10 +39,6 @@ dependencies:
   jasper_helpers:
     github: amberframework/jasper-helpers
     version: ~> 0.2.0
-
-  pg:
-    github: will/crystal-pg
-    version: ~> 0.15.0
 
   citrine-i18n:
     github: amberframework/citrine-i18n

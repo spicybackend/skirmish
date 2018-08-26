@@ -37,8 +37,8 @@ shards:
     version: 0.2.1
 
   granite:
-    github: amberframework/granite
-    commit: 29ca32472f0835e1b193960e82679864e000e41c
+    github: yumoose/granite
+    commit: 9c28794c79855f94a2a011f5082e52565d193b00
 
   i18n:
     github: TechMagister/i18n.cr
@@ -73,8 +73,8 @@ shards:
     version: 0.5.8
 
   pg:
-    github: will/crystal-pg
-    version: 0.15.0
+    github: yumoose/crystal-pg
+    commit: 27a7f466ee794eda21bcadfec3fc99343d0fdf80
 
   pool:
     github: ysbaddaden/pool

@@ -1,2 +1,2 @@
 release: bin/amber db migrate
-web: bin/skirmish
+web: bin/start-pgbouncer bin/skirmish
