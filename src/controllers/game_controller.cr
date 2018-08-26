@@ -32,13 +32,10 @@ class GameController < ApplicationController
 
       if other_players.empty?
         flash["warning"] = "There are no other players to log against"
-        redirect_to(
-          location: "/leagues/#{league.id}",
-          status: 302
-        )
+        redirect_to "/leagues/#{league.id}"
+      else
+        render("new.slang")
       end
-
-      render("new.slang")
     else
       flash["danger"] = "Can't find league"
       redirect_to "/leagues"
