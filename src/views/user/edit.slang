@@ -1,4 +1,4 @@
-h1 Edit Profile
+h2 Edit Profile
 
 - if user.errors
   ul.errors

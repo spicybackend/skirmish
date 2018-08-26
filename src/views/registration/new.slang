@@ -1,4 +1,4 @@
-h1 Sign Up
+h2 Sign Up
 
 - if user.errors
   ul.errors

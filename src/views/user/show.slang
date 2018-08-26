@@ -1,10 +1,10 @@
-h2 Profile
-
 .row
-  .col-sm-11
-    h3 User Info
-  .col-sm-1
-   == link_to("edit", "/profile/edit", class: "btn btn-success btn-sm")
+  .col.justify-content-between.btn-toolbar
+    h2 Profile
+    .button-group
+      == link_to("edit", "/profile/edit", class: "btn btn-success btn-sm")
+
+h3 User Info
 
 p class="small"
   == "#{player.tag}"
