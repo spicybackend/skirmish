@@ -4,5 +4,5 @@ p
 p | The winner was...
   == game.winner.try(&.tag)
 
-- if player_can_confirm_game
+- if show_game_confirmation
   == render(partial: "_confirmation_form.slang")

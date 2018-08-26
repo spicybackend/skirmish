@@ -1,7 +1,7 @@
 .row
   .col-sm-11
     h2 Leagues
-  - if user = current_user
+  - if current_user
     .col-sm-1
       a.btn.btn-success.btn-sm href="/leagues/new" New
 .table-responsive

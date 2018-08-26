@@ -10,7 +10,7 @@ class LeagueController < ApplicationController
 
   def show
     if league = League.find(params["id"])
-      player = current_user.try(&.player)
+      player = current_player
       membership = Membership.find_by(
         player_id: player.try(&.id),
         league_id: league.id
@@ -52,6 +52,7 @@ class LeagueController < ApplicationController
   def update
     if league = League.find(params["id"])
       league.set_attributes(league_params.validate!)
+
       if league.valid? && league.save
         flash["success"] = "Updated League successfully."
         redirect_to "/leagues/#{league.id}"
@@ -71,6 +72,7 @@ class LeagueController < ApplicationController
     else
       flash["warning"] = "League with ID #{params["id"]} Not Found"
     end
+
     redirect_to "/leagues"
   end
 

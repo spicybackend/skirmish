@@ -6,31 +6,26 @@ class GameController < ApplicationController
   end
 
   def show
-    if game = Game.find(params["id"])
-      player_can_confirm_game = if player = current_player
+    if game = Game.find(params[:id])
+      show_game_confirmation = false
+
+      if player = current_player
         Game::CanBeConfirmedByPlayer.new(
           game: game,
           player: player
         ).call
-      else
-        false
       end
 
       render("show.slang")
     else
       flash["warning"] = "Can't find game"
-
-      if league = League.find(params["league_id"])
-        redirect_to "/leagues/#{league.id}"
-      else
-        redirect_to "/leagues"
-      end
+      redirect_to "/leagues/#{params[:league_id]}"
     end
   end
 
   def new
     game = Game.new
-    league = League.find(params["league_id"])
+    league = League.find(params[:league_id])
 
     if league
       other_players = league.active_players.reject { |player| player == current_player }
@@ -40,7 +35,7 @@ class GameController < ApplicationController
         redirect_to(
           location: "/leagues/#{league.id}",
           status: 302
-        ) && return
+        )
       end
 
       render("new.slang")
@@ -51,10 +46,9 @@ class GameController < ApplicationController
   end
 
   def create
-    return unless player = current_player
-
-    league = League.find(params[:league_id].to_i64)
-    other_player = Player.find(params["opponent-id"].to_i64)
+    player = current_player.not_nil!
+    league = League.find(params[:league_id])
+    other_player = Player.find(params["opponent-id"])
 
     unless league
       flash["danger"] = "Can't find league"
@@ -64,8 +58,7 @@ class GameController < ApplicationController
     unless other_player
       flash["danger"] = "Can't find opponent"
       other_players = league.active_players.reject { |other_player| other_player == player }
-      render("new.slang")
-      return
+      render("new.slang"); return
     end
 
     winner, loser = params[:status] == "won" ? [player, other_player] : [other_player, player]
@@ -85,6 +78,7 @@ class GameController < ApplicationController
     else
       flash["danger"] = game_logger.errors.to_s
       other_players = league.active_players.reject { |other_player| other_player == player }
+
       render("new.slang")
     end
   end
@@ -105,21 +99,17 @@ class GameController < ApplicationController
 
     case action
     when CONFIRM_ACTION
-      if confirming_player = current_player
-        game_confirmation_service = Game::Confirm.new(
-          game: game,
-          confirming_player: confirming_player
-        )
+      confirming_player = current_player.not_nil!
+      game_confirmation_service = Game::Confirm.new(
+        game: game,
+        confirming_player: confirming_player
+      )
 
-        if game_confirmation_service.call
-          flash["success"] = "Confirmed game"
-          redirect_to("/leagues/#{game.league_id}/games/#{game.id}"); return
-        else
-          flash["danger"] = game_confirmation_service.errors.join(", ")
-          redirect_to("/leagues/#{game.league_id}/games/#{game.id}"); return
-        end
+      if game_confirmation_service.call
+        flash["success"] = "Confirmed game"
+        redirect_to("/leagues/#{game.league_id}/games/#{game.id}"); return
       else
-        flash["danger"] = "Must be logged in to confirm"
+        flash["danger"] = game_confirmation_service.errors.join(", ")
         redirect_to("/leagues/#{game.league_id}/games/#{game.id}"); return
       end
     else
@@ -129,17 +119,13 @@ class GameController < ApplicationController
   end
 
   def destroy
-    if game = Game.find params["id"]
+    if game = Game.find params[:id]
       game.destroy
     else
       flash["warning"] = "Can't find game"
     end
 
-    if league = League.find(params["league_id"])
-      redirect_to "/leagues/#{league.id}"
-    else
-      redirect_to "/leagues"
-    end
+    redirect_to "/leagues/#{params[:league_id]}"
   end
 
   def game_params
