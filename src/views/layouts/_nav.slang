@@ -16,13 +16,17 @@ button.navbar-toggler type="button" data-toggle="collapse" data-target="#navbarS
 
   ul.navbar-nav
     - if player = current_player
-      li.nav-item.dropdown.profile
-        - active = context.request.path == "/profile" ? "active" : ""
-        a class="nav-link dropdown-toggle #{active}" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-          == "#{player.tag}"
-        .dropdown-menu aria-labelledby="navbarDropdown"
-          a.dropdown-item href="/profile" Profile
-          a.dropdown-item href="/signout" Sign Out
+      span.nav-profile
+        li.nav-item.dropdown.profile
+          - active = context.request.path == "/profile" ? "active" : ""
+          a class="nav-link dropdown-toggle #{active}" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+            == "#{player.tag}"
+
+          .dropdown-menu aria-labelledby="navbarDropdown"
+            a.dropdown-item href="/profile" Profile
+            a.dropdown-item href="/signout" Sign Out
+
+        img.gravatar src="#{gravatar_src_for(player)}?s=40"
     - else
       - active = context.request.path == "/signup" ? "active" : ""
       li class="nav-item #{active} auth"
