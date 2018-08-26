@@ -1,4 +1,7 @@
-h1 | Game
+.row
+  .col.justify-content-between.btn-toolbar
+    h2 Game
+
 p
   == link_to("Back", "/leagues/#{game.league_id}", class: "btn btn-light btn-sm")
 p | The winner was...

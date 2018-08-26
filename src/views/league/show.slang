@@ -1,9 +1,9 @@
 .row
-  .col-sm-11
+  .col.justify-content-between.btn-toolbar
     h2 = league.name
-  .col-sm-1
     - if current_user
-      == render(partial: "_membership_form.slang")
+      .button-group
+        == render(partial: "_membership_form.slang")
 
 p = league.description
 

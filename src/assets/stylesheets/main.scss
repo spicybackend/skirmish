@@ -26,6 +26,12 @@ th.right, td.right {
   text-align: right;
 }
 
+.btn-toolbar {
+  .btn {
+    vertical-align: text-top;
+  }
+}
+
 .btn-primary {
   // color: #fff;
   background-color: $blue;

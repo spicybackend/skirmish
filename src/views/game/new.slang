@@ -1,4 +1,4 @@
-h1 New Game
+h2 New Game
 
 == form(action: "/leagues/#{league.id}/games", method: :post) do
   == csrf_tag

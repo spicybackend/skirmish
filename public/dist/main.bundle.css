@@ -11,6 +11,9 @@ form.single-btn {
 th.right, td.right {
   text-align: right; }
 
+.btn-toolbar .btn {
+  vertical-align: text-top; }
+
 .btn-primary {
   background-color: #5da9e9;
   border-color: #5da9e9; }
