@@ -7,14 +7,13 @@ h2 Profile
    == link_to("edit", "/profile/edit", class: "btn btn-success btn-sm")
 
 p class="small"
-  == "@#{user.username}"
+  == "#{player.tag}"
 p
   == user.email
 
-- if player = user.player
-  h3 Recent Games
-  == render(partial: "_recent_games.slang")
+h3 Recent Games
+== render(partial: "_recent_games.slang")
 
-  h3 Memberships
-  - leagues = player.leagues
-  == render(partial: "_memberships.slang")
+h3 Memberships
+- leagues = player.leagues
+== render(partial: "_memberships.slang")

@@ -4,29 +4,35 @@ class UserController < ApplicationController
   end
 
   def show
-    render("show.slang") if (user = current_user)
+    user = current_user.not_nil!
+    player = current_player.not_nil!
+
+    render("show.slang")
   end
 
   def edit
-    render("edit.slang") if (user = current_user)
+    user = current_user.not_nil!
+    player = current_player.not_nil!
+
+    render("edit.slang")
   end
 
   def update
-    user = current_user
+    user = current_user.not_nil!
+    player = current_player.not_nil!
+
     if update(user)
       flash[:success] = "Updated Profile successfully."
       redirect_to "/profile"
-    elsif user
+    else
       flash[:danger] = "Could not update Profile!"
       render("edit.slang")
-    else
-      flash[:info] = "Must be logged in"
-      redirect_to "/signin"
     end
   end
 
   private def update(user)
     return false unless user && user_params.valid?
+
     user.set_attributes(user_params.to_h)
     user.valid? && user.save
   end

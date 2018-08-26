@@ -8,7 +8,7 @@ h1 Edit Profile
 == form(action: "/profile", method: :patch) do
   == csrf_tag
   .form-group
-    input.form-control type="username" name="username" placeholder="Display name" value="#{user.username}"
+    input.form-control type="username" name="username" placeholder="Display name" value="#{player.tag}"
   .form-group
     input.form-control type="email" name="email" placeholder="Email" value="#{user.email}"
   == submit("Update", class: "btn btn-primary btn-sm")

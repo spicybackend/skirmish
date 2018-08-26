@@ -33,10 +33,6 @@ class User < Granite::Base
     Administrator.find_by(user_id: id)
   end
 
-  def username
-    player.try(&.tag)
-  end
-
   def password=(password)
     @new_password = password
     @hashed_password = Bcrypt::Password.create(password, cost: 10).to_s

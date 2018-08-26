@@ -11,7 +11,9 @@ class ApplicationController < Amber::Controller::Base
   end
 
   def current_player
-    current_user.try(&.player)
+    if user = current_user
+      user.player.not_nil!
+    end
   end
 
   def signed_in?
