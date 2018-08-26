@@ -74,7 +74,7 @@ shards:
 
   pg:
     github: yumoose/crystal-pg
-    commit: 27a7f466ee794eda21bcadfec3fc99343d0fdf80
+    commit: 50df854e0deee89a5cbe58236310cbf7a0ceffbe
 
   pool:
     github: ysbaddaden/pool
