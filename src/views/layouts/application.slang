@@ -12,9 +12,9 @@ html
     link rel="icon" type="image/x-icon" href="/favicon.ico"
 
   body
-    .masthead
+    .masthead.bg-dark
       .container
-        nav.nav
+        nav.navbar.navbar-expand-lg.navbar-dark
           == render(partial: "layouts/_nav.slang")
     .container
       .row
