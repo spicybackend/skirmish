@@ -13,11 +13,11 @@ class Game < Granite::Base
   timestamps
 
   def winner
-    players.all("AND participations.won = true LIMIT 1").first
+    players.all("AND participations.won = ? LIMIT 1", [true]).first
   end
 
   def loser
-    players.all("AND participations.won = false LIMIT 1").first
+    players.all("AND participations.won = ? LIMIT 1", [false]).first
   end
 
   def confirmed?
