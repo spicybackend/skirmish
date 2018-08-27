@@ -24,7 +24,7 @@ describe Game::CanBeConfirmedByPlayer do
         loser = create_player_with_mock_user
 
         [winner, loser].each do |player|
-          Membership.create!(player_id: player.id, league_id: league.id)
+          Membership.create!(player_id: player.id, league_id: league.id, joined_at: Time.now)
         end
 
         game_logger = League::LogGame.new(league: league, winner: winner, loser: loser, logger: winner)
@@ -40,7 +40,7 @@ describe Game::CanBeConfirmedByPlayer do
         loser = create_player_with_mock_user
 
         [winner, loser].each do |player|
-          Membership.create!(player_id: player.id, league_id: league.id)
+          Membership.create!(player_id: player.id, league_id: league.id, joined_at: Time.now)
         end
 
         game_logger = League::LogGame.new(league: league, winner: winner, loser: loser, logger: winner)
@@ -58,7 +58,7 @@ describe Game::CanBeConfirmedByPlayer do
         loser = create_player_with_mock_user
 
         [winner, loser].each do |player|
-          Membership.create!(player_id: player.id, league_id: league.id)
+          Membership.create!(player_id: player.id, league_id: league.id, joined_at: Time.now)
         end
 
         game_logger = League::LogGame.new(league: league, winner: winner, loser: loser, logger: loser)
@@ -74,7 +74,7 @@ describe Game::CanBeConfirmedByPlayer do
         loser = create_player_with_mock_user
 
         [winner, loser].each do |player|
-          Membership.create!(player_id: player.id, league_id: league.id)
+          Membership.create!(player_id: player.id, league_id: league.id, joined_at: Time.now)
         end
 
         game_logger = League::LogGame.new(league: league, winner: winner, loser: loser, logger: loser)

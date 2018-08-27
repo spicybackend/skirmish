@@ -9,8 +9,9 @@ class LeagueController < ApplicationController
   end
 
   def show
-    if league = League.find(params["id"])
+    if league = League.find(params[:id])
       player = current_player
+
       membership = Membership.find_by(
         player_id: player.try(&.id),
         league_id: league.id

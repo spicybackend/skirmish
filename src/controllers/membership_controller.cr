@@ -6,6 +6,11 @@ class MembershipController < ApplicationController
   def create
     player = current_player.not_nil!
 
+    if Membership.find_by(player_id: player.id, league_id: params[:league_id])
+      flash["danger"] = "Membership already exists."
+      redirect_to "/leagues/#{params[:league_id]}"; return
+    end
+
     membership = Membership.new(membership_params.validate!)
     membership.player = player
     membership.joined_at = Time.now
@@ -44,10 +49,10 @@ class MembershipController < ApplicationController
   end
 
   private def leaving?
-    params["leave_or_join"] == "leave"
+    params[:leave_or_join] == "leave"
   end
 
   private def rejoining?
-    params["leave_or_join"] == "join"
+    params[:leave_or_join] == "join"
   end
 end

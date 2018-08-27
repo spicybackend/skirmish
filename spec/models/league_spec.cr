@@ -198,7 +198,8 @@ describe League do
         player = create_player_with_mock_user("player_one")
         membership = Membership.create!(
           league_id: league.id,
-          player_id: player.id
+          player_id: player.id,
+          joined_at: Time.now
         )
 
         league.active_players.size.should eq 1
@@ -211,6 +212,7 @@ describe League do
           membership = Membership.create!(
             league_id: league.id,
             player_id: player.id,
+            joined_at: Time.now,
             left_at: Time.now
           )
 

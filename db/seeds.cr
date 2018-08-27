@@ -53,6 +53,7 @@ if Amber.env.development?
     Membership.create!(
       player_id: player.id,
       league_id: hotdog_league.id,
+      joined_at: Time.now
     )
   end
 
