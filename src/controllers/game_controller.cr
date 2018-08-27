@@ -10,7 +10,7 @@ class GameController < ApplicationController
       show_game_confirmation = false
 
       if player = current_player
-        Game::CanBeConfirmedByPlayer.new(
+        show_game_confirmation = Game::CanBeConfirmedByPlayer.new(
           game: game,
           player: player
         ).call
