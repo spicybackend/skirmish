@@ -26,7 +26,7 @@ button.navbar-toggler type="button" data-toggle="collapse" data-target="#navbarS
             a.dropdown-item href="/profile" Profile
             a.dropdown-item href="/signout" Sign Out
 
-        img.gravatar src="#{gravatar_src_for(player)}?s=40"
+        img.gravatar src="#{gravatar_src_for(player)}"
     - else
       - active = context.request.path == "/signup" ? "active" : ""
       li class="nav-item #{active} auth"
