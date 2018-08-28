@@ -9,11 +9,10 @@ end
 
 describe Game::CanBeConfirmedByPlayer do
   Spec.before_each do
+    Game.clear
     League.clear
     Player.clear
     Membership.clear
-    Game.clear
-    Participation.clear
   end
 
   describe "#call" do

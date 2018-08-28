@@ -22,6 +22,7 @@ def authenticated_headers_for(user : User | Nil)
 end
 
 def basic_authenticated_headers
+  # try and find a user without ANY administration
   user = User.first(
     "WHERE NOT EXISTS(
       SELECT 1
@@ -30,6 +31,7 @@ def basic_authenticated_headers
     )"
   )
 
+  # failing that, create one
   if user.nil?
     user = User.new
     user.email = "basic@user.com"
@@ -45,22 +47,25 @@ def basic_authenticated_headers
   authenticated_headers_for(user)
 end
 
-def admin_authenticated_headers
-  if admin = Administrator.first
+def admin_authenticated_headers(league : League)
+  # find an admin for the league
+  if admin = Administrator.first("WHERE league_id = ?", [league.id])
     authenticated_headers_for(admin.user)
   else
+    # failing that, create one
     admin_user = User.new
-    admin_user.email = "admin_user@example.com"
+    admin_user.email = "admin_user_#{league.name}@example.com"
     admin_user.password = "password"
     admin_user.save!
 
     admin_player = Player.create!(
-      tag: "admin",
+      tag: "admin_#{league.name}",
       user_id: admin_user.id
     )
 
     Administrator.create!(
-      user_id: admin_user.id
+      user_id: admin_user.id,
+      league_id: league.id
     )
 
     authenticated_headers_for(admin_user)

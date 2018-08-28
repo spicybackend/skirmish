@@ -44,6 +44,9 @@ describe LeagueControllerTest do
 
   Spec.before_each do
     League.clear
+    Administrator.clear
+    Player.clear
+    User.clear
   end
 
   describe "#index" do
@@ -88,7 +91,7 @@ describe LeagueControllerTest do
   describe "#new" do
     context "when logged in" do
       it "renders the new league template" do
-        response = subject.get "/leagues/new", headers: admin_authenticated_headers
+        response = subject.get "/leagues/new", headers: basic_authenticated_headers
 
         response.status_code.should eq(200)
         response.body.should contain("New League")
@@ -109,7 +112,7 @@ describe LeagueControllerTest do
     context "when logged in" do
       it "renders the new league template" do
         league = create_league
-        response = subject.get "/leagues/#{league.id}/edit", headers: admin_authenticated_headers
+        response = subject.get "/leagues/#{league.id}/edit", headers: admin_authenticated_headers(league)
 
         response.status_code.should eq(200)
         response.body.should contain("Edit League")
@@ -140,13 +143,13 @@ describe LeagueControllerTest do
     context "when logged in" do
       it "creates a league" do
         leagues_before = League.count
-        subject.post "/leagues", headers: admin_authenticated_headers, body: body
+        subject.post "/leagues", headers: basic_authenticated_headers, body: body
 
         League.count.should eq(leagues_before + 1)
       end
 
       it "redirects to the new league" do
-        response = subject.post "/leagues", headers: admin_authenticated_headers, body: body
+        response = subject.post "/leagues", headers: basic_authenticated_headers, body: body
 
         league = League.all.last
 
@@ -156,7 +159,7 @@ describe LeagueControllerTest do
 
       describe "the created league" do
         it "has the properties specified in the params" do
-          subject.post "/leagues", headers: admin_authenticated_headers, body: body
+          subject.post "/leagues", headers: basic_authenticated_headers, body: body
 
           league = League.all.last
 
@@ -191,7 +194,7 @@ describe LeagueControllerTest do
     context "when logged in" do
       it "redirects to the league" do
         league = create_league
-        response = subject.patch "/leagues/#{league.id}", headers: admin_authenticated_headers, body: body
+        response = subject.patch "/leagues/#{league.id}", headers: admin_authenticated_headers(league), body: body
 
         response.status_code.should eq(302)
         response.headers["Location"].should eq "/leagues/#{league.id}"
@@ -200,7 +203,7 @@ describe LeagueControllerTest do
       describe "the updated league" do
         it "has the properties specified in the params" do
           league = create_league
-          subject.patch "/leagues/#{league.id}", headers: admin_authenticated_headers, body: body
+          subject.patch "/leagues/#{league.id}", headers: admin_authenticated_headers(league), body: body
 
           # reload the league
           league = League.find!(league.id)
@@ -228,7 +231,7 @@ describe LeagueControllerTest do
     context "when logged in" do
       it "deletes the league" do
         league = create_league
-        response = subject.delete "/leagues/#{league.id}", headers: admin_authenticated_headers
+        response = subject.delete "/leagues/#{league.id}", headers: admin_authenticated_headers(league)
 
         response.status_code.should eq(302)
         response.headers["Location"].should eq "/leagues"
@@ -244,7 +247,7 @@ describe LeagueControllerTest do
           game.save
           game_id = game.id
 
-          subject.delete "/leagues/#{league.id}", headers: admin_authenticated_headers
+          subject.delete "/leagues/#{league.id}", headers: admin_authenticated_headers(league)
 
           Game.find(game_id).should eq nil
         end
