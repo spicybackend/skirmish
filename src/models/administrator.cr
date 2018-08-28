@@ -3,6 +3,7 @@ class Administrator < Granite::Base
   table_name administrators
 
   belongs_to :user
+  belongs_to :league
 
   timestamps
 end
