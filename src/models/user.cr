@@ -29,8 +29,8 @@ class User < Granite::Base
     Player.find_by(user_id: id)
   end
 
-  def admin?
-    Administrator.find_by(user_id: id)
+  def admin_of?(league : League)
+    !!Administrator.find_by(user_id: id, league_id: league.id)
   end
 
   def password=(password)
