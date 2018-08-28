@@ -1,19 +1,5 @@
 require "../config/application.cr"
 
-admin_user = User.new
-admin_user.email = "admin@example.com"
-admin_user.password = "password"
-admin_user.save!
-
-admin = Player.create!(
-  tag: "admin",
-  user_id: admin_user.id
-)
-
-Administrator.create!(
-  user_id: admin_user.id
-)
-
 if Amber.env.development?
   alice_user = User.new
   alice_user.email = "alice@example.com"
@@ -47,6 +33,12 @@ if Amber.env.development?
     description: "Down a hotdog as fast as possible!",
     start_rating: League::DEFAULT_START_RATING,
     k_factor: League::DEFAULT_K_FACTOR,
+  )
+
+  Administrator.create!(
+    user_id: alice_user.id,
+    player_id: alice.id,
+    league_id: hotdog_league.id
   )
 
   [alice, bob].each do |player|

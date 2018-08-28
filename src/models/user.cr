@@ -29,10 +29,6 @@ class User < Granite::Base
     Player.find_by(user_id: id)
   end
 
-  def admin?
-    Administrator.find_by(user_id: id)
-  end
-
   def password=(password)
     @new_password = password
     @hashed_password = Bcrypt::Password.create(password, cost: 10).to_s
