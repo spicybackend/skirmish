@@ -2,3 +2,7 @@
 application:
   name: "Skirmish"
   welcome: "Welcome to Skirmish"
+
+game:
+  status:
+    pending: "Pending"
