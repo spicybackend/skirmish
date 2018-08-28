@@ -148,6 +148,13 @@ describe LeagueControllerTest do
         League.count.should eq(leagues_before + 1)
       end
 
+      it "creates an administrator" do
+        administrators_before = League.count
+        subject.post "/leagues", headers: basic_authenticated_headers, body: body
+
+        Administrator.count.should eq(administrators_before + 1)
+      end
+
       it "redirects to the new league" do
         response = subject.post "/leagues", headers: basic_authenticated_headers, body: body
 
@@ -167,6 +174,19 @@ describe LeagueControllerTest do
           league.description.should eq league_props[:description]
           league.start_rating.should eq league_props[:start_rating]
           league.k_factor.should eq league_props[:k_factor]
+        end
+      end
+
+      describe "the created admin role" do
+        it "is granted to the logged in player and created league" do
+          player = create_player_with_mock_user
+          subject.post "/leagues", headers: authenticated_headers_for(player.user.not_nil!), body: body
+
+          admin = Administrator.all.last
+          league = League.all.last
+
+          admin.player.id.should eq player.id
+          admin.league.id.should eq league.id
         end
       end
     end
