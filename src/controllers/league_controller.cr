@@ -34,7 +34,6 @@ class LeagueController < ApplicationController
 
     if league.valid? && league.save
       Administrator.create!(
-        user_id: current_user.not_nil!.id,
         player_id: current_player.not_nil!.id,
         league_id: league.id
       )
