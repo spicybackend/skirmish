@@ -36,7 +36,6 @@ if Amber.env.development?
   )
 
   Administrator.create!(
-    user_id: alice_user.id,
     player_id: alice.id,
     league_id: hotdog_league.id
   )

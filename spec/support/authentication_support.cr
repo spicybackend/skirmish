@@ -52,25 +52,25 @@ end
 def admin_authenticated_headers(league : League)
   # find an admin for the league
   if admin = Administrator.first("WHERE league_id = ?", [league.id])
-    authenticated_headers_for(admin.user.not_nil!)
+    player = admin.player.not_nil!
+    user = player.user.not_nil!
   else
     # failing that, create one
-    admin_user = User.new
-    admin_user.email = "admin_user_#{league.name}@example.com"
-    admin_user.password = "password"
-    admin_user.save!
+    user = User.new
+    user.email = "admin_user_#{league.name}@example.com"
+    user.password = "password"
+    user.save!
 
-    admin_player = Player.create!(
+    player = Player.create!(
       tag: "admin_#{league.name}",
-      user_id: admin_user.id
+      user_id: user.id
     )
 
     Administrator.create!(
-      user_id: admin_user.id,
-      player_id: admin_player.id,
+      player_id: player.id,
       league_id: league.id
     )
-
-    authenticated_headers_for(admin_user)
   end
+
+  authenticated_headers_for(user)
 end
