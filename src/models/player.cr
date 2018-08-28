@@ -18,6 +18,10 @@ class Player < Granite::Base
     !other.nil? && self.class == other.class && self.id == other.id
   end
 
+  def admin_of?(league : League)
+    !!Administrator.find_by(player_id: id, league_id: league.id)
+  end
+
   def in_league?(league : League)
     !!Membership.find_by(
       player_id: id,
