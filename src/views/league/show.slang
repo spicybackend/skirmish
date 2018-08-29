@@ -8,12 +8,12 @@
 p = league.description
 
 p
-  == link_to("Back", "/leagues", class: "btn btn-light btn-sm")
+  == link_to(t("general.actions.back"), "/leagues", class: "btn btn-light btn-sm")
   - if membership.active?
-    == link_to("Log Game", "/leagues/#{league.id}/games/new", class: "btn btn-primary btn-sm")
+    == link_to(t("league.actions.log_game"), "/leagues/#{league.id}/games/new", class: "btn btn-primary btn-sm")
   - if current_player.try(&.admin_of?(league))
-    == link_to("Edit", "/leagues/#{league.id}/edit", class: "btn btn-success btn-sm")
-    == link_to("Delete", "/leagues/#{league.id}?_csrf=#{csrf_token}", "data-method": "delete", "data-confirm": "Are you sure?", class: "btn btn-danger btn-sm")
+    == link_to(t("general.actions.edit"), "/leagues/#{league.id}/edit", class: "btn btn-success btn-sm")
+    == link_to(t("general.actions.delete"), "/leagues/#{league.id}?_csrf=#{csrf_token}", "data-method": "delete", "data-confirm": "Are you sure?", class: "btn btn-danger btn-sm")
 
 h3 Recent Games
 == render(partial: "_recent_games.slang")

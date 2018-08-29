@@ -14,6 +14,6 @@ form action="/registration" method="post"
   .form-group
     input.form-control type="password" name="password" placeholder="Password"
   button.btn.btn-primary.btn-sm type="submit"
-    | Register
+    == t("authentication.register")
 <hr/>
 == link_to("Already have an account?", "/signin")

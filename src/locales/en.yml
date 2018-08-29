@@ -3,6 +3,32 @@ application:
   name: "Skirmish"
   welcome: "Welcome to Skirmish"
 
+general:
+  actions:
+    view: "View"
+    edit: "Edit"
+    delete: "Delete"
+    back: "Back"
+
+authentication:
+  register: "Register"
+  sign_up: "Sign Up"
+  sign_in: "Sign In"
+  sign_out: "Sign Out"
+
+league:
+  actions:
+    join: "Join"
+    leave: "Leave"
+    log_game: "Log Game"
+
 game:
+  won: "Won"
+  lost: "Lost"
+
+  actions:
+    log_game: "Log Game"
+    confirm: "Confirm"
+
   status:
     pending: "Pending"

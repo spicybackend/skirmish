@@ -1,4 +1,3 @@
-
 a.navbar-brand href="/" Skirmish
 
 button.navbar-toggler type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
@@ -24,14 +23,14 @@ button.navbar-toggler type="button" data-toggle="collapse" data-target="#navbarS
 
           .dropdown-menu aria-labelledby="navbarDropdown"
             a.dropdown-item href="/profile" Profile
-            a.dropdown-item href="/signout" Sign Out
+            a.dropdown-item href="/signout" == t "authentication.sign_out"
 
         img.gravatar src="#{gravatar_src_for(player)}"
     - else
       - active = context.request.path == "/signup" ? "active" : ""
       li class="nav-item #{active} auth"
-        a.nav-link href="/signup" Sign Up
+        a.nav-link href="/signup" == t "authentication.sign_up"
 
       - active = context.request.path == "/signin" ? "active" : ""
       li class="nav-item #{active}"
-        a.nav-link href="/signin" Sign In
+        a.nav-link href="/signin" == t "authentication.sign_in"
