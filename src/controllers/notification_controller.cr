@@ -1,4 +1,4 @@
-class NotificationsController < ApplicationController
+class NotificationController < ApplicationController
   before_action do
     all { redirect_signed_out_user }
   end
@@ -11,13 +11,13 @@ class NotificationsController < ApplicationController
   end
 
   def show
-    notification = Notifications.find(params[:id])
+    notification = Notification.find(params[:id])
     # Some presenter to find action to direct to, eg. viewing a logged game
   end
 
   def read
     # AJAX action only?
-    notification = Notifications.find(params[:id])
+    notification = Notification.find(params[:id])
 
     if notification
       notification.read_at = Time.now
@@ -33,13 +33,13 @@ class NotificationsController < ApplicationController
     # See if the latter can be tidied up with the code reuse:
     # notifications = notifications_for_player(player).all("AND read_at = ?", [false])
 
-    Notifications.all("WHERE player_id = ? AND read_at = ?", [player.id, false]).find_each do |notification|
+    Notification.all("WHERE player_id = ? AND read_at = ?", [player.id, false]).find_each do |notification|
       notification.read_at = Time.now
       notification.save!
     end
   end
 
   private def notifications_for_player(player)
-    Notifications.all("WHERE player_id = ?", [player.id])
+    Notification.all("WHERE player_id = ?", [player.id])
   end
 end

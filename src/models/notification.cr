@@ -1,4 +1,4 @@
-class Notifications < Granite::Base
+class Notification < Granite::Base
   adapter postgres
   table_name notifications
 
@@ -11,4 +11,6 @@ class Notifications < Granite::Base
   field title : String
   field content : String
   timestamps
+
+  # validate and lock down the types -- this also needs to happen in the db migration
 end

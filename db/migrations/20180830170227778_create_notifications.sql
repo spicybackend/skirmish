@@ -1,12 +1,13 @@
 -- +micrate Up
 CREATE TABLE notifications (
-  id INTEGER NOT NULL PRIMARY KEY,
-  player_id BIGINT,
-  event_type VARCHAR,
+  id BIGSERIAL PRIMARY KEY,
+
+  player_id BIGSERIAL NOT NULL REFERENCES players(id) ON DELETE CASCADE,
+  event_type VARCHAR NOT NULL,
   sent_at TIMESTAMP,
   read_at TIMESTAMP,
-  title VARCHAR,
-  content VARCHAR,
+  title VARCHAR NOT NULL,
+  content VARCHAR NOT NULL,
   created_at TIMESTAMP,
   updated_at TIMESTAMP
 );

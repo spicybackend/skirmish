@@ -1,8 +1,9 @@
 .row
-  .col-sm-11
+  .col.justify-content-between.btn-toolbar
     h2 Notifications
-  .col-sm-1
-    == link_to(t("notification.actions.mark_all_as_read"), "/notifications/read_all?_csrf=#{csrf_token}", "data-method": "patch", "data-confirm": "Are you sure?", class: "btn btn-success btn-sm")
+    .button-group
+      == link_to(t("notification.actions.mark_all_as_read"), "/notifications/read_all?_csrf=#{csrf_token}", "data-method": "patch", "data-confirm": "Are you sure?", class: "btn btn-success btn-sm")
+
 .table-responsive
   table.table.table-striped
     thead
