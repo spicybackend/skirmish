@@ -22,6 +22,7 @@ class League::LogGame
     if game.valid? && game.save
       # TODO these should be validated and saved along with the game
       create_participations!
+      notify_other_player!
 
       return true
     else
@@ -54,5 +55,20 @@ class League::LogGame
     )
 
     [winner_participation, loser_participation]
+  end
+
+  private def other_player
+    players.find { |player| player != logger }.not_nil!
+  end
+
+  private def notify_other_player!
+    # Split out sub-service?
+    # Update to include specific messaging about the game outcome
+    Notification.create!(
+      player_id: other_player.id,
+      event_type: "logged_game",
+      title: "Game Logged",
+      content: "Player has logged that you played with them"
+    )
   end
 end

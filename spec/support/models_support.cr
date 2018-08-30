@@ -18,3 +18,14 @@ def create_league(name : String | Nil = nil, description : String | Nil = nil, s
     k_factor: k_factor || League::DEFAULT_K_FACTOR
   )
 end
+
+def create_notification(player : Player, event_type : String | Nil = nil, title : String | Nil = nil, content : String | Nil = nil, sent_at : Time | Nil = Time.now, read_at : Time | Nil = nil)
+  Notification.create!(
+    player_id: player.id,
+    event_type: event_type || Notification::GENERAL,
+    title: title || "New Notification",
+    content: content || "with some descriptive content",
+    sent_at: sent_at,
+    read_at: read_at
+  )
+end

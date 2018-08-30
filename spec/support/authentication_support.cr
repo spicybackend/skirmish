@@ -62,7 +62,7 @@ def admin_authenticated_headers(league : League)
     user.save!
 
     player = Player.create!(
-      tag: "admin_#{league.name}",
+      tag: "admin_#{league.name}"[0, 16],
       user_id: user.id
     )
 

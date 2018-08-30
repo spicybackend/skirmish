@@ -1,26 +1,5 @@
 require "./spec_helper"
 
-def league_hash
-  {
-    name: "Fake",
-    description: "Fake",
-    start_rating: League::DEFAULT_START_RATING,
-    k_factor: League::DEFAULT_K_FACTOR
-  }.to_h
-end
-
-def params_from_hash(params_hash : Hash)
-  params = [] of String
-  params_hash.each { |key, val| params << "#{key}=#{val}" }
-  params.join("&")
-end
-
-def create_league
-  league = League.new(league_hash)
-  league.save || raise league.errors.join(", ")
-  league
-end
-
 class LeagueControllerTest < GarnetSpec::Controller::Test
   getter handler : Amber::Pipe::Pipeline
 

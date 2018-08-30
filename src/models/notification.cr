@@ -12,5 +12,6 @@ class Notification < Granite::Base
   field content : String
   timestamps
 
-  # validate and lock down the types -- this also needs to happen in the db migration
+  # notification types
+  GENERAL = "general"
 end

@@ -13,6 +13,8 @@ class NotificationController < ApplicationController
   def show
     notification = Notification.find(params[:id])
     # Some presenter to find action to direct to, eg. viewing a logged game
+
+    redirect_to "/notifications"
   end
 
   def read
