@@ -32,3 +32,8 @@ game:
 
   status:
     pending: "Pending"
+
+notification:
+  actions:
+    mark_as_read: "Mark as Read"
+    mark_all_as_read: "Mark All as Read"

@@ -17,13 +17,14 @@ button.navbar-toggler type="button" data-toggle="collapse" data-target="#navbarS
     - if player = current_player
       span.nav-profile
         li.nav-item.dropdown.profile
-          - active = context.request.path == "/profile" ? "active" : ""
+          - active = context.request.path.match(/\/(profile|notifications)/) ? "active" : ""
           a class="nav-link dropdown-toggle #{active}" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
             == "#{player.tag}"
 
           .dropdown-menu aria-labelledby="navbarDropdown"
             a.dropdown-item href="/profile" Profile
-            a.dropdown-item href="/signout" == t "authentication.sign_out"
+            a.dropdown-item href="/notifications" Notifications
+            a.dropdown-item href="/signout" Sign Out == t "authentication.sign_out"
 
         img.gravatar src="#{gravatar_src_for(player)}"
     - else
