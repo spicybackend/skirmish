@@ -9,10 +9,10 @@ h2 New Game
       div class="status-selection"
         == hidden_field name: "status", value: "won"
         button id="status-dropdown" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-          | won
+          == t("game.won").downcase
         div id="status-dropdown-options" class="dropdown-menu" aria-labelledby="dropdown-status"
           a class="dropdown-item" href="#" data-status="lost"
-            | lost
+            == t("game.lost").downcase
 
       span class="sentence-part" against
 
@@ -28,5 +28,5 @@ h2 New Game
                 = "#{player.tag}"
 
   .form-group
-    == submit "Log Game", class: "btn btn-primary"
-    == link_to("back", "/leagues/#{league.id}", class: "btn btn-light")
+    == submit t("game.actions.log_game"), class: "btn btn-primary"
+    == link_to(t("general.actions.back"), "/leagues/#{league.id}", class: "btn btn-light")
