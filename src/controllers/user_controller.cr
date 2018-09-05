@@ -21,7 +21,7 @@ class UserController < ApplicationController
     user = current_user.not_nil!
     player = current_player.not_nil!
 
-    if update(user)
+    if update(user, player)
       flash[:success] = "Updated Profile successfully."
       redirect_to "/profile"
     else
@@ -30,14 +30,16 @@ class UserController < ApplicationController
     end
   end
 
-  private def update(user)
-    return false unless user && user_params.valid?
+  private def update(user : User, player : Player)
+    return false unless profile_params.valid?
 
-    user.set_attributes(user_params.to_h)
-    user.valid? && user.save
+    user.set_attributes(profile_params.to_h.reject("username"))
+    player.set_attributes(tag: profile_params[:username])
+
+    user.valid? && player.valid? && user.save && player.save
   end
 
-  private def user_params
+  private def profile_params
     params.validation do
       required(:email) { |f| !f.nil? && !f.empty? }
       required(:username) { |f| !f.nil? && !f.empty? }
