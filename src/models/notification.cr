@@ -14,4 +14,8 @@ class Notification < Granite::Base
 
   # notification types
   GENERAL = "general"
+
+  def read?
+    !!read_at
+  end
 end

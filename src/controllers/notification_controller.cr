@@ -18,7 +18,6 @@ class NotificationController < ApplicationController
   end
 
   def read
-    # AJAX action only?
     notification = Notification.find(params[:id])
 
     if notification
@@ -26,18 +25,22 @@ class NotificationController < ApplicationController
       notification.save!
     end
 
-    # render("new.slang")
+    respond_with do
+      html ->{ redirect_to "/notifications" }
+      json notification.to_json
+    end
   end
 
   def read_all
     player = current_player.not_nil!
 
-    # See if the latter can be tidied up with the code reuse:
-    # notifications = notifications_for_player(player).all("AND read_at = ?", [false])
+    notifications = Notification.all("WHERE player_id = ? AND read_at IS NULL", [player.id])
+    bulk_read_query = "UPDATE notifications SET read_at = NOW() WHERE id in (#{notifications.map(&.id).join(", ")})"
+    Notification.exec(bulk_read_query) if notifications.any?
 
-    Notification.all("WHERE player_id = ? AND read_at = ?", [player.id, false]).find_each do |notification|
-      notification.read_at = Time.now
-      notification.save!
+    respond_with do
+      html ->{ redirect_to "/notifications" }
+      json notifications.to_json
     end
   end
 

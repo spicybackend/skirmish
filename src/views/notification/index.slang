@@ -2,7 +2,9 @@
   .col.justify-content-between.btn-toolbar
     h2 Notifications
     .button-group
-      == link_to(t("notification.actions.mark_all_as_read"), "/notifications/read_all?_csrf=#{csrf_token}", "data-method": "patch", "data-confirm": "Are you sure?", class: "btn btn-success btn-sm")
+      == form(action: "/notifications/read_all", method: :patch, class: "single-btn") do
+        == csrf_tag
+        == submit(t("notification.actions.mark_all_as_read"), "data-confirm": "Are you sure?", class: "btn btn-success btn-sm")
 
 .table-responsive
   table.table.table-striped
@@ -19,4 +21,7 @@
           td
             span
               == link_to("Open", "/notifications/#{notification.id}", class: "btn btn-primary btn-sm")
-              == link_to("Mark Read", "/notifications/#{notification.id}/read?_csrf=#{csrf_token}", "data-method": "patch", "data-confirm": "Are you sure?", class: "btn btn-success btn-sm")
+              - if !notification.read?
+                == form(action: "/notifications/#{notification.id}/read", method: :patch, class: "single-btn") do
+                  == csrf_tag
+                  == submit(t("notification.actions.mark_as_read"), "data-confirm": "Are you sure?", class: "btn btn-success btn-sm")
