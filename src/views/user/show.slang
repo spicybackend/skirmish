@@ -2,7 +2,7 @@
   .col.justify-content-between.btn-toolbar
     h2 Profile
     .button-group
-      == link_to("edit", "/profile/edit", class: "btn btn-success btn-sm")
+      == link_to(t("general.actions.edit"), "/profile/edit", class: "btn btn-success btn-sm")
 
 h3 User Info
 
