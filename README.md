@@ -8,11 +8,19 @@ This is a project written using [Amber](https://amberframework.org). Enjoy!
 
 These instructions will get a copy of this project running on your machine for development and testing purposes.
 
-Please see [deployment](https://docs.amberframework.org/amber/deployment) for notes on deploying the project in production.
-
 ## Prerequisites
 
-This project requires [Crystal](https://crystal-lang.org/) ([installation guide](https://crystal-lang.org/docs/installation/)).
+This project requires [Crystal](https://crystal-lang.org/)
+The version of Crystal used is defined inside `.crystal-version`.
+I'd recommend using [crenv](https://github.com/pine/crenv) to install the current version of Crystal, which is as simple as the following.
+```
+crenv install
+```
+
+There are also some other dependencies required for some extensions of Crystal and Amber, as well as PostgresQL.
+```
+sudo apt install -y postgresql libssl-dev libxml2-dev libyaml-dev libgmp-dev libreadline-dev libevent-dev libsqlite3-dev
+```
 
 ## Development
 
@@ -24,10 +32,6 @@ To start your Amber server:
 4. Start Amber server with `bin/amber watch`
 
 Now you can visit http://localhost:3000/ from your browser.
-
-Getting an error message you need help decoding? Check the [Amber troubleshooting guide](https://docs.amberframework.org/amber/troubleshooting), post a [tagged message on Stack Overflow](https://stackoverflow.com/questions/tagged/amber-framework), or visit [Amber on Gitter](https://gitter.im/amberframework/amber).
-
-Using Docker? Please check [Amber Docker guides](https://docs.amberframework.org/amber/guides/docker).
 
 ## Tests
 
