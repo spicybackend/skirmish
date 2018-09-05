@@ -54,7 +54,7 @@ class GameController < ApplicationController
 
     unless other_player
       flash["danger"] = "Can't find opponent"
-      other_players = league.active_players.reject { |other_player| other_player == player }
+      other_players = league.active_players.reject { |other| other == player }
       render("new.slang"); return
     end
 
@@ -74,7 +74,7 @@ class GameController < ApplicationController
       redirect_to "/leagues/#{league.id}/games/#{game.id}"
     else
       flash["danger"] = game_logger.errors.to_s
-      other_players = league.active_players.reject { |other_player| other_player == player }
+      other_players = league.active_players.reject { |other| other == player }
 
       render("new.slang")
     end
