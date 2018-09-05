@@ -45,6 +45,10 @@ dependencies:
     version: 0.3.2
 
 development_dependencies:
- garnet_spec:
-   github: amberframework/garnet-spec
-   version: ~> 0.2.1
+  garnet_spec:
+    github: amberframework/garnet-spec
+    version: ~> 0.2.1
+
+  ameba:
+    github: veelenga/ameba
+    version: 0.8.0
