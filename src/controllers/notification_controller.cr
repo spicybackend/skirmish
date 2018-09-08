@@ -10,6 +10,21 @@ class NotificationController < ApplicationController
     render("index.slang")
   end
 
+  def show
+    player = current_player.not_nil!
+    if notification = Notification.find(params[:id])
+      presented_notification = notification.presented
+
+      notification.read_at = Time.now
+      notification.save!
+
+      redirect_to presented_notification.action_url
+    else
+      flash[:danger] = "Can't find notification"
+      redirect_to "/notifications"
+    end
+  end
+
   def read
     notification = Notification.find(params[:id])
 

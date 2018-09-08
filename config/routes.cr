@@ -29,7 +29,7 @@ Amber::Server.configure do
   end
 
   routes :web do
-    resources "/notifications", NotificationController, only: [:index]
+    resources "/notifications", NotificationController, only: [:index, :show]
     patch "/notifications/read_all", NotificationController, :read_all
     patch "/notifications/:id/read", NotificationController, :read
 

@@ -7,6 +7,6 @@ class Notification::GeneralPresenter
   end
 
   def action_url
-    "#"
+    "#"  # do nothing, for now?
   end
 end
