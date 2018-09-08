@@ -1,16 +1,5 @@
 require "./spec_helper"
 
-def notification_props
-  {
-    player_id: 1,
-    event_type: "Fake",
-    sent_at: Time.now,
-    read_at: nil,
-    title: "Fake",
-    content: "Fake"
-  }
-end
-
 class NotificationControllerTest < GarnetSpec::Controller::Test
   getter handler : Amber::Pipe::Pipeline
 
@@ -41,7 +30,7 @@ describe NotificationControllerTest do
     response.body.should contain("notifications")
   end
 
-  it "renders notifications show template" do
+  pending "redirects to the notification source" do
     player = create_player_with_mock_user
     user = player.user.not_nil!
     notification = create_notification(player: player)
@@ -52,15 +41,35 @@ describe NotificationControllerTest do
     # TODO check location redirects as appropriate to notification type
   end
 
-  pending "reads a notifications" do
-    model = create_notifications
-    response = subject.delete "/notifications/#{model.id}", headers: basic_authenticated_headers
+  it "reads a notifications" do
+    player = create_player_with_mock_user
+    user = player.user.not_nil!
+    notification = create_notification(player: player)
+    notification.read?.should eq false
+
+    response = subject.patch "/notifications/#{notification.id}/read", headers: authenticated_headers_for(user)
 
     response.headers["Location"].should eq "/notifications"
     response.status_code.should eq(302)
     response.body.should eq "302"
+
+    notification = Notification.find(notification.id).not_nil!
+    notification.read?.should eq true
   end
 
-  pending "reads all notifications" do
+  it "reads all notifications" do
+    player = create_player_with_mock_user
+    user = player.user.not_nil!
+    notification = create_notification(player: player)
+    notification.read?.should eq false
+
+    response = subject.patch "/notifications/read_all", headers: authenticated_headers_for(user)
+
+    response.headers["Location"].should eq "/notifications"
+    response.status_code.should eq(302)
+    response.body.should eq "302"
+
+    notification = Notification.find(notification.id).not_nil!
+    notification.read?.should eq true
   end
 end
