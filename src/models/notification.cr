@@ -27,6 +27,11 @@ class Notification < Granite::Base
     GAME_LOGGED => Game
   }
 
+  PRESENTER_BY_EVENT_TYPE = {
+    GENERAL => Notification::GeneralPresenter,
+    GAME_LOGGED => Notification::LoggedGamePresenter
+  }
+
   validate :player, "is required", ->(notification : Notification) do
     !Player.find(notification.player_id).nil?
   end
@@ -78,6 +83,10 @@ class Notification < Granite::Base
     if source_class = SOURCE_CLASS_BY_EVENT_TYPE[event_type]?
       source_class.find(source_id)
     end
+  end
+
+  def presented
+    PRESENTER_BY_EVENT_TYPE[event_type].new(self)
   end
 
   def read?

@@ -20,7 +20,7 @@
           td = notification.content
           td
             span
-              == link_to("Open", "/notifications/#{notification.id}", class: "btn btn-primary btn-sm")
+              == link_to("Open", notification.action_url, class: "btn btn-primary btn-sm")
               - if !notification.read?
                 == form(action: "/notifications/#{notification.id}/read", method: :patch, class: "single-btn") do
                   == csrf_tag

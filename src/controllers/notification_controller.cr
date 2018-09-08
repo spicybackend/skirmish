@@ -5,16 +5,9 @@ class NotificationController < ApplicationController
 
   def index
     player = current_player.not_nil!
-    notifications = notifications_for_player(player)
+    notifications = notifications_for_player(player).map(&.presented)
 
     render("index.slang")
-  end
-
-  def show
-    notification = Notification.find(params[:id])
-    # Some presenter to find action to direct to, eg. viewing a logged game
-
-    redirect_to "/notifications"
   end
 
   def read
