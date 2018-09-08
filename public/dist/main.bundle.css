@@ -5,6 +5,23 @@ div#simple-logger {
     font-weight: 400;
     padding: .375rem .75rem; }
 
+a.dropdown-item {
+  display: flex;
+  justify-content: space-between; }
+
+span.notification-count {
+  font-size: 12px;
+  font-weight: bold;
+  color: white;
+  background-color: #5da9e9;
+  padding: 4px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  margin-left: 1.5rem;
+  align-self: flex-end;
+  text-align: center; }
+
 form.single-btn {
   display: inline; }
 

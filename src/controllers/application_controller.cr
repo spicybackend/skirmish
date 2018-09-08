@@ -5,7 +5,7 @@ class ApplicationController < Amber::Controller::Base
   LAYOUT = "application.slang"
 
   include ReadableTimeHelpers
-  include GravatarHelper
+  include ProfileHelper
 
   def current_user
     context.current_user

@@ -23,7 +23,11 @@ button.navbar-toggler type="button" data-toggle="collapse" data-target="#navbarS
 
           .dropdown-menu aria-labelledby="navbarDropdown"
             a.dropdown-item href="/profile" Profile
-            a.dropdown-item href="/notifications" Notifications
+            a.dropdown-item href="/notifications"
+              span Notifications
+              - notification_count = notification_count_for(player)
+              - if notification_count > 0
+                span.notification-count == notification_count
             a.dropdown-item href="/signout" == t "authentication.sign_out"
 
         img.gravatar src="#{gravatar_src_for(player)}"

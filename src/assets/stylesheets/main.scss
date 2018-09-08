@@ -18,6 +18,25 @@ $amber-orange: #f4994b;
 $background-color: $brand1;
 $nav-item-color: $blue;
 
+a.dropdown-item {
+  display: flex;
+  justify-content: space-between;
+}
+
+span.notification-count {
+  font-size: 12px;
+  font-weight: bold;
+  color: white;
+  background-color: $blue;
+  padding: 4px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  margin-left: 1.5rem;
+  align-self: flex-end;
+  text-align: center;
+}
+
 form.single-btn {
   display: inline;
 }
