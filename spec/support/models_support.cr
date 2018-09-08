@@ -19,13 +19,16 @@ def create_league(name : String | Nil = nil, description : String | Nil = nil, s
   )
 end
 
-def create_notification(player : Player, event_type : String | Nil = nil, title : String | Nil = nil, content : String | Nil = nil, sent_at : Time | Nil = Time.now, read_at : Time | Nil = nil)
-  Notification.create!(
-    player_id: player.id,
-    event_type: event_type || Notification::GENERAL,
-    title: title || "New Notification",
-    content: content || "with some descriptive content",
-    sent_at: sent_at,
-    read_at: read_at
-  )
+def create_notification(player : Player, event_type : String | Nil = nil, source : Granite::Base | Nil = nil, title : String | Nil = nil, content : String | Nil = nil, sent_at : Time | Nil = Time.now, read_at : Time | Nil = nil)
+  Notification.new.tap do |notification|
+    notification.player_id = player.id
+    notification.event_type = event_type || Notification::GENERAL
+    notification.source = source
+    notification.title = title || "New Notification"
+    notification.content = content || "with some descriptive content"
+    notification.sent_at = sent_at
+    notification.read_at = read_at
+
+    notification.save!
+  end
 end

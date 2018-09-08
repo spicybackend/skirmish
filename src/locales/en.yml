@@ -33,6 +33,11 @@ game:
   status:
     pending: "Pending"
 
+  notifications:
+    game_logged:
+      title: "Game logged"
+      content: "Please confirm your game."
+
 notification:
   actions:
     mark_as_read: "Mark as Read"

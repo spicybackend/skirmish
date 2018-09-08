@@ -2,12 +2,14 @@
 CREATE TABLE notifications (
   id BIGSERIAL PRIMARY KEY,
 
-  player_id BIGSERIAL NOT NULL REFERENCES players(id) ON DELETE CASCADE,
+  player_id BIGINT NOT NULL REFERENCES players(id) ON DELETE CASCADE,
   event_type VARCHAR NOT NULL,
-  sent_at TIMESTAMP,
-  read_at TIMESTAMP,
   title VARCHAR NOT NULL,
   content VARCHAR NOT NULL,
+  source_type VARCHAR NULL,
+  source_id BIGINT NULL,
+  sent_at TIMESTAMP,
+  read_at TIMESTAMP,
   created_at TIMESTAMP,
   updated_at TIMESTAMP
 );
