@@ -29,6 +29,10 @@ Amber::Server.configure do
   end
 
   routes :web do
+    resources "/notifications", NotificationController, only: [:index, :show]
+    patch "/notifications/read_all", NotificationController, :read_all
+    patch "/notifications/:id/read", NotificationController, :read
+
     post "/leagues/:league_id/join", MembershipController, :create
     patch "/leagues/:league_id/:leave_or_join", MembershipController, :update
     resources "/leagues/:league_id/games", GameController, except: [:index, :edit, :update]

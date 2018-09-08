@@ -18,3 +18,17 @@ def create_league(name : String | Nil = nil, description : String | Nil = nil, s
     k_factor: k_factor || League::DEFAULT_K_FACTOR
   )
 end
+
+def create_notification(player : Player, event_type : String | Nil = nil, source : Granite::Base | Nil = nil, title : String | Nil = nil, content : String | Nil = nil, sent_at : Time | Nil = Time.now, read_at : Time | Nil = nil)
+  Notification.new.tap do |notification|
+    notification.player_id = player.id
+    notification.event_type = event_type || Notification::GENERAL
+    notification.source = source
+    notification.title = title || "New Notification"
+    notification.content = content || "with some descriptive content"
+    notification.sent_at = sent_at
+    notification.read_at = read_at
+
+    notification.save!
+  end
+end
