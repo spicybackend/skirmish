@@ -13,9 +13,11 @@ class Notification < Granite::Base
 
   # notification types
   GENERAL = "general"
+  GAME_LOGGED = "game_logged"
 
   EVENT_TYPES = [
-    GENERAL
+    GENERAL,
+    GAME_LOGGED
   ]
 
   validate :player, "is required", ->(notification : Notification) do

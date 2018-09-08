@@ -62,13 +62,11 @@ class League::LogGame
   end
 
   private def notify_other_player!
-    # Split out sub-service?
-    # Update to include specific messaging about the game outcome
-    Notification.create!(
-      player_id: other_player.id,
-      event_type: "logged_game",
-      title: "Game Logged",
-      content: "Player has logged that you played with them"
-    )
+    NotifyPlayer.new(
+      player: other_player,
+      won: other_player.id == winner.id,
+      game: game,
+      logger: logger
+    ).call!
   end
 end
