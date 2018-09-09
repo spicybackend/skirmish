@@ -12,7 +12,13 @@ class NotificationController < ApplicationController
 
   def show
     player = current_player.not_nil!
+
     if notification = Notification.find(params[:id])
+      if notification.player_id != player.id
+        flash[:danger] = "Can't find notification"
+        redirect_to "/notifications"; return
+      end
+
       presented_notification = notification.presented
 
       notification.read_at = Time.now
@@ -26,17 +32,17 @@ class NotificationController < ApplicationController
   end
 
   def read
+    player = current_player.not_nil!
     notification = Notification.find(params[:id])
 
-    if notification
+    if notification && notification.player_id == player.id
       notification.read_at = Time.now
       notification.save!
+    else
+      flash[:danger] = "Can't find notification"
     end
 
-    respond_with do
-      html ->{ redirect_to "/notifications" }
-      json notification.to_json
-    end
+    redirect_to "/notifications"
   end
 
   def read_all
@@ -46,10 +52,7 @@ class NotificationController < ApplicationController
     bulk_read_query = "UPDATE notifications SET read_at = NOW() WHERE id in (#{notifications.map(&.id).join(", ")})"
     Notification.exec(bulk_read_query) if notifications.any?
 
-    respond_with do
-      html ->{ redirect_to "/notifications" }
-      json notifications.to_json
-    end
+    redirect_to "/notifications"
   end
 
   private def notifications_for_player(player)

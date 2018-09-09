@@ -50,13 +50,8 @@ describe Notification do
         # create models for the sake of matching with a notification type
         league = create_league
         another_player = create_player_with_mock_user
-        [player, another_player].each do |player|
-          Membership.create!(
-            player_id: player.id,
-            league_id: league.id,
-            joined_at: Time.now
-          )
-        end
+        Membership.create!(player_id: player.id, league_id: league.id, joined_at: Time.now)
+        Membership.create!(player_id: another_player.id, league_id: league.id, joined_at: Time.now)
         game_logger = League::LogGame.new(league: league, winner: player, loser: another_player, logger: player)
         game_logger.call || puts game_logger.errors.map(&.to_s)
         game = game_logger.game
@@ -87,13 +82,8 @@ describe Notification do
         # create models for the sake of matching with a notification type
         league = create_league
         another_player = create_player_with_mock_user
-        [player, another_player].each do |player|
-          Membership.create!(
-            player_id: player.id,
-            league_id: league.id,
-            joined_at: Time.now
-          )
-        end
+        Membership.create!(player_id: player.id, league_id: league.id, joined_at: Time.now)
+        Membership.create!(player_id: another_player.id, league_id: league.id, joined_at: Time.now)
         game_logger = League::LogGame.new(league: league, winner: player, loser: another_player, logger: player)
         game_logger.call
         game = game_logger.game
@@ -176,13 +166,8 @@ describe Notification do
         # create models for the sake of matching with a notification type
         league = create_league
         another_player = create_player_with_mock_user
-        [player, another_player].each do |player|
-          Membership.create!(
-            player_id: player.id,
-            league_id: league.id,
-            joined_at: Time.now
-          )
-        end
+        Membership.create!(player_id: player.id, league_id: league.id, joined_at: Time.now)
+        Membership.create!(player_id: another_player.id, league_id: league.id, joined_at: Time.now)
         game_logger = League::LogGame.new(league: league, winner: player, loser: another_player, logger: player)
         game_logger.call || puts game_logger.errors.map(&.to_s)
         game = game_logger.game
