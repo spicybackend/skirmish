@@ -15,6 +15,9 @@ targets:
   amber:
     main: lib/amber/src/amber/cli.cr
 
+  ameba:
+    main: lib/ameba/src/cli.cr
+
 dependencies:
   pg:
     github: yumoose/crystal-pg
