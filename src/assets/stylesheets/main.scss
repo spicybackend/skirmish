@@ -111,6 +111,8 @@ body {
   font-family: $font-stack;
   color: #555;
   background-color: #eee;
+  display: flex;
+  flex-direction: column;
 }
 
 h1, .h1,
@@ -143,9 +145,11 @@ h6, .h6 {
 }
 
 nav {
-  .nav-profile {
+  .nav-profile, .nav-auth {
     display: flex;
     flex-direction: row;
+    align-self: flex-end;
+    margin-left: auto;
   }
 
   img.gravatar {
@@ -203,4 +207,73 @@ tr.clickable-row {
 .table-striped tbody tr.clickable-row:nth-of-type(2n+1):hover {
   color: white;
   background-color: $blue;
+}
+
+.navbar-nav {
+  flex-direction: row;
+  width: 100%;
+}
+
+@media only screen and (max-width: 768px) {
+  .masthead {
+    position: fixed;
+    left: 0px;
+    bottom: 0px;
+    height: 64px;
+    width: 100%;
+    z-index: 999;
+  }
+
+  body {
+    flex-direction: column-reverse;
+    justify-content: space-between;
+
+    .container {
+      margin-bottom: 64px;
+    }
+  }
+
+  .navbar-brand {
+    display: none;
+  }
+
+  .gravatar {
+    display: none;
+  }
+
+  nav.navbar {
+    padding: 0;
+  }
+
+  .navbar-nav {
+    justify-content: space-between;
+  }
+
+  .nav-profile, .nav-auth {
+    margin-left: 0 !important;
+  }
+
+  .nav-item {
+    padding: 4px 8px;
+
+    &.signup { display: none; }
+
+    .nav-link {
+      // visibility: hidden;
+      color: transparent !important;
+      width: 40px;
+      height: 40px;
+      margin: 8px;
+      background-size: contain !important;
+      &.home { background: url("https://png.icons8.com/ios-glyphs/160/ffffff/cottage.png"); }
+      &.leagues { background: url("https://png.icons8.com/ios-glyphs/160/ffffff/trophy.png"); }
+      &.profile { background: url("https://png.icons8.com/ios-glyphs/160/ffffff/gender-neutral-user.png"); }
+      &.notifications { background: url("https://png.icons8.com/ios-glyphs/160/ffffff/appointment-reminders.png") }
+      &.login { background: url("https://png.icons8.com/ios-glyphs/160/ffffff/enter-2.png") }
+    }
+
+    &.active {
+      background-color: $blue;
+    }
+  }
 }

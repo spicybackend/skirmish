@@ -1,41 +1,31 @@
 a.navbar-brand href="/" Skirmish
 
-button.navbar-toggler type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
-  span.navbar-toggler-icon
+ul.navbar-nav
+  - active = context.request.path == "/" ? "active" : ""
+  li class="nav-item #{active}"
+    a.nav-link.home href="/" Home
 
-.collapse.navbar-collapse id="navbarSupportedContent"
-  ul.navbar-nav.mr-auto
-    - active = context.request.path == "/" ? "active" : ""
+  - active = context.request.path.starts_with?("/leagues") ? "active" : ""
+  li class="nav-item #{active}"
+    a.nav-link.leagues href="/leagues" Leagues
+
+  - if player = current_player
+    - active = context.request.path.starts_with?("/notifications") ? "active" : ""
     li class="nav-item #{active}"
-      a.nav-link href="/" Home
+      a.nav-link.notifications href="/notifications" Notifications
 
-    - active = context.request.path == "/leagues" ? "active" : ""
-    li class="nav-item #{active}"
-      a.nav-link href="/leagues" Leagues
+    span.nav-profile
+      - active = context.request.path.starts_with?("/profile") ? "active" : ""
+      li class="nav-item #{active}"
+        a.nav-link.profile href="/profile" = player.tag
+      img.gravatar src="#{gravatar_src_for(player)}"
 
-  ul.navbar-nav
-    - if player = current_player
-      span.nav-profile
-        li.nav-item.dropdown.profile
-          - active = context.request.path.match(/\/(profile|notifications)/) ? "active" : ""
-          a class="nav-link dropdown-toggle #{active}" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-            == "#{player.tag}"
-
-          .dropdown-menu aria-labelledby="navbarDropdown"
-            a.dropdown-item href="/profile" Profile
-            a.dropdown-item href="/notifications"
-              span Notifications
-              - notification_count = notification_count_for(player)
-              - if notification_count > 0
-                span.notification-count == notification_count
-            a.dropdown-item href="/signout" == t "authentication.sign_out"
-
-        img.gravatar src="#{gravatar_src_for(player)}"
-    - else
-      - active = context.request.path == "/signup" ? "active" : ""
-      li class="nav-item #{active} auth"
+  - else
+    span.nav-auth
+      - active = context.request.path.starts_with?("/signup") ? "active" : ""
+      li class="nav-item #{active} signup"
         a.nav-link href="/signup" == t "authentication.sign_up"
 
-      - active = context.request.path == "/signin" ? "active" : ""
+      - active = context.request.path.starts_with?("/signin") ? "active" : ""
       li class="nav-item #{active}"
-        a.nav-link href="/signin" == t "authentication.sign_in"
+        a.nav-link.login href="/signin" == t "authentication.sign_in"
