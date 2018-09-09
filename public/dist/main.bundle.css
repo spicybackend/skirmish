@@ -72,7 +72,9 @@ th.right, td.right {
 body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: #555;
-  background-color: #eee; }
+  background-color: #eee;
+  display: flex;
+  flex-direction: column; }
 
 h1, .h1,
 h2, .h2,
@@ -99,9 +101,11 @@ h6, .h6 {
   -webkit-box-shadow: inset 0 -2px 5px rgba(0, 0, 0, 0.1);
   box-shadow: inset 0 -2px 5px rgba(0, 0, 0, 0.1); }
 
-nav .nav-profile {
+nav .nav-profile, nav .nav-auth {
   display: flex;
-  flex-direction: row; }
+  flex-direction: row;
+  align-self: flex-end;
+  margin-left: auto; }
 
 nav img.gravatar {
   width: 40px;
@@ -145,5 +149,55 @@ tr.clickable-row {
 .table-striped tbody tr.clickable-row:nth-of-type(2n+1):hover {
   color: white;
   background-color: #5da9e9; }
+
+.navbar-nav {
+  flex-direction: row;
+  width: 100%; }
+
+@media only screen and (max-width: 768px) {
+  .masthead {
+    position: fixed;
+    left: 0px;
+    bottom: 0px;
+    height: 64px;
+    width: 100%;
+    z-index: 999; }
+  body {
+    flex-direction: column-reverse;
+    justify-content: space-between; }
+    body .container {
+      margin-bottom: 64px; }
+  .navbar-brand {
+    display: none; }
+  .gravatar {
+    display: none; }
+  nav.navbar {
+    padding: 0; }
+  .navbar-nav {
+    justify-content: space-between; }
+  .nav-profile, .nav-auth {
+    margin-left: 0 !important; }
+  .nav-item {
+    padding: 4px 8px; }
+    .nav-item.signup {
+      display: none; }
+    .nav-item .nav-link {
+      color: transparent !important;
+      width: 40px;
+      height: 40px;
+      margin: 8px;
+      background-size: contain !important; }
+      .nav-item .nav-link.home {
+        background: url("https://png.icons8.com/ios-glyphs/160/ffffff/cottage.png"); }
+      .nav-item .nav-link.leagues {
+        background: url("https://png.icons8.com/ios-glyphs/160/ffffff/trophy.png"); }
+      .nav-item .nav-link.profile {
+        background: url("https://png.icons8.com/ios-glyphs/160/ffffff/gender-neutral-user.png"); }
+      .nav-item .nav-link.notifications {
+        background: url("https://png.icons8.com/ios-glyphs/160/ffffff/appointment-reminders.png"); }
+      .nav-item .nav-link.login {
+        background: url("https://png.icons8.com/ios-glyphs/160/ffffff/enter-2.png"); }
+    .nav-item.active {
+      background-color: #5da9e9; } }
 
 /*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJtYWluLmJ1bmRsZS5jc3MiLCJzb3VyY2VSb290IjoiIn0=*/
