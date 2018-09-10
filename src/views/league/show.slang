@@ -18,6 +18,6 @@ p
 h3 Recent Games
 == render(partial: "_recent_games.slang")
 
-h3 Members
-- members = league.active_players
-== render(partial: "_members.slang")
+h3 Leaderboard
+- leaderboard = Leaderboard::PureSkill.new(league: league)
+== render(partial: "_leaderboard.slang")

@@ -54,8 +54,8 @@ describe Leaderboard::PureSkill do
     it "accurately fetches rankings for specific players based on their participation ratings" do
       league = create_league
       player_one, player_two, player_three = create_and_pit_players(league)
-      leaderboard = Leaderboard::PureSkill.new(league)
 
+      leaderboard = Leaderboard::PureSkill.new(league)
       leaderboard.ranking_for(player_one).should eq 1
       leaderboard.ranking_for(player_two).should eq 2
       leaderboard.ranking_for(player_three).should eq 3
