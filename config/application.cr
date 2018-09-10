@@ -4,6 +4,7 @@ require "amber"
 require "../src/models/**"
 require "../src/services/**"
 require "../src/helpers/**"
+require "../src/concepts/**"
 require "../src/presenters/**"
 require "../src/pipes/**"
 
