@@ -24,17 +24,16 @@ a.dropdown-item {
 }
 
 span.notification-count {
-  font-size: 12px;
+  font-size: 13px;
   font-weight: bold;
   color: white;
-  background-color: $blue;
-  padding: 4px;
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  margin-left: 1.5rem;
-  align-self: flex-end;
+  background-color: #fd971f;
+  padding: 0 6px;
+  border-radius: 12px;
+  margin-left: 8px;
+  float: right;
   text-align: center;
+  line-height: 20px;
 }
 
 form.single-btn {
@@ -219,7 +218,7 @@ tr.clickable-row {
     position: fixed;
     left: 0px;
     bottom: 0px;
-    height: 64px;
+    height: 56px;
     width: 100%;
     z-index: 999;
   }
@@ -229,7 +228,7 @@ tr.clickable-row {
     justify-content: space-between;
 
     .container {
-      margin-bottom: 64px;
+      margin-bottom: 56px;
     }
   }
 
@@ -245,6 +244,12 @@ tr.clickable-row {
     padding: 0;
   }
 
+  span.notification-count {
+    position: absolute;
+    margin-left: 24px;
+    margin-top: -36px;
+  }
+
   .navbar-nav {
     justify-content: space-between;
   }
@@ -254,15 +259,15 @@ tr.clickable-row {
   }
 
   .nav-item {
-    padding: 4px 8px;
+    padding: 4px 14px;
 
     &.signup { display: none; }
 
     .nav-link {
       // visibility: hidden;
       color: transparent !important;
-      width: 40px;
-      height: 40px;
+      width: 32px;
+      height: 32px;
       margin: 8px;
       background-size: contain !important;
       &.home { background: url("https://png.icons8.com/ios-glyphs/160/ffffff/cottage.png"); }
