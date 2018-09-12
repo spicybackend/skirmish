@@ -33,6 +33,6 @@ class Leaderboard::PureSkill < Leaderboard::Base
   end
 
   private def ranked_player_rating_for(player : Player)
-    players_by_ratings.find { |index, ranked_player| ranked_player.id == player.id }
+    players_by_ratings.find { |_, ranked_player| ranked_player.id == player.id }
   end
 end
