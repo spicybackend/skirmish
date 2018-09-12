@@ -10,17 +10,16 @@ a.dropdown-item {
   justify-content: space-between; }
 
 span.notification-count {
-  font-size: 12px;
+  font-size: 13px;
   font-weight: bold;
   color: white;
   background-color: #fd971f;
-  padding: 4px;
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
+  padding: 0 6px;
+  border-radius: 12px;
   margin-left: 8px;
   float: right;
-  text-align: center; }
+  text-align: center;
+  line-height: 20px; }
 
 form.single-btn {
   display: inline; }
@@ -159,14 +158,14 @@ tr.clickable-row {
     position: fixed;
     left: 0px;
     bottom: 0px;
-    height: 64px;
+    height: 56px;
     width: 100%;
     z-index: 999; }
   body {
     flex-direction: column-reverse;
     justify-content: space-between; }
     body .container {
-      margin-bottom: 64px; }
+      margin-bottom: 56px; }
   .navbar-brand {
     display: none; }
   .gravatar {
@@ -182,13 +181,13 @@ tr.clickable-row {
   .nav-profile, .nav-auth {
     margin-left: 0 !important; }
   .nav-item {
-    padding: 4px 8px; }
+    padding: 4px 14px; }
     .nav-item.signup {
       display: none; }
     .nav-item .nav-link {
       color: transparent !important;
-      width: 40px;
-      height: 40px;
+      width: 32px;
+      height: 32px;
       margin: 8px;
       background-size: contain !important; }
       .nav-item .nav-link.home {
