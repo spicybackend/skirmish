@@ -32,10 +32,6 @@ shards:
     github: crystal-lang/crystal-db
     version: 0.5.0
 
-  email:
-    github: arcage/crystal-email
-    version: 0.2.5
-
   garnet_spec:
     github: amberframework/garnet-spec
     version: 0.2.1
@@ -64,6 +60,10 @@ shards:
     github: TechMagister/liquid.cr
     version: 0.3.0
 
+  mailer:
+    github: crisward/mailer
+    commit: d6c539185b0880483052f7000c07d37e78d9e616
+
   micrate:
     github: amberframework/micrate
     version: 0.3.3
@@ -83,10 +83,6 @@ shards:
   pool:
     github: ysbaddaden/pool
     version: 0.2.3
-
-  quartz_mailer:
-    github: amberframework/quartz-mailer
-    version: 0.5.1
 
   redis:
     github: stefanwille/crystal-redis

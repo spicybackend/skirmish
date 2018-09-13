@@ -35,9 +35,8 @@ dependencies:
     # github: amberframework/granite
     # version: ~> 0.12.1
 
-  quartz_mailer:
-    github: amberframework/quartz-mailer
-    version: ~> 0.5.1
+  mailer:
+    github: crisward/mailer
 
   jasper_helpers:
     github: amberframework/jasper-helpers
