@@ -1,6 +1,15 @@
 require "kilt"
+require "jasper_helpers"
+
 
 class ApplicationMailer < Mailer::Message
+  include JasperHelpers
+
+  def initialize
+    super()
+    self.from = "Skirmish <postmaster@mail.skirmish.online>"
+  end
+
   macro render(filename, layout, *args)
     content = render("{{filename.id}}", {{*args}})
     render("layouts/{{layout.id}}")
