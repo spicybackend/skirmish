@@ -10,8 +10,6 @@ class User < Granite::Base
 
   timestamps
 
-  after_create :associate_new_player
-
   validate :email, "is required", ->(user : User) do
     (email = user.email) ? !email.empty? : false
   end
@@ -51,10 +49,4 @@ class User < Granite::Base
   end
 
   private getter new_password : String?
-
-  private def associate_new_player
-    Player.create(
-      user_id: id
-    )
-  end
 end
