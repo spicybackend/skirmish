@@ -272,9 +272,8 @@ tr.clickable-row {
       background-size: contain !important;
       &.home { background: url("https://png.icons8.com/ios-glyphs/160/ffffff/cottage.png"); }
       &.leagues { background: url("https://png.icons8.com/ios-glyphs/160/ffffff/trophy.png"); }
-      &.profile { background: url("https://png.icons8.com/ios-glyphs/160/ffffff/gender-neutral-user.png"); }
+      &.profile, &.login { background: url("https://png.icons8.com/ios-glyphs/160/ffffff/gender-neutral-user.png"); }
       &.notifications { background: url("https://png.icons8.com/ios-glyphs/160/ffffff/appointment-reminders.png") }
-      &.login { background: url("https://png.icons8.com/ios-glyphs/160/ffffff/enter-2.png") }
     }
 
     &.active {
