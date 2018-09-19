@@ -16,10 +16,7 @@ class RegistrationController < ApplicationController
         user_id: user.id
       )
 
-      WelcomeMailer.new(
-        player.tag.not_nil!,
-        user.email.not_nil!
-      ).deliver
+      WelcomeMailer.new(player).send
 
       flash["success"] = "Created User successfully."
       redirect_to "/"
