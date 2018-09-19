@@ -11,10 +11,12 @@ class RegistrationController < ApplicationController
     if user.valid? && user.save
       session[:user_id] = user.id
 
-      Player.create!(
+      player = Player.create!(
         tag: params["username"],
         user_id: user.id
       )
+
+      WelcomeMailer.new(player).send
 
       flash["success"] = "Created User successfully."
       redirect_to "/"

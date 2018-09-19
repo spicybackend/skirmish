@@ -25,7 +25,7 @@ class Game < Granite::Base
   end
 
   def logged_by
-    Player.find(logged_by_id)
+    Player.find(logged_by_id).not_nil!
   end
 
   def confirmed?

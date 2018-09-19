@@ -16,6 +16,10 @@ authentication:
   sign_in: "Sign In"
   sign_out: "Sign Out"
 
+mailer:
+  welcome:
+    verify: "Verify Account"
+
 league:
   actions:
     join: "Join"

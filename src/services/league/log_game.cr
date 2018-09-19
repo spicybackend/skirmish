@@ -68,5 +68,7 @@ class League::LogGame
       game: game,
       logger: logger
     ).call!
+
+    GameLoggedMailer.new(other_player, game).send
   end
 end
