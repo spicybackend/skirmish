@@ -7,6 +7,7 @@ class User < Granite::Base
   primary id : Int64
   field email : String
   field hashed_password : String
+  field receive_email_notifications : Bool
 
   timestamps
 

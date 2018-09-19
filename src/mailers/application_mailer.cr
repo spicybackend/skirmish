@@ -16,7 +16,21 @@ class ApplicationMailer < Mailer::Message
   end
 
   private def suppress_emails?
-    ENV["SUPPRESS_EMAILS"]? != "false"
+    ENV["SUPPRESS_EMAILS"]? != "false" || recipient_opted_out_of_email_notifications?
+  end
+
+  private def recipient_opted_out_of_email_notifications?
+    # Assumes a single recipient, if one is opted out, all will NOT receive the email
+    # TODO Remove unwilling recipients and then check if any left before sending
+    to.any? do |recipient|
+      user = User.find_by(email: recipient.email)
+
+      if user
+        !user.receive_email_notifications
+      else
+        false
+      end
+    end
   end
 
   macro render(filename, layout, *args)
