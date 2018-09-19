@@ -16,7 +16,7 @@ class ApplicationMailer < Mailer::Message
   end
 
   private def suppress_emails?
-    ENV["SUPPRESS_EMAILS"]? != "false" || recipient_opted_out_of_email_notifications?
+    ENV["SUPPRESS_EMAILS"]? == "true" || recipient_opted_out_of_email_notifications?
   end
 
   private def recipient_opted_out_of_email_notifications?
@@ -26,8 +26,9 @@ class ApplicationMailer < Mailer::Message
       user = User.find_by(email: recipient.email)
 
       if user
-        !user.receive_email_notifications
+        !user.receive_email_notifications?
       else
+        # Not signed up as a user, yet...
         false
       end
     end

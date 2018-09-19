@@ -2,6 +2,7 @@ def create_player_with_mock_user(tag : String | Nil = nil)
   user = User.new
   user.email = "#{Random::Secure.hex}@test.com"
   user.password = Random::Secure.hex
+  user.receive_email_notifications = false
   user.save!
 
   Player.create!(
