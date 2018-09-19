@@ -12,12 +12,14 @@
       tr
         th Title
         th Content
+        th When
         th Actions
     tbody
       - notifications.each do |notification|
         tr
           td = notification.title
           td = notification.content
+          td = time_units_since(notification.created_at)
           td
             span
               == link_to("Open", "/notifications/#{notification.id}", class: "btn btn-primary btn-sm")

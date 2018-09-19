@@ -3,7 +3,7 @@ class Notification::LoggedGamePresenter
 
   property game : Game
 
-  delegate id, read?, read_at, to: notification
+  delegate id, read?, read_at, created_at, to: notification
 
   def initialize(@notification : Notification)
     @game = notification.source.not_nil!

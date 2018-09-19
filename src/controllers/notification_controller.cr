@@ -56,6 +56,6 @@ class NotificationController < ApplicationController
   end
 
   private def notifications_for_player(player)
-    Notification.all("WHERE player_id = ?", [player.id])
+    Notification.all("WHERE player_id = ? ORDER BY created_at DESC", [player.id])
   end
 end
