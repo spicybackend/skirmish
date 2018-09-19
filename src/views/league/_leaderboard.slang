@@ -1,10 +1,12 @@
 table.table.table-striped
   thead
     tr
+      th Ranking
       th Name
       th Rating
   tbody
-    - members.each do |player|
+    - leaderboard.rankings.each do |ranking, player|
       tr
+        td = ranking
         td = player.tag
         td = player.rating_for(league)
