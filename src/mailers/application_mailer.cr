@@ -11,8 +11,12 @@ class ApplicationMailer < Mailer::Message
   end
 
   def send
-    return if Amber.env.test?
+    return if Amber.env.test? || suppress_emails?
     super
+  end
+
+  private def suppress_emails?
+    ENV["SUPPRESS_EMAILS"]? != "false"
   end
 
   macro render(filename, layout, *args)
