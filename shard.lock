@@ -36,13 +36,13 @@ shards:
     github: amberframework/garnet-spec
     version: 0.2.1
 
-  granite:
-    github: yumoose/granite
-    commit: 9c28794c79855f94a2a011f5082e52565d193b00
-
   i18n:
     github: TechMagister/i18n.cr
     version: 0.2.0
+
+  ifrit:
+    github: imdrasil/ifrit
+    version: 0.1.2
 
   inflector:
     github: phoffer/inflector.cr
@@ -51,6 +51,10 @@ shards:
   jasper_helpers:
     github: amberframework/jasper-helpers
     version: 0.2.0
+
+  jennifer:
+    github: imdrasil/jennifer.cr
+    version: 0.6.1
 
   kilt:
     github: jeromegn/kilt
@@ -87,6 +91,10 @@ shards:
   redis:
     github: stefanwille/crystal-redis
     version: 2.0.0
+
+  sam:
+    github: imdrasil/sam.cr
+    version: 0.2.4
 
   selenium:
     github: ysbaddaden/selenium-webdriver-crystal
