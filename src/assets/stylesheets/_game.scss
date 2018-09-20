@@ -7,3 +7,52 @@ div#simple-logger {
     padding: .375rem .75rem
   }
 }
+
+.game-results {
+  display: flex;
+  justify-content: center;
+
+  span.versus {
+    font-size: 28px;
+    font-weight: bolder;
+    height: inherit;
+    margin-top: auto;
+    margin-bottom: auto;
+    padding: 20px;
+  }
+
+  .player-result {
+    display: flex;
+    flex-direction: column;
+
+    img.gravatar {
+      width: 200px;
+      height: 200px;
+      padding: 14px;
+      margin-left: auto;
+      border-radius: 50%;
+      -webkit-border-radius: 50%;
+      -webkit-background-clip: padding-box;
+    }
+
+    span.name {
+      font-size: 24px;
+      text-align: center;
+    }
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .game-results {
+    span.versus {
+      font-size: 18px;
+    }
+
+    .player-result {
+      img.gravatar {
+        width: 100px;
+        height: 100px;
+      }
+    }
+  }
+}
