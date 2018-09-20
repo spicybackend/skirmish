@@ -16,6 +16,29 @@ class GameController < ApplicationController
         ).call
       end
 
+      winner_rating = game.winner.rating_for(game.league)
+      loser_rating = game.loser.rating_for(game.league)
+
+      if !game.confirmed?
+        # calculate point increase for display
+        new_winner_rating = Rating::DetermineNewRating.new(
+          old_rating: winner_rating,
+          other_rating: loser_rating,
+          won: true,
+          league: game.league
+        ).call
+
+        new_loser_rating = Rating::DetermineNewRating.new(
+          old_rating: loser_rating,
+          other_rating: winner_rating,
+          won: false,
+          league: game.league
+        ).call
+
+        winner_delta = (new_winner_rating - winner_rating).abs
+        loser_delta = (new_loser_rating - loser_rating).abs
+      end
+
       render("show.slang")
     else
       flash["warning"] = "Can't find game"
