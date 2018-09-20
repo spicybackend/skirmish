@@ -1,16 +1,18 @@
 ENV["AMBER_ENV"] ||= "test"
 
 require "spec"
-require "micrate"
+require "jennifer"
 require "garnet_spec"
 
 require "../config/*"
 require "./support/*"
 
-Micrate::DB.connection_url = ENV["DATABASE_URL"]? || Amber.settings.database_url
+Jennifer::Config.from_uri(database_url)
 
 # Automatically run migrations on the test database
-Micrate::Cli.run_up
+Jennifer::Migration::Runner.migrate
 
-# Disable Granite logs in tests
-Granite.settings.logger = Logger.new nil
+# Disable database logs in tests
+Jennifer::Config.configure do |conf|
+  conf.logger = Logger.new(nil)
+end
