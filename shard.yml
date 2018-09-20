@@ -18,6 +18,9 @@ targets:
   ameba:
     main: lib/ameba/src/cli.cr
 
+  sam:
+    main: src/sam.cr
+
 dependencies:
   pg:
     github: yumoose/crystal-pg
@@ -32,6 +35,9 @@ dependencies:
   jennifer:
     github: imdrasil/jennifer.cr
     version: "~> 0.6.1"
+
+  sam:
+    github: imdrasil/sam.cr
 
   mailer:
     github: crisward/mailer
