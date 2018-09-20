@@ -38,6 +38,7 @@ def basic_authenticated_headers
     user = User.new
     user.email = "basic@user.com"
     user.password = "much-secure-wow"
+    user.receive_email_notifications = false
     user.save!
 
     Player.create!(
@@ -59,6 +60,7 @@ def admin_authenticated_headers(league : League)
     user = User.new
     user.email = "admin_user_#{league.name}@example.com"
     user.password = "password"
+    user.receive_email_notifications = false
     user.save!
 
     player = Player.create!(

@@ -13,6 +13,8 @@ class League::LogGame::NotifyPlayer
       notification.source = game
       notification.save!
     end
+
+    GameLoggedMailer.new(player, game).send if player.user.receive_email_notifications?
   end
 
   private def title

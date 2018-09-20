@@ -6,6 +6,7 @@ class RegistrationController < ApplicationController
 
   def create
     user = User.new(registration_params.validate!)
+    user.receive_email_notifications = true
     user.password = params["password"].to_s
 
     if user.valid? && user.save

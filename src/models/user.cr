@@ -7,6 +7,7 @@ class User < Granite::Base
   primary id : Int64
   field email : String
   field hashed_password : String
+  field receive_email_notifications : Bool
 
   timestamps
 
@@ -25,6 +26,10 @@ class User < Granite::Base
 
   def player
     Player.find_by(user_id: id)
+  end
+
+  def receive_email_notifications?
+    receive_email_notifications
   end
 
   def password=(password)
