@@ -11,6 +11,7 @@ div#simple-logger {
 .game-results {
   display: flex;
   justify-content: center;
+  margin-bottom: 32px;
 
   span.versus {
     font-size: 28px;
@@ -19,6 +20,47 @@ div#simple-logger {
     margin-top: auto;
     margin-bottom: auto;
     padding: 20px;
+  }
+
+  span.rating {
+    height: inherit;
+    margin-top: auto;
+    margin-bottom: auto;
+    padding: 10px 20px;
+    font-size: 20px;
+  }
+
+  span.rating.delta::before {
+    content: "";
+    background-size: contain !important;
+    background-repeat: no-repeat !important;
+    padding: 16px;
+  }
+
+  .winning-result {
+    display: flex;
+
+    span.rating {
+      order: -1;  // left
+    }
+
+    span.rating.delta::before {
+      background: url("https://png.icons8.com/metro/200/7bc950/sort-up.png");
+      background-position-y: 12px;
+    }
+  }
+
+  .losing-result {
+    display: flex;
+
+    span.rating {
+      order: 9999;  // right
+    }
+
+    span.rating.delta::before {
+      background: url("https://png.icons8.com/metro/200/db2b39/sort-down.png");
+      background-position-y: 10px;
+    }
   }
 
   .player-result {
@@ -46,6 +88,14 @@ div#simple-logger {
   .game-results {
     span.versus {
       font-size: 18px;
+    }
+
+    .losing-result, .winning-result {
+      flex-direction: column;
+
+      span.rating {
+        order: 9999;
+      }
     }
 
     .player-result {
