@@ -8,27 +8,28 @@ class RegistrationController < ApplicationController
   end
 
   def create
-    user = User.build(registration_params.validate!)
-    user.receive_email_notifications = true
-    user.password = params["password"].to_s
+    Jennifer::Adapter.adapter.transaction do
+      user = User.build(registration_params.validate!)
+      user.receive_email_notifications = true
+      user.password = params["password"].to_s
 
-    if user.valid? && user.save
-      player = Player.create!(
-        tag: params["username"],
-        user_id: user.id
-      )
+      if user.valid? && user.save
+        player = Player.create!(
+          tag: params["username"],
+          user_id: user.id
+        )
 
-      WelcomeMailer.new(player).send
+        WelcomeMailer.new(player).send
 
-      session[:user_id] = user.id
-      session[:player_id] = player.id
+        session[:user_id] = user.id
+        session[:player_id] = player.id
 
-      flash["success"] = "Created User successfully."
-      redirect_to "/"
-    else
-      flash["danger"] = "Uh-oh, something's not quite right..."
-      !valid_username?(user)  # put errors for the username back on
-      render("new.slang")
+        flash["success"] = "Created User successfully."
+        redirect_to "/"
+      else
+        flash["danger"] = "Could not create User!"
+        render("new.slang")
+      end
     end
   end
 
