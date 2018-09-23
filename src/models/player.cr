@@ -14,6 +14,19 @@ class Player < Granite::Base
 
   timestamps
 
+  validate :user, "is required", ->(player : Player) do
+    !User.find(player.user_id).nil?
+  end
+
+  validate :tag, "is required", ->(player : Player) do
+    (tag = player.tag) ? !tag.empty? : false
+  end
+
+  validate :tag, "already in use", ->(player : Player) do
+    existing = Player.find_by tag: player.tag
+    !existing || existing.id == player.id
+  end
+
   def ==(other)
     !other.nil? && self.class == other.class && self.id == other.id
   end

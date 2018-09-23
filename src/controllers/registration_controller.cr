@@ -9,7 +9,7 @@ class RegistrationController < ApplicationController
     user.receive_email_notifications = true
     user.password = params["password"].to_s
 
-    if user.valid? && user.save
+    if user.valid? && !valid_username?(user) && user.save
       session[:user_id] = user.id
 
       player = Player.create!(
@@ -22,7 +22,8 @@ class RegistrationController < ApplicationController
       flash["success"] = "Created User successfully."
       redirect_to "/"
     else
-      flash["danger"] = "Could not create User!"
+      flash["danger"] = "Uh-oh, something's not quite right..."
+      !valid_username?(user)  # put errors for the username back on
       render("new.slang")
     end
   end
@@ -32,6 +33,18 @@ class RegistrationController < ApplicationController
       required(:username) { |f| !f.nil? }
       required(:email) { |f| !f.nil? }
       required(:password) { |f| !f.nil? }
+    end
+  end
+
+  private def valid_username?(user)
+    username = params[:username]
+
+    if username.empty?
+      user.errors << Granite::Error.new(:username, "is required")
+    else
+      if Player.find_by(tag: username)
+        user.errors << Granite::Error.new(:username, "is already taken")
+      end
     end
   end
 end
