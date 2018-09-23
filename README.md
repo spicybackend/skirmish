@@ -22,14 +22,47 @@ There are also some other dependencies required for some extensions of Crystal a
 sudo apt install -y postgresql libssl-dev libxml2-dev libyaml-dev libgmp-dev libreadline-dev libevent-dev libsqlite3-dev
 ```
 
+### Postgres
+Unless you've used Postgres before, or know your way around configuring it already, you'll probably want to follow this quick guide to setting up users for development.
+```
+# start a session as the postgres user
+sudo su - postgres
+
+# create a user named skirmish_development
+createuser skirmish --pwprompt
+
+# exit the session as postgres
+exit
+```
+
+To change the authentication with postgres to use a simple password 'trust' authentication method, we'll need to edit the `pg_hba.conf` file.
+```
+sudo vim /etc/postgresql/9.5/main/pg_hba.conf
+```
+Replace `md5` with `trust` on the lines for local connections
+```
+# IPv4 local connections:
+host    all             all             127.0.0.1/32            trust
+# IPv6 local connections:
+host    all             all             ::1/128                 trust
+```
+
+And finally, ensure the settings for postgres have been applied by restarting the service
+```
+sudo service postgresql restart
+```
+
 ## Development
 
 To start your Amber server:
 
-1. Install dependencies with `shards install`
-2. Build executables with `shards build`
-3. Create and migrate your database with `bin/amber db create migrate`. Also see [creating the database](https://docs.amberframework.org/amber/guides/create-new-app#creating-the-database).
-4. Start Amber server with `bin/amber watch`
+```
+shards install               # install dependencies
+shards build                 # build executable binaries
+bin/amber db create migrate  # create the database and bring it up to speed
+bin/amber db seed            # optionally seed the database with some mock data
+bin/amber watch              # start the server and watch for file changes
+```
 
 Now you can visit http://localhost:3000/ from your browser.
 
