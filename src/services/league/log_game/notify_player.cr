@@ -5,16 +5,18 @@ class League::LogGame::NotifyPlayer
   end
 
   def call!
-    Notification.new.tap do |notification|
-      notification.player_id = player.id
-      notification.event_type = Notification::GAME_LOGGED
-      notification.title = title
-      notification.content = content
-      notification.source = game
-      notification.save!
-    end
+    Jennifer::Adapter.adapter.transaction do
+      Notification.create!({
+        player_id: player.id.not_nil!,
+        event_type: Notification::GAME_LOGGED,
+        title: title,
+        content: content,
+        source: game.class.to_s,
+        source_id: game.id
+      })
 
-    GameLoggedMailer.new(player, game).send if player.user.receive_email_notifications?
+      GameLoggedMailer.new(player, game).send if player.user!.receive_email_notifications?
+    end
   end
 
   private def title

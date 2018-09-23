@@ -1,32 +1,39 @@
 require "crypto/bcrypt/password"
 
-class User < Granite::Base
+class User < Jennifer::Model::Base
   include Crypto
-  adapter postgres
 
-  primary id : Int64
-  field email : String
-  field hashed_password : String
-  field receive_email_notifications : Bool
+  with_timestamps
 
-  timestamps
+  mapping(
+    id: { type: Int64, primary: true },
+    email: String,
+    hashed_password: String?,
+    receive_email_notifications: { type: Bool, default: true },
 
-  validate :email, "is required", ->(user : User) do
-    (email = user.email) ? !email.empty? : false
-  end
+    created_at: { type: Time, default: Time.now },
+    updated_at: { type: Time, default: Time.now }
+  )
 
-  validate :email, "already in use", ->(user : User) do
-    existing = User.find_by email: user.email
-    !existing || existing.id == user.id
-  end
+  has_one :player, Player
 
-  validate :password, "is too short", ->(user : User) do
-    user.password_changed? ? user.valid_password_size? : true
-  end
 
-  def player
-    Player.find_by(user_id: id)
-  end
+  # validate :email, "is required", ->(user : User) do
+  #   (email = user.email) ? !email.empty? : false
+  # end
+
+  # validate :email, "already in use", ->(user : User) do
+  #   existing = User.find_by email: user.email
+  #   !existing || existing.id == user.id
+  # end
+
+  # validate :password, "is too short", ->(user : User) do
+  #   user.password_changed? ? user.valid_password_size? : true
+  # end
+
+  # def player
+  #   Player.find_by(user_id: id)
+  # end
 
   def receive_email_notifications?
     receive_email_notifications

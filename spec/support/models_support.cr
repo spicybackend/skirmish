@@ -1,5 +1,5 @@
 def create_player_with_mock_user(tag : String | Nil = nil)
-  user = User.new
+  user = User.build
   user.email = "#{Random::Secure.hex}@test.com"
   user.password = Random::Secure.hex
   user.receive_email_notifications = false
@@ -21,7 +21,7 @@ def create_league(name : String | Nil = nil, description : String | Nil = nil, s
 end
 
 def create_notification(player : Player, event_type : String | Nil = nil, source : Granite::Base | Nil = nil, title : String | Nil = nil, content : String | Nil = nil, sent_at : Time | Nil = Time.now, read_at : Time | Nil = nil)
-  Notification.new.tap do |notification|
+  Notification.build.tap do |notification|
     notification.player_id = player.id
     notification.event_type = event_type || Notification::GENERAL
     notification.source = source

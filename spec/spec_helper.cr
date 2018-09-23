@@ -7,7 +7,7 @@ require "garnet_spec"
 require "../config/*"
 require "./support/*"
 
-Jennifer::Config.from_uri(database_url)
+Jennifer::Config.from_uri(Amber.settings.database_url)
 
 # Automatically run migrations on the test database
 Jennifer::Migration::Runner.migrate

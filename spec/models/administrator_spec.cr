@@ -5,15 +5,15 @@ def build_admin
   player = create_player_with_mock_user
   league = create_league
 
-  Administrator.new.tap do |admin|
-    admin.player_id = player.id
-    admin.league_id = league.id
+  Administrator.build.tap do |admin|
+    admin.player_id = player.id.not_nil!
+    admin.league_id = league.id.not_nil!
   end
 end
 
 describe Administrator do
   Spec.before_each do
-    Administrator.clear
+    Administrator.all.destroy
   end
 
   describe "validations" do
@@ -30,10 +30,10 @@ describe Administrator do
       context "when no player is given" do
         it "is invalid" do
           admin = build_admin
-          admin.player_id = nil
+          admin.update_attributes(player_id: nil)
 
           admin.valid?.should eq false
-          admin.errors.map(&.to_s).join(", ").should match /Player is required/
+          admin.errors.full_messages.join(", ").should match /Player is required/
         end
       end
 
@@ -43,7 +43,7 @@ describe Administrator do
           admin.player_id = 9999
 
           admin.valid?.should eq false
-          admin.errors.map(&.to_s).join(", ").should match /Player is required/
+          admin.errors.full_messages.join(", ").should match /Player is required/
         end
       end
     end
@@ -61,20 +61,20 @@ describe Administrator do
       context "when no league is given" do
         it "is invalid" do
           admin = build_admin
-          admin.league_id = nil
+          admin.update_attributes(league_id: nil)
 
           admin.valid?.should eq false
-          admin.errors.map(&.to_s).join(", ").should match /League is required/
+          admin.errors.full_messages.join(", ").should match /League is required/
         end
       end
 
       context "when the league doesn't exist" do
         it "is invalid" do
           admin = build_admin
-          admin.league_id = 9999
+          admin.update_attributes(league_id: 9999)
 
           admin.valid?.should eq false
-          admin.errors.map(&.to_s).join(", ").should match /League is required/
+          admin.errors.full_messages.join(", ").should match /League is required/
         end
       end
     end

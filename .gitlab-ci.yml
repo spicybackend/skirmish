@@ -1,4 +1,4 @@
-image: "crystallang/crystal:0.25.1"
+image: "crystallang/crystal:0.26.1"
 
 # Pick zero or more services to be used on all builds.
 # Only needed when using a docker container to run your tests in.

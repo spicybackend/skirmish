@@ -20,7 +20,7 @@ describe NotificationControllerTest do
   subject = NotificationControllerTest.new
 
   Spec.before_each do
-    Notification.clear
+    Notification.all.destroy
   end
 
   it "renders notifications index template" do

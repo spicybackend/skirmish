@@ -19,9 +19,9 @@ end
 
 describe Leaderboard::PureSkill do
   Spec.before_each do
-    League.clear
-    Player.clear
-    Membership.clear
+    League.all.destroy
+    Player.all.destroy
+    Membership.all.destroy
   end
 
   describe "#rankings" do

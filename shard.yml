@@ -4,7 +4,7 @@ version: 0.1.5
 authors:
   - Jordane Lew <jordane.lew@gmail.com>
 
-crystal: 0.25.1
+crystal: 0.26.1
 
 license: UNLICENSED
 
@@ -30,7 +30,7 @@ dependencies:
 
   amber:
     github: amberframework/amber
-    version: 0.8.0
+    version: 0.9.0
 
   jennifer:
     github: imdrasil/jennifer.cr

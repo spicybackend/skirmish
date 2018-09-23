@@ -10,12 +10,9 @@ class LeagueController < ApplicationController
 
   def show
     if league = League.find(params[:id])
-      player = current_player
+      player = current_player.not_nil!
 
-      membership = Membership.find_by(
-        player_id: player.try(&.id),
-        league_id: league.id
-      ) || Membership.new
+      membership = player.memberships_query.where { _league_id == league.id }.to_a.first? || Membership.build
 
       render("show.slang")
     else
@@ -25,12 +22,20 @@ class LeagueController < ApplicationController
   end
 
   def new
-    league = League.new
+    league = League.build({
+      name: ""
+    })
+
     render("new.slang")
   end
 
   def create
-    league = League.new(league_params.validate!)
+    league = League.new({
+      name: params[:name],
+      description: params[:description],
+      start_rating: params[:start_rating].to_i,
+      k_factor: params[:k_factor].to_f,
+    })
 
     if league.valid? && league.save
       Administrator.create!(
@@ -57,7 +62,7 @@ class LeagueController < ApplicationController
 
   def update
     if league = League.find(params["id"])
-      league.set_attributes(league_params.validate!)
+      league.update_attributes(league_params.validate!)
 
       if league.valid? && league.save
         flash["success"] = "Updated League successfully."

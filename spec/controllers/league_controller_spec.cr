@@ -22,10 +22,10 @@ describe LeagueControllerTest do
   subject = LeagueControllerTest.new
 
   Spec.before_each do
-    League.clear
-    Administrator.clear
-    Player.clear
-    User.clear
+    League.all.destroy
+    Administrator.all.destroy
+    Player.all.destroy
+    User.all.destroy
   end
 
   describe "#index" do

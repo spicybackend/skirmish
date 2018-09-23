@@ -23,7 +23,7 @@ class ApplicationMailer < Mailer::Message
     # Assumes a single recipient, if one is opted out, all will NOT receive the email
     # TODO Remove unwilling recipients and then check if any left before sending
     to.any? do |recipient|
-      user = User.find_by(email: recipient.email)
+      user = User.where { _email == recipient.email }.to_a.first
 
       if user
         !user.receive_email_notifications?

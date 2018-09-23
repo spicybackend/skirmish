@@ -21,9 +21,9 @@ end
 
 describe League do
   Spec.before_each do
-    League.clear
-    Player.clear
-    Membership.clear
+    League.all.destroy
+    Player.all.destroy
+    Membership.all.destroy
   end
 
   describe "validations" do
@@ -43,7 +43,7 @@ describe League do
           league.name = nil
 
           league.valid?.should eq false
-          league.errors.map(&.to_s).join(", ").should match /Name is required/
+          league.errors.full_messages.join(", ").should match /Name is required/
         end
       end
 
@@ -53,7 +53,7 @@ describe League do
           league.name = ""
 
           league.valid?.should eq false
-          league.errors.map(&.to_s).join(", ").should match /Name is required/
+          league.errors.full_messages.join(", ").should match /Name is required/
         end
       end
 
@@ -64,7 +64,7 @@ describe League do
           league.name = existing_league.name
 
           league.valid?.should eq false
-          league.errors.map(&.to_s).join(", ").should match /Name already taken/
+          league.errors.full_messages.join(", ").should match /Name already taken/
         end
       end
     end
@@ -85,7 +85,7 @@ describe League do
           league.description = nil
 
           league.valid?.should eq false
-          league.errors.map(&.to_s).join(", ").should match /Description is required/
+          league.errors.full_messages.join(", ").should match /Description is required/
         end
       end
 
@@ -95,7 +95,7 @@ describe League do
           league.description = ""
 
           league.valid?.should eq false
-          league.errors.map(&.to_s).join(", ").should match /Description is required/
+          league.errors.full_messages.join(", ").should match /Description is required/
         end
       end
     end
@@ -116,7 +116,7 @@ describe League do
           league.start_rating = 99
 
           league.valid?.should eq false
-          league.errors.map(&.to_s).join(", ").should match /Start_rating is too low/
+          league.errors.full_messages.join(", ").should match /Start_rating is too low/
         end
       end
 
@@ -126,7 +126,7 @@ describe League do
           league.start_rating = 3001
 
           league.valid?.should eq false
-          league.errors.map(&.to_s).join(", ").should match /Start_rating is too high/
+          league.errors.full_messages.join(", ").should match /Start_rating is too high/
         end
       end
 
@@ -136,7 +136,7 @@ describe League do
           league.start_rating = nil
 
           league.valid?.should eq false
-          league.errors.map(&.to_s).join(", ").should match /Start_rating is required/
+          league.errors.full_messages.join(", ").should match /Start_rating is required/
         end
       end
     end
@@ -157,7 +157,7 @@ describe League do
           league.k_factor = 0.0
 
           league.valid?.should eq false
-          league.errors.map(&.to_s).join(", ").should match /K_factor is too low/
+          league.errors.full_messages.join(", ").should match /K_factor is too low/
         end
       end
 
@@ -167,7 +167,7 @@ describe League do
           league.k_factor = 101.0
 
           league.valid?.should eq false
-          league.errors.map(&.to_s).join(", ").should match /K_factor is too high/
+          league.errors.full_messages.join(", ").should match /K_factor is too high/
         end
       end
 
@@ -177,7 +177,7 @@ describe League do
           league.k_factor = nil
 
           league.valid?.should eq false
-          league.errors.map(&.to_s).join(", ").should match /K_factor is required/
+          league.errors.full_messages.join(", ").should match /K_factor is required/
         end
       end
     end

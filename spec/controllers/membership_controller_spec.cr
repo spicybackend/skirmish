@@ -22,10 +22,10 @@ describe MembershipControllerTest do
   subject = MembershipControllerTest.new
 
   Spec.before_each do
-    League.clear
-    Membership.clear
-    User.clear
-    Player.clear
+    League.all.destroy
+    Membership.all.destroy
+    User.all.destroy
+    Player.all.destroy
   end
 
   describe "#create" do

@@ -1,23 +1,27 @@
 class RegistrationController < ApplicationController
   def new
-    user = User.new
+    user = User.new({
+      email: ""
+    })
+
     render("new.slang")
   end
 
   def create
-    user = User.new(registration_params.validate!)
+    user = User.build(registration_params.validate!)
     user.receive_email_notifications = true
     user.password = params["password"].to_s
 
-    if user.valid? && !valid_username?(user) && user.save
-      session[:user_id] = user.id
-
+    if user.valid? && user.save
       player = Player.create!(
         tag: params["username"],
         user_id: user.id
       )
 
       WelcomeMailer.new(player).send
+
+      session[:user_id] = user.id
+      session[:player_id] = player.id
 
       flash["success"] = "Created User successfully."
       redirect_to "/"

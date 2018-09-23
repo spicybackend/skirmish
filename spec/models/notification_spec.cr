@@ -3,11 +3,11 @@ require "../../src/models/notification.cr"
 
 describe Notification do
   Spec.before_each do
-    Notification.clear
-    Game.clear
-    Membership.clear
-    League.clear
-    Player.clear
+    Notification.all.destroy
+    Game.all.destroy
+    Membership.all.destroy
+    League.all.destroy
+    Player.all.destroy
 
     create_player_with_mock_user
   end
@@ -36,7 +36,7 @@ describe Notification do
         notification.event_type = "some-made-up-event-type"
         notification.valid?.should eq false
 
-        notification.errors.clear
+        notification.errors.all.destroy
         notification.event_type = Notification::EVENT_TYPES.first
         notification.valid?.should eq true
       end
@@ -53,7 +53,7 @@ describe Notification do
         Membership.create!(player_id: player.id, league_id: league.id, joined_at: Time.now)
         Membership.create!(player_id: another_player.id, league_id: league.id, joined_at: Time.now)
         game_logger = League::LogGame.new(league: league, winner: player, loser: another_player, logger: player)
-        game_logger.call || puts game_logger.errors.map(&.to_s)
+        game_logger.call || puts game_logger.errors.full_messages
         game = game_logger.game
 
         notification = create_notification(player: player)
@@ -62,15 +62,15 @@ describe Notification do
         notification.source = nil
         notification.valid?.should eq true
 
-        notification.errors.clear
+        notification.errors.all.destroy
         notification.event_type = Notification::GAME_LOGGED
         notification.valid?.should eq false
 
-        notification.errors.clear
+        notification.errors.all.destroy
         notification.source = game
         notification.valid?.should eq true
 
-        notification.errors.clear
+        notification.errors.all.destroy
         notification.event_type = Notification::GENERAL
         notification.valid?.should eq false
       end
@@ -101,11 +101,11 @@ describe Notification do
         notification.title = nil
         notification.valid?.should eq false
 
-        notification.errors.clear
+        notification.errors.all.destroy
         notification.title = ""
         notification.valid?.should eq false
 
-        notification.errors.clear
+        notification.errors.all.destroy
         notification.title = "Some Title"
         notification.valid?.should eq true
       end
@@ -118,11 +118,11 @@ describe Notification do
         notification.content = nil
         notification.valid?.should eq false
 
-        notification.errors.clear
+        notification.errors.all.destroy
         notification.content = ""
         notification.valid?.should eq false
 
-        notification.errors.clear
+        notification.errors.all.destroy
         notification.content = "Some Content"
         notification.valid?.should eq true
       end
@@ -169,7 +169,7 @@ describe Notification do
         Membership.create!(player_id: player.id, league_id: league.id, joined_at: Time.now)
         Membership.create!(player_id: another_player.id, league_id: league.id, joined_at: Time.now)
         game_logger = League::LogGame.new(league: league, winner: player, loser: another_player, logger: player)
-        game_logger.call || puts game_logger.errors.map(&.to_s)
+        game_logger.call || puts game_logger.errors.full_messages
         game = game_logger.game
 
         notification = create_notification(player: player, event_type: Notification::GAME_LOGGED, source: game)

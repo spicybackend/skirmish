@@ -33,8 +33,8 @@ class UserController < ApplicationController
   private def update(user : User, player : Player)
     return false unless profile_params.valid?
 
-    user.set_attributes(profile_params.to_h.reject("username"))
-    player.set_attributes(tag: profile_params[:username])
+    user.update_attributes(profile_params.to_h.reject("username"))
+    player.update_attributes(tag: profile_params[:username])
 
     user.valid? && player.valid? && user.save && player.save
   end

@@ -2,11 +2,12 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 9.5.14
--- Dumped by pg_dump version 9.5.14
+-- Dumped from database version 10.5 (Ubuntu 10.5-0ubuntu0.18.04)
+-- Dumped by pg_dump version 10.5 (Ubuntu 10.5-0ubuntu0.18.04)
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SELECT pg_catalog.set_config('search_path', '', false);
@@ -215,7 +216,7 @@ CREATE TABLE public.memberships (
     id bigint NOT NULL,
     player_id bigint NOT NULL,
     league_id bigint NOT NULL,
-    joined_at timestamp without time zone DEFAULT now() NOT NULL,
+    joined_at timestamp without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
     left_at timestamp without time zone,
     created_at timestamp without time zone,
     updated_at timestamp without time zone
@@ -304,6 +305,7 @@ ALTER TABLE public.migration_versions OWNER TO postgres;
 --
 
 CREATE SEQUENCE public.migration_versions_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -537,126 +539,126 @@ ALTER SEQUENCE public.users_id_seq OWNED BY public.users.id;
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: administrators id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.administrators ALTER COLUMN id SET DEFAULT nextval('public.administrators_id_seq'::regclass);
 
 
 --
--- Name: league_id; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: administrators league_id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.administrators ALTER COLUMN league_id SET DEFAULT nextval('public.administrators_league_id_seq'::regclass);
 
 
 --
--- Name: player_id; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: administrators player_id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.administrators ALTER COLUMN player_id SET DEFAULT nextval('public.administrators_player_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: games id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.games ALTER COLUMN id SET DEFAULT nextval('public.games_id_seq'::regclass);
 
 
 --
--- Name: league_id; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: games league_id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.games ALTER COLUMN league_id SET DEFAULT nextval('public.games_league_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: leagues id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.leagues ALTER COLUMN id SET DEFAULT nextval('public.leagues_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: memberships id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.memberships ALTER COLUMN id SET DEFAULT nextval('public.memberships_id_seq'::regclass);
 
 
 --
--- Name: player_id; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: memberships player_id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.memberships ALTER COLUMN player_id SET DEFAULT nextval('public.memberships_player_id_seq'::regclass);
 
 
 --
--- Name: league_id; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: memberships league_id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.memberships ALTER COLUMN league_id SET DEFAULT nextval('public.memberships_league_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: migration_versions id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.migration_versions ALTER COLUMN id SET DEFAULT nextval('public.migration_versions_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: notifications id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.notifications ALTER COLUMN id SET DEFAULT nextval('public.notifications_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: participations id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.participations ALTER COLUMN id SET DEFAULT nextval('public.participations_id_seq'::regclass);
 
 
 --
--- Name: game_id; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: participations game_id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.participations ALTER COLUMN game_id SET DEFAULT nextval('public.participations_game_id_seq'::regclass);
 
 
 --
--- Name: player_id; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: participations player_id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.participations ALTER COLUMN player_id SET DEFAULT nextval('public.participations_player_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: players id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.players ALTER COLUMN id SET DEFAULT nextval('public.players_id_seq'::regclass);
 
 
 --
--- Name: user_id; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: players user_id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.players ALTER COLUMN user_id SET DEFAULT nextval('public.players_user_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: users id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_id_seq'::regclass);
 
 
 --
--- Name: administrators_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: administrators administrators_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.administrators
@@ -664,7 +666,7 @@ ALTER TABLE ONLY public.administrators
 
 
 --
--- Name: games_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: games games_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.games
@@ -672,7 +674,7 @@ ALTER TABLE ONLY public.games
 
 
 --
--- Name: leagues_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: leagues leagues_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.leagues
@@ -680,7 +682,7 @@ ALTER TABLE ONLY public.leagues
 
 
 --
--- Name: memberships_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: memberships memberships_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.memberships
@@ -688,7 +690,7 @@ ALTER TABLE ONLY public.memberships
 
 
 --
--- Name: migration_versions_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: migration_versions migration_versions_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.migration_versions
@@ -696,7 +698,7 @@ ALTER TABLE ONLY public.migration_versions
 
 
 --
--- Name: notifications_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: notifications notifications_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.notifications
@@ -704,7 +706,7 @@ ALTER TABLE ONLY public.notifications
 
 
 --
--- Name: participations_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: participations participations_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.participations
@@ -712,7 +714,7 @@ ALTER TABLE ONLY public.participations
 
 
 --
--- Name: players_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: players players_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.players
@@ -720,7 +722,7 @@ ALTER TABLE ONLY public.players
 
 
 --
--- Name: users_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.users
@@ -735,7 +737,7 @@ CREATE INDEX notifications_player_id_idx ON public.notifications USING btree (pl
 
 
 --
--- Name: administrators_league_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: administrators administrators_league_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.administrators
@@ -743,7 +745,7 @@ ALTER TABLE ONLY public.administrators
 
 
 --
--- Name: administrators_player_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: administrators administrators_player_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.administrators
@@ -751,7 +753,7 @@ ALTER TABLE ONLY public.administrators
 
 
 --
--- Name: games_confirmed_by_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: games games_confirmed_by_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.games
@@ -759,7 +761,7 @@ ALTER TABLE ONLY public.games
 
 
 --
--- Name: games_league_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: games games_league_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.games
@@ -767,7 +769,7 @@ ALTER TABLE ONLY public.games
 
 
 --
--- Name: games_logged_by_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: games games_logged_by_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.games
@@ -775,7 +777,7 @@ ALTER TABLE ONLY public.games
 
 
 --
--- Name: memberships_league_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: memberships memberships_league_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.memberships
@@ -783,7 +785,7 @@ ALTER TABLE ONLY public.memberships
 
 
 --
--- Name: memberships_player_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: memberships memberships_player_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.memberships
@@ -791,7 +793,7 @@ ALTER TABLE ONLY public.memberships
 
 
 --
--- Name: notifications_player_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: notifications notifications_player_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.notifications
@@ -799,7 +801,7 @@ ALTER TABLE ONLY public.notifications
 
 
 --
--- Name: participations_game_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: participations participations_game_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.participations
@@ -807,7 +809,7 @@ ALTER TABLE ONLY public.participations
 
 
 --
--- Name: participations_player_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: participations participations_player_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.participations
@@ -815,21 +817,11 @@ ALTER TABLE ONLY public.participations
 
 
 --
--- Name: players_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: players players_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.players
     ADD CONSTRAINT players_user_id_fkey FOREIGN KEY (user_id) REFERENCES public.users(id) ON DELETE CASCADE;
-
-
---
--- Name: SCHEMA public; Type: ACL; Schema: -; Owner: postgres
---
-
-REVOKE ALL ON SCHEMA public FROM PUBLIC;
-REVOKE ALL ON SCHEMA public FROM postgres;
-GRANT ALL ON SCHEMA public TO postgres;
-GRANT ALL ON SCHEMA public TO PUBLIC;
 
 
 --

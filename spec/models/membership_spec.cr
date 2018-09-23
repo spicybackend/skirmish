@@ -3,6 +3,6 @@ require "../../src/models/membership.cr"
 
 describe Membership do
   Spec.before_each do
-    Membership.clear
+    Membership.all.destroy
   end
 end
