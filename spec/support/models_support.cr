@@ -25,7 +25,7 @@ def create_notification(player : Player, event_type : String? = nil, source : Je
   Notification.create!({
     player_id: player.id,
     event_type: event_type || Notification::GENERAL,
-    source_type: source.class.name,
+    source_type: source.nil? ? nil : source.class.name,
     source_id: source.try(&.id),
     title: title || "New Notification",
     content: content || "with some descriptive content",

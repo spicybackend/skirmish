@@ -40,53 +40,40 @@ class Notification < Jennifer::Model::Base
 
   belongs_to :player, Player
 
-  # validate :player, "is required", ->(notification : Notification) do
-  #   !Player.find(notification.player_id).nil?
-  # end
+  validates_presence :player_id
+  validates_presence :title
+  validates_presence :content
+  validates_presence :event_type
 
-  # validate :event_type, "is required", ->(notification : Notification) do
-  #   (event_type = notification.event_type) ? !event_type.nil? : false
-  # end
+  validates_inclusion :event_type, in: EVENT_TYPES
 
-  # validate :event_type, "must be a valid event type", ->(notification : Notification) do
-  #   (event_type = notification.event_type) ? Notification::EVENT_TYPES.includes?(event_type) : false
-  # end
+  validates_with PlayerRelationValidator
 
-  # validate :source, "must match the event type if given", ->(notification : Notification) do
-  #   if event_type = notification.event_type
-  #     if source_class = SOURCE_CLASS_BY_EVENT_TYPE[event_type]?
-  #       # match the class, achieve some messy implementation of polymorphism
-  #       (source_type = notification.source_type) ? source_class.name == source_type : false
-  #     else
-  #       notification.source_type.nil?
-  #     end
-  #   else
-  #     true
-  #   end
-  # end
+  validates_with_method :source_present_and_valid
 
-  # validate :source, "must exist if given", ->(notification : Notification) do
-  #   notification.source_type ? !!notification.source : true
-  # end
+  def source_present_and_valid
+    source_class = SOURCE_CLASS_BY_EVENT_TYPE[event_type]?
 
-  # validate :title, "is required", ->(notification : Notification) do
-  #   (title = notification.title) ? !title.empty? : false
-  # end
+    if source_class
+      if source_type != source_class.name
+        errors.add(:source_type, "must be a #{source_class.name}")
+      elsif source_class.find(source_id).nil?
+        errors.add(:source, "must exist")
+      end
+    elsif source_type
+      errors.add(:source, "must be nil for #{event_type} notifications")
+    end
 
-  # validate :content, "is required", ->(notification : Notification) do
-  #   (content = notification.content) ? !content.empty? : false
-  # end
+    return unless source_id || source_type
 
-  # def source=(source : Jennifer::Model::Base | Nil)
-  #   if source.nil?
-  #     self.source_type = nil
-  #     self.source_id = nil
-  #   else
-  #     self.source_type = source.class.name
-  #     self.source_id = source.id
-  #   end
-  # end
-
+    if source_id.nil? || source_type.nil?
+      if source_id
+        errors.add(:source_type, "must also be present if source_id is given")
+      else
+        errors.add(:source_id, "must also be present if source_type is given")
+      end
+    end
+  end
   def source
     if source_class = SOURCE_CLASS_BY_EVENT_TYPE[event_type]?
       source_class.find(source_id)

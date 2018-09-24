@@ -11,7 +11,7 @@ class League::LogGame::NotifyPlayer
         event_type: Notification::GAME_LOGGED,
         title: title,
         content: content,
-        source: game.class.to_s,
+        source_type: game.class.to_s,
         source_id: game.id
       })
 
