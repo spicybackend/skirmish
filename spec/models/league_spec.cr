@@ -38,7 +38,7 @@ describe League do
         league.name = existing_league.name
 
         league.valid?.should eq false
-        league.errors.full_messages.join(", ").should match /Name already taken/
+        league.errors.full_messages.join(", ").should match /Name has already been taken/
       end
     end
 
@@ -60,11 +60,11 @@ describe League do
 
         league.start_rating = 99
         league.valid?.should eq false
-        league.errors.full_messages.join(", ").should match /Start_rating is too low/
+        league.errors.full_messages.join(", ").should match /Start rating must be greater than or equal to 100/
 
         league.start_rating = 3001
         league.valid?.should eq false
-        league.errors.full_messages.join(", ").should match /Start_rating is too high/
+        league.errors.full_messages.join(", ").should match /Start rating must be less than or equal to 3000/
 
         league.start_rating = 1000
         league.valid?.should eq true
@@ -78,11 +78,11 @@ describe League do
 
         league.k_factor = 0.9
         league.valid?.should eq false
-        league.errors.full_messages.join(", ").should match /K_factor is too low/
+        league.errors.full_messages.join(", ").should match /K factor must be greater than or equal to 1/
 
         league.k_factor = 100.1
         league.valid?.should eq false
-        league.errors.full_messages.join(", ").should match /K_factor is too high/
+        league.errors.full_messages.join(", ").should match /K factor must be less than or equal to 100/
 
         league.k_factor = 32.0
         league.valid?.should eq true

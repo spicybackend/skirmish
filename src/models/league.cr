@@ -22,42 +22,15 @@ class League < Jennifer::Model::Base
 
   has_and_belongs_to_many :players, Player, nil, nil, nil, "memberships", "player_id"
 
-  # validate :name, "is required", ->(league : League) do
-  #   (name = league.name) ? !name.empty? : false
-  # end
+  validates_presence :name
+  validates_uniqueness :name
 
-  # validate :name, "already taken", ->(league : League) do
-  #   existing = League.find_by(name: league.name)
-  #   !existing || existing.id == league.id
-  # end
+  validates_presence :description
+  validates_presence :start_rating
+  validates_presence :k_factor
 
-  # validate :description, "is required", ->(league : League) do
-  #   (description = league.description) ? !description.empty? : false
-  # end
-
-  # validate :start_rating, "is required", ->(league : League) do
-  #   !!league.start_rating
-  # end
-
-  # validate :start_rating, "is too low", ->(league : League) do
-  #   (rating = league.start_rating) ? rating > 100 : true
-  # end
-
-  # validate :start_rating, "is too high", ->(league : League) do
-  #   (rating = league.start_rating) ? rating < 3000 : true
-  # end
-
-  # validate :k_factor, "is required", ->(league : League) do
-  #   !!league.k_factor
-  # end
-
-  # validate :k_factor, "is too low", ->(league : League) do
-  #   (rating = league.k_factor) ? rating > 1 : true
-  # end
-
-  # validate :k_factor, "is too high", ->(league : League) do
-  #   (rating = league.k_factor) ? rating < 100 : true
-  # end
+  validates_numericality :start_rating, greater_than_or_equal_to: 100, less_than_or_equal_to: 3000
+  validates_numericality :k_factor, greater_than_or_equal_to: 1, less_than_or_equal_to: 100
 
   def active_players
     players_query.where { Membership._left_at == nil }.to_a
