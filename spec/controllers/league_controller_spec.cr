@@ -44,7 +44,7 @@ describe LeagueControllerTest do
   describe "#show" do
     it "renders league show template" do
       league = create_league
-      response = subject.get "/leagues/#{league.id}"
+      response = subject.get "/leagues/#{league.id}", headers: basic_authenticated_headers
 
       response.status_code.should eq(200)
       response.body.should contain("League")
@@ -52,10 +52,20 @@ describe LeagueControllerTest do
 
     context "when the league doesn't exist" do
       it "redirects back to the leagues listing" do
-        response = subject.get "/leagues/99999"
+        response = subject.get "/leagues/99999", headers: basic_authenticated_headers
 
         response.status_code.should eq(302)
         response.headers["Location"].should eq "/leagues"
+      end
+    end
+
+    context "when logged out" do
+      it "redirects to the login page" do
+        league = create_league
+        response = subject.get "/leagues/#{league.id}"
+
+        response.status_code.should eq(302)
+        response.headers["Location"].should eq "/signin"
       end
     end
   end
@@ -121,7 +131,7 @@ describe LeagueControllerTest do
       end
 
       it "creates an administrator" do
-        administrators_before = League.all.count
+        administrators_before = Administrator.all.count
         subject.post "/leagues", headers: basic_authenticated_headers, body: body
 
         Administrator.all.count.should eq(administrators_before + 1)
@@ -157,8 +167,8 @@ describe LeagueControllerTest do
           admin = Administrator.all.last!
           league = League.all.last!
 
-          admin.player.should eq player
-          admin.league.should eq league
+          admin.player_id.should eq player.id
+          admin.league_id.should eq league.id
         end
       end
     end
@@ -238,10 +248,11 @@ describe LeagueControllerTest do
             league_id: league.id,
             logged_by_id: player.id
           })
+          game_id = game.id
 
           subject.delete "/leagues/#{league.id}", headers: admin_authenticated_headers(league)
 
-          Game.find(game.id).should eq nil
+          Game.where { _league_id == game_id }.to_a.size.should eq 0
         end
       end
     end

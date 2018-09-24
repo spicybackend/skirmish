@@ -62,7 +62,12 @@ class LeagueController < ApplicationController
 
   def update
     if league = League.find(params["id"])
-      league.update_attributes(league_params.validate!)
+      league.update_attributes({
+        name: params[:name],
+        description: params[:description],
+        start_rating: params[:start_rating].to_i,
+        k_factor: params[:k_factor].to_f,
+      })
 
       if league.valid? && league.save
         flash["success"] = "Updated League successfully."
@@ -78,21 +83,15 @@ class LeagueController < ApplicationController
   end
 
   def destroy
-    if league = League.find params["id"]
-      league.destroy
-    else
-      flash["warning"] = "League with ID #{params["id"]} Not Found"
+    Jennifer::Adapter.adapter.transaction do
+      if league = League.find params["id"]
+        league.administrators_query.destroy
+        league.destroy
+      else
+        flash["warning"] = "League with ID #{params["id"]} Not Found"
+      end
     end
 
     redirect_to "/leagues"
-  end
-
-  def league_params
-    params.validation do
-      required(:name) { |f| !f.nil? }
-      required(:description) { |f| !f.nil? }
-      required(:start_rating) { |f| !f.nil? }
-      required(:k_factor) { |f| !f.nil? }
-    end
   end
 end
