@@ -77,15 +77,15 @@ class Notification < Jennifer::Model::Base
   #   (content = notification.content) ? !content.empty? : false
   # end
 
-  def source=(source : Jennifer::Model::Base | Nil)
-    if source.nil?
-      self.source_type = nil
-      self.source_id = nil
-    else
-      self.source_type = source.class.name
-      self.source_id = source.id
-    end
-  end
+  # def source=(source : Jennifer::Model::Base | Nil)
+  #   if source.nil?
+  #     self.source_type = nil
+  #     self.source_id = nil
+  #   else
+  #     self.source_type = source.class.name
+  #     self.source_id = source.id
+  #   end
+  # end
 
   def source
     if source_class = SOURCE_CLASS_BY_EVENT_TYPE[event_type]?

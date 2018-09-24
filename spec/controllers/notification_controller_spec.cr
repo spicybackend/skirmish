@@ -19,10 +19,6 @@ end
 describe NotificationControllerTest do
   subject = NotificationControllerTest.new
 
-  Spec.before_each do
-    Notification.all.destroy
-  end
-
   it "renders notifications index template" do
     response = subject.get "/notifications", headers: basic_authenticated_headers
 

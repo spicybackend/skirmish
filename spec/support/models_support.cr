@@ -1,8 +1,9 @@
-def create_player_with_mock_user(tag : String | Nil = nil)
-  user = User.build
-  user.email = "#{Random::Secure.hex}@test.com"
+def create_player_with_mock_user(tag : String? = nil)
+  user = User.new({
+    email: "#{Random::Secure.hex}@test.com",
+    receive_email_notifications: false
+  })
   user.password = Random::Secure.hex
-  user.receive_email_notifications = false
   user.save!
 
   Player.create!(
@@ -11,7 +12,7 @@ def create_player_with_mock_user(tag : String | Nil = nil)
   )
 end
 
-def create_league(name : String | Nil = nil, description : String | Nil = nil, start_rating : Int32 | Nil = nil, k_factor : Float64 | Nil = nil)
+def create_league(name : String? = nil, description : String? = nil, start_rating : Int32? = nil, k_factor : Float64? = nil)
   League.create!(
     name: name || Random::Secure.hex,
     description: description || Random::Secure.hex,
@@ -20,16 +21,15 @@ def create_league(name : String | Nil = nil, description : String | Nil = nil, s
   )
 end
 
-def create_notification(player : Player, event_type : String | Nil = nil, source : Granite::Base | Nil = nil, title : String | Nil = nil, content : String | Nil = nil, sent_at : Time | Nil = Time.now, read_at : Time | Nil = nil)
-  Notification.build.tap do |notification|
-    notification.player_id = player.id
-    notification.event_type = event_type || Notification::GENERAL
-    notification.source = source
-    notification.title = title || "New Notification"
-    notification.content = content || "with some descriptive content"
-    notification.sent_at = sent_at
-    notification.read_at = read_at
-
-    notification.save!
-  end
+def create_notification(player : Player, event_type : String? = nil, source : Jennifer::Model::Base? = nil, title : String? = nil, content : String? = nil, sent_at : Time? = Time.now, read_at : Time? = nil)
+  Notification.create!({
+    player_id: player.id,
+    event_type: event_type || Notification::GENERAL,
+    source_type: source.class.name,
+    source_id: source.try(&.id),
+    title: title || "New Notification",
+    content: content || "with some descriptive content",
+    sent_at: sent_at,
+    read_at: read_at
+  })
 end

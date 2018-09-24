@@ -12,10 +12,6 @@ def build_admin
 end
 
 describe Administrator do
-  Spec.before_each do
-    Administrator.all.destroy
-  end
-
   describe "validations" do
     context "player" do
       context "a valid player" do
@@ -71,7 +67,7 @@ describe Administrator do
       context "when the league doesn't exist" do
         it "is invalid" do
           admin = build_admin
-          admin.update_attributes(league_id: 9999)
+          admin.update_attributes(league_id: 9999.to_i64)
 
           admin.valid?.should eq false
           admin.errors.full_messages.join(", ").should match /League is required/

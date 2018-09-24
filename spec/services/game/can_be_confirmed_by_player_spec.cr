@@ -8,13 +8,6 @@ def can_be_confirmed?(game : Game, player : Player)
 end
 
 describe Game::CanBeConfirmedByPlayer do
-  Spec.before_each do
-    Game.all.destroy
-    League.all.destroy
-    Player.all.destroy
-    Membership.all.destroy
-  end
-
   describe "#call" do
     context "a game logged by the winner" do
       it "is able to be confirmed by the loser" do

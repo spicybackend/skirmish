@@ -2,7 +2,7 @@ require "./spec_helper"
 require "../../src/models/player.cr"
 
 describe Player do
-  Spec.before_each do
-    Player.all.destroy
+  pending do
+    it "has specs"
   end
 end

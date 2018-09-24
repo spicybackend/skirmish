@@ -16,3 +16,11 @@ Jennifer::Migration::Runner.migrate
 Jennifer::Config.configure do |conf|
   conf.logger = Logger.new(nil)
 end
+
+Spec.before_each do
+  Jennifer::Adapter.adapter.begin_transaction
+end
+
+Spec.after_each do
+  Jennifer::Adapter.adapter.rollback_transaction
+end

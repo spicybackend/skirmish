@@ -18,12 +18,6 @@ def create_and_pit_players(league : League)
 end
 
 describe Leaderboard::PureSkill do
-  Spec.before_each do
-    League.all.destroy
-    Player.all.destroy
-    Membership.all.destroy
-  end
-
   describe "#rankings" do
     it "accurately determines player ranking based on their participation ratings" do
       league = create_league
@@ -36,8 +30,8 @@ describe Leaderboard::PureSkill do
       leaderboard.rankings[3].id.should eq player_three.id
 
       rating_for_player_two = player_two.rating_for(league)
-      participation_for_player_one = Participation.first("WHERE player_id = ?", [player_one.id]).not_nil!
-      participation_for_player_three = Participation.first("WHERE player_id = ?", [player_three.id]).not_nil!
+      participation_for_player_one = player_one.participations.last
+      participation_for_player_three = player_three.participations.last
       participation_for_player_one.rating = rating_for_player_two - 2
       participation_for_player_three.rating = rating_for_player_two - 1
       participation_for_player_one.save && participation_for_player_three.save
@@ -61,8 +55,8 @@ describe Leaderboard::PureSkill do
       leaderboard.ranking_for(player_three).should eq 3
 
       rating_for_player_two = player_two.rating_for(league)
-      participation_for_player_one = Participation.first("WHERE player_id = ?", [player_one.id]).not_nil!
-      participation_for_player_three = Participation.first("WHERE player_id = ?", [player_three.id]).not_nil!
+      participation_for_player_one = player_one.participations.last
+      participation_for_player_three = player_three.participations.last
       participation_for_player_one.rating = rating_for_player_two - 2
       participation_for_player_three.rating = rating_for_player_two - 1
       participation_for_player_one.save && participation_for_player_three.save
