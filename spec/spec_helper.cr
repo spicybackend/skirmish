@@ -7,15 +7,12 @@ require "garnet_spec"
 require "../config/*"
 require "./support/*"
 
-Jennifer::Config.from_uri(Amber.settings.database_url)
+Jennifer::Config.from_uri(ENV["DATABASE_URL"]? || Amber.settings.database_url)
+Jennifer::Config.logger = Logger.new(nil)
 
-# Automatically run migrations on the test database
+# Automatically load schema and run migrations on the test database
+Jennifer::Migration::Runner.load_schema
 Jennifer::Migration::Runner.migrate
-
-# Disable database logs in tests
-Jennifer::Config.configure do |conf|
-  conf.logger = Logger.new(nil)
-end
 
 Spec.before_each do
   Jennifer::Adapter.adapter.begin_transaction
