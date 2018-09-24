@@ -29,7 +29,7 @@ describe Administrator do
           admin.update_attributes(player_id: nil)
 
           admin.valid?.should eq false
-          admin.errors.full_messages.join(", ").should match /Player is required/
+          admin.errors.full_messages.join(", ").should match /Player can't be blank/
         end
       end
 
@@ -39,7 +39,7 @@ describe Administrator do
           admin.player_id = 9999
 
           admin.valid?.should eq false
-          admin.errors.full_messages.join(", ").should match /Player is required/
+          admin.errors.full_messages.join(", ").should match /Player must exist/
         end
       end
     end
@@ -60,7 +60,7 @@ describe Administrator do
           admin.update_attributes(league_id: nil)
 
           admin.valid?.should eq false
-          admin.errors.full_messages.join(", ").should match /League is required/
+          admin.errors.full_messages.join(", ").should match /League can't be blank/
         end
       end
 
@@ -70,7 +70,7 @@ describe Administrator do
           admin.update_attributes(league_id: 9999.to_i64)
 
           admin.valid?.should eq false
-          admin.errors.full_messages.join(", ").should match /League is required/
+          admin.errors.full_messages.join(", ").should match /League must exist/
         end
       end
     end

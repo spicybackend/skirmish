@@ -13,11 +13,9 @@ class Administrator < Jennifer::Model::Base
   belongs_to :player, Player
   belongs_to :league, League
 
-  # validate :player, "is required", ->(admin : Administrator) do
-  #   (player = Player.find(admin.player_id)) ? !player.nil? : false
-  # end
+  validates_presence :player_id
+  validates_presence :league_id
 
-  # validate :league, "is required", ->(admin : Administrator) do
-  #   (league = League.find(admin.league_id)) ? !league.nil? : false
-  # end
+  validates_with PlayerRelationValidator
+  validates_with LeagueRelationValidator
 end
