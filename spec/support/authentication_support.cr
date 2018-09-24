@@ -4,21 +4,17 @@ end
 
 class FakeId < Amber::Pipe::Base
   def call(context)
-    if user_id = context.request.headers["fake_id"]? || context.params["fake_id"]?
-      context.session["user_id"] = user_id
-    end
+    context.session["user_id"] = context.request.headers["fake_user_id"]? || context.params["fake_user_id"]?
+    context.session["player_id"] = context.request.headers["fake_player_id"]? || context.params["fake_player_id"]?
 
     call_next(context)
   end
 end
 
 def authenticated_headers_for(user : User)
-  if user
-    headers = HTTP::Headers.new
-    headers.add("fake_id", user.id.to_s)
-  else
-    raise "user not present"
-  end
+  headers = HTTP::Headers.new
+  headers.add("fake_user_id", user.id.to_s)
+  headers.add("fake_player_id", user.player!.id.to_s)
 end
 
 def authenticated_headers_for(player : Player)
