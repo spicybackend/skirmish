@@ -21,22 +21,24 @@ class UserController < ApplicationController
     user = current_user.not_nil!
     player = current_player.not_nil!
 
-    if update(user, player)
-      flash[:success] = "Updated Profile successfully."
-      redirect_to "/profile"
-    else
+    begin
+      Jennifer::Adapter.adapter.transaction do
+        update!(user, player)
+
+        flash[:success] = "Updated Profile successfully."
+        redirect_to "/profile"
+      end
+    rescue ex : Jennifer::RecordInvalid
       flash[:danger] = "Could not update Profile!"
       render("edit.slang")
     end
   end
 
-  private def update(user : User, player : Player)
-    return false unless profile_params.valid?
+  private def update!(user : User, player : Player)
+    user.email = params[:email]
+    player.tag = params[:username]
 
-    user.update_attributes(profile_params.to_h.reject("username"))
-    player.update_attributes(tag: profile_params[:username])
-
-    user.valid? && player.valid? && user.save && player.save
+    (!user.changed? || user.save!) && (!player.changed? || player.save!)
   end
 
   private def profile_params

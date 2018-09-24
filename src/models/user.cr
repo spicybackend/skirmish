@@ -17,22 +17,11 @@ class User < Jennifer::Model::Base
 
   has_one :player, Player
 
+  validates_uniqueness :email
 
-  # validate :email, "is required", ->(user : User) do
-  #   (email = user.email) ? !email.empty? : false
-  # end
-
-  # validate :email, "already in use", ->(user : User) do
-  #   existing = User.find_by email: user.email
-  #   !existing || existing.id == user.id
-  # end
-
+  # validates_length :password, greater_than_or_equal_to: 8
   # validate :password, "is too short", ->(user : User) do
   #   user.password_changed? ? user.valid_password_size? : true
-  # end
-
-  # def player
-  #   Player.find_by(user_id: id)
   # end
 
   def receive_email_notifications?

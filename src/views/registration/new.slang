@@ -1,9 +1,9 @@
 h2 Sign Up
 
-- if user.errors
+- if user.errors || player.errors
   ul.errors
-  - user.errors.each do |error|
-    li = error.to_s
+  - (user.errors.full_messages + player.errors.full_messages).each do |error_message|
+    li = error_message
 
 form action="/registration" method="post"
   == csrf_tag

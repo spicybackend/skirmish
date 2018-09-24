@@ -1,9 +1,9 @@
 h2 Edit Profile
 
-- if user.errors
+- if user.errors || player.errors
   ul.errors
-  - user.errors.each do |error|
-    li = error.to_s
+  - (user.errors.full_messages + player.errors.full_messages).each do |error|
+    li = error
 
 == form(action: "/profile", method: :patch) do
   == csrf_tag
