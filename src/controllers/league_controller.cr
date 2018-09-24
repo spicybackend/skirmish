@@ -1,6 +1,6 @@
 class LeagueController < ApplicationController
   before_action do
-    only [:new, :create, :edit, :update, :destroy] { redirect_signed_out_user }
+    only [:show, :new, :create, :edit, :update, :destroy] { redirect_signed_out_user }
   end
 
   def index

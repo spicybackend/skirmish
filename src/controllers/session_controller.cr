@@ -7,7 +7,7 @@ class SessionController < ApplicationController
   end
 
   def create
-    user = User.where { _email == params["email"].to_s }.to_a.first
+    user = User.where { _email == params["email"].to_s }.to_a.first?
 
     if user && user.authenticate(params["password"].to_s)
       session[:user_id] = user.id
@@ -17,7 +17,10 @@ class SessionController < ApplicationController
       redirect_to "/"
     else
       flash[:danger] = "Invalid email or password"
-      user = User.build
+      user = User.build({
+        email: ""
+      })
+
       render("new.slang")
     end
   end
