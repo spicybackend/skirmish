@@ -24,7 +24,7 @@ before_script:
   - apt-get install -y -qq libxml2-dev libreadline-dev libsqlite3-dev libpq-dev libssl-dev libyaml-dev
   - crystal -v # Print out Crystal version for debugging
   - shards && shards build amber ameba
-  - bin/amber db drop create migrate
+  - bin/amber db drop create
 
 spec:
   script:
