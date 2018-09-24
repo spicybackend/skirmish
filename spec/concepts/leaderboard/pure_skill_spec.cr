@@ -1,4 +1,5 @@
-require "../spec_helper"
+require "./spec_helper"
+require "../../../src/concepts/leaderboard/pure_skill.cr"
 
 def create_and_pit_players(league : League)
   player_one = create_player_with_mock_user
