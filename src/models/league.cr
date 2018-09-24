@@ -60,7 +60,7 @@ class League < Jennifer::Model::Base
   # end
 
   def active_players
-    players  # FIXME: where left_at is nil
+    players_query.where { Membership._left_at == nil }.to_a
   end
 
   def recent_games
