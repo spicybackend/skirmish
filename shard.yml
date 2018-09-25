@@ -23,10 +23,10 @@ targets:
 
 dependencies:
   pg:
-    github: yumoose/crystal-pg
-    branch: case-insensitive-client-encoding
-    # github: will/crystal-pg
+    github: will/crystal-pg
     # version: ~> 0.15.0
+    # Just a couple of commits ahead of v0.15.0, this includes a fix for postgres bouncer
+    commit: cafe4b4a6b9dfedcd1b8c247b4d53cf0b794adcb
 
   amber:
     github: amberframework/amber

@@ -81,8 +81,8 @@ shards:
     version: 0.5.8
 
   pg:
-    github: yumoose/crystal-pg
-    commit: 50df854e0deee89a5cbe58236310cbf7a0ceffbe
+    github: will/crystal-pg
+    commit: cafe4b4a6b9dfedcd1b8c247b4d53cf0b794adcb
 
   pool:
     github: ysbaddaden/pool
