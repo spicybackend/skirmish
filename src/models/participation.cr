@@ -16,6 +16,10 @@ class Participation < Jennifer::Model::Base
   belongs_to :game, Game
   belongs_to :player, Player
 
+  validates_presence :game_id
+  validates_presence :player_id
+  validates_presence :won
+
   def won?
     !!won
   end

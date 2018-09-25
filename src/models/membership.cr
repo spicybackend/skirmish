@@ -16,6 +16,9 @@ class Membership < Jennifer::Model::Base
   belongs_to :player, Player
   belongs_to :league, League
 
+  validates_presence :player_id
+  validates_presence :league_id
+
   def active?
     !joined_at.nil? && left_at.nil?
   end
