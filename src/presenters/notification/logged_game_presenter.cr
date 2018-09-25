@@ -26,11 +26,15 @@ class Notification::LoggedGamePresenter
   end
 
   def action_url
-    "/leagues/#{game.league.id}/games/#{game.id}"
+    "/leagues/#{league.id}/games/#{game.id}"
+  end
+
+  private def league
+    game.league!
   end
 
   private def logger
-    game.logged_by.not_nil!
+    game.logged_by!
   end
 
   private def won?

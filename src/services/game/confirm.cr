@@ -3,12 +3,12 @@ class Game::Confirm
   property :errors
 
   def initialize(@game : Game, @confirming_player : Player)
-    @league = game.league
+    @league = game.league!
     @winner = game.winner
     @loser = game.loser
 
-    @winner_participation = game.participations.all("AND participations.won = ? LIMIT 1", [true]).first
-    @loser_participation = game.participations.all("AND participations.won = ? LIMIT 1", [false]).first
+    @winner_participation = game.participations_query.where { _won == true }.to_a.first
+    @loser_participation = game.participations_query.where { _won == false }.to_a.first
 
     @errors = [] of String
   end
@@ -90,6 +90,6 @@ class Game::Confirm
   end
 
   private def game_and_participation_errors
-    game.errors + winner_participation.errors + loser_participation.errors
+    game.errors.full_messages + winner_participation.errors.full_messages + loser_participation.errors.full_messages
   end
 end

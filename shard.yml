@@ -4,7 +4,7 @@ version: 0.1.5
 authors:
   - Jordane Lew <jordane.lew@gmail.com>
 
-crystal: 0.25.1
+crystal: 0.26.1
 
 license: UNLICENSED
 
@@ -18,22 +18,26 @@ targets:
   ameba:
     main: lib/ameba/src/cli.cr
 
+  sam:
+    main: src/sam.cr
+
 dependencies:
   pg:
-    github: yumoose/crystal-pg
-    branch: case-insensitive-client-encoding
-    # github: will/crystal-pg
+    github: will/crystal-pg
     # version: ~> 0.15.0
+    # Just a couple of commits ahead of v0.15.0, this includes a fix for postgres bouncer
+    commit: cafe4b4a6b9dfedcd1b8c247b4d53cf0b794adcb
 
   amber:
     github: amberframework/amber
-    version: 0.8.0
+    version: 0.9.0
 
-  granite:
-    github: yumoose/granite
-    branch: db-connection-reuse-pre-0.26
-    # github: amberframework/granite
-    # version: ~> 0.12.1
+  jennifer:
+    github: imdrasil/jennifer.cr
+    version: "~> 0.6.1"
+
+  sam:
+    github: imdrasil/sam.cr
 
   mailer:
     github: crisward/mailer

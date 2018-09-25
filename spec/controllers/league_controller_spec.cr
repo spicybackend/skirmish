@@ -21,13 +21,6 @@ end
 describe LeagueControllerTest do
   subject = LeagueControllerTest.new
 
-  Spec.before_each do
-    League.clear
-    Administrator.clear
-    Player.clear
-    User.clear
-  end
-
   describe "#index" do
     context "with no leagues exist" do
       it "renders league index template" do
@@ -51,7 +44,7 @@ describe LeagueControllerTest do
   describe "#show" do
     it "renders league show template" do
       league = create_league
-      response = subject.get "/leagues/#{league.id}"
+      response = subject.get "/leagues/#{league.id}", headers: basic_authenticated_headers
 
       response.status_code.should eq(200)
       response.body.should contain("League")
@@ -59,10 +52,20 @@ describe LeagueControllerTest do
 
     context "when the league doesn't exist" do
       it "redirects back to the leagues listing" do
-        response = subject.get "/leagues/99999"
+        response = subject.get "/leagues/99999", headers: basic_authenticated_headers
 
         response.status_code.should eq(302)
         response.headers["Location"].should eq "/leagues"
+      end
+    end
+
+    context "when logged out" do
+      it "redirects to the login page" do
+        league = create_league
+        response = subject.get "/leagues/#{league.id}"
+
+        response.status_code.should eq(302)
+        response.headers["Location"].should eq "/signin"
       end
     end
   end
@@ -121,23 +124,23 @@ describe LeagueControllerTest do
 
     context "when logged in" do
       it "creates a league" do
-        leagues_before = League.count
+        leagues_before = League.all.count
         subject.post "/leagues", headers: basic_authenticated_headers, body: body
 
-        League.count.should eq(leagues_before + 1)
+        League.all.count.should eq(leagues_before + 1)
       end
 
       it "creates an administrator" do
-        administrators_before = League.count
+        administrators_before = Administrator.all.count
         subject.post "/leagues", headers: basic_authenticated_headers, body: body
 
-        Administrator.count.should eq(administrators_before + 1)
+        Administrator.all.count.should eq(administrators_before + 1)
       end
 
       it "redirects to the new league" do
         response = subject.post "/leagues", headers: basic_authenticated_headers, body: body
 
-        league = League.all.last
+        league = League.all.last!
 
         response.status_code.should eq(302)
         response.headers["Location"].should eq "/leagues/#{league.id}"
@@ -147,7 +150,7 @@ describe LeagueControllerTest do
         it "has the properties specified in the params" do
           subject.post "/leagues", headers: basic_authenticated_headers, body: body
 
-          league = League.all.last
+          league = League.all.last!
 
           league.name.should eq league_props[:name]
           league.description.should eq league_props[:description]
@@ -161,11 +164,11 @@ describe LeagueControllerTest do
           player = create_player_with_mock_user
           subject.post "/leagues", headers: authenticated_headers_for(player.user.not_nil!), body: body
 
-          admin = Administrator.all.last
-          league = League.all.last
+          admin = Administrator.all.last!
+          league = League.all.last!
 
-          admin.player.id.should eq player.id
-          admin.league.id.should eq league.id
+          admin.player_id.should eq player.id
+          admin.league_id.should eq league.id
         end
       end
     end
@@ -238,17 +241,18 @@ describe LeagueControllerTest do
 
       context "when a game has been played" do
         it "deletes the game as well" do
+          player = create_player_with_mock_user
           league = create_league
 
-          game = Game.new(
-            league_id: league.id
-          )
-          game.save
+          game = Game.create!({
+            league_id: league.id,
+            logged_by_id: player.id
+          })
           game_id = game.id
 
           subject.delete "/leagues/#{league.id}", headers: admin_authenticated_headers(league)
 
-          Game.find(game_id).should eq nil
+          Game.where { _league_id == game_id }.to_a.size.should eq 0
         end
       end
     end

@@ -21,22 +21,15 @@ end
 describe MembershipControllerTest do
   subject = MembershipControllerTest.new
 
-  Spec.before_each do
-    League.clear
-    Membership.clear
-    User.clear
-    Player.clear
-  end
-
   describe "#create" do
     context "when logged in as a player" do
       it "creates a membership" do
         league = create_league
-        memberships_before = Membership.count
+        memberships_before = Membership.all.count
 
         subject.post "/leagues/#{league.id}/join", headers: basic_authenticated_headers
 
-        Membership.count.should eq memberships_before + 1
+        Membership.all.count.should eq memberships_before + 1
       end
 
       it "redirects back to the league" do
@@ -48,11 +41,20 @@ describe MembershipControllerTest do
       end
 
       describe "the created membership" do
+        it "belongs to the authenticated player" do
+          league = create_league
+          player = create_player_with_mock_user
+
+          subject.post "/leagues/#{league.id}/join", headers: authenticated_headers_for(player)
+
+          Membership.all.last!.player.should eq player
+        end
+
         it "is active" do
           league = create_league
           subject.post "/leagues/#{league.id}/join", headers: basic_authenticated_headers
 
-          Membership.all.last.active?.should eq true
+          Membership.all.last!.active?.should eq true
         end
       end
     end
@@ -62,11 +64,11 @@ describe MembershipControllerTest do
         league = create_league
         player = create_player_with_mock_user
         membership = Membership.create!(league_id: league.id, player_id: player.id, joined_at: Time.now)
-        memberships_before = Membership.count
+        memberships_before = Membership.all.count
 
         subject.post "/leagues/#{league.id}/join", headers: authenticated_headers_for(player.user.not_nil!)
 
-        Membership.count.should eq memberships_before
+        Membership.all.count.should eq memberships_before
       end
 
       it "redirects back to the league" do
@@ -84,11 +86,11 @@ describe MembershipControllerTest do
     context "when logged out" do
       it "doesn't create a membership" do
         league = create_league
-        memberships_before = Membership.count
+        memberships_before = Membership.all.count
 
         response = subject.post "/leagues/#{league.id}/join"
 
-        Membership.count.should eq memberships_before
+        Membership.all.count.should eq memberships_before
       end
 
       it "redirects to the login page" do
@@ -119,10 +121,10 @@ describe MembershipControllerTest do
         player = create_player_with_mock_user
         membership = Membership.create!(league_id: league.id, player_id: player.id, joined_at: Time.now)
 
-        memberships_before = Membership.count
+        memberships_before = Membership.all.count
         subject.patch "/leagues/#{league.id}/leave", headers: authenticated_headers_for(player.user.not_nil!)
 
-        Membership.count.should eq memberships_before
+        Membership.all.count.should eq memberships_before
       end
 
       it "redirects back to the league" do
@@ -178,10 +180,10 @@ describe MembershipControllerTest do
         player = create_player_with_mock_user
         membership = Membership.create!(league_id: league.id, player_id: player.id, joined_at: Time.now, left_at: Time.now)
 
-        memberships_before = Membership.count
+        memberships_before = Membership.all.count
         subject.patch "/leagues/#{league.id}/join", headers: authenticated_headers_for(player.user.not_nil!)
 
-        Membership.count.should eq memberships_before
+        Membership.all.count.should eq memberships_before
       end
 
       it "redirects back to the league" do

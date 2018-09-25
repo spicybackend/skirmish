@@ -4,7 +4,7 @@ describe Rating::DetermineNewRating do
   old_rating = 1000
   other_rating = 1000
   won = true
-  league = League.new
+  league = create_league
 
   determine_new_rating = -> do
     Rating::DetermineNewRating.new(
@@ -31,7 +31,7 @@ describe Rating::DetermineNewRating do
     end
 
     describe "k factor effect" do
-      altered_k_factor_league = League.new
+      altered_k_factor_league = create_league
 
       determine_altered_rating = -> do
         Rating::DetermineNewRating.new(

@@ -3,6 +3,7 @@ require "./initializers/**"
 require "amber"
 
 require "../src/models/**"
+require "../src/validators/**"
 require "../src/services/**"
 require "../src/helpers/**"
 require "../src/concepts/**"

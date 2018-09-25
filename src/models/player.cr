@@ -1,67 +1,64 @@
-class Player < Granite::Base
+class Player < Jennifer::Model::Base
   RECENT_GAMES_LIMIT = 3
 
-  adapter postgres
-  table_name players
+  with_timestamps
 
-  field tag : String
+  mapping(
+    id: { type: Int64, primary: true },
+    user_id: Int64?,
 
-  belongs_to :user
-  has_many :memberships
-  has_many :leagues, through: :memberships
-  has_many :participations
-  has_many :games, through: :participations
+    tag: String,
 
-  timestamps
+    created_at: { type: Time, default: Time.now },
+    updated_at: { type: Time, default: Time.now }
+  )
 
-  validate :user, "is required", ->(player : Player) do
-    !User.find(player.user_id).nil?
-  end
+  belongs_to :user, User
 
-  validate :tag, "is required", ->(player : Player) do
-    (tag = player.tag) ? !tag.empty? : false
-  end
+  has_many :memberships, Membership
+  has_many :participations, Participation
+  has_many :administrators, Administrator
 
-  validate :tag, "already in use", ->(player : Player) do
-    existing = Player.find_by tag: player.tag
-    !existing || existing.id == player.id
-  end
+  has_and_belongs_to_many :leagues, League, nil, nil, nil, "memberships", "league_id"
+  has_and_belongs_to_many :games, Game, nil, nil, nil, "participations", "game_id"
+
+  validates_uniqueness :tag
+  validates_length :tag, in: 3..16
+
+  validates_uniqueness :user_id
+  validates_with_method :user_exists
 
   def ==(other)
     !other.nil? && self.class == other.class && self.id == other.id
   end
 
   def admin_of?(league : League)
-    !!Administrator.find_by(player_id: id, league_id: league.id)
+    administrators_query.where { _league_id == league.id }.exists?
   end
 
   def in_league?(league : League)
-    !!Membership.find_by(
-      player_id: id,
-      league_id: league.id
-    ).try(&.active?)
+    memberships_query.where { _league_id == league.id }.where { _left_at == nil }.exists?
   end
 
   def rating_for(league : League)
-    latest_participation = Participation.first(
-      "JOIN games ON participations.game_id = games.id
-      WHERE participations.player_id = ?
-      AND games.league_id = ?
-      AND participations.rating IS NOT NULL
-      ORDER BY participations.created_at DESC",
-      [id, league.id]
-    )
+    latest_participation = participations_query.
+      join(Game) { Participation._game_id == _id }.
+      where { Game._league_id == league.id }.
+      where { Participation._rating != nil }.
+      order(created_at: :desc).
+      limit(1).
+      to_a.first?
 
     latest_participation.try(&.rating) || league.start_rating || League::DEFAULT_START_RATING
   end
 
   def recent_games
-    # TODO add and use confirmed_at
-    games.all("ORDER BY created_at DESC LIMIT ?", [RECENT_GAMES_LIMIT])
+    games_query.order(confirmed_at: :desc, created_at: :desc).limit(RECENT_GAMES_LIMIT).to_a
   end
 
-  validate :tag, "already in use", ->(player : Player) do
-    existing = Player.find_by tag: player.tag
-    !existing || existing.id == player.id
+  private def user_exists
+    if User.find(user_id).nil?
+      errors.add(:user, "must exist")
+    end
   end
 end

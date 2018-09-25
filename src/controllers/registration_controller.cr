@@ -1,30 +1,51 @@
 class RegistrationController < ApplicationController
   def new
-    user = User.new
+    user = User.build(email: "")
+    player = Player.build(tag: "")
+
     render("new.slang")
   end
 
   def create
-    user = User.new(registration_params.validate!)
-    user.receive_email_notifications = true
-    user.password = params["password"].to_s
-
-    if user.valid? && !valid_username?(user) && user.save
-      session[:user_id] = user.id
-
-      player = Player.create!(
-        tag: params["username"],
-        user_id: user.id
-      )
+    Jennifer::Adapter.adapter.transaction do
+      user = create_user_from_params
+      player = create_player_from_params(user)
 
       WelcomeMailer.new(player).send
 
-      flash["success"] = "Created User successfully."
-      redirect_to "/"
-    else
-      flash["danger"] = "Uh-oh, something's not quite right..."
-      !valid_username?(user)  # put errors for the username back on
-      render("new.slang")
+      session[:user_id] = user.id
+      session[:player_id] = player.id
+    end
+
+    flash["success"] = "Registered successfully."
+    redirect_to "/"
+  rescue ex : Jennifer::RecordInvalid
+    user = build_user_from_params.tap(&.valid?)
+    player = build_player_from_params.tap(&.valid?)
+
+    flash["danger"] = "Could not complete registration!"
+    render("new.slang")
+  end
+
+  private def build_user_from_params
+    User.build(registration_params.validate!).tap do |user|
+      user.receive_email_notifications = true
+      user.password = params["password"].to_s
+    end
+  end
+
+  private def build_player_from_params
+    Player.build(tag: params["username"])
+  end
+
+  private def create_user_from_params
+    build_user_from_params.tap(&.save!)
+  end
+
+  private def create_player_from_params(user : User)
+    build_player_from_params.tap do |player|
+      player.add_user(user.not_nil!)
+      player.save!
     end
   end
 

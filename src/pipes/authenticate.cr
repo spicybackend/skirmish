@@ -1,5 +1,6 @@
 class HTTP::Server::Context
   property current_user : User?
+  property current_player : Player?
 end
 
 class Authenticate < Amber::Pipe::Base
@@ -7,9 +8,14 @@ class Authenticate < Amber::Pipe::Base
 
   def call(context)
     user_id = context.session["user_id"]?
+    player_id = context.session["player_id"]?
 
-    if user = User.find user_id
+    user = User.find user_id
+    player = Player.find player_id
+
+    if user && player
       context.current_user = user
+      context.current_player = player
       call_next(context)
     else
       return call_next(context) if public_path?(context.request.path) || whitelisted_request?(context.request)

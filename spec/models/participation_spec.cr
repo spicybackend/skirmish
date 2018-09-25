@@ -2,7 +2,7 @@ require "./spec_helper"
 require "../../src/models/participation.cr"
 
 describe Participation do
-  Spec.before_each do
-    Participation.clear
+  pending do
+    it "has specs"
   end
 end

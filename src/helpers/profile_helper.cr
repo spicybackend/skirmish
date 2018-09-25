@@ -13,6 +13,7 @@ module ProfileHelper
   end
 
   def notification_count_for(player : Player)
-    Notification.all("WHERE player_id = ? AND read_at IS NULL", [player.id]).size
+    # TODO Optimise read_at by adding a where clause
+    Notification.where { _player_id == player.id }.to_a.reject { |notification| notification.read? }.size
   end
 end

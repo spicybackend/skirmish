@@ -16,8 +16,9 @@ class GameController < ApplicationController
         ).call
       end
 
-      winner_rating = game.winner.rating_for(game.league)
-      loser_rating = game.loser.rating_for(game.league)
+      league = game.league!
+      winner_rating = game.winner.rating_for(league)
+      loser_rating = game.loser.rating_for(league)
 
       if !game.confirmed?
         # calculate point increase for display
@@ -25,14 +26,14 @@ class GameController < ApplicationController
           old_rating: winner_rating,
           other_rating: loser_rating,
           won: true,
-          league: game.league
+          league: game.league!
         ).call
 
         new_loser_rating = Rating::DetermineNewRating.new(
           old_rating: loser_rating,
           other_rating: winner_rating,
           won: false,
-          league: game.league
+          league: game.league!
         ).call
 
         winner_delta = (new_winner_rating - winner_rating).abs
@@ -47,11 +48,11 @@ class GameController < ApplicationController
   end
 
   def new
-    game = Game.new
+    game = Game.build
     league = League.find(params[:league_id])
 
     if league
-      other_players = league.active_players.reject { |player| player == current_player }
+      other_players = league.active_players.to_a.reject { |player| player == current_player }
 
       if other_players.empty?
         flash["warning"] = "There are no other players to log against"
@@ -77,7 +78,7 @@ class GameController < ApplicationController
 
     unless other_player
       flash["danger"] = "Can't find opponent"
-      other_players = league.active_players.reject { |other| other == player }
+      other_players = league.active_players.to_a.reject { |other| other == player }
       render("new.slang"); return
     end
 
@@ -97,7 +98,7 @@ class GameController < ApplicationController
       redirect_to "/leagues/#{league.id}/games/#{game.id}"
     else
       flash["danger"] = game_logger.errors.to_s
-      other_players = league.active_players.reject { |other| other == player }
+      other_players = league.active_players.to_a.reject { |other| other == player }
 
       render("new.slang")
     end

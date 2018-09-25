@@ -1,6 +1,6 @@
 class LeagueController < ApplicationController
   before_action do
-    only [:new, :create, :edit, :update, :destroy] { redirect_signed_out_user }
+    only [:show, :new, :create, :edit, :update, :destroy] { redirect_signed_out_user }
   end
 
   def index
@@ -10,12 +10,9 @@ class LeagueController < ApplicationController
 
   def show
     if league = League.find(params[:id])
-      player = current_player
+      player = current_player.not_nil!
 
-      membership = Membership.find_by(
-        player_id: player.try(&.id),
-        league_id: league.id
-      ) || Membership.new
+      membership = player.memberships_query.where { _league_id == league.id }.to_a.first? || Membership.build
 
       render("show.slang")
     else
@@ -25,12 +22,20 @@ class LeagueController < ApplicationController
   end
 
   def new
-    league = League.new
+    league = League.build({
+      name: ""
+    })
+
     render("new.slang")
   end
 
   def create
-    league = League.new(league_params.validate!)
+    league = League.new({
+      name: params[:name],
+      description: params[:description],
+      start_rating: params[:start_rating].to_i,
+      k_factor: params[:k_factor].to_f,
+    })
 
     if league.valid? && league.save
       Administrator.create!(
@@ -57,7 +62,12 @@ class LeagueController < ApplicationController
 
   def update
     if league = League.find(params["id"])
-      league.set_attributes(league_params.validate!)
+      league.update_attributes({
+        name: params[:name],
+        description: params[:description],
+        start_rating: params[:start_rating].to_i,
+        k_factor: params[:k_factor].to_f,
+      })
 
       if league.valid? && league.save
         flash["success"] = "Updated League successfully."
@@ -73,21 +83,15 @@ class LeagueController < ApplicationController
   end
 
   def destroy
-    if league = League.find params["id"]
-      league.destroy
-    else
-      flash["warning"] = "League with ID #{params["id"]} Not Found"
+    Jennifer::Adapter.adapter.transaction do
+      if league = League.find params["id"]
+        league.administrators_query.destroy
+        league.destroy
+      else
+        flash["warning"] = "League with ID #{params["id"]} Not Found"
+      end
     end
 
     redirect_to "/leagues"
-  end
-
-  def league_params
-    params.validation do
-      required(:name) { |f| !f.nil? }
-      required(:description) { |f| !f.nil? }
-      required(:start_rating) { |f| !f.nil? }
-      required(:k_factor) { |f| !f.nil? }
-    end
   end
 end

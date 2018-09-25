@@ -4,20 +4,20 @@ class League::LogGame
   property game : Game, errors : Array(String)
 
   def initialize(@league : League, @winner : Player, @loser : Player, @logger : Player)
-    @game = Game.new
+    @game = Game.build
     @errors = [] of String
   end
 
   def call
     players.each do |player|
-      unless league_members.includes?(player)
+      unless league_members.to_a.includes?(player)
         @errors << "#{player} is not a member of #{league}"
         return false
       end
     end
 
-    game.logged_by_id = logger.id
-    game.league = league
+    game.logged_by_id = logger.id.not_nil!
+    game.league_id = league.id.not_nil!
 
     if game.valid? && game.save
       # TODO these should be validated and saved along with the game
@@ -26,7 +26,7 @@ class League::LogGame
 
       return true
     else
-      @errors += game.errors.map(&.to_s).compact
+      @errors += game.errors.full_messages.compact
       return false
     end
   end

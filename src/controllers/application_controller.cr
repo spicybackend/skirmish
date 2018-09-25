@@ -12,9 +12,7 @@ class ApplicationController < Amber::Controller::Base
   end
 
   def current_player
-    if user = current_user
-      user.player.not_nil!
-    end
+    context.current_player
   end
 
   def signed_in?

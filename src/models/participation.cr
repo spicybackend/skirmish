@@ -1,16 +1,30 @@
-class Participation < Granite::Base
-  adapter postgres
-  table_name participations
+class Participation < Jennifer::Model::Base
+  with_timestamps
 
-  belongs_to :game
-  belongs_to :player
+  mapping(
+    id: { type: Int64, primary: true },
+    game_id: Int64,
+    player_id: Int64,
 
-  field won : Bool, comment: "# Whether or not the player won the game"
-  field rating : Int32, comment: "# The resulting rating of the player after the game"
+    won: Bool,
+    rating: Int32?,
 
-  timestamps
+    created_at: { type: Time, default: Time.now },
+    updated_at: { type: Time, default: Time.now }
+  )
+
+  belongs_to :game, Game
+  belongs_to :player, Player
+
+  validates_presence :game_id
+  validates_presence :player_id
+  validates_presence :won
 
   def won?
     !!won
+  end
+
+  def lost?
+    !won
   end
 end

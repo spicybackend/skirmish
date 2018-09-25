@@ -1,17 +1,21 @@
-class Administrator < Granite::Base
-  adapter postgres
-  table_name administrators
+class Administrator < Jennifer::Model::Base
+  with_timestamps
 
-  belongs_to :player
-  belongs_to :league
+  mapping(
+    id: { type: Int64, primary: true },
+    player_id: Int64?,
+    league_id: Int64?,
 
-  timestamps
+    created_at: { type: Time, default: Time.now },
+    updated_at: { type: Time, default: Time.now }
+  )
 
-  validate :player, "is required", ->(admin : Administrator) do
-    (player = Player.find(admin.player_id)) ? !player.nil? : false
-  end
+  belongs_to :player, Player
+  belongs_to :league, League
 
-  validate :league, "is required", ->(admin : Administrator) do
-    (league = League.find(admin.league_id)) ? !league.nil? : false
-  end
+  validates_presence :player_id
+  validates_presence :league_id
+
+  validates_with PlayerRelationValidator
+  validates_with LeagueRelationValidator
 end

@@ -5,7 +5,7 @@ class NotificationController < ApplicationController
 
   def index
     player = current_player.not_nil!
-    notifications = notifications_for_player(player).map(&.presented)
+    notifications = notifications_for_player(player).to_a.map(&.presented)
 
     render("index.slang")
   end
@@ -48,14 +48,13 @@ class NotificationController < ApplicationController
   def read_all
     player = current_player.not_nil!
 
-    notifications = Notification.all("WHERE player_id = ? AND read_at IS NULL", [player.id])
-    bulk_read_query = "UPDATE notifications SET read_at = NOW() WHERE id in (#{notifications.map(&.id).join(", ")})"
-    Notification.exec(bulk_read_query) if notifications.any?
+    notifications = Notification.where { _player_id == player.id }.where { _read_at == nil }
+    notifications.update(read_at: Time.now)
 
     redirect_to "/notifications"
   end
 
   private def notifications_for_player(player)
-    Notification.all("WHERE player_id = ? ORDER BY created_at DESC", [player.id])
+    Notification.where { _player_id == player.id }.order(created_at: :desc)
   end
 end

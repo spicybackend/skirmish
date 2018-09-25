@@ -4,63 +4,41 @@ end
 
 class FakeId < Amber::Pipe::Base
   def call(context)
-    if user_id = context.request.headers["fake_id"]? || context.params["fake_id"]?
-      context.session["user_id"] = user_id
-    end
+    context.session["user_id"] = context.request.headers["fake_user_id"]? || context.params["fake_user_id"]?
+    context.session["player_id"] = context.request.headers["fake_player_id"]? || context.params["fake_player_id"]?
 
     call_next(context)
   end
 end
 
 def authenticated_headers_for(user : User)
-  if user
-    headers = HTTP::Headers.new
-    headers.add("fake_id", user.id.to_s)
-  else
-    raise "user not present"
-  end
+  headers = HTTP::Headers.new
+  headers.add("fake_user_id", user.id.to_s)
+  headers.add("fake_player_id", user.player!.id.to_s)
+end
+
+def authenticated_headers_for(player : Player)
+  authenticated_headers_for(player.user!)
 end
 
 def basic_authenticated_headers
-  # try and find a player without ANY administration
-  player = Player.first(
-    "WHERE NOT EXISTS(
-      SELECT 1
-      FROM administrators
-      WHERE administrators.player_id = players.id
-    )"
-  )
+  player = create_player_with_mock_user
 
-  if player
-    user = player.user.not_nil!
-  else
-    # failing that, create one
-    user = User.new
-    user.email = "basic@user.com"
-    user.password = "much-secure-wow"
-    user.receive_email_notifications = false
-    user.save!
-
-    Player.create!(
-      tag: "basic",
-      user_id: user.id
-    )
-  end
-
-  authenticated_headers_for(user)
+  authenticated_headers_for(player.user!)
 end
 
 def admin_authenticated_headers(league : League)
   # find an admin for the league
-  if admin = Administrator.first("WHERE league_id = ?", [league.id])
+  if admin = league.administrators.first?
     player = admin.player.not_nil!
     user = player.user.not_nil!
   else
     # failing that, create one
-    user = User.new
-    user.email = "admin_user_#{league.name}@example.com"
+    user = User.new({
+      email: "admin_user_#{league.name}@example.com",
+      receive_email_notifications: false
+    })
     user.password = "password"
-    user.receive_email_notifications = false
     user.save!
 
     player = Player.create!(
