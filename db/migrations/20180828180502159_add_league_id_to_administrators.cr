@@ -1,6 +1,6 @@
 class AddLeagueIdToAdministrators < Jennifer::Migration::Base
   def up
-    exec("ALTER TABLE administrators ADD COLUMN league_id BIGSERIAL NOT NULL REFERENCES leagues(id) ON DELETE CASCADE;")
+    exec("ALTER TABLE administrators ADD COLUMN IF NOT EXISTS league_id BIGSERIAL NOT NULL REFERENCES leagues(id) ON DELETE CASCADE;")
   end
 
   def down

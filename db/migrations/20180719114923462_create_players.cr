@@ -1,7 +1,7 @@
 class CreatePlayers < Jennifer::Migration::Base
   def up
     exec(
-      "CREATE TABLE players (
+      "CREATE TABLE IF NOT EXISTS players (
         id BIGSERIAL PRIMARY KEY,
         user_id BIGSERIAL REFERENCES users(id) ON DELETE CASCADE,
 

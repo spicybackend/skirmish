@@ -1,7 +1,7 @@
 class CreateNotifications < Jennifer::Migration::Base
   def up
     exec(
-      "CREATE TABLE notifications (
+      "CREATE TABLE IF NOT EXISTS notifications (
         id BIGSERIAL PRIMARY KEY,
 
         player_id BIGINT NOT NULL REFERENCES players(id) ON DELETE CASCADE,
@@ -17,7 +17,7 @@ class CreateNotifications < Jennifer::Migration::Base
       );"
     )
 
-    exec("CREATE INDEX notifications_player_id_idx ON notifications (player_id);")
+    exec("CREATE INDEX IF NOT EXISTS notifications_player_id_idx ON notifications (player_id);")
   end
 
   def down

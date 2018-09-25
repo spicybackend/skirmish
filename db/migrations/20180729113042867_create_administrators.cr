@@ -1,7 +1,7 @@
 class CreateAdministrators < Jennifer::Migration::Base
   def up
     exec(
-      "CREATE TABLE administrators (
+      "CREATE TABLE IF NOT EXISTS administrators (
         id BIGSERIAL PRIMARY KEY,
         user_id BIGSERIAL REFERENCES users(id) ON DELETE CASCADE,
 

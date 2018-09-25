@@ -1,6 +1,6 @@
 class DropUserIdFromAdministrators < Jennifer::Migration::Base
   def up
-    exec("ALTER TABLE administrators DROP COLUMN user_id;")
+    exec("ALTER TABLE administrators DROP COLUMN IF EXISTS user_id;")
   end
 
   def down

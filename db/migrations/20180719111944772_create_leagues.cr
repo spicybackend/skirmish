@@ -1,7 +1,7 @@
 class CreateLeagues < Jennifer::Migration::Base
   def up
     exec(
-      "CREATE TABLE leagues (
+      "CREATE TABLE IF NOT EXISTS leagues (
         id BIGSERIAL PRIMARY KEY,
 
         name VARCHAR(32),

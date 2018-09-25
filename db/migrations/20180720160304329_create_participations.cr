@@ -1,7 +1,7 @@
 class CreateParticipations < Jennifer::Migration::Base
   def up
     exec(
-      "CREATE TABLE participations (
+      "CREATE TABLE IF NOT EXISTS participations (
         id BIGSERIAL PRIMARY KEY,
 
         game_id BIGSERIAL REFERENCES games(id) ON DELETE CASCADE,

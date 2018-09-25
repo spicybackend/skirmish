@@ -1,7 +1,7 @@
 class CreateUsers < Jennifer::Migration::Base
   def up
     exec(
-      "CREATE TABLE users (
+      "CREATE TABLE IF NOT EXISTS users (
         id BIGSERIAL PRIMARY KEY,
         email VARCHAR(255) NOT NULL,
         hashed_password VARCHAR(60) NOT NULL,
