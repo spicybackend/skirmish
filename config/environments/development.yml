@@ -2,6 +2,7 @@ secret_key_base: mWB28yMt7tR7JTU4ZrmljTJwF1eO6LWP67BooxcwZdI
 port: 3000
 name: skirmish
 logging:
+  skip: []
   severity: debug
   colorize: true
   filter:
