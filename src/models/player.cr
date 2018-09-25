@@ -23,6 +23,10 @@ class Player < Jennifer::Model::Base
   has_and_belongs_to_many :games, Game, nil, nil, nil, "participations", "game_id"
 
   validates_uniqueness :tag
+  validates_length :tag, in: 3..16
+
+  validates_uniqueness :user_id
+  validates_with_method :user_exists
 
   def ==(other)
     !other.nil? && self.class == other.class && self.id == other.id
@@ -50,5 +54,11 @@ class Player < Jennifer::Model::Base
 
   def recent_games
     games_query.order(confirmed_at: :desc, created_at: :desc).limit(RECENT_GAMES_LIMIT).to_a
+  end
+
+  private def user_exists
+    if User.find(user_id).nil?
+      errors.add(:user, "must exist")
+    end
   end
 end

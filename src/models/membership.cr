@@ -6,7 +6,7 @@ class Membership < Jennifer::Model::Base
     player_id: Int64?,
     league_id: Int64?,
 
-    joined_at: Time?,
+    joined_at: { type: Time, default: Time.now },
     left_at: Time?,
 
     created_at: { type: Time, default: Time.now },
