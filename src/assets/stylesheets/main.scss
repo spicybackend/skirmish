@@ -219,6 +219,10 @@ tr.clickable-row {
 .navbar-nav {
   flex-direction: row;
   width: 100%;
+
+  .dropdown-menu {
+    position: absolute;
+  }
 }
 
 @media only screen and (max-width: 768px) {
@@ -286,8 +290,18 @@ tr.clickable-row {
       &.notifications { background: url("https://png.icons8.com/ios-glyphs/160/ffffff/appointment-reminders.png") }
     }
 
-    &.active {
+    &.active, .dropdown-item.active {
       background-color: $blue;
+    }
+
+    .dropdown-menu-wrapper {
+      position: absolute;
+      bottom: calc(100% - 5px);
+      right: 0;
+
+      .dropdown-menu {
+        position: relative;
+      }
     }
   }
 }
