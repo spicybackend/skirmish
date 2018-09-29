@@ -4,12 +4,9 @@
     .button-group
       == link_to(t("general.actions.edit"), "/profile/edit", class: "btn btn-success btn-sm")
 
-h3 User Info
-
-p class="small"
-  == "#{player.tag}"
-p
-  == user.email
+.player-profile
+  img.gravatar src="#{gravatar_src_for(player)}"
+  span.name = player.tag
 
 h3 Recent Games
 == render(partial: "_recent_games.slang")

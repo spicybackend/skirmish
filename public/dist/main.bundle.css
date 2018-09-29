@@ -146,6 +146,26 @@ a.dropdown-item {
 h3 {
   font-size: 26px; }
 
+span.description {
+  font-size: 20px; }
+
+.player-profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 16px; }
+  .player-profile img.gravatar {
+    width: 200px;
+    height: 200px;
+    padding: 14px;
+    border-radius: 50%;
+    background-clip: padding-box;
+    -webkit-border-radius: 50%;
+    -webkit-background-clip: padding-box; }
+  .player-profile span.name {
+    font-size: 24px;
+    text-align: center; }
+
 span.notification-count {
   font-size: 13px;
   font-weight: bold;
