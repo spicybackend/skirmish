@@ -1,0 +1,35 @@
+.notifications {
+  a:hover {
+    text-decoration: none !important;
+  }
+
+  .notification {
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    background-color: #fafafa;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+    color: #555;
+
+    transition: background-color 0.25s;
+    &:hover {
+      background-color: white;
+    }
+
+    .icon {
+      width: 32px;
+      height: 32px;
+      margin: 5px 12px 5px 5px;
+      padding: 6px;
+      background-color: #fd971f;
+      border-radius: 50%;
+    }
+
+    .time {
+      flex-grow: 1;
+      text-align: right;
+      color: #888;
+    }
+  }
+}
