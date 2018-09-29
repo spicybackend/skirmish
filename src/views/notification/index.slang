@@ -3,7 +3,7 @@
     .button-group
       == form(action: "/notifications/read_all", method: :patch, class: "single-btn") do
         == csrf_tag
-        == submit(t("notification.actions.mark_all_as_read"), "data-confirm": "Are you sure?", class: "btn btn-success btn-sm")
+        == submit(t("notification.actions.mark_all_as_read"), "data-confirm": "Are you sure?", class: "btn btn-success")
 
 .notifications
   - notifications.each do |notification|

@@ -18,5 +18,5 @@
     == text_field(name: "title", value: notifications.title, placeholder: "Title", class: "form-control")
   .form-group
     == text_field(name: "content", value: notifications.content, placeholder: "Content", class: "form-control")
-  == submit("Submit", class: "btn btn-primary btn-sm")
-  == link_to("back", "/notifications", class: "btn btn-light btn-sm")
+  == submit("Submit", class: "btn btn-primary")
+  == link_to("back", "/notifications", class: "btn btn-light")

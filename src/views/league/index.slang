@@ -2,7 +2,7 @@
   h2.col.justify-content-between.btn-toolbar Leagues
     - if current_user
       .button-group
-        a.btn.btn-success.btn-sm href="/leagues/new" New
+        a.btn.btn-success href="/leagues/new" New
 
 .leagues
   - leagues.each do |league|

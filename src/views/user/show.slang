@@ -1,7 +1,7 @@
 .row
   h2.col.justify-content-between.btn-toolbar Profile
     .button-group
-      == link_to(t("general.actions.edit"), "/profile/edit", class: "btn btn-success btn-sm")
+      == link_to(t("general.actions.edit"), "/profile/edit", class: "btn btn-success")
 
 .player-profile
   img.gravatar src="#{gravatar_src_for(player)}"
