@@ -101,6 +101,7 @@ div#simple-logger {
       font-size: 120%;
       font-weight: bold; }
     .leagues .league .description {
+      font-size: 110%;
       overflow: hidden;
       text-overflow: ellipsis;
       display: -webkit-box;
