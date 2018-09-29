@@ -10,7 +10,7 @@
           == link_to(t("general.actions.edit"), "/leagues/#{league.id}/edit", class: "btn btn-success btn-sm")
           == link_to(t("general.actions.delete"), "/leagues/#{league.id}?_csrf=#{csrf_token}", "data-method": "delete", "data-confirm": "Are you sure?", class: "btn btn-danger btn-sm")
 
-p = league.description
+span.description = league.description
 
 - if current_user
   p
