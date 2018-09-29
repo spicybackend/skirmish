@@ -2,7 +2,7 @@ require "../config/application.cr"
 
 if Amber.env.development?
   alice_user = User.build(
-    email: "alice@example.com",
+    email: "alice@skirmish.online",
     receive_email_notifications: false
   )
   alice_user.password = "password"
@@ -13,7 +13,7 @@ if Amber.env.development?
   )
 
   bob_user = User.build(
-    email: "bob@example.com",
+    email: "bob@skirmish.online",
     receive_email_notifications: false
   )
   bob_user.password = "password"
@@ -24,7 +24,7 @@ if Amber.env.development?
   )
 
   charlie_user = User.build(
-    email: "charlie@example.com",
+    email: "charlie@skirmish.online",
     receive_email_notifications: false
   )
   charlie_user.password = "password"
