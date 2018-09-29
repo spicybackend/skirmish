@@ -74,19 +74,20 @@ div#simple-logger {
   .leagues a:hover {
     text-decoration: none !important; }
   .leagues .league {
-    margin-bottom: 8px;
+    width: 300px;
+    height: 220px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     padding: 8px 12px;
-    background-color: #fafafa;
-    border-radius: 6px;
-    border: 1px solid #ddd;
+    margin-bottom: 8px;
     color: #555;
-    width: 300px;
-    height: 220px;
-    transition: background-color 0.25s; }
+    text-align: center;
+    background-color: #fafafa;
+    transition: background-color 0.25s;
+    border: 1px solid #ddd;
+    border-radius: 6px; }
     .leagues .league:hover {
       background-color: white; }
     .leagues .league .icon {
@@ -115,11 +116,11 @@ div#simple-logger {
   display: flex;
   align-items: center;
   padding: 8px 12px;
-  background-color: #fafafa;
-  border-radius: 6px;
-  border: 1px solid #ddd;
   color: #555;
-  transition: background-color 0.25s; }
+  background-color: #fafafa;
+  transition: background-color 0.25s;
+  border-radius: 6px;
+  border: 1px solid #ddd; }
   .notifications .notification:hover {
     background-color: white; }
   .notifications .notification .icon {
