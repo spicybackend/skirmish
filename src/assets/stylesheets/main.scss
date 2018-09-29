@@ -1,6 +1,3 @@
-@import "game";
-@import "notification";
-
 $font-stack:"Raleway",  "Krub", "Muli",  "Helvetica Neue", Helvetica, Arial, sans-serif;
 
 $brand1: #333;
@@ -18,6 +15,10 @@ $amber-orange: #f4994b;
 
 $background-color: $brand1;
 $nav-item-color: $blue;
+
+@import "game";
+@import "league";
+@import "notification";
 
 a.dropdown-item {
   display: flex;

@@ -5,21 +5,14 @@
       .button-group
         a.btn.btn-success.btn-sm href="/leagues/new" New
 
-.table-responsive
-  table.table.table-striped
-    thead
-      tr
-        th Name
-        th Description
-        th.right Actions
-    tbody
-      - leagues.each do |league|
-        tr
-          td = league.name
-          td = league.description
-          td.right
-            span
-              == link_to(t("general.actions.view"), "/leagues/#{league.id}", class: "btn btn-primary btn-sm")
-              - if current_player.try(&.admin_of?(league))
-                == link_to(t("general.actions.edit"), "/leagues/#{league.id}/edit", class: "btn btn-success btn-sm")
-                == link_to(t("general.actions.delete"), "/leagues/#{ league.id }?_csrf=#{csrf_token}", "data-method": "delete", "data-confirm": "Are you sure?", class: "btn btn-danger btn-sm")
+.leagues
+  - leagues.each do |league|
+    a href="/leagues/#{league.id}"
+      .league
+        img.icon src="https://png.icons8.com/ios-glyphs/200/ffffff/trophy.png"
+        span.title = league.name
+        span.description = league.description
+        - if members_count = league.memberships_query.count == 1
+          span.membership-count = "#{league.memberships_query.count} member"
+        - else
+          span.membership-count = "#{league.memberships_query.count} members"
