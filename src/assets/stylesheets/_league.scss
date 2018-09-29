@@ -18,13 +18,13 @@
     margin-bottom: 8px;
     color: #555;
     text-align: center;
-    background-color: #fafafa;
-    transition: background-color 0.25s;
+    background-color: white;
+    transition: background-color 0.15s;
     border: 1px solid #ddd;
     border-radius: 6px;
 
     &:hover {
-      background-color: white;
+      background-color: #f8f9fa;
     }
 
     .icon {

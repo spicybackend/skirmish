@@ -8,13 +8,13 @@
     align-items: center;
     padding: 8px 12px;
     color: #555;
-    background-color: #fafafa;
-    transition: background-color 0.25s;
+    background-color: white;
+    transition: background-color 0.15s;
     border-radius: 6px;
     border: 1px solid #ddd;
 
     &:hover {
-      background-color: white;
+      background-color: #f8f9fa;
     }
 
     .icon {

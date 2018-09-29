@@ -84,12 +84,12 @@ div#simple-logger {
     margin-bottom: 8px;
     color: #555;
     text-align: center;
-    background-color: #fafafa;
-    transition: background-color 0.25s;
+    background-color: white;
+    transition: background-color 0.15s;
     border: 1px solid #ddd;
     border-radius: 6px; }
     .leagues .league:hover {
-      background-color: white; }
+      background-color: #f8f9fa; }
     .leagues .league .icon {
       width: 64px;
       height: 64px;
@@ -117,12 +117,12 @@ div#simple-logger {
   align-items: center;
   padding: 8px 12px;
   color: #555;
-  background-color: #fafafa;
-  transition: background-color 0.25s;
+  background-color: white;
+  transition: background-color 0.15s;
   border-radius: 6px;
   border: 1px solid #ddd; }
   .notifications .notification:hover {
-    background-color: white; }
+    background-color: #f8f9fa; }
   .notifications .notification .icon {
     width: 32px;
     height: 32px;
