@@ -1,9 +1,10 @@
 require "../config/application.cr"
 
 if Amber.env.development?
-  alice_user = User.new
-  alice_user.email = "alice@example.com"
-  alice_user.receive_email_notifications = false
+  alice_user = User.build(
+    email: "alice@example.com",
+    receive_email_notifications: false
+  )
   alice_user.password = "password"
   alice_user.save!
   alice = Player.create!(
@@ -11,9 +12,10 @@ if Amber.env.development?
     user_id: alice_user.id
   )
 
-  bob_user = User.new
-  bob_user.email = "bob@example.com"
-  bob_user.receive_email_notifications = false
+  bob_user = User.build(
+    email: "bob@example.com",
+    receive_email_notifications: false
+  )
   bob_user.password = "password"
   bob_user.save!
   bob = Player.create!(
@@ -21,9 +23,10 @@ if Amber.env.development?
     user_id: bob_user.id
   )
 
-  charlie_user = User.new
-  charlie_user.email = "charlie@example.com"
-  charlie_user.receive_email_notifications = false
+  charlie_user = User.build(
+    email: "charlie@example.com",
+    receive_email_notifications: false
+  )
   charlie_user.password = "password"
   charlie_user.save!
   charlie_user = Player.create!(
