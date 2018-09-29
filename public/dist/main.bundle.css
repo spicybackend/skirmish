@@ -144,10 +144,21 @@ a.dropdown-item {
   text-align: center; }
 
 h3 {
-  font-size: 26px; }
+  font-size: 26px;
+  margin-top: 16px !important; }
 
 span.description {
   font-size: 20px; }
+
+.btn.dropdown-toggle.dropdown-toggle-split {
+  border-left: 1px solid rgba(51, 51, 51, 0.25) !important;
+  margin-left: 0; }
+
+.dropdown-menu input[type=submit] {
+  cursor: pointer; }
+
+.dropdown-item.danger {
+  color: #db2b39; }
 
 .player-profile {
   display: flex;

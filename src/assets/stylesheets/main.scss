@@ -31,10 +31,24 @@ a.dropdown-item {
 
 h3 {
   font-size: 26px;
+  margin-top: 16px !important;
 }
 
 span.description {
   font-size: 20px;
+}
+
+.btn.dropdown-toggle.dropdown-toggle-split {
+  border-left: 1px solid rgba($dark-grey, 0.25) !important;
+  margin-left: 0;
+}
+
+.dropdown-menu input[type=submit] {
+  cursor: pointer;
+}
+
+.dropdown-item.danger {
+  color: $red;
 }
 
 .player-profile {

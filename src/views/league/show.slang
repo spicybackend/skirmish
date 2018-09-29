@@ -1,21 +1,25 @@
 .row
-  .col.justify-content-between.btn-toolbar
-    h2 = league.name
-    - if current_user
-      .button-group
-        == link_to(t("general.actions.back"), "/leagues", class: "btn btn-light btn-sm")
-        - if membership.active?
-          == link_to(t("league.actions.log_game"), "/leagues/#{league.id}/games/new", class: "btn btn-primary btn-sm")
+  h2.col.justify-content-between.btn-toolbar = league.name
+    .btn-group
+      == link_to(t("league.actions.log_game"), "/leagues/#{league.id}/games/new", class: "btn btn-primary")
+
+      button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+        span.sr-only Toggle Dropdown
+      .dropdown-menu.dropdown-menu-right
         - if current_player.try(&.admin_of?(league))
-          == link_to(t("general.actions.edit"), "/leagues/#{league.id}/edit", class: "btn btn-success btn-sm")
-          == link_to(t("general.actions.delete"), "/leagues/#{league.id}?_csrf=#{csrf_token}", "data-method": "delete", "data-confirm": "Are you sure?", class: "btn btn-danger btn-sm")
+          == link_to(t("general.actions.edit"), "/leagues/#{league.id}/edit", class: "dropdown-item")
+          == link_to(t("general.actions.delete"), "/leagues/#{league.id}?_csrf=#{csrf_token}", "data-method": "delete", "data-confirm": "Are you sure?", class: "dropdown-item danger")
+          .dropdown-divider
+        - if membership.active?
+          == form(action: "/leagues/#{league.id.to_s}/leave", method: :patch) do
+            == csrf_tag
+            == submit(t("league.actions.leave"), "data-confirm": "Are you sure?", class: "dropdown-item danger")
+        - else
+          == form(action: "/leagues/#{league.id.to_s}/join", method: membership.id ? :patch : :post) do
+            == csrf_tag
+            == submit(t("league.actions.join"), class: "dropdown-item")
 
 span.description = league.description
-
-- if current_user
-  p
-    .button-group
-      == render(partial: "_membership_form.slang")
 
 h3 Recent Games
 == render(partial: "_recent_games.slang")
