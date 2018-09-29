@@ -4,7 +4,12 @@ class LeagueController < ApplicationController
   end
 
   def index
-    leagues = League.all
+    leagues = League.all.left_join(Membership) { League._id == _league_id }
+      .select("leagues.*, COUNT(memberships.league_id) as membership_count")
+      .where { Membership._left_at == nil }
+      .group("leagues.id")
+      .order { { "membership_count" => :desc } }
+
     render("index.slang")
   end
 
