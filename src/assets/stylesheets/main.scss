@@ -11,7 +11,7 @@ $dark-grey: #333;
 $red: #db2b39;
 $green: #7bc950;
 $blue: #5da9e9;
-$yellow: #f3a712;
+$yellow: #fd971f;
 
 $amber-orange: #f4994b;
 
@@ -35,7 +35,7 @@ span.notification-count {
   font-size: 13px;
   font-weight: bold;
   color: white;
-  background-color: #fd971f;
+  background-color: $yellow;
   padding: 0 6px;
   border-radius: 12px;
   margin-left: 8px;
