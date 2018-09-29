@@ -10,6 +10,9 @@ html
     link rel="apple-touch-icon" href="/favicon.png"
     link rel="icon" href="/favicon.png"
     link rel="icon" type="image/x-icon" href="/favicon.ico"
+    link href="https://fonts.googleapis.com/css?family=Krub" rel="stylesheet"
+    link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet"
+    link href="https://fonts.googleapis.com/css?family=Muli" rel="stylesheet"
 
   body
     .masthead.bg-dark
