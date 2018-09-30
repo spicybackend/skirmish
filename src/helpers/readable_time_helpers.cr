@@ -6,13 +6,13 @@ module ReadableTimeHelpers
 
     if span.total_weeks.to_i > 0
       if span.total_weeks.to_i == 1
-        "A week ago"
+        "Last week"
       else
         "#{span.total_weeks.to_i} weeks ago"
       end
     elsif span.total_days.to_i > 0
       if span.total_days.to_i == 1
-        "A day ago"
+        "Yesterday"
       else
         "#{span.total_days.to_i} days ago"
       end
