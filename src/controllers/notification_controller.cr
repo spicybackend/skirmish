@@ -5,7 +5,8 @@ class NotificationController < ApplicationController
 
   def index
     player = current_player.not_nil!
-    notifications = notifications_for_player(player).to_a.map(&.presented)
+    unread_notifications = notifications_for_player(player).where { _read_at == nil }.to_a.map(&.presented)
+    read_notifications = notifications_for_player(player).where { _read_at != nil }.to_a.map(&.presented)
 
     render("index.slang")
   end

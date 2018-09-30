@@ -1,6 +1,6 @@
-.leagues {
+div.leagues {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   flex-wrap: wrap;
 
   a:hover {
@@ -11,17 +11,27 @@
     width: 300px;
     height: 220px;
     display: flex;
+    flex: 1 1 0;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     padding: 8px 12px;
-    margin-bottom: 8px;
+    margin: 8px 12px;
+    margin-top: 0;
     color: #555;
     text-align: center;
     background-color: white;
     transition: background-color 0.15s;
     border: 1px solid #ddd;
     border-radius: 6px;
+
+    &:first-child {
+      margin-left: 0;
+    }
+
+    &:last-child {
+      margin-right: 0;
+    }
 
     &:hover {
       background-color: #f8f9fa;
@@ -32,7 +42,6 @@
       height: 64px;
       margin: 5px 5px 16px 5px;
       padding: 12px;
-      background-color: #fd971f;
       border-radius: 50%;
     }
 
@@ -54,5 +63,14 @@
     .membership-count {
       color: #888;
     }
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  div.leagues {
+    justify-content: stretch;
+
+    a { width: 100%; }
+    .league { width: inherit; }
   }
 }

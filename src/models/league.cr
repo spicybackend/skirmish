@@ -9,6 +9,7 @@ class League < Jennifer::Model::Base
     id: { type: Int64, primary: true },
     name: String,
     description: String?,
+    accent_color: { type: String, default: "#fd971f" },
     start_rating: { type: Int32, default: DEFAULT_START_RATING },
     k_factor: { type: Float64, default: DEFAULT_K_FACTOR },
 
@@ -26,11 +27,13 @@ class League < Jennifer::Model::Base
   validates_uniqueness :name
 
   validates_presence :description
+  validates_presence :accent_color
   validates_presence :start_rating
   validates_presence :k_factor
 
   validates_numericality :start_rating, greater_than_or_equal_to: 100, less_than_or_equal_to: 3000
   validates_numericality :k_factor, greater_than_or_equal_to: 1, less_than_or_equal_to: 100
+  validates_format :accent_color, /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/
 
   def active_players
     players_query.where { Membership._left_at == nil }.to_a

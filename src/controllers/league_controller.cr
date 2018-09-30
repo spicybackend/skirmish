@@ -38,6 +38,7 @@ class LeagueController < ApplicationController
     league = League.new({
       name: params[:name],
       description: params[:description],
+      accent_color: params[:accent_color],
       start_rating: params[:start_rating].to_i,
       k_factor: params[:k_factor].to_f,
     })
@@ -70,6 +71,7 @@ class LeagueController < ApplicationController
       league.update_attributes({
         name: params[:name],
         description: params[:description],
+        accent_color: params[:accent_color],
         start_rating: params[:start_rating].to_i,
         k_factor: params[:k_factor].to_f,
       })

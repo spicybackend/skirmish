@@ -181,7 +181,8 @@ CREATE TABLE public.leagues (
     start_rating integer DEFAULT 1000 NOT NULL,
     k_factor double precision DEFAULT 32.0 NOT NULL,
     created_at timestamp without time zone,
-    updated_at timestamp without time zone
+    updated_at timestamp without time zone,
+    accent_color character varying(9) DEFAULT '#fd971f'::character varying
 );
 
 

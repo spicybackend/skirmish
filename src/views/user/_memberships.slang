@@ -1,17 +1,8 @@
-.table-responsive
-  table.table.table-striped
-    thead
-      tr
-        th Name
-        th Description
-        th Rating
-        th.right Actions
-    tbody
-      - leagues.each do |league|
-        tr
-          td = league.name
-          td = league.description
-          td = player.rating_for(league)
-          td.right
-            span
-              == link_to(t("general.actions.view"), "/leagues/#{league.id}", class: "btn btn-primary")
+.leagues
+  - leagues.each do |league|
+    a href="/leagues/#{league.id}"
+      .league
+        img.icon style="background-color: #{league.accent_color};" src="https://png.icons8.com/ios-glyphs/200/ffffff/trophy.png"
+        span.title = league.name
+        span.description = league.description
+        span.membership-count = player.rating_for(league)
