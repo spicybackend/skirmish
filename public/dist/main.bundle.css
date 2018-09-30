@@ -72,13 +72,13 @@ div#simple-logger {
     width: 100px;
     height: 100px; } }
 
-.leagues {
+div.leagues {
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap; }
-  .leagues a:hover {
+  div.leagues a:hover {
     text-decoration: none !important; }
-  .leagues .league {
+  div.leagues .league {
     width: 300px;
     height: 220px;
     display: flex;
@@ -93,19 +93,18 @@ div#simple-logger {
     transition: background-color 0.15s;
     border: 1px solid #ddd;
     border-radius: 6px; }
-    .leagues .league:hover {
+    div.leagues .league:hover {
       background-color: #f8f9fa; }
-    .leagues .league .icon {
+    div.leagues .league .icon {
       width: 64px;
       height: 64px;
       margin: 5px 5px 16px 5px;
       padding: 12px;
-      background-color: #fd971f;
       border-radius: 50%; }
-    .leagues .league .title {
+    div.leagues .league .title {
       font-size: 120%;
       font-weight: bold; }
-    .leagues .league .description {
+    div.leagues .league .description {
       font-size: 110%;
       margin-bottom: 16px;
       overflow: hidden;
@@ -113,14 +112,14 @@ div#simple-logger {
       display: -webkit-box;
       -webkit-line-clamp: 2;
       -webkit-box-orient: vertical; }
-    .leagues .league .membership-count {
+    div.leagues .league .membership-count {
       color: #888; }
 
-.notifications {
+div.notifications {
   margin-bottom: 16px; }
-  .notifications a:hover {
+  div.notifications a:hover {
     text-decoration: none !important; }
-  .notifications .notification {
+  div.notifications .notification {
     display: flex;
     align-items: center;
     padding: 8px 12px;
@@ -130,16 +129,16 @@ div#simple-logger {
     transition: background-color 0.15s;
     border-radius: 6px;
     border: 1px solid #ddd; }
-    .notifications .notification:hover {
+    div.notifications .notification:hover {
       background-color: #f8f9fa; }
-    .notifications .notification .icon {
+    div.notifications .notification .icon {
       width: 32px;
       height: 32px;
       margin: 5px 12px 5px 5px;
       padding: 6px;
       background-color: #fd971f;
       border-radius: 50%; }
-    .notifications .notification .time {
+    div.notifications .notification .time {
       flex-grow: 1;
       text-align: right;
       color: #888; }
