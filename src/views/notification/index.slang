@@ -5,9 +5,18 @@
         == csrf_tag
         == submit(t("notification.actions.mark_all_as_read"), "data-confirm": "Are you sure?", class: "btn btn-success")
 
-h6.section-header All Notifications
+h6.section-header Unread
 .notifications
-  - notifications.each do |notification|
+  - unread_notifications.each do |notification|
+    a href="/notifications/#{notification.id}"
+      .notification
+        img.icon src="https://png.icons8.com/ios-glyphs/200/ffffff/trophy.png"
+        span.content = notification.title
+        span.time = time_units_since(notification.created_at)
+
+h6.section-header Read
+.notifications
+  - read_notifications.each do |notification|
     a href="/notifications/#{notification.id}"
       .notification
         img.icon src="https://png.icons8.com/ios-glyphs/200/ffffff/trophy.png"
