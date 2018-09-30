@@ -1,3 +1,4 @@
+.table-responsive
   table.table.table-striped
     thead
       tr
