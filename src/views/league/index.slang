@@ -4,6 +4,7 @@
       .button-group
         a.btn.btn-success href="/leagues/new" New
 
+span.description All Leagues
 .leagues
   - leagues.each do |league|
     a href="/leagues/#{league.id}"

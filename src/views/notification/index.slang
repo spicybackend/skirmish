@@ -5,6 +5,7 @@
         == csrf_tag
         == submit(t("notification.actions.mark_all_as_read"), "data-confirm": "Are you sure?", class: "btn btn-success")
 
+span.description All Notifications
 .notifications
   - notifications.each do |notification|
     a href="/notifications/#{notification.id}"
