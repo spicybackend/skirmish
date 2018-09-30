@@ -13,6 +13,9 @@
     == label(name: "description", content: "Description")
     == text_field(name: "description", value: league.description, placeholder: "What's it all about?", class: "form-control")
   .form-group
+    == label(name: "accent_color", content: "Accent Colour")
+    == text_field(name: "accent_color", value: league.accent_color, placeholder: "A splash of hex to make your league truly yours", class: "form-control")
+  .form-group
     == label(name: "start_rating", content: "Initial Rating")
     == input_field(:number, name: "start_rating", value: league.start_rating || League::DEFAULT_START_RATING, placeholder: League::DEFAULT_START_RATING, class: "form-control")
   .form-group
