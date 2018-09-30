@@ -14,7 +14,6 @@
           td = league.name
           td = game.winner.id == player.id ? "Won" : "Lost"
           td = game.players_query.where { _id != player.id }.to_a.map(&.tag).join(", ")
-          // TODO look into readable date options
           td = time_units_since(game.created_at)
           td.right
             span
