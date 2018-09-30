@@ -116,6 +116,7 @@ describe LeagueControllerTest do
     league_props = {
       name: "new league",
       description: "some description",
+      accent_color: "#abc123",
       start_rating: League::DEFAULT_START_RATING,
       k_factor: League::DEFAULT_K_FACTOR
     }.to_h
@@ -187,6 +188,7 @@ describe LeagueControllerTest do
     league_props = {
       name: "new league",
       description: "some description",
+      accent_color: "#abc123",
       start_rating: League::DEFAULT_START_RATING,
       k_factor: League::DEFAULT_K_FACTOR
     }.to_h
