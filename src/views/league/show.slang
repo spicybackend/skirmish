@@ -1,23 +1,23 @@
 .row
   h2.col.justify-content-between.btn-toolbar = league.name
     .btn-group
-      == link_to(t("league.actions.log_game"), "/leagues/#{league.id}/games/new", class: "btn btn-primary")
+      - if membership.id && membership.active?
+        == link_to(t("league.actions.log_game"), "/leagues/#{league.id}/games/new", class: "btn btn-primary")
 
-      button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-        span.sr-only Toggle Dropdown
-      .dropdown-menu.dropdown-menu-right
-        - if current_player.try(&.admin_of?(league))
-          == link_to(t("general.actions.edit"), "/leagues/#{league.id}/edit", class: "dropdown-item")
-          == link_to(t("general.actions.delete"), "/leagues/#{league.id}?_csrf=#{csrf_token}", "data-method": "delete", "data-confirm": "Are you sure?", class: "dropdown-item danger")
-          .dropdown-divider
-        - if membership.active?
+        button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+          span.sr-only Toggle Dropdown
+        .dropdown-menu.dropdown-menu-right
+          - if current_player.try(&.admin_of?(league))
+            == link_to(t("general.actions.edit"), "/leagues/#{league.id}/edit", class: "dropdown-item")
+            == link_to(t("general.actions.delete"), "/leagues/#{league.id}?_csrf=#{csrf_token}", "data-method": "delete", "data-confirm": "Are you sure?", class: "dropdown-item danger")
+            .dropdown-divider
           == form(action: "/leagues/#{league.id.to_s}/leave", method: :patch) do
             == csrf_tag
             == submit(t("league.actions.leave"), "data-confirm": "Are you sure?", class: "dropdown-item danger")
-        - else
-          == form(action: "/leagues/#{league.id.to_s}/join", method: membership.id ? :patch : :post) do
-            == csrf_tag
-            == submit(t("league.actions.join"), class: "dropdown-item")
+      - else
+        == form(action: "/leagues/#{league.id.to_s}/join", method: membership.id ? :patch : :post) do
+          == csrf_tag
+          == submit(t("league.actions.join"), class: "btn btn-primary")
 
 span.description = league.description
 
