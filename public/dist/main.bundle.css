@@ -28,14 +28,19 @@ div#simple-logger {
     background-repeat: no-repeat !important;
     padding: 16px; }
   .game-results .winning-result {
-    display: flex; }
+    display: flex;
+    text-align: center;
+    width: 30%; }
     .game-results .winning-result span.rating {
       order: -1; }
     .game-results .winning-result span.rating.delta::before {
       background: url("https://png.icons8.com/metro/200/7bc950/sort-up.png");
       background-position-y: 12px; }
   .game-results .losing-result {
-    display: flex; }
+    display: flex;
+    text-align: center;
+    justify-content: flex-end;
+    width: 30%; }
     .game-results .losing-result span.rating {
       order: 9999; }
     .game-results .losing-result span.rating.delta::before {
@@ -43,12 +48,12 @@ div#simple-logger {
       background-position-y: 10px; }
   .game-results .player-result {
     display: flex;
-    flex-direction: column; }
+    flex-direction: column;
+    align-items: center; }
     .game-results .player-result img.gravatar {
       width: 200px;
       height: 200px;
       padding: 14px;
-      margin-left: auto;
       border-radius: 50%;
       -webkit-border-radius: 50%;
       -webkit-background-clip: padding-box; }
@@ -378,6 +383,9 @@ tr.clickable-row {
       bottom: calc(100% - 5px);
       right: 0; }
       .nav-item .dropdown-menu-wrapper .dropdown-menu {
-        position: relative; } }
+        position: relative; }
+  .player-profile img.gravatar {
+    width: 160px;
+    height: 160px; } }
 
 /*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJtYWluLmJ1bmRsZS5jc3MiLCJzb3VyY2VSb290IjoiIn0=*/

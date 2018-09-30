@@ -39,6 +39,8 @@ div#simple-logger {
 
   .winning-result {
     display: flex;
+    text-align: center;
+    width: 30%;
 
     span.rating {
       order: -1;  // left
@@ -52,6 +54,9 @@ div#simple-logger {
 
   .losing-result {
     display: flex;
+    text-align: center;
+    justify-content: flex-end;
+    width: 30%;
 
     span.rating {
       order: 9999;  // right
@@ -66,12 +71,13 @@ div#simple-logger {
   .player-result {
     display: flex;
     flex-direction: column;
+    align-items: center;
 
     img.gravatar {
       width: 200px;
       height: 200px;
       padding: 14px;
-      margin-left: auto;
+      // margin-left: auto;
       border-radius: 50%;
       -webkit-border-radius: 50%;
       -webkit-background-clip: padding-box;
