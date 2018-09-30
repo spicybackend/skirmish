@@ -30,7 +30,7 @@
     .icon {
       width: 64px;
       height: 64px;
-      margin: 5px;
+      margin: 5px 5px 16px 5px;
       padding: 12px;
       background-color: #fd971f;
       border-radius: 50%;
@@ -43,6 +43,7 @@
 
     .description {
       font-size: 110%;
+      margin-bottom: 16px;
       overflow: hidden;
       text-overflow: ellipsis;
       display: -webkit-box;
