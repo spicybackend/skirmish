@@ -54,7 +54,29 @@ describe League do
       end
     end
 
-    context "start rating" do
+    describe "accent color" do
+      it "must be present" do
+        league = build_league
+
+        league.accent_color = ""
+        league.valid?.should eq false
+
+        league.accent_color = "#abc123"
+        league.valid?.should eq true
+      end
+
+      it "must be of hex format" do
+        league = build_league
+
+        league.accent_color = "rgb(123,123,123)"
+        league.valid?.should eq false
+
+        league.accent_color = "#abc123"
+        league.valid?.should eq true
+      end
+    end
+
+    describe "start rating" do
       it "must be between 100 and 3000" do
         league = build_league
 
@@ -72,7 +94,7 @@ describe League do
       end
     end
 
-    context "k-factor" do
+    describe "k-factor" do
       it "must be between 1 and 100" do
         league = build_league
 
