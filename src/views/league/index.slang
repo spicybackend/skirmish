@@ -11,7 +11,10 @@
         img.icon src="https://png.icons8.com/ios-glyphs/200/ffffff/trophy.png"
         span.title = league.name
         span.description = league.description
-        - if members_count = league.memberships_query.count == 1
-          span.membership-count = "#{league.memberships_query.count} member"
+        - members_count = league.active_memberships_query.count
+        - if members_count == 1
+          span.membership-count = "#{members_count} member"
+        - elsif members_count == 0
+          span.membership-count No members
         - else
-          span.membership-count = "#{league.memberships_query.count} members"
+          span.membership-count = "#{members_count} members"
