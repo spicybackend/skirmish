@@ -1,29 +1,15 @@
 .row
-  .col.justify-content-between.btn-toolbar
-    h2 Notifications
+  h2.col.justify-content-between.btn-toolbar Notifications
     .button-group
       == form(action: "/notifications/read_all", method: :patch, class: "single-btn") do
         == csrf_tag
-        == submit(t("notification.actions.mark_all_as_read"), "data-confirm": "Are you sure?", class: "btn btn-success btn-sm")
+        == submit(t("notification.actions.mark_all_as_read"), "data-confirm": "Are you sure?", class: "btn btn-success")
 
-.table-responsive
-  table.table.table-striped
-    thead
-      tr
-        th Title
-        th Content
-        th When
-        th Actions
-    tbody
-      - notifications.each do |notification|
-        tr
-          td = notification.title
-          td = notification.content
-          td = time_units_since(notification.created_at)
-          td
-            span
-              == link_to("Open", "/notifications/#{notification.id}", class: "btn btn-primary btn-sm")
-              - if !notification.read?
-                == form(action: "/notifications/#{notification.id}/read", method: :patch, class: "single-btn") do
-                  == csrf_tag
-                  == submit(t("notification.actions.mark_as_read"), "data-confirm": "Are you sure?", class: "btn btn-success btn-sm")
+h6.section-header All Notifications
+.notifications
+  - notifications.each do |notification|
+    a href="/notifications/#{notification.id}"
+      .notification
+        img.icon src="https://png.icons8.com/ios-glyphs/200/ffffff/trophy.png"
+        span.content = notification.title
+        span.time = time_units_since(notification.created_at)

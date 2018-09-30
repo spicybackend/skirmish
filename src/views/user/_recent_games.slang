@@ -18,4 +18,4 @@
           td = time_units_since(game.created_at)
           td.right
             span
-              == link_to(t("general.actions.view"), "/leagues/#{league.id}/games/#{game.id}", class: "btn btn-primary btn-sm")
+              == link_to(t("general.actions.view"), "/leagues/#{league.id}/games/#{game.id}", class: "btn btn-primary")

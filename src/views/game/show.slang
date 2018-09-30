@@ -1,9 +1,8 @@
 .row
-  .col.justify-content-between.btn-toolbar
-    h2 Game
+  h2.col.justify-content-between.btn-toolbar Game
     - if current_user
       .button-group
-        == link_to(t("general.actions.back"), "/leagues/#{game.league_id}", class: "btn btn-light btn-sm")
+        == link_to(t("general.actions.back"), "/leagues/#{game.league_id}", class: "btn btn-light")
 
 .game-results
   .winning-result

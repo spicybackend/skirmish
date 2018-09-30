@@ -1,3 +1,4 @@
+.table-responsive
   table.table.table-striped
     thead
       tr
@@ -13,4 +14,4 @@
           td = player.rating_for(league)
           td.right
             span
-              == link_to(t("general.actions.view"), "/leagues/#{league.id}", class: "btn btn-primary btn-sm")
+              == link_to(t("general.actions.view"), "/leagues/#{league.id}", class: "btn btn-primary")

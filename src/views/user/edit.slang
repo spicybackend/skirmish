@@ -11,5 +11,5 @@ h2 Edit Profile
     input.form-control type="username" name="username" placeholder="Display name" value="#{player.tag}"
   .form-group
     input.form-control type="email" name="email" placeholder="Email" value="#{user.email}"
-  == submit("Update", class: "btn btn-primary btn-sm")
-  == link_to("Cancel", "/profile", class: "btn btn-light btn-sm")
+  == submit("Update", class: "btn btn-primary")
+  == link_to("Cancel", "/profile", class: "btn btn-light")

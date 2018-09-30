@@ -1,6 +1,4 @@
-@import "game";
-
-$font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
+$font-stack:"Raleway",  "Krub", "Muli",  "Helvetica Neue", Helvetica, Arial, sans-serif;
 
 $brand1: #333;
 $brand2: #f6f930;
@@ -11,12 +9,16 @@ $dark-grey: #333;
 $red: #db2b39;
 $green: #7bc950;
 $blue: #5da9e9;
-$yellow: #f3a712;
+$yellow: #fd971f;
 
 $amber-orange: #f4994b;
 
 $background-color: $brand1;
 $nav-item-color: $blue;
+
+@import "game";
+@import "league";
+@import "notification";
 
 a.dropdown-item {
   display: flex;
@@ -29,13 +31,54 @@ a.dropdown-item {
 
 h3 {
   font-size: 26px;
+  margin-top: 16px !important;
+}
+
+h6.section-header {
+  font-size: 22px;
+  margin-bottom: 16px !important;
+}
+
+.btn.dropdown-toggle.dropdown-toggle-split {
+  border-left: 1px solid rgba($dark-grey, 0.25) !important;
+  margin-left: 0;
+}
+
+.dropdown-menu input[type=submit] {
+  cursor: pointer;
+}
+
+.dropdown-item.danger {
+  color: $red;
+}
+
+.player-profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 16px;
+
+  img.gravatar {
+    width: 200px;
+    height: 200px;
+    padding: 14px;
+    border-radius: 50%;
+    background-clip: padding-box;
+    -webkit-border-radius: 50%;
+    -webkit-background-clip: padding-box;
+  }
+
+  span.name {
+    font-size: 24px;
+    text-align: center;
+  }
 }
 
 span.notification-count {
   font-size: 13px;
   font-weight: bold;
   color: white;
-  background-color: #fd971f;
+  background-color: $yellow;
   padding: 0 6px;
   border-radius: 12px;
   margin-left: 8px;
@@ -302,6 +345,13 @@ tr.clickable-row {
       .dropdown-menu {
         position: relative;
       }
+    }
+  }
+
+  .player-profile {
+    img.gravatar {
+      width: 160px;
+      height: 160px;
     }
   }
 }
