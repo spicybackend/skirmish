@@ -74,7 +74,7 @@ div#simple-logger {
 
 div.leagues {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   flex-wrap: wrap; }
   div.leagues a:hover {
     text-decoration: none !important; }
@@ -82,17 +82,23 @@ div.leagues {
     width: 300px;
     height: 220px;
     display: flex;
+    flex: 1 1 0;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     padding: 8px 12px;
-    margin-bottom: 8px;
+    margin: 8px 12px;
+    margin-top: 0;
     color: #555;
     text-align: center;
     background-color: white;
     transition: background-color 0.15s;
     border: 1px solid #ddd;
     border-radius: 6px; }
+    div.leagues .league:first-child {
+      margin-left: 0; }
+    div.leagues .league:last-child {
+      margin-right: 0; }
     div.leagues .league:hover {
       background-color: #f8f9fa; }
     div.leagues .league .icon {
@@ -114,6 +120,14 @@ div.leagues {
       -webkit-box-orient: vertical; }
     div.leagues .league .membership-count {
       color: #888; }
+
+@media only screen and (max-width: 768px) {
+  div.leagues {
+    justify-content: stretch; }
+    div.leagues a {
+      width: 100%; }
+    div.leagues .league {
+      width: inherit; } }
 
 div.notifications {
   margin-bottom: 16px; }

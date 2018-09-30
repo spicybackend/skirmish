@@ -20,6 +20,9 @@ class Game < Jennifer::Model::Base
   has_many :participations, Participation
   has_and_belongs_to_many :players, Player, nil, nil, nil, "participations", "player_id"
 
+  scope :confirmed { where { _confirmed_at != nil } }
+  scope :unconfirmed { where { _confirmed_at == nil } }
+
   def winner
     players_query.where { Participation._won == true }.to_a.first
   end
