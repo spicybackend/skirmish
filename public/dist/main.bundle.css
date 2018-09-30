@@ -148,8 +148,8 @@ h3 {
   font-size: 26px;
   margin-top: 16px !important; }
 
-span.description {
-  font-size: 20px;
+h6.section-header {
+  font-size: 22px;
   margin-bottom: 16px !important; }
 
 .btn.dropdown-toggle.dropdown-toggle-split {
