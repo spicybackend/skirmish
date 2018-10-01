@@ -29,7 +29,10 @@ Unless you've used Postgres before, or know your way around configuring it alrea
 sudo su - postgres
 
 # create a user named skirmish_development
-createuser skirmish --pwprompt
+createuser skirmish
+
+# optionally create a user to login to postgres yourself
+createuser <username> --pwprompt
 
 # exit the session as postgres
 exit
@@ -57,11 +60,11 @@ sudo service postgresql restart
 To start your Amber server:
 
 ```
-shards install               # install dependencies
-shards build                 # build executable binaries
-bin/amber db create migrate  # create the database and bring it up to speed
-bin/amber db seed            # optionally seed the database with some mock data
-bin/amber watch              # start the server and watch for file changes
+shards install                  # install dependencies
+shards build                    # build executable binaries
+bin/sam db:create @ db:migrate  # create the database and bring it up to speed
+bin/amber db seed               # optionally seed the database with some mock data
+bin/amber watch                 # start the server and watch for file changes
 ```
 
 Now you can visit http://localhost:3000/ from your browser.
