@@ -49,6 +49,8 @@ Amber::Server.configure do
     get "/signup", RegistrationController, :new
     post "/registration", RegistrationController, :create
 
+    get "/mailer_preview/:mailer_name", MailerPreviewController, :show
+
     get "/", HomeController, :index
   end
 

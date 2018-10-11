@@ -10,6 +10,6 @@ class WelcomeMailer < ApplicationMailer
 
     self.subject = "Welcome to Skirmish"
     self.text = render("mailers/welcome.text.ecr")
-    self.html = render("mailers/welcome.html.slang", "mailer-layout.html.slang")
+    self.html = render("mailers/welcome.html.slang", "mailer_layout.html.slang")
   end
 end
