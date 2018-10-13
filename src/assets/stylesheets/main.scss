@@ -1,4 +1,4 @@
-$font-stack:"Raleway",  "Krub", "Muli",  "Helvetica Neue", Helvetica, Arial, sans-serif;
+$font-stack: "Raleway", "Krub", "Muli", "Helvetica Neue", Helvetica, Arial, sans-serif;
 
 $brand1: #333;
 $brand2: #f6f930;
@@ -19,6 +19,7 @@ $nav-item-color: $blue;
 @import "game";
 @import "league";
 @import "notification";
+@import "mailer";
 
 a.dropdown-item {
   display: flex;

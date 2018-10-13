@@ -157,26 +157,6 @@ div.notifications {
       text-align: right;
       color: #888; }
 
-table.body.mailer table.container p, table.body.mailer table.container a {
-  font-family: "Raleway", "Krub", "Muli", "Helvetica Neue", Helvetica, Arial, sans-serif; }
-
-table.body.mailer table.container tr.header td.content {
-  background-color: #f4994b;
-  padding: 16px; }
-  table.body.mailer table.container tr.header td.content h1.title, table.body.mailer table.container tr.header td.content h2.subtitle {
-    color: white; }
-  table.body.mailer table.container tr.header td.content .title {
-    font-size: 28px; }
-  table.body.mailer table.container tr.header td.content .subtitle {
-    font-size: 18px; }
-
-table.body.mailer table.container tr.section td.content {
-  padding: 16px; }
-
-table.body.mailer table.button table td {
-  background: #5da9e9;
-  border-color: #5da9e9; }
-
 a.dropdown-item {
   display: flex;
   justify-content: space-between; }
@@ -422,4 +402,4 @@ tr.clickable-row {
     width: 160px;
     height: 160px; } }
 
-/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJtYWluLmJ1bmRsZS5jc3MiLCJzb3VyY2VSb290IjoiIn0=*/
+/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJtYWlsZXIuYnVuZGxlLmNzcyIsInNvdXJjZVJvb3QiOiIifQ==*/
