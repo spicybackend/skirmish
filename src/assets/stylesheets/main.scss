@@ -1,20 +1,27 @@
 $font-stack: "Raleway", "Krub", "Muli", "Helvetica Neue", Helvetica, Arial, sans-serif;
 
-$brand1: #333;
-$brand2: #f6f930;
-$brand3: #3e6990;
-
-$dark-grey: #333;
-
-$red: #db2b39;
-$green: #7bc950;
-$blue: #5da9e9;
-$yellow: #fd971f;
-
 $amber-orange: #f4994b;
 
-$background-color: $brand1;
-$nav-item-color: $blue;
+// http://cryptokitties.wikia.com/wiki/Color_palette_%26_HEX_codes
+$coral:	#45f0f4;
+$babyblue:	#4eb4f9;
+$topaz:	#0ba09c;
+$mintgreen:	#43edac;
+$limegreen:	#aef72f;
+$babypuke:	#bcba5e;
+$chestnut:	#a56429;
+$strawberry:	#ef4b62;
+$pumpkin:	#ffa039;
+$gold:	#fcdf35;
+$sizzurp:	#7c40ff;
+$bubblegum:	#ef52d1;
+$violet:	#ba8aff;
+$thundergrey:	#828282;
+
+$brand-primary: $strawberry;
+$dark-grey: #343a40;
+
+$nav-item-color: $babyblue;
 
 @import "game";
 @import "league";
@@ -50,7 +57,7 @@ h6.section-header {
 }
 
 .dropdown-item.danger {
-  color: $red;
+  color: $strawberry;
 }
 
 .player-profile {
@@ -79,7 +86,7 @@ span.notification-count {
   font-size: 13px;
   font-weight: bold;
   color: white;
-  background-color: $yellow;
+  background-color: $pumpkin;
   padding: 0 6px;
   border-radius: 12px;
   margin-left: 8px;
@@ -103,35 +110,32 @@ th.right, td.right {
 }
 
 .btn-primary {
-  // color: #fff;
-  background-color: $blue;
-  border-color: $blue;
+  background-color: $babyblue;
+  border-color: $babyblue;
 
   &:hover {
-    background-color: darken($blue, 10%);
-    border-color: darken($blue, 10%);
+    background-color: darken($babyblue, 10%);
+    border-color: darken($babyblue, 10%);
   }
 }
 
 .btn-success {
-  // color: #fff;
-  background-color: $green;
-  border-color: $green;
+  background-color: $limegreen;
+  border-color: $limegreen;
 
   &:hover {
-    background-color: darken($green, 10%);
-    border-color: darken($green, 10%);
+    background-color: darken($limegreen, 10%);
+    border-color: darken($limegreen, 10%);
   }
 }
 
 .btn-danger {
-  // color: #fff;
-  background-color: $red;
-  border-color: $red;
+  background-color: $strawberry;
+  border-color: $strawberry;
 
   &:hover {
-    background-color: darken($red, 10%);
-    border-color: darken($red, 10%);
+    background-color: darken($strawberry, 10%);
+    border-color: darken($strawberry, 10%);
   }
 }
 
@@ -193,9 +197,11 @@ h6, .h6 {
 .masthead {
   -webkit-box-shadow: inset 0 -2px 5px rgba(0,0,0,.1);
           box-shadow: inset 0 -2px 5px rgba(0,0,0,.1);
+  background: $dark-grey;
 }
 
 nav {
+
   .nav-profile, .nav-auth {
     display: flex;
     flex-direction: row;
@@ -218,7 +224,7 @@ nav {
 }
 
 #logo {
-  background-color: $background-color;
+  background-color: $dark-grey;
   background-image: url("../images/logo.png");
   background-size:contain;
   width: 200px;
@@ -250,14 +256,14 @@ tr.clickable-row {
 
   &:hover {
     color: white;
-    background-color: $blue;
+    background-color: $babyblue;
   }
 
   transition: color .15s ease-in-out, background-color .15s ease-in-out//, border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }
 .table-striped tbody tr.clickable-row:nth-of-type(2n+1):hover {
   color: white;
-  background-color: $blue;
+  background-color: $babyblue;
 }
 
 .navbar-nav {
@@ -335,7 +341,7 @@ tr.clickable-row {
     }
 
     &.active, .dropdown-item.active {
-      background-color: $blue;
+      background-color: $babyblue;
     }
 
     .dropdown-menu-wrapper {
