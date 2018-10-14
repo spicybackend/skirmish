@@ -1,7 +1,8 @@
-Welcome to Skirmish
--------------------
-Hey #{player.tag}, it's game on!
+<%= I18n.translate("mailer.welcome.title") %>
+<%= "-" * I18n.translate("mailer.welcome.title").size %>
+<%= I18n.translate("mailer.welcome.subtitle", { name: player.tag }) %>
 
-Once last thing before we get you all set up, we need to confirm you're really who you say you are.
-Please follow the link to confirm your email address.
-#{ENV["BASE_URL"]}/profile
+<%= I18n.translate("mailer.welcome.content") %>
+
+<%= I18n.translate("mailer.welcome.verification.content") %>
+<%= ENV["BASE_URL"] %>/profile

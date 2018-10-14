@@ -1,18 +1,16 @@
 table.container
   tr.header
     td.content
-      h1.title Welcome to Skirmish
-      h2.subtitle Hey #{player.tag}, it's game on!
+      h1.title = I18n.translate("mailer.welcome.title")
+      h2.subtitle = I18n.translate("mailer.welcome.subtitle", { name: player.tag })
   tr.section
     td.content
-      p
-        | Once last thing before we get you all set up, we need to confirm you're really who you say you are.
-      p
-        | Please follow the link to confirm your email address.
+      p = I18n.translate("mailer.welcome.content")
 
+      p = I18n.translate("mailer.welcome.verification.content")
       table.button.radius
         tr
           td
             table
               tr
-                td == link_to(I18n.translate("mailer.welcome.verify"), "#{ENV["BASE_URL"]}/profile", class: "btn btn-primary")
+                td == link_to(I18n.translate("mailer.welcome.verification.action"), "#{ENV["BASE_URL"]}/profile", class: "btn btn-primary")

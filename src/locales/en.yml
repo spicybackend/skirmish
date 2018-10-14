@@ -18,7 +18,18 @@ authentication:
 
 mailer:
   welcome:
-    verify: "Verify Account"
+    title: "Welcome to Skirmish"
+    subtitle: "Hey %{name}, it's game on!"
+    content: "Once last thing before we get you all set up, we need to confirm you're really who you say you are."
+    verification:
+      content: "Please follow the link to confirm your email address."
+      action: "Verify Account"
+
+  game_logged:
+    title: "Game Logged"
+    subtitle: "%{logger} has logged a game against you!"
+    content: "Follow the link below to confirm the game."
+    action: "Confirm"
 
 league:
   actions:
