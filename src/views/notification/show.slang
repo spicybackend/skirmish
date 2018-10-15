@@ -9,4 +9,4 @@ p
   // Needs to be rebased on master once other change merged
   == link_to(t("general.actions.back"), "/notifications", class: "btn btn-light")
   // Needs to be a patch action
-  == link_to("read", "/notifications/#{notifications.id}/read", class: "btn btn-success")
+  == link_to("read", "/notifications/#{notifications.id}/read", class: "btn btn-primary")

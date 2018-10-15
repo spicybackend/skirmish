@@ -2,7 +2,7 @@
   h2.col.justify-content-between.btn-toolbar Leagues
     - if current_user
       .button-group
-        a.btn.btn-success href="/leagues/new" New
+        a.btn.btn-primary href="/leagues/new" New
 
 h6.section-header All Leagues
 .leagues

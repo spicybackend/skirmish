@@ -1,6 +1,6 @@
-Game Logged
------------
-Hey #{player.tag}, #{logger.tag} has logged a game against you!
+<%= I18n.translate("mailer.game_logged.title") %>
+<%= "-" * I18n.translate("mailer.game_logged.title").size %>
+<%= I18n.translate("mailer.game_logged.subtitle", { logger: logger.tag }) %>
 
-Open the link below to confirm the game.
-#{ENV["BASE_URL"]}/leagues/#{game.league_id}/games/#{game.id}"
+<%= I18n.translate("mailer.game_logged.content") %>
+<%= ENV["BASE_URL"] %>/leagues/<%= game.league_id %>/games/<%= game.id %>

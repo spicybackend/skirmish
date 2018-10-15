@@ -34,7 +34,7 @@ class Notification::LoggedGamePresenter
   end
 
   private def logger
-    game.logged_by!
+    game.logger!
   end
 
   private def won?

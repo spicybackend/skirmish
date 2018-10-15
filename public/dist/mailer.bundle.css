@@ -157,26 +157,6 @@ div.notifications {
       text-align: right;
       color: #888; }
 
-table.body.mailer table.container p, table.body.mailer table.container a {
-  font-family: "Raleway", "Krub", "Muli", "Helvetica Neue", Helvetica, Arial, sans-serif; }
-
-table.body.mailer table.container tr.header td.content {
-  background-color: #ef4b62;
-  padding: 16px; }
-  table.body.mailer table.container tr.header td.content h1.title, table.body.mailer table.container tr.header td.content h2.subtitle {
-    color: white; }
-  table.body.mailer table.container tr.header td.content .title {
-    font-size: 28px; }
-  table.body.mailer table.container tr.header td.content .subtitle {
-    font-size: 18px; }
-
-table.body.mailer table.container tr.section td.content {
-  padding: 16px; }
-
-table.body.mailer table.button table td {
-  background: #4eb4f9;
-  border-color: #4eb4f9; }
-
 a.dropdown-item {
   display: flex;
   justify-content: space-between; }
@@ -193,14 +173,14 @@ h6.section-header {
   margin-bottom: 16px; }
 
 .btn.dropdown-toggle.dropdown-toggle-split {
-  border-left: 1px solid rgba(52, 58, 64, 0.25) !important;
+  border-left: 1px solid rgba(51, 51, 51, 0.25) !important;
   margin-left: 0; }
 
 .dropdown-menu input[type=submit] {
   cursor: pointer; }
 
 .dropdown-item.danger {
-  color: #ef4b62; }
+  color: #db2b39; }
 
 .player-profile {
   display: flex;
@@ -223,7 +203,7 @@ span.notification-count {
   font-size: 13px;
   font-weight: bold;
   color: white;
-  background-color: #ffa039;
+  background-color: #fd971f;
   padding: 0 6px;
   border-radius: 12px;
   margin-left: 8px;
@@ -241,25 +221,25 @@ th.right, td.right {
   vertical-align: text-top; }
 
 .btn-primary {
-  background-color: #4eb4f9;
-  border-color: #4eb4f9; }
+  background-color: #5da9e9;
+  border-color: #5da9e9; }
   .btn-primary:hover {
-    background-color: #1d9ff7;
-    border-color: #1d9ff7; }
+    background-color: #3091e3;
+    border-color: #3091e3; }
 
 .btn-success {
-  background-color: #aef72f;
-  border-color: #aef72f; }
+  background-color: #7bc950;
+  border-color: #7bc950; }
   .btn-success:hover {
-    background-color: #98ea09;
-    border-color: #98ea09; }
+    background-color: #61b036;
+    border-color: #61b036; }
 
 .btn-danger {
-  background-color: #ef4b62;
-  border-color: #ef4b62; }
+  background-color: #db2b39;
+  border-color: #db2b39; }
   .btn-danger:hover {
-    background-color: #eb1c39;
-    border-color: #eb1c39; }
+    background-color: #b41f2b;
+    border-color: #b41f2b; }
 
 .btn-light {
   background-color: #fff;
@@ -269,11 +249,11 @@ th.right, td.right {
     border-color: #e6e6e6; }
 
 .btn-dark {
-  background-color: #343a40;
-  border-color: #343a40; }
+  background-color: #333;
+  border-color: #333; }
   .btn-dark:hover {
-    background-color: #1d2124;
-    border-color: #1d2124; }
+    background-color: #1a1a1a;
+    border-color: #1a1a1a; }
 
 /*
  * Globals
@@ -308,8 +288,7 @@ h6, .h6 {
  */
 .masthead {
   -webkit-box-shadow: inset 0 -2px 5px rgba(0, 0, 0, 0.1);
-  box-shadow: inset 0 -2px 5px rgba(0, 0, 0, 0.1);
-  background: #343a40; }
+  box-shadow: inset 0 -2px 5px rgba(0, 0, 0, 0.1); }
 
 nav .nav-profile, nav .nav-auth {
   display: flex;
@@ -329,7 +308,7 @@ nav img.gravatar {
   padding-top: 20px; }
 
 #logo {
-  background-color: #343a40;
+  background-color: #333;
   background-image: url(/dist/images/logo.png);
   background-size: contain;
   width: 200px;
@@ -354,11 +333,11 @@ tr.clickable-row {
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out; }
   tr.clickable-row:hover {
     color: white;
-    background-color: #4eb4f9; }
+    background-color: #5da9e9; }
 
 .table-striped tbody tr.clickable-row:nth-of-type(2n+1):hover {
   color: white;
-  background-color: #4eb4f9; }
+  background-color: #5da9e9; }
 
 .navbar-nav {
   flex-direction: row;
@@ -412,7 +391,7 @@ tr.clickable-row {
       .nav-item .nav-link.notifications {
         background: url("https://png.icons8.com/ios-glyphs/160/ffffff/appointment-reminders.png"); }
     .nav-item.active, .nav-item .dropdown-item.active {
-      background-color: #4eb4f9; }
+      background-color: #5da9e9; }
     .nav-item .dropdown-menu-wrapper {
       position: absolute;
       bottom: calc(100% - 5px);
@@ -423,4 +402,4 @@ tr.clickable-row {
     width: 160px;
     height: 160px; } }
 
-/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJtYWluLmJ1bmRsZS5jc3MiLCJzb3VyY2VSb290IjoiIn0=*/
+/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJtYWlsZXIuYnVuZGxlLmNzcyIsInNvdXJjZVJvb3QiOiIifQ==*/

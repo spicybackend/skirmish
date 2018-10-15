@@ -1,0 +1,40 @@
+table.body.mailer {
+  table.container {
+    p, a {
+      font-family: $font-stack;
+    }
+
+    tr.header {
+      td.content {
+        background-color: $strawberry;
+        padding: 16px;
+
+        h1.title, h2.subtitle {
+          color: white;
+        }
+
+        .title {
+          font-size: 28px;
+        }
+        .subtitle {
+          font-size: 18px;
+        }
+      }
+    }
+
+    tr.section {
+      td.content {
+        padding: 16px;
+      }
+    }
+  }
+
+  table.button {
+    table {
+      td {
+        background: $babyblue;
+        border-color: $babyblue;
+      }
+    }
+  }
+}

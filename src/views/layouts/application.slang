@@ -15,7 +15,7 @@ html
     link href="https://fonts.googleapis.com/css?family=Muli" rel="stylesheet"
 
   body
-    .masthead.bg-dark
+    .masthead
       .container
         nav.navbar.navbar-expand-lg.navbar-dark
           == render(partial: "layouts/_nav.slang")
