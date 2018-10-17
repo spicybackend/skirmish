@@ -145,6 +145,8 @@ div.notifications {
     border: 1px solid #ddd; }
     div.notifications .notification:hover {
       background-color: #f8f9fa; }
+    div.notifications .notification .content ~ .icon {
+      margin-left: 12px; }
     div.notifications .notification .icon {
       width: 32px;
       height: 32px;
@@ -152,6 +154,8 @@ div.notifications {
       padding: 6px;
       background-color: #fd971f;
       border-radius: 50%; }
+      div.notifications .notification .icon.gravatar {
+        padding: 0px; }
     div.notifications .notification .time {
       flex-grow: 1;
       text-align: right;

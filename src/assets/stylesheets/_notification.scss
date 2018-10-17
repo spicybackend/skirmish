@@ -20,6 +20,10 @@ div.notifications {
       background-color: #f8f9fa;
     }
 
+    .content ~ .icon {
+      margin-left: 12px;
+    }
+
     .icon {
       width: 32px;
       height: 32px;
@@ -27,6 +31,10 @@ div.notifications {
       padding: 6px;
       background-color: #fd971f;
       border-radius: 50%;
+
+      &.gravatar {
+        padding: 0px;
+      }
     }
 
     .time {
