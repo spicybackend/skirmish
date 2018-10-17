@@ -259,7 +259,7 @@ th.right, td.right {
  * Globals
  */
 body {
-  font-family: "Raleway", "Krub", "Muli", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Muli", "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: #555;
   background-color: #eee;
   display: flex;
@@ -272,7 +272,7 @@ h4, .h4,
 h5, .h5,
 h6, .h6 {
   margin-top: 0;
-  font-family: "Raleway", "Krub", "Muli", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Muli", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: normal;
   color: #333; }
 
