@@ -10,6 +10,7 @@ class User < Jennifer::Model::Base
     email: String,
     hashed_password: String?,
     receive_email_notifications: { type: Bool, default: true },
+    activated_at: Time?,
 
     created_at: { type: Time, default: Time.now },
     updated_at: { type: Time, default: Time.now }
@@ -23,6 +24,10 @@ class User < Jennifer::Model::Base
   # validate :password, "is too short", ->(user : User) do
   #   user.password_changed? ? user.valid_password_size? : true
   # end
+
+  def activated?
+    !!activated_at
+  end
 
   def receive_email_notifications?
     receive_email_notifications
