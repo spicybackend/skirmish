@@ -512,7 +512,8 @@ CREATE TABLE public.users (
     hashed_password character varying(60) NOT NULL,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
-    receive_email_notifications boolean DEFAULT true NOT NULL
+    receive_email_notifications boolean DEFAULT true NOT NULL,
+    activated_at timestamp without time zone
 );
 
 
