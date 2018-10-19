@@ -46,8 +46,12 @@ Amber::Server.configure do
     get "/signin", SessionController, :new
     post "/session", SessionController, :create
     get "/signout", SessionController, :delete
+
     get "/signup", RegistrationController, :new
     post "/registration", RegistrationController, :create
+
+    get "/verification/:email", VerificationController, :show
+    post "/verify/:code", VerificationController, :create
 
     get "/mailer_preview/:mailer_name", MailerPreviewController, :show
 

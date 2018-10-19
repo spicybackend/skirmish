@@ -26,7 +26,7 @@ class Authenticate < Amber::Pipe::Base
   end
 
   private def public_path?(path)
-    PUBLIC_PATHS.includes?(path)
+    PUBLIC_PATHS.includes?(path) || path.starts_with?("/verify/")  || path.starts_with?("/verification/")
 
     # Different strategies can be used to determine if a path is public
     # Example, if /admin/* paths are the only private paths
@@ -37,6 +37,7 @@ class Authenticate < Amber::Pipe::Base
   end
 
   private def whitelisted_request?(request)
+    # gross
     request.method == "GET" && request.path.match(/^\/leagues(\/[0-9]+)?$/)
   end
 end
