@@ -1,8 +1,10 @@
 class SessionController < ApplicationController
   def new
     user = User.build({
-      email: ""
+      email: "",
+      verification_code: ""
     })
+
     render("new.slang")
   end
 

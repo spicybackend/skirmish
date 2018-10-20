@@ -21,11 +21,8 @@ class VerificationController < ApplicationController
       else
         user.activate!
 
-        session[:user_id] = user.id
-        session[:player_id] = Player.where { _user_id == user.id }.to_a.first.id
-
         flash[:success] = "Activated successfully"
-        redirect_to "/"
+        redirect_to "/signin"
       end
     else
       flash[:danger] = "Can't find an account linked to that email address"
