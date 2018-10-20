@@ -33,3 +33,7 @@ spec:
 lint:
   script:
     - bin/ameba
+
+seed:
+  script:
+    - crystal db/seeds.cr
