@@ -13,7 +13,6 @@ class RegistrationController < ApplicationController
 
       WelcomeMailer.new(player).send
 
-      flash["success"] = "Registered successfully."
       redirect_to "/verification/#{user.email}"
     end
   rescue ex : Jennifer::RecordInvalid
