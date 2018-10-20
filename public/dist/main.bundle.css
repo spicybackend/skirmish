@@ -104,15 +104,16 @@ div.leagues {
     div.leagues .league .icon {
       width: 64px;
       height: 64px;
-      margin: 5px 5px 16px 5px;
+      margin: 5px;
       padding: 12px;
       border-radius: 50%; }
     div.leagues .league .title {
+      margin-top: 8px;
       font-size: 120%;
       font-weight: bold; }
     div.leagues .league .description {
       font-size: 110%;
-      margin-bottom: 16px;
+      margin-bottom: 8px;
       overflow: hidden;
       text-overflow: ellipsis;
       display: -webkit-box;
