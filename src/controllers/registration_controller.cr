@@ -13,12 +13,9 @@ class RegistrationController < ApplicationController
 
       WelcomeMailer.new(player).send
 
-      session[:user_id] = user.id
-      session[:player_id] = player.id
+      flash["success"] = "Registered successfully."
+      redirect_to "/verification/#{user.email}"
     end
-
-    flash["success"] = "Registered successfully."
-    redirect_to "/"
   rescue ex : Jennifer::RecordInvalid
     user = build_user_from_params.tap(&.valid?)
     player = build_player_from_params.tap(&.valid?)
