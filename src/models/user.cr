@@ -18,6 +18,8 @@ class User < Jennifer::Model::Base
     updated_at: { type: Time, default: Time.now }
   )
 
+  scope :unverified { where { _activated_at == nil } }
+
   has_one :player, Player
 
   validates_uniqueness :email
@@ -27,6 +29,10 @@ class User < Jennifer::Model::Base
   # validate :password, "is too short", ->(user : User) do
   #   user.password_changed? ? user.valid_password_size? : true
   # end
+
+  def activate!
+    update!(activated_at: Time.now)
+  end
 
   def activated?
     !!activated_at
