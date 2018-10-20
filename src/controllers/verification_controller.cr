@@ -13,7 +13,7 @@ class VerificationController < ApplicationController
     end
   end
 
-  def create
+  def verify
     if user = User.unverified.where { _verification_code == params[:verification_code] }.first
       if user.activated?
         flash[:danger] = "User has already been activated"

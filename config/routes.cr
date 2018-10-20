@@ -51,7 +51,7 @@ Amber::Server.configure do
     post "/registration", RegistrationController, :create
 
     get "/verification/:email", VerificationController, :show
-    post "/verify/:code", VerificationController, :create
+    get "/verify/:verification_code", VerificationController, :verify
 
     get "/mailer_preview/:mailer_name", MailerPreviewController, :show
 
