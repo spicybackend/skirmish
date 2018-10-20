@@ -22,8 +22,12 @@ class User < Jennifer::Model::Base
 
   has_one :player, Player
 
+  validates_presence :email
   validates_uniqueness :email
+  validates_format :email, /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
+
   validates_presence :verification_code
+  validates_format :verification_code, /^[0-9a-z]{16}$/
 
   # validates_length :password, greater_than_or_equal_to: 8
   # validate :password, "is too short", ->(user : User) do
