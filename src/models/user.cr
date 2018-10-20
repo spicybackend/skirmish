@@ -10,6 +10,8 @@ class User < Jennifer::Model::Base
     email: String,
     hashed_password: String?,
     receive_email_notifications: { type: Bool, default: true },
+
+    verification_code: String,
     activated_at: Time?,
 
     created_at: { type: Time, default: Time.now },
@@ -19,6 +21,7 @@ class User < Jennifer::Model::Base
   has_one :player, Player
 
   validates_uniqueness :email
+  validates_presence :verification_code
 
   # validates_length :password, greater_than_or_equal_to: 8
   # validate :password, "is too short", ->(user : User) do

@@ -30,6 +30,7 @@ class RegistrationController < ApplicationController
   private def build_user_from_params
     User.build(registration_params.validate!).tap do |user|
       user.receive_email_notifications = true
+      user.verification_code = Random::Secure.hex
       user.password = params["password"].to_s
     end
   end
