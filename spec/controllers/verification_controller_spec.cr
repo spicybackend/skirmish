@@ -25,7 +25,6 @@ describe VerificationControllerTest do
     context "when the user for the email is already activated" do
       it "redirects to the sign in page" do
         user = create_player_with_mock_user.user!
-        user.activate!
 
         response = subject.get "/verification/#{user.email}"
 
@@ -45,21 +44,21 @@ describe VerificationControllerTest do
 
     context "when the user for the email is unverified" do
       it "sucessfully renders the page" do
-        user = create_player_with_mock_user.user!
+        user = create_player_with_mock_user(verified: false).user!
         response = subject.get "/verification/#{user.email}"
 
         response.status_code.should eq(200)
       end
 
       it "contains the 'account created' message" do
-        user = create_player_with_mock_user.user!
+        user = create_player_with_mock_user(verified: false).user!
         response = subject.get "/verification/#{user.email}"
 
         response.body.should contain "Account Created"
       end
 
       it "contains verification instructions" do
-        user = create_player_with_mock_user.user!
+        user = create_player_with_mock_user(verified: false).user!
         response = subject.get "/verification/#{user.email}"
 
         response.body.should contain "An email has been sent"
@@ -71,7 +70,6 @@ describe VerificationControllerTest do
     context "when the user for the email is already activated" do
       it "redirects to the sign in page" do
         user = create_player_with_mock_user.user!
-        user.activate!
 
         response = subject.get "/verify/#{user.verification_code}"
 
@@ -91,7 +89,7 @@ describe VerificationControllerTest do
 
     context "when the user for the email is unverified" do
       it "redirects to the sign in page" do
-        user = create_player_with_mock_user.user!
+        user = create_player_with_mock_user(verified: false).user!
         response = subject.get "/verify/#{user.verification_code}"
 
         response.status_code.should eq(302)
@@ -99,7 +97,7 @@ describe VerificationControllerTest do
       end
 
       it "successfully activates the user" do
-        user = create_player_with_mock_user.user!
+        user = create_player_with_mock_user(verified: false).user!
         user.activated?.should be_false
 
         response = subject.get "/verify/#{user.verification_code}"

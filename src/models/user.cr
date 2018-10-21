@@ -35,7 +35,7 @@ class User < Jennifer::Model::Base
   # end
 
   def activate!
-    update!(activated_at: Time.now)
+    update!(activated_at: Time.now) unless activated?
   end
 
   def activated?

@@ -5,14 +5,13 @@ describe User do
   describe "scopes" do
     describe "unverified" do
       it "includes users that haven't been activated" do
-        unverified_user = create_player_with_mock_user.user!
+        unverified_user = create_player_with_mock_user(verified: false).user!
 
         User.unverified.pluck(:id).should contain unverified_user.id
       end
 
       it "excludes users that have been activated" do
         verified_user = create_player_with_mock_user.user!
-        verified_user.activate!
 
         User.unverified.pluck(:id).should_not contain verified_user.id
       end
@@ -123,28 +122,42 @@ describe User do
   end
 
   describe "#activate!" do
-    it "sets the activated time of the user" do
-      user = create_player_with_mock_user.user!
+    context "when the user is unverified/inactive" do
+      it "sets the activated time of the user" do
+        user = create_player_with_mock_user(verified: false).user!
 
-      user.activated_at.should eq nil
-      user.activate!
-      user.activated_at.should_not eq nil
-      user.activated_at.should be_a(Time)
+        user.activated_at.should eq nil
+        user.activate!
+        user.activated_at.should_not eq nil
+        user.activated_at.should be_a(Time)
+      end
+
+      it "activates/verifies the user" do
+        user = create_player_with_mock_user(verified: false).user!
+        user.activate!
+
+        user.activated?.should be_true
+        user.unverified?.should be_false
+      end
     end
 
-    it "activates/verifies the user" do
-      user = create_player_with_mock_user.user!
-      user.activate!
+    context "when the user is already activated" do
+      it "doesn't update the activation time" do
+        user = create_player_with_mock_user(verified: false).user!
 
-      user.activated?.should be_true
-      user.unverified?.should be_false
+        original_activation_time = Time.epoch(0)
+        user.update!(activated_at: original_activation_time)
+
+        user.activate!
+        user.activated_at.should eq original_activation_time
+      end
     end
   end
 
   describe "#activated?" do
     context "when the user has not yet been activated" do
       it "is false" do
-        user = create_player_with_mock_user.user!
+        user = create_player_with_mock_user(verified: false).user!
 
         user.activated?.should be_false
       end
@@ -153,7 +166,6 @@ describe User do
     context "when the user has been activated" do
       it "is true" do
         user = create_player_with_mock_user.user!
-        user.activate!
 
         user.activated?.should be_true
       end
@@ -163,7 +175,7 @@ describe User do
   describe "#unverified?" do
     context "when the user has not yet been activated" do
       it "is true" do
-        user = create_player_with_mock_user.user!
+        user = create_player_with_mock_user(verified: false).user!
 
         user.unverified?.should be_true
       end
@@ -172,7 +184,6 @@ describe User do
     context "when the user has been activated" do
       it "is false" do
         user = create_player_with_mock_user.user!
-        user.activate!
 
         user.unverified?.should be_false
       end

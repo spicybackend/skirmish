@@ -60,7 +60,7 @@ describe SessionControllerSpec do
     context "when the user for the email address isn't verified" do
       it "redirects to the verification page" do
         password = "abc123"
-        user = create_player_with_mock_user(password: password).user!
+        user = create_player_with_mock_user(password: password, verified: false).user!
 
         login_params = { email: user.email, password: password }.to_h
         response = subject.post "/session", body: params_from_hash(login_params)
