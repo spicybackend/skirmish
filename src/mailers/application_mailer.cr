@@ -1,13 +1,15 @@
 require "kilt"
 require "jasper_helpers"
 
-
 class ApplicationMailer < Mailer::Message
   include JasperHelpers
 
+  FROM_SUPPORT = "Skirmish <games@skirmish.online>"
+  FROM_GAMES = "Skirmish <games@skirmish.online>"
+
   def initialize
     super()
-    self.from = "Skirmish <postmaster@mail.skirmish.online>"
+    self.from = FROM_SUPPORT
   end
 
   def send

@@ -2,5 +2,5 @@
 <%= "-" * I18n.translate("mailer.game_logged.title").size %>
 <%= I18n.translate("mailer.game_logged.subtitle", { logger: logger.tag }) %>
 
-<%= I18n.translate("mailer.game_logged.content") %>
+<%= I18n.translate("mailer.game_logged.confirmation.content") %>
 <%= ENV["BASE_URL"] %>/leagues/<%= game.league_id %>/games/<%= game.id %>

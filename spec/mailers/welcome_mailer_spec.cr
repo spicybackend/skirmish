@@ -22,13 +22,24 @@ describe WelcomeMailer do
     end
   end
 
+  describe "sender" do
+    it "is from the support address" do
+      player = create_player_with_mock_user
+      user = player.user!
+      mailer = WelcomeMailer.new(player)
+
+      sender = mailer.from
+      sender.should eq ApplicationMailer::FROM_SUPPORT
+    end
+  end
+
   describe "subject" do
     it "is a nice welcome message" do
       player = create_player_with_mock_user
       user = player.user!
       mailer = WelcomeMailer.new(player)
 
-      mailer.subject.should eq "Welcome to Skirmish"
+      mailer.subject.should eq I18n.translate("mailer.welcome.subject")
     end
   end
 

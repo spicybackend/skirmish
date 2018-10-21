@@ -2,7 +2,7 @@ class VerificationController < ApplicationController
   def show
     if user = User.where { _email == params[:email] }.first
       if user.activated?
-        flash[:warning] = I18n.translate("verification.already_verified")
+        flash[:warning] = I18n.translate("verification.already_activated")
         redirect_to "/signin"
       else
         render("show.slang")
@@ -16,7 +16,7 @@ class VerificationController < ApplicationController
   def verify
     if user = User.where { _verification_code == params[:verification_code] }.first
       if user.activated?
-        flash[:warning] = I18n.translate("verification.already_verified")
+        flash[:warning] = I18n.translate("verification.already_activated")
         redirect_to "/signin"
       else
         user.activate!

@@ -1,14 +1,11 @@
 class WelcomeMailer < ApplicationMailer
-  getter user : User
-
   def initialize(player : Player)
     super()
 
-    @user = player.user!
+    user = player.user!
+    to(user.email!, player.tag.to_s)
 
-    to(user.email.not_nil!, player.tag.not_nil!)
-
-    self.subject = "Welcome to Skirmish"
+    self.subject = I18n.translate("mailer.welcome.subject")
     self.text = render("mailers/welcome.text.ecr")
     self.html = render("mailers/welcome.html.slang", "mailer_layout.html.slang")
   end
