@@ -12,7 +12,7 @@ describe Notification do
         notification = create_notification(player: Player.all.first!)
         notification.player_id = nil
 
-        notification.valid?.should eq false
+        notification.valid?.should be_false
       end
     end
 
@@ -21,10 +21,10 @@ describe Notification do
         notification = create_notification(player: Player.all.first!)
 
         notification.event_type = "some-made-up-event-type"
-        notification.valid?.should eq false
+        notification.valid?.should be_false
 
         notification.event_type = Notification::EVENT_TYPES.first
-        notification.valid?.should eq true
+        notification.valid?.should be_true
       end
     end
 
@@ -47,17 +47,17 @@ describe Notification do
         notification.event_type = Notification::GENERAL
         notification.source_type = nil
         notification.source_id = nil
-        notification.valid?.should eq true
+        notification.valid?.should be_true
 
         notification.event_type = Notification::GAME_LOGGED
-        notification.valid?.should eq false
+        notification.valid?.should be_false
 
         notification.source_type = game.class.name
         notification.source_id = game.id
-        notification.valid?.should eq true
+        notification.valid?.should be_true
 
         notification.event_type = Notification::GENERAL
-        notification.valid?.should eq false
+        notification.valid?.should be_false
       end
 
       it "must be persisted if specified" do
@@ -75,7 +75,7 @@ describe Notification do
 
         notification = create_notification(player: player, event_type: Notification::GAME_LOGGED, source: game)
         notification.source_id = nil
-        notification.valid?.should eq false
+        notification.valid?.should be_false
       end
     end
 
@@ -84,10 +84,10 @@ describe Notification do
         notification = create_notification(player: Player.all.first!)
 
         notification.title = ""
-        notification.valid?.should eq false
+        notification.valid?.should be_false
 
         notification.title = "Some Title"
-        notification.valid?.should eq true
+        notification.valid?.should be_true
       end
     end
 
@@ -96,10 +96,10 @@ describe Notification do
         notification = create_notification(player: Player.all.first!)
 
         notification.content = ""
-        notification.valid?.should eq false
+        notification.valid?.should be_false
 
         notification.content = "Some Content"
-        notification.valid?.should eq true
+        notification.valid?.should be_true
       end
     end
   end
@@ -109,7 +109,7 @@ describe Notification do
       it "is false" do
         notification = create_notification(player: Player.all.first!)
 
-        notification.read?.should eq false
+        notification.read?.should be_false
       end
     end
 
@@ -118,7 +118,7 @@ describe Notification do
         notification = create_notification(player: Player.all.first!)
         notification.read_at = Time.now
 
-        notification.read?.should eq true
+        notification.read?.should be_true
       end
     end
   end

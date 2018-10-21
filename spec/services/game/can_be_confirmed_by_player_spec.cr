@@ -23,7 +23,7 @@ describe Game::CanBeConfirmedByPlayer do
         game_logger.call
         game = game_logger.game
 
-        can_be_confirmed?(game, loser).should eq true
+        can_be_confirmed?(game, loser).should be_true
       end
 
       it "is unable to be confirmed by the winner" do
@@ -39,7 +39,7 @@ describe Game::CanBeConfirmedByPlayer do
         game_logger.call
         game = game_logger.game
 
-        can_be_confirmed?(game, winner).should eq false
+        can_be_confirmed?(game, winner).should be_false
       end
     end
 
@@ -57,7 +57,7 @@ describe Game::CanBeConfirmedByPlayer do
         game_logger.call
         game = game_logger.game
 
-        can_be_confirmed?(game, winner).should eq true
+        can_be_confirmed?(game, winner).should be_true
       end
 
       it "is unable to be confirmed by the loser" do
@@ -73,7 +73,7 @@ describe Game::CanBeConfirmedByPlayer do
         game_logger.call
         game = game_logger.game
 
-        can_be_confirmed?(game, loser).should eq false
+        can_be_confirmed?(game, loser).should be_false
       end
     end
   end

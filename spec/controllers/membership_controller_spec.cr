@@ -54,7 +54,7 @@ describe MembershipControllerTest do
           league = create_league
           subject.post "/leagues/#{league.id}/join", headers: basic_authenticated_headers
 
-          Membership.all.last!.active?.should eq true
+          Membership.all.last!.active?.should be_true
         end
       end
     end
@@ -113,7 +113,7 @@ describe MembershipControllerTest do
         subject.patch "/leagues/#{league.id}/leave", headers: authenticated_headers_for(player.user.not_nil!)
 
         membership = Membership.find!(membership.id)
-        membership.active?.should eq false
+        membership.active?.should be_false
       end
 
       it "doesn't destroy any memberships" do
@@ -147,7 +147,7 @@ describe MembershipControllerTest do
           response = subject.patch "/leagues/#{league.id}/leave"
 
           membership = Membership.find!(membership.id)
-          membership.active?.should eq true
+          membership.active?.should be_true
         end
 
         it "redirects to the login page" do
@@ -172,7 +172,7 @@ describe MembershipControllerTest do
         subject.patch "/leagues/#{league.id}/join", headers: authenticated_headers_for(player.user.not_nil!)
 
         membership = Membership.find!(membership.id)
-        membership.active?.should eq true
+        membership.active?.should be_true
       end
 
       it "doesn't create another membership" do
@@ -206,7 +206,7 @@ describe MembershipControllerTest do
           response = subject.patch "/leagues/#{league.id}/join"
 
           membership = Membership.find!(membership.id)
-          membership.active?.should eq false
+          membership.active?.should be_false
         end
 
         it "redirects to the login page" do

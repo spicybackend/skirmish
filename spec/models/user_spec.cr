@@ -12,10 +12,10 @@ describe User do
         })
         user.password = Random::Secure.hex
 
-        user.valid?.should eq false
+        user.valid?.should be_false
 
         user.email = "#{Random::Secure.hex}@test.com"
-        user.valid?.should eq true
+        user.valid?.should be_true
       end
 
       it "must be a valid email address" do
@@ -26,16 +26,16 @@ describe User do
         })
         user.password = Random::Secure.hex
 
-        user.valid?.should eq true
+        user.valid?.should be_true
 
         user.email = "#{Random::Secure.hex}"
-        user.valid?.should eq false
+        user.valid?.should be_false
 
         user.email = "a@a.com"
-        user.valid?.should eq true
+        user.valid?.should be_true
 
         user.email = "@gmail.com"
-        user.valid?.should eq false
+        user.valid?.should be_false
       end
     end
 
@@ -48,10 +48,10 @@ describe User do
         })
         user.password = Random::Secure.hex
 
-        user.valid?.should eq false
+        user.valid?.should be_false
 
         user.verification_code = Random::Secure.hex(8)
-        user.valid?.should eq true
+        user.valid?.should be_true
       end
 
       it "must be 16 characters long" do
@@ -62,13 +62,13 @@ describe User do
         })
         user.password = Random::Secure.hex
 
-        user.valid?.should eq false
+        user.valid?.should be_false
 
         user.verification_code = "1234567890123456"
-        user.valid?.should eq true
+        user.valid?.should be_true
 
         user.verification_code = "12345678901234567"
-        user.valid?.should eq false
+        user.valid?.should be_false
       end
 
       it "must not contain special characters" do
@@ -80,7 +80,7 @@ describe User do
         user.password = Random::Secure.hex
 
         user.verification_code = "!234567890123456"
-        user.valid?.should eq false
+        user.valid?.should be_false
       end
 
       it "must be lowercase" do
@@ -91,13 +91,13 @@ describe User do
         })
         user.password = Random::Secure.hex
 
-        user.valid?.should eq true
+        user.valid?.should be_true
 
         user.verification_code = "ABCDEFGH90123456"
-        user.valid?.should eq false
+        user.valid?.should be_false
 
         user.verification_code = "abcdefgh90123456"
-        user.valid?.should eq true
+        user.valid?.should be_true
       end
     end
   end
@@ -107,7 +107,7 @@ describe User do
       it "is false" do
         user = create_player_with_mock_user.user!
 
-        user.activated?.should eq false
+        user.activated?.should be_false
       end
     end
 
@@ -116,7 +116,7 @@ describe User do
         user = create_player_with_mock_user.user!
         user.activated_at = Time.now
 
-        user.activated?.should eq true
+        user.activated?.should be_true
       end
     end
   end
@@ -126,7 +126,7 @@ describe User do
       it "is false" do
         user = create_player_with_mock_user.user!
 
-        user.activated?.should eq false
+        user.activated?.should be_false
       end
     end
 
@@ -135,7 +135,7 @@ describe User do
         user = create_player_with_mock_user.user!
         user.activate!
 
-        user.activated?.should eq true
+        user.activated?.should be_true
       end
     end
   end
