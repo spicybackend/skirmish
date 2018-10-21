@@ -121,6 +121,36 @@ describe User do
     end
   end
 
+  describe "#activated?" do
+    context "when the user has not yet been activated" do
+      it "is false" do
+        user = create_player_with_mock_user.user!
+
+        user.activated?.should eq false
+      end
+    end
+
+    context "when the user has been activated" do
+      it "is true" do
+        user = create_player_with_mock_user.user!
+        user.activate!
+
+        user.activated?.should eq true
+      end
+    end
+  end
+
+  describe "#activate!" do
+    it "sets the activated time of the user" do
+      user = create_player_with_mock_user.user!
+
+      user.activated_at.should eq nil
+      user.activate!
+      user.activated_at.should_not eq nil
+      user.activated_at.should be_a(Time)
+    end
+  end
+
   pending do
     it "has specs"
   end
