@@ -2,6 +2,23 @@ require "./spec_helper"
 require "../../src/models/user.cr"
 
 describe User do
+  describe "scopes" do
+    describe "unverified" do
+      it "includes users that haven't been activated" do
+        unverified_user = create_player_with_mock_user.user!
+
+        User.unverified.pluck(:id).should contain unverified_user.id
+      end
+
+      it "excludes users that have been activated" do
+        verified_user = create_player_with_mock_user.user!
+        verified_user.activate!
+
+        User.unverified.pluck(:id).should_not contain verified_user.id
+      end
+    end
+  end
+
   describe "validations" do
     describe "email_address" do
       it "must be present" do
