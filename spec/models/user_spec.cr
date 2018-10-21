@@ -53,6 +53,9 @@ describe User do
 
         user.email = "@gmail.com"
         user.valid?.should be_false
+
+        user.email = "alice@skirmish.online"
+        user.valid?.should be_true
       end
     end
 

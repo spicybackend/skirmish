@@ -24,7 +24,7 @@ class User < Jennifer::Model::Base
 
   validates_presence :email
   validates_uniqueness :email
-  validates_format :email, /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
+  validates_format :email, /^[a-zA-Z0-9.!#$%&’*+\/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
 
   validates_presence :verification_code
   validates_format :verification_code, /^[0-9a-z]{16}$/
