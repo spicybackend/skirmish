@@ -18,7 +18,7 @@ describe Administrator do
         it "is valid" do
           admin = build_admin
 
-          admin.valid?.should eq true
+          admin.valid?.should be_true
           admin.errors.size.should eq 0
         end
       end
@@ -28,7 +28,7 @@ describe Administrator do
           admin = build_admin
           admin.update_attributes(player_id: nil)
 
-          admin.valid?.should eq false
+          admin.valid?.should be_false
           admin.errors.full_messages.join(", ").should match /Player can't be blank/
         end
       end
@@ -38,7 +38,7 @@ describe Administrator do
           admin = build_admin
           admin.player_id = 9999
 
-          admin.valid?.should eq false
+          admin.valid?.should be_false
           admin.errors.full_messages.join(", ").should match /Player must exist/
         end
       end
@@ -49,7 +49,7 @@ describe Administrator do
         it "is valid" do
           admin = build_admin
 
-          admin.valid?.should eq true
+          admin.valid?.should be_true
           admin.errors.size.should eq 0
         end
       end
@@ -59,7 +59,7 @@ describe Administrator do
           admin = build_admin
           admin.update_attributes(league_id: nil)
 
-          admin.valid?.should eq false
+          admin.valid?.should be_false
           admin.errors.full_messages.join(", ").should match /League can't be blank/
         end
       end
@@ -69,7 +69,7 @@ describe Administrator do
           admin = build_admin
           admin.update_attributes(league_id: 9999.to_i64)
 
-          admin.valid?.should eq false
+          admin.valid?.should be_false
           admin.errors.full_messages.join(", ").should match /League must exist/
         end
       end

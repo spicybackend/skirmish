@@ -8,7 +8,7 @@ describe Player do
         player = create_player_with_mock_user
 
         player.user_id = 9999.to_i64
-        player.valid?.should eq false
+        player.valid?.should be_false
         player.errors.full_messages.join(",").should match /User must exist/
       end
 
@@ -17,11 +17,11 @@ describe Player do
         another_player = create_player_with_mock_user
 
         player.user_id = another_player.user!.id
-        player.valid?.should eq false
+        player.valid?.should be_false
         player.errors.full_messages.join(",").should match /User has already been taken/
 
         another_player.destroy
-        player.valid?.should eq true
+        player.valid?.should be_true
       end
     end
 
@@ -30,16 +30,16 @@ describe Player do
         player = create_player_with_mock_user
 
         player.tag = "a"
-        player.valid?.should eq false
+        player.valid?.should be_false
         player.errors.full_messages.join(",").should match /Tag is too short/
 
 
         player.tag = "a" * 17
-        player.valid?.should eq false
+        player.valid?.should be_false
         player.errors.full_messages.join(",").should match /Tag is too long/
 
         player.tag = "a name"
-        player.valid?.should eq true
+        player.valid?.should be_true
       end
     end
   end

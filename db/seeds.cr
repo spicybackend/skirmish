@@ -1,5 +1,4 @@
 require "../config/application.cr"
-
 # Automatically load schema and run migrations on the test database
 Jennifer::Migration::Runner.load_schema
 Jennifer::Migration::Runner.migrate
@@ -8,7 +7,9 @@ Jennifer::Adapter.adapter.transaction do
   if Amber.env.development?
     alice_user = User.build(
       email: "alice@skirmish.online",
-      receive_email_notifications: false
+      receive_email_notifications: false,
+      verification_code: Random::Secure.hex(8),
+      activated_at: Time.now
     )
     alice_user.password = "password"
     alice_user.save!
@@ -19,7 +20,9 @@ Jennifer::Adapter.adapter.transaction do
 
     bob_user = User.build(
       email: "bob@skirmish.online",
-      receive_email_notifications: false
+      receive_email_notifications: false,
+      verification_code: Random::Secure.hex(8),
+      activated_at: Time.now
     )
     bob_user.password = "password"
     bob_user.save!
@@ -30,7 +33,9 @@ Jennifer::Adapter.adapter.transaction do
 
     charlie_user = User.build(
       email: "charlie@skirmish.online",
-      receive_email_notifications: false
+      receive_email_notifications: false,
+      verification_code: Random::Secure.hex(8),
+      activated_at: Time.now
     )
     charlie_user.password = "password"
     charlie_user.save!

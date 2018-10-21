@@ -36,7 +36,8 @@ def admin_authenticated_headers(league : League)
     # failing that, create one
     user = User.new({
       email: "admin_user_#{league.name}@example.com",
-      receive_email_notifications: false
+      receive_email_notifications: false,
+      verification_code: Random::Secure.hex(8)
     })
     user.password = "password"
     user.save!

@@ -341,11 +341,26 @@ nav img.gravatar {
   padding-top: 20px; }
 
 #logo {
+  width: 200px;
+  height: 278px;
   background-color: #343a40;
   background-image: url(/dist/images/logo.png);
-  background-size: contain;
-  width: 200px;
-  height: 278px; }
+  background-size: contain; }
+
+.image-content {
+  display: flex; }
+  .image-content .image {
+    margin-right: 24px;
+    flex-shrink: 0; }
+
+#email-verification-check {
+  width: 150px;
+  height: 150px;
+  background-image: url(/dist/images/animat-checkmark-color.gif);
+  background-repeat: no-repeat;
+  background-size: 150%;
+  background-position-x: 50%;
+  background-position-y: 50%; }
 
 /* Hide logo in small screens */
 @media (max-width: 767px) {
@@ -391,6 +406,10 @@ tr.clickable-row {
     justify-content: space-between; }
     body .container {
       margin-bottom: 56px; }
+  .image-content {
+    flex-direction: column; }
+    .image-content .image {
+      margin: 24px auto; }
   .navbar-brand {
     display: none; }
   nav .gravatar {

@@ -33,11 +33,11 @@ describe NotificationControllerTest do
         user = player.user.not_nil!
         notification = create_notification(player: player)
 
-        notification.read?.should eq false
+        notification.read?.should be_false
         response = subject.get "/notifications/#{notification.id}", headers: authenticated_headers_for(user)
 
-        notification = Notification.find(notification.id).not_nil!
-        notification.read?.should eq true
+        notification.reload
+        notification.read?.should be_true
       end
 
       it "redirects to the notifications listing" do
@@ -69,11 +69,11 @@ describe NotificationControllerTest do
 
         notification = create_notification(player: player, event_type: Notification::GAME_LOGGED, source: game)
 
-        notification.read?.should eq false
+        notification.read?.should be_false
         response = subject.get "/notifications/#{notification.id}", headers: authenticated_headers_for(user)
 
-        notification = Notification.find(notification.id).not_nil!
-        notification.read?.should eq true
+        notification.reload
+        notification.read?.should be_true
       end
 
       it "redirects to the notification action url" do
@@ -92,7 +92,7 @@ describe NotificationControllerTest do
 
         notification = create_notification(player: player, event_type: Notification::GAME_LOGGED, source: game)
 
-        notification.read?.should eq false
+        notification.read?.should be_false
         response = subject.get "/notifications/#{notification.id}", headers: authenticated_headers_for(user)
 
         response.headers["Location"].should eq "/leagues/#{league.id}/games/#{game.id}"
@@ -108,11 +108,11 @@ describe NotificationControllerTest do
         another_player = create_player_with_mock_user
         notification = create_notification(player: another_player)
 
-        notification.read?.should eq false
+        notification.read?.should be_false
         response = subject.get "/notifications/#{notification.id}", headers: authenticated_headers_for(user)
 
-        notification = Notification.find(notification.id).not_nil!
-        notification.read?.should eq false
+        notification.reload
+        notification.read?.should be_false
       end
 
       it "redirects to the notifications listing" do
@@ -135,12 +135,12 @@ describe NotificationControllerTest do
       player = create_player_with_mock_user
       user = player.user.not_nil!
       notification = create_notification(player: player)
-      notification.read?.should eq false
+      notification.read?.should be_false
 
       response = subject.patch "/notifications/#{notification.id}/read", headers: authenticated_headers_for(user)
 
-      notification = Notification.find(notification.id).not_nil!
-      notification.read?.should eq true
+      notification.reload
+      notification.read?.should be_true
     end
 
     it "redirects to the notifications listing" do
@@ -160,17 +160,17 @@ describe NotificationControllerTest do
       player = create_player_with_mock_user
       user = player.user.not_nil!
       notification = create_notification(player: player)
-      notification.read?.should eq false
+      notification.read?.should be_false
       another_notification = create_notification(player: player)
-      another_notification.read?.should eq false
+      another_notification.read?.should be_false
 
       response = subject.patch "/notifications/read_all", headers: authenticated_headers_for(user)
 
-      notification = Notification.find(notification.id).not_nil!
-      another_notification = Notification.find(another_notification.id).not_nil!
+      notification.reload
+      another_notification.reload
 
-      notification.read?.should eq true
-      another_notification.read?.should eq true
+      notification.read?.should be_true
+      another_notification.read?.should be_true
     end
 
     it "redirects to the notifications listing" do
