@@ -23,6 +23,23 @@ def create_league(name : String? = nil, description : String? = nil, start_ratin
   )
 end
 
+def create_and_pit_players(league : League)
+  player_one = create_player_with_mock_user
+  player_two = create_player_with_mock_user
+  player_three = create_player_with_mock_user
+
+  Membership.create!(player_id: player_one.id, league_id: league.id, joined_at: Time.now)
+  Membership.create!(player_id: player_two.id, league_id: league.id, joined_at: Time.now)
+  Membership.create!(player_id: player_three.id, league_id: league.id, joined_at: Time.now)
+
+  game_logger = League::LogGame.new(league: league, winner: player_one, loser: player_three, logger: player_one)
+  game_logger.call
+  game = game_logger.game
+  Game::Confirm.new(game: game, confirming_player: player_three).call
+
+  [player_one, player_two, player_three]
+end
+
 def create_notification(player : Player, event_type : String? = nil, source : Jennifer::Model::Base? = nil, title : String? = nil, content : String? = nil, sent_at : Time? = Time.now, read_at : Time? = nil)
   Notification.create!({
     player_id: player.id,
