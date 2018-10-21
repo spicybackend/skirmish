@@ -5,7 +5,7 @@ class Game::CanBeConfirmedByPlayer
   end
 
   def call
-    game_not_confirmed? && player_opposes_game_logger?
+    game_not_confirmed? && (player_opposes_game_logger? || player.admin_of?(game.league!))
   end
 
   private def game_not_confirmed?
