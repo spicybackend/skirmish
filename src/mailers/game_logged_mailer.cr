@@ -2,10 +2,9 @@ class GameLoggedMailer < ApplicationMailer
   def initialize(player : Player, game : Game)
     super()
 
-    to(
-      player.user!.email.not_nil!,
-      player.tag.not_nil!
-    )
+    user = player.user!
+    to(user.email!, player.tag.to_s)
+    self.from = ApplicationMailer::FROM_GAMES
 
     logger = game.logger!
     self.subject = "#{logger.tag} has logged a game with you"
