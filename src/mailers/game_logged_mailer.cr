@@ -7,7 +7,7 @@ class GameLoggedMailer < ApplicationMailer
     self.from = ApplicationMailer::FROM_GAMES
 
     logger = game.logger!
-    self.subject = "#{logger.tag} has logged a game with you"
+    self.subject = I18n.translate("mailer.game_logged.subject", { logger: logger.tag })
     self.text = render("mailers/game_logged.text.ecr")
     self.html = render("mailers/game_logged.html.slang", "mailer_layout.html.slang")
   end

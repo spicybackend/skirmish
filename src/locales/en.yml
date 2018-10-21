@@ -29,6 +29,7 @@ session:
 
 mailer:
   welcome:
+    subject: "Welcome to Skirmish"
     title: "Welcome to Skirmish"
     subtitle: "Hey %{name}, it's game on!"
     content: "Once last thing before we get you all set up, we need to confirm you're really who you say you are."
@@ -37,10 +38,12 @@ mailer:
       action: "Verify Account"
 
   game_logged:
+    subject: "%{logger} has logged a game against you!"
     title: "Game Logged"
     subtitle: "%{logger} has logged a game against you!"
-    content: "Follow the link below to confirm the game."
-    action: "Confirm"
+    confirmation:
+      content: "Follow the link below to confirm the game."
+      action: "Confirm"
 
 verification:
   activated_successfully: "Activated successfully"

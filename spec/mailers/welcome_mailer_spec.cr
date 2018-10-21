@@ -39,7 +39,7 @@ describe WelcomeMailer do
       user = player.user!
       mailer = WelcomeMailer.new(player)
 
-      mailer.subject.should eq "Welcome to Skirmish"
+      mailer.subject.should eq I18n.translate("mailer.welcome.subject")
     end
   end
 
