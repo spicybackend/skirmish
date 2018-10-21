@@ -1,10 +1,10 @@
-def create_player_with_mock_user(tag : String? = nil)
+def create_player_with_mock_user(tag : String? = nil, password : String? = nil)
   user = User.new({
     email: "#{Random::Secure.hex}@test.com",
     receive_email_notifications: false,
     verification_code: Random::Secure.hex(8)
   })
-  user.password = Random::Secure.hex
+  user.password = password || Random::Secure.hex
   user.save!
 
   Player.create!(
