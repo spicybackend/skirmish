@@ -36,7 +36,7 @@ describe NotificationControllerTest do
         notification.read?.should be_false
         response = subject.get "/notifications/#{notification.id}", headers: authenticated_headers_for(user)
 
-        notification = Notification.find(notification.id).not_nil!
+        notification.reload
         notification.read?.should be_true
       end
 
@@ -72,7 +72,7 @@ describe NotificationControllerTest do
         notification.read?.should be_false
         response = subject.get "/notifications/#{notification.id}", headers: authenticated_headers_for(user)
 
-        notification = Notification.find(notification.id).not_nil!
+        notification.reload
         notification.read?.should be_true
       end
 
@@ -111,7 +111,7 @@ describe NotificationControllerTest do
         notification.read?.should be_false
         response = subject.get "/notifications/#{notification.id}", headers: authenticated_headers_for(user)
 
-        notification = Notification.find(notification.id).not_nil!
+        notification.reload
         notification.read?.should be_false
       end
 
@@ -139,7 +139,7 @@ describe NotificationControllerTest do
 
       response = subject.patch "/notifications/#{notification.id}/read", headers: authenticated_headers_for(user)
 
-      notification = Notification.find(notification.id).not_nil!
+      notification.reload
       notification.read?.should be_true
     end
 
@@ -166,8 +166,8 @@ describe NotificationControllerTest do
 
       response = subject.patch "/notifications/read_all", headers: authenticated_headers_for(user)
 
-      notification = Notification.find(notification.id).not_nil!
-      another_notification = Notification.find(another_notification.id).not_nil!
+      notification.reload
+      another_notification.reload
 
       notification.read?.should be_true
       another_notification.read?.should be_true
