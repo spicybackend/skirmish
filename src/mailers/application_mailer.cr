@@ -4,7 +4,7 @@ require "jasper_helpers"
 class ApplicationMailer < Mailer::Message
   include JasperHelpers
 
-  FROM_SUPPORT = "Skirmish <games@skirmish.online>"
+  FROM_SUPPORT = "Skirmish <support@skirmish.online>"
   FROM_GAMES = "Skirmish <games@skirmish.online>"
 
   def initialize
