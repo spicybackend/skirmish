@@ -122,22 +122,22 @@ describe User do
     end
   end
 
-  describe "#activated?" do
-    context "when the user has not yet been activated" do
-      it "is false" do
-        user = create_player_with_mock_user.user!
+  describe "#activate!" do
+    it "sets the activated time of the user" do
+      user = create_player_with_mock_user.user!
 
-        user.activated?.should be_false
-      end
+      user.activated_at.should eq nil
+      user.activate!
+      user.activated_at.should_not eq nil
+      user.activated_at.should be_a(Time)
     end
 
-    context "when the user has been activated" do
-      it "is true" do
-        user = create_player_with_mock_user.user!
-        user.activated_at = Time.now
+    it "activates/verifies the user" do
+      user = create_player_with_mock_user.user!
+      user.activate!
 
-        user.activated?.should be_true
-      end
+      user.activated?.should be_true
+      user.unverified?.should be_false
     end
   end
 
@@ -160,14 +160,22 @@ describe User do
     end
   end
 
-  describe "#activate!" do
-    it "sets the activated time of the user" do
-      user = create_player_with_mock_user.user!
+  describe "#unverified?" do
+    context "when the user has not yet been activated" do
+      it "is true" do
+        user = create_player_with_mock_user.user!
 
-      user.activated_at.should eq nil
-      user.activate!
-      user.activated_at.should_not eq nil
-      user.activated_at.should be_a(Time)
+        user.unverified?.should be_true
+      end
+    end
+
+    context "when the user has been activated" do
+      it "is false" do
+        user = create_player_with_mock_user.user!
+        user.activate!
+
+        user.unverified?.should be_false
+      end
     end
   end
 

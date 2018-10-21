@@ -42,6 +42,10 @@ class User < Jennifer::Model::Base
     !!activated_at
   end
 
+  def unverified?
+    !activated?
+  end
+
   def receive_email_notifications?
     receive_email_notifications
   end
