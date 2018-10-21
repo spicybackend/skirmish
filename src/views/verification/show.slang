@@ -1,7 +1,7 @@
 .image-content
   #email-verification-check.image
   .content
-    h2 Account Created
+    h2 = t("registration.registered")
 
-    p Thanks for creating your account. Before you get started there's just one more step!
-    p An email has been sent to #{user.email} with instructions to confirm and verify your account
+    p = t("registration.content")
+    p = t("registration.verification", { email_address: user.email })

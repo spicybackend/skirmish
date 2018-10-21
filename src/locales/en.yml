@@ -16,6 +16,17 @@ authentication:
   sign_in: "Sign In"
   sign_out: "Sign Out"
 
+registration:
+  registered: "Account Created"
+  content: "Thanks for creating your account. Before you get started there's just one more step!"
+  verification: "An email has been sent to %{email_address} with instructions to confirm and verify your account"
+
+session:
+  already_signed_in: "Already signed in"
+  logged_in_successfully: "Successfully logged in"
+  authentication_failed: "Invalid email or password"
+  logged_out: "Logged out. See ya later!"
+
 mailer:
   welcome:
     title: "Welcome to Skirmish"
@@ -30,6 +41,12 @@ mailer:
     subtitle: "%{logger} has logged a game against you!"
     content: "Follow the link below to confirm the game."
     action: "Confirm"
+
+verification:
+  activated_successfully: "Activated successfully"
+  already_activated: "User has already been activated"
+  not_yet_activated: "Account hasn't been verified"
+  user_not_found: "Can't find an account linked to that email address"
 
 league:
   actions:

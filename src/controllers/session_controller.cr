@@ -1,7 +1,7 @@
 class SessionController < ApplicationController
   def new
     if signed_in?
-      flash[:warning] = "Already signed in"
+      flash[:warning] = I18n.translate("session.already_signed_in")
       redirect_to "/"
     else
       user = User.build({
@@ -18,17 +18,17 @@ class SessionController < ApplicationController
 
     if user && user.authenticate(params["password"].to_s)
       if user.unverified?
-        flash[:warning] = "Account hasn't been verified"
+        flash[:warning] = I18n.translate("verification.not_yet_activated")
         redirect_to "/verification/#{user.email}"
       else
         session[:user_id] = user.id
         session[:player_id] = Player.where { _user_id == user.id }.to_a.first.id
 
-        flash[:info] = "Successfully logged in"
+        flash[:info] = I18n.translate("session.logged_in_successfully")
         redirect_to "/"
       end
     else
-      flash[:danger] = "Invalid email or password"
+      flash[:danger] = I18n.translate("session.authentication_failed")
       user = User.build({
         email: "",
         verification_code: ""
@@ -41,7 +41,7 @@ class SessionController < ApplicationController
   def delete
     session.delete(:user_id)
 
-    flash[:info] = "Logged out. See ya later!"
+    flash[:info] = I18n.translate("session.logged_out")
     redirect_to "/"
   end
 end
