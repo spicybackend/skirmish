@@ -1,8 +1,18 @@
 .row
   h2.col.justify-content-between.btn-toolbar Game
-    - if current_user
-      .button-group
-        == link_to(t("general.actions.back"), "/leagues/#{game.league_id}", class: "btn btn-light")
+    - player = current_player
+    - if current_player.try(&.admin_of?(league)) && game.unconfirmed?
+      .btn-group
+        == form(action: "/leagues/#{game.league_id}/games/#{game.id}/confirm", method: :patch) do
+          == csrf_tag
+          == submit("#{t("game.actions.confirm")} on behalf", class: "btn btn-primary form-toggle-split")
+
+        button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+          span.sr-only Toggle Dropdown
+        .dropdown-menu.dropdown-menu-right
+          == form(action: "/leagues/#{game.league_id}/games/#{game.id}", method: :delete) do
+            == csrf_tag
+            == submit(t("general.actions.delete"), "data-confirm": "Are you sure?", class: "dropdown-item danger")
 
 .game-results
   .winning-result

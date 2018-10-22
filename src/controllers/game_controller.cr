@@ -141,12 +141,24 @@ class GameController < ApplicationController
 
   def destroy
     if game = Game.find params[:id]
-      game.destroy
+      league = game.league!
+
+      if game.unconfirmed?
+        Jennifer::Adapter.adapter.transaction do
+          game.participations.each { |participation| participation.destroy }
+          game.destroy
+
+          flash["success"] = "Game deleted successfully"
+          redirect_to "/leagues/#{league.id}"
+        end
+      else
+        flash["warning"] = "Can't delete confirmed games"
+        redirect_to "/leagues/#{league.id}/games/#{game.id}"
+      end
     else
       flash["warning"] = "Can't find game"
+      redirect_to "/"
     end
-
-    redirect_to "/leagues/#{params[:league_id]}"
   end
 
   def game_params

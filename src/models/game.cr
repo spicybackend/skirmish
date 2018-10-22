@@ -34,4 +34,8 @@ class Game < Jennifer::Model::Base
   def confirmed?
     !!confirmed_at
   end
+
+  def unconfirmed?
+    !confirmed?
+  end
 end
