@@ -1,6 +1,7 @@
 class MailerPreviewController < ApplicationController
   before_action do
     all { redirect_signed_out_user }
+    all { redirect_unless_in_development }
   end
 
   def show
@@ -32,5 +33,11 @@ class MailerPreviewController < ApplicationController
 
   private def text_only_preview?
     params[:version]? == "text"
+  end
+
+  private def redirect_unless_in_development
+    unless Amber.env.development?
+      redirect_to "/"
+    end
   end
 end
