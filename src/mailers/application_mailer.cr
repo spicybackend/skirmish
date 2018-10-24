@@ -4,8 +4,12 @@ require "jasper_helpers"
 class ApplicationMailer < Mailer::Message
   include JasperHelpers
 
+  # TODO Move these to env config
   FROM_SUPPORT = "Skirmish <support@skirmish.online>"
   FROM_GAMES = "Skirmish <games@skirmish.online>"
+  FROM_ERRORS = "Skirmish <errors@skirmish.online>"
+
+  ERRORS_RECIPIENT_ADDRESS = "errors@skirmish.online"
 
   def initialize
     super()
