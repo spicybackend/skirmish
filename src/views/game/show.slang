@@ -1,18 +1,18 @@
 .row
-  h2.col.justify-content-between.btn-toolbar Game
+  h2.col.justify-content-between.btn-toolbar Game Results
     - player = current_player
     - if current_player.try(&.admin_of?(league)) && game.unconfirmed?
       .btn-group
-        == form(action: "/leagues/#{game.league_id}/games/#{game.id}/confirm", method: :patch) do
-          == csrf_tag
-          == submit("#{t("game.actions.confirm")} on behalf", class: "btn btn-primary form-toggle-split")
 
-        button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-          span.sr-only Toggle Dropdown
+        button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+          | Admin Tools
         .dropdown-menu.dropdown-menu-right
+          == form(action: "/leagues/#{game.league_id}/games/#{game.id}/confirm", method: :patch) do
+            == csrf_tag
+            == submit("#{t("game.actions.confirm")} on behalf", "data-confirm": "Are you sure you want to confirm this game on behalf of the unconfirmed?", class: "dropdown-item primary")
           == form(action: "/leagues/#{game.league_id}/games/#{game.id}", method: :delete) do
             == csrf_tag
-            == submit(t("general.actions.delete"), "data-confirm": "Are you sure?", class: "dropdown-item danger")
+            == submit(t("general.actions.delete"), "data-confirm": "Are you sure you want to delete this unconfirmed game?", class: "dropdown-item danger")
 
 .game-results
   .winning-result
