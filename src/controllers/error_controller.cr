@@ -21,7 +21,7 @@ class ErrorController < Amber::Controller::Error
 
   def internal_server_error
     if !Amber.env.development?
-      ExceptionMailer.new(@ex).send
+      ExceptionMailer.new(exception: @ex, user: current_user).send
     end
 
     render("internal_server_error.slang")
