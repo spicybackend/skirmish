@@ -17,8 +17,7 @@ class ApplicationMailer < Mailer::Message
   end
 
   def send
-    return if Amber.env.test? || suppress_emails?
-    super
+    super unless suppress_emails?
   end
 
   private def suppress_emails?
