@@ -44,11 +44,11 @@ class Notification < Jennifer::Model::Base
   validates_presence :title
   validates_presence :content
   validates_presence :event_type
+  validates_presence :sent_at
 
   validates_inclusion :event_type, in: EVENT_TYPES
 
   validates_with PlayerRelationValidator
-
   validates_with_method :source_present_and_valid
 
   def source_present_and_valid

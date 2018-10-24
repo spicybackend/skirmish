@@ -12,7 +12,8 @@ class League::LogGame::NotifyPlayer
         title: title,
         content: content,
         source_type: game.class.to_s,
-        source_id: game.id
+        source_id: game.id,
+        sent_at: Time.now
       })
 
       GameLoggedMailer.new(player, game).send if player.user!.receive_email_notifications?

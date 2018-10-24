@@ -335,7 +335,7 @@ CREATE TABLE public.notifications (
     content character varying NOT NULL,
     source_type character varying,
     source_id bigint,
-    sent_at timestamp without time zone,
+    sent_at timestamp without time zone DEFAULT now() NOT NULL,
     read_at timestamp without time zone,
     created_at timestamp without time zone,
     updated_at timestamp without time zone
