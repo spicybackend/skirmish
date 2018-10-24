@@ -9,11 +9,11 @@
         .dropdown-menu.dropdown-menu-right
           - if current_player.try(&.admin_of?(league))
             == link_to(t("general.actions.edit"), "/leagues/#{league.id}/edit", class: "dropdown-item")
-            == link_to(t("general.actions.delete"), "/leagues/#{league.id}?_csrf=#{csrf_token}", "data-method": "delete", "data-confirm": "Are you sure?", class: "dropdown-item danger")
+            == link_to(t("general.actions.delete"), "/leagues/#{league.id}?_csrf=#{csrf_token}", "data-method": "delete", "data-confirm": "Are you sure you want to delete #{league.name}?", class: "dropdown-item danger")
             .dropdown-divider
           == form(action: "/leagues/#{league.id.to_s}/leave", method: :patch) do
             == csrf_tag
-            == submit(t("league.actions.leave"), "data-confirm": "Are you sure?", class: "dropdown-item danger")
+            == submit(t("league.actions.leave"), "data-confirm": "Are you sure you want to leave #{league.name}?", class: "dropdown-item danger")
       - else
         == form(action: "/leagues/#{league.id.to_s}/join", method: membership.id ? :patch : :post) do
           == csrf_tag
