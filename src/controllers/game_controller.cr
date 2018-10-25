@@ -146,6 +146,8 @@ class GameController < ApplicationController
       if game.unconfirmed?
         Jennifer::Adapter.adapter.transaction do
           game.participations.each { |participation| participation.destroy }
+          Notification.where { _source_type == "Game" && _source_id == game.id }.destroy
+
           game.destroy
 
           flash["success"] = "Game deleted successfully"
