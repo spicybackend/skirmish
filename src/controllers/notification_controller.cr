@@ -5,8 +5,8 @@ class NotificationController < ApplicationController
 
   def index
     player = current_player.not_nil!
-    unread_notifications = notifications_for_player(player).where { _read_at == nil }.to_a.map(&.presented)
-    read_notifications = notifications_for_player(player).where { _read_at != nil }.to_a.map(&.presented)
+    unread_notifications = Notification.for_player(player).unread.order(created_at: :desc).to_a.map(&.presented)
+    read_notifications = Notification.for_player(player).read.order(created_at: :desc).to_a.map(&.presented)
 
     render("index.slang")
   end
@@ -21,9 +21,7 @@ class NotificationController < ApplicationController
       end
 
       presented_notification = notification.presented
-
-      notification.read_at = Time.now
-      notification.save!
+      notification.read!
 
       redirect_to presented_notification.action_url
     else
@@ -37,8 +35,7 @@ class NotificationController < ApplicationController
     notification = Notification.find(params[:id])
 
     if notification && notification.player_id == player.id
-      notification.read_at = Time.now
-      notification.save!
+      notification.read!
     else
       flash[:danger] = "Can't find notification"
     end
@@ -53,9 +50,5 @@ class NotificationController < ApplicationController
     notifications.update(read_at: Time.now)
 
     redirect_to "/notifications"
-  end
-
-  private def notifications_for_player(player)
-    Notification.where { _player_id == player.id }.order(created_at: :desc)
   end
 end
