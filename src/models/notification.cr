@@ -38,6 +38,10 @@ class Notification < Jennifer::Model::Base
     updated_at: { type: Time, default: Time.now }
   )
 
+  scope :read { where { _read_at != nil } }
+  scope :unread { where { _read_at == nil } }
+  scope :for_player { |player| where { _player_id == player.id } }
+
   belongs_to :player, Player
 
   validates_presence :player_id
@@ -86,5 +90,12 @@ class Notification < Jennifer::Model::Base
 
   def read?
     !!read_at
+  end
+
+  def read!
+    return if read?
+
+    self.read_at = Time.now
+    save!
   end
 end

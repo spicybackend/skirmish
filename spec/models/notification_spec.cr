@@ -123,6 +123,29 @@ describe Notification do
     end
   end
 
+  describe "#read!" do
+    context "when the notification has not been read before" do
+      it "marks the notification as read" do
+        notification = create_notification(player: Player.all.first!)
+        notification.read?.should be_false
+
+        notification.read!
+        notification.read?.should be_true
+      end
+    end
+
+    context "when the notification has already been read" do
+      it "keeps the notification's original read time untouched" do
+        notification = create_notification(player: Player.all.first!)
+        original_read_time = Time.now
+        notification.read_at = original_read_time
+
+        notification.read!
+        notification.read_at.should eq original_read_time
+      end
+    end
+  end
+
   describe "#source" do
     context "a general notification without a source" do
       it "is nil" do
