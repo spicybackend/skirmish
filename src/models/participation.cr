@@ -8,6 +8,7 @@ class Participation < Jennifer::Model::Base
 
     won: Bool,
     rating: Int32?,
+    confirmation_code: String,
 
     created_at: { type: Time, default: Time.now },
     updated_at: { type: Time, default: Time.now }

@@ -44,14 +44,16 @@ class League::LogGame
       game_id: game.id,
       player_id: winner.id,
       won: true,
-      rating: nil
+      rating: nil,
+      confirmation_code: Random::Secure.hex(8)
     )
 
     loser_participation = Participation.create!(
       game_id: game.id,
       player_id: loser.id,
       won: false,
-      rating: nil
+      rating: nil,
+      confirmation_code: Random::Secure.hex(8)
     )
 
     [winner_participation, loser_participation]
