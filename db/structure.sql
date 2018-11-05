@@ -376,7 +376,8 @@ CREATE TABLE public.participations (
     won boolean NOT NULL,
     rating integer,
     created_at timestamp without time zone,
-    updated_at timestamp without time zone
+    updated_at timestamp without time zone,
+    confirmation_code character varying(16)
 );
 
 
