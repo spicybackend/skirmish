@@ -2,7 +2,7 @@ class GameController < ApplicationController
   CONFIRM_ACTION = "confirm"
 
   before_action do
-    all { redirect_signed_out_user }
+    only [:show, :new, :create, :update, :destroy] { redirect_signed_out_user }
   end
 
   def show

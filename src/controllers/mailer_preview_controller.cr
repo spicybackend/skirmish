@@ -19,6 +19,7 @@ class MailerPreviewController < ApplicationController
       player = game.loser.not_nil!
       user = player.user!
       logger = game.winner.not_nil!
+      confirmation_code = game.participations.first.confirmation_code
 
       if text_only_preview?
         render("mailers/game_logged.text.ecr")
