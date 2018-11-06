@@ -19,6 +19,7 @@ class Authenticate < Amber::Pipe::Base
       call_next(context)
     else
       return call_next(context) if public_path?(context.request.path) || whitelisted_request?(context.request)
+
       context.flash[:warning] = "Please Sign In"
       context.response.headers.add "Location", "/signin"
       context.response.status_code = 302
@@ -26,7 +27,10 @@ class Authenticate < Amber::Pipe::Base
   end
 
   private def public_path?(path)
-    PUBLIC_PATHS.includes?(path) || path.starts_with?("/verify/")  || path.starts_with?("/verification/")
+    PUBLIC_PATHS.includes?(path) ||
+      quick_confirmation_url?(path) ||
+      path.starts_with?("/verify/") ||
+      path.starts_with?("/verification/")
 
     # Different strategies can be used to determine if a path is public
     # Example, if /admin/* paths are the only private paths
@@ -39,5 +43,9 @@ class Authenticate < Amber::Pipe::Base
   private def whitelisted_request?(request)
     # gross
     request.method == "GET" && request.path.match(/^\/leagues(\/[0-9]+)?$/)
+  end
+
+  private def quick_confirmation_url?(path)
+    path.match(/leagues\/.*\/games\/.*\/confirm\/.*/)
   end
 end

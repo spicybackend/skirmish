@@ -37,6 +37,7 @@ Amber::Server.configure do
     patch "/leagues/:league_id/:leave_or_join", MembershipController, :update
     resources "/leagues/:league_id/games", GameController, except: [:index, :edit, :update]
     patch "/leagues/:league_id/games/:game_id/:action", GameController, :update
+    get "/leagues/:league_id/games/:game_id/confirm/:confirmation_code", GameController, :quick_confirm
     resources "/leagues", LeagueController
 
     get "/profile", UserController, :show

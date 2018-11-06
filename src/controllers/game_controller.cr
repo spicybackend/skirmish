@@ -2,7 +2,7 @@ class GameController < ApplicationController
   CONFIRM_ACTION = "confirm"
 
   before_action do
-    all { redirect_signed_out_user }
+    only [:show, :new, :create, :update, :destroy] { redirect_signed_out_user }
   end
 
   def show
@@ -139,6 +139,34 @@ class GameController < ApplicationController
     else
       flash["danger"] = "Unknown update action"
       redirect_to("/leagues/#{game.league_id}/games/#{game.id}"); return
+    end
+  end
+
+  def quick_confirm
+    if participation = Participation.where { _confirmation_code == params[:confirmation_code] }.first
+      game = participation.game!
+      player = participation.player!
+
+      if game.confirmed?
+        flash[:warning] = "already confirmed" # I18n.translate("game.already_confirmed")
+        redirect_to "/leagues/#{game.league_id}/games/#{game.id}"
+      else
+        game_confirmation_service = Game::Confirm.new(
+          game: game,
+          confirming_player: player
+        )
+
+        if game_confirmation_service.call
+          flash["success"] = "Confirmed game"
+          redirect_to "/leagues/#{game.league_id}/games/#{game.id}"
+        else
+          flash["danger"] = game_confirmation_service.errors.join(", ")
+          redirect_to "/leagues/#{game.league_id}/games/#{game.id}"
+        end
+      end
+    else
+      flash[:warning] = "confirmation code not valid" # I18n.translate("verification.game_not_found")
+      redirect_to "/"
     end
   end
 
