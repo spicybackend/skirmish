@@ -4,8 +4,10 @@ class UserController < ApplicationController
   end
 
   def show
-    user = current_user.not_nil!
-    player = current_player.not_nil!
+    player = Player.where { _tag == params[:player_tag]? }.first || current_player.not_nil!
+    user = player.user!
+
+    own_profile? = player.id == current_player.not_nil!.id
 
     render("show.slang")
   end
