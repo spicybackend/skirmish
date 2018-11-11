@@ -14,7 +14,13 @@ class Tournament < Jennifer::Model::Base
 
   belongs_to :league, League
   has_many :matches, Match
+  has_many :entrants, Entrant
+  has_and_belongs_to_many :players, Player, nil, nil, nil, "entrants", "player_id"
 
   scope :unfinished { where { _finished_at == nil } }
   scope :for_league { |league| where { _league_id == league.id } }
+
+  def in_progress?
+    matches_query.exists? && finished_at.nil?
+  end
 end
