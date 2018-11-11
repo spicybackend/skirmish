@@ -87,4 +87,5 @@ crystal spec
 
 ## Contributors
 
-- [your-github-user](https://github.com/your-github-user) Jordane Lew - creator, maintainer
+- [yumoose](https://gitlab.com/yumoose) Jordane Lew - creator, maintainer
+- [nandahibatullah](https://gitlab.com/nandahibatullah) Nanda Hibatullah - developer
