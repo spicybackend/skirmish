@@ -116,9 +116,9 @@ ALTER SEQUENCE public.administrators_player_id_seq OWNED BY public.administrator
 --
 
 CREATE TABLE public.entrants (
-    id integer NOT NULL,
-    tournament_id integer,
-    player_id integer,
+    id bigint NOT NULL,
+    tournament_id bigint,
+    player_id bigint,
     created_at timestamp without time zone,
     updated_at timestamp without time zone
 );
@@ -131,7 +131,6 @@ ALTER TABLE public.entrants OWNER TO postgres;
 --
 
 CREATE SEQUENCE public.entrants_id_seq
-    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -251,12 +250,12 @@ ALTER SEQUENCE public.leagues_id_seq OWNED BY public.leagues.id;
 --
 
 CREATE TABLE public.matches (
-    id integer NOT NULL,
-    tournament_id integer,
-    player_a_id integer,
-    player_b_id integer,
-    winner_id integer,
-    next_match_id integer,
+    id bigint NOT NULL,
+    tournament_id bigint,
+    player_a_id bigint,
+    player_b_id bigint,
+    winner_id bigint,
+    next_match_id bigint,
     level integer,
     created_at timestamp without time zone,
     updated_at timestamp without time zone
@@ -270,7 +269,6 @@ ALTER TABLE public.matches OWNER TO postgres;
 --
 
 CREATE SEQUENCE public.matches_id_seq
-    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -586,8 +584,8 @@ ALTER SEQUENCE public.players_user_id_seq OWNED BY public.players.user_id;
 --
 
 CREATE TABLE public.tournaments (
-    id integer NOT NULL,
-    league_id integer,
+    id bigint NOT NULL,
+    league_id bigint,
     finished_at timestamp without time zone,
     created_at timestamp without time zone,
     updated_at timestamp without time zone
@@ -601,7 +599,6 @@ ALTER TABLE public.tournaments OWNER TO postgres;
 --
 
 CREATE SEQUENCE public.tournaments_id_seq
-    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -986,127 +983,6 @@ ALTER TABLE ONLY public.participations
 
 ALTER TABLE ONLY public.players
     ADD CONSTRAINT players_user_id_fkey FOREIGN KEY (user_id) REFERENCES public.users(id) ON DELETE CASCADE;
-
-
---
--- Name: TABLE administrators; Type: ACL; Schema: public; Owner: postgres
---
-
-GRANT ALL ON TABLE public.administrators TO jordane;
-
-
---
--- Name: TABLE entrants; Type: ACL; Schema: public; Owner: postgres
---
-
-GRANT ALL ON TABLE public.entrants TO jordane;
-
-
---
--- Name: SEQUENCE entrants_id_seq; Type: ACL; Schema: public; Owner: postgres
---
-
-GRANT ALL ON SEQUENCE public.entrants_id_seq TO jordane;
-
-
---
--- Name: TABLE games; Type: ACL; Schema: public; Owner: postgres
---
-
-GRANT ALL ON TABLE public.games TO jordane;
-
-
---
--- Name: TABLE leagues; Type: ACL; Schema: public; Owner: postgres
---
-
-GRANT ALL ON TABLE public.leagues TO jordane;
-
-
---
--- Name: TABLE matches; Type: ACL; Schema: public; Owner: postgres
---
-
-GRANT ALL ON TABLE public.matches TO jordane;
-
-
---
--- Name: SEQUENCE matches_id_seq; Type: ACL; Schema: public; Owner: postgres
---
-
-GRANT ALL ON SEQUENCE public.matches_id_seq TO jordane;
-
-
---
--- Name: TABLE memberships; Type: ACL; Schema: public; Owner: postgres
---
-
-GRANT ALL ON TABLE public.memberships TO jordane;
-
-
---
--- Name: TABLE migration_versions; Type: ACL; Schema: public; Owner: postgres
---
-
-GRANT ALL ON TABLE public.migration_versions TO jordane;
-
-
---
--- Name: TABLE notifications; Type: ACL; Schema: public; Owner: postgres
---
-
-GRANT ALL ON TABLE public.notifications TO jordane;
-
-
---
--- Name: TABLE participations; Type: ACL; Schema: public; Owner: postgres
---
-
-GRANT ALL ON TABLE public.participations TO jordane;
-
-
---
--- Name: TABLE players; Type: ACL; Schema: public; Owner: postgres
---
-
-GRANT ALL ON TABLE public.players TO jordane;
-
-
---
--- Name: TABLE tournaments; Type: ACL; Schema: public; Owner: postgres
---
-
-GRANT ALL ON TABLE public.tournaments TO jordane;
-
-
---
--- Name: SEQUENCE tournaments_id_seq; Type: ACL; Schema: public; Owner: postgres
---
-
-GRANT ALL ON SEQUENCE public.tournaments_id_seq TO jordane;
-
-
---
--- Name: TABLE users; Type: ACL; Schema: public; Owner: postgres
---
-
-GRANT ALL ON TABLE public.users TO jordane;
-
-
---
--- Name: DEFAULT PRIVILEGES FOR SEQUENCES; Type: DEFAULT ACL; Schema: public; Owner: postgres
---
-
-ALTER DEFAULT PRIVILEGES FOR ROLE postgres IN SCHEMA public REVOKE ALL ON SEQUENCES  FROM postgres;
-ALTER DEFAULT PRIVILEGES FOR ROLE postgres IN SCHEMA public GRANT ALL ON SEQUENCES  TO jordane;
-
-
---
--- Name: DEFAULT PRIVILEGES FOR TABLES; Type: DEFAULT ACL; Schema: public; Owner: postgres
---
-
-ALTER DEFAULT PRIVILEGES FOR ROLE postgres IN SCHEMA public REVOKE ALL ON TABLES  FROM postgres;
-ALTER DEFAULT PRIVILEGES FOR ROLE postgres IN SCHEMA public GRANT ALL ON TABLES  TO jordane;
 
 
 --
