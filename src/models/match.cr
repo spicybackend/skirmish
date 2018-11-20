@@ -20,5 +20,5 @@ class Match < Jennifer::Model::Base
   belongs_to :tournament, Tournament
 
   validates_presence :tournament_id
-  validates_presence :level_id
+  validates_presence :level
 end
