@@ -40,6 +40,8 @@ Amber::Server.configure do
     get "/leagues/:league_id/games/:game_id/confirm/:confirmation_code", GameController, :quick_confirm
     resources "/leagues", LeagueController
 
+    resources "/leagues/:league_id/tournaments/", TournamentController, only: [:new]
+
     get "/profile", UserController, :show
     get "/profile/:player_tag", UserController, :show
     get "/profile/edit", UserController, :edit

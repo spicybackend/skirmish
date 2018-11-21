@@ -22,6 +22,7 @@
             button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
               | Admin Tools
             .dropdown-menu.dropdown-menu-right
+              == link_to(t("tournament.actions.open"), "/leagues/#{league.id}/tournaments/new", class: "dropdown-item")
               == link_to(t("general.actions.edit"), "/leagues/#{league.id}/edit", class: "dropdown-item")
               .dropdown-divider
               == link_to(t("general.actions.delete"), "/leagues/#{league.id}?_csrf=#{csrf_token}", "data-method": "delete", "data-confirm": "Are you sure you want to delete #{league.name}?", class: "dropdown-item danger")

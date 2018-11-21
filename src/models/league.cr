@@ -20,6 +20,7 @@ class League < Jennifer::Model::Base
   has_many :games, Game
   has_many :memberships, Membership
   has_many :administrators, Administrator
+  has_many :tournaments, Tournament
 
   has_and_belongs_to_many :players, Player, nil, nil, nil, "memberships", "player_id"
 
