@@ -2,7 +2,7 @@ class Entrant < Jennifer::Model::Base
   with_timestamps
 
   mapping(
-    id: { type: Int64, primary: true },
+    id: Primary64,
     tournament_id: Int64,
     player_id: Int64,
 

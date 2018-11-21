@@ -6,7 +6,7 @@ class League < Jennifer::Model::Base
   with_timestamps
 
   mapping(
-    id: { type: Int64, primary: true },
+    id: Primary64,
     name: String,
     description: String?,
     accent_color: { type: String, default: "#fd971f" },

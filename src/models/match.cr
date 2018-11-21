@@ -4,7 +4,7 @@ class Match < Jennifer::Model::Base
   with_timestamps
 
   mapping(
-    id: { type: Int64, primary: true },
+    id: Primary64,
 
     level: Int32,
     tournament_id: Int64,

@@ -6,7 +6,7 @@ class User < Jennifer::Model::Base
   with_timestamps
 
   mapping(
-    id: { type: Int64, primary: true },
+    id: Primary64,
     email: String,
     hashed_password: String?,
     receive_email_notifications: { type: Bool, default: true },

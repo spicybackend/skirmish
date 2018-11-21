@@ -2,7 +2,7 @@ class Membership < Jennifer::Model::Base
   with_timestamps
 
   mapping(
-    id: { type: Int64, primary: true },
+    id: Primary64,
     player_id: Int64?,
     league_id: Int64?,
 

@@ -2,7 +2,7 @@ class Game < Jennifer::Model::Base
   with_timestamps
 
   mapping(
-    id: { type: Int64, primary: true },
+    id: Primary64,
     league_id: Int64?,
 
     logged_by_id: Int64?,

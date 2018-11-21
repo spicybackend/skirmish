@@ -22,7 +22,7 @@ class Notification < Jennifer::Model::Base
   with_timestamps
 
   mapping(
-    id: { type: Int64, primary: true },
+    id: Primary64,
     player_id: Int64?,
     source_type: String?,
     source_id: Int64?,
