@@ -1,10 +1,12 @@
 class Tournament::StartTournament
-  getter :tournament
+  getter :tournament, :double_elimination
 
   class TournamentStartError < Exception; end
 
-  def initialize(tournament : Tournament)
+  def initialize(tournament : Tournament, double_elimination = true)
     @tournament = tournament
+    # TODO: Determine double elim or other type of tournament from the tournament itself
+    @double_elimination = double_elimination
   end
 
   def call
@@ -17,37 +19,9 @@ class Tournament::StartTournament
     end
 
     Jennifer::Adapter.adapter.transaction do
-      players_query = tournament.players_query
-      player_ids = players_query.pluck(:id)
-
-      player_count = players_query.count
-
-      filled_tournament_count = (2 ** Math.sqrt(player_count).ceil).to_i32
-
-      # sprinkle the byes into the player ids
-      num_byes = filled_tournament_count - player_count
-      num_byes.times do |bye_i|
-        player_ids.insert(bye_i * 2 + 1, nil)
-      end
-
-      # each player will lose two matches expect for the winner
-      # the winner will either lose only one game, or no games at all
-      # this means we can create 2 losing games for everyone, with the exception
-      # of the winner, who may only lose, at most, one game.
-      # matches_to_create = 2 * filled_tournament_count - 1
-
-      initial_matches = [] of Match
-      (filled_tournament_count / 2).times do |match_i|
-        initial_matches << Match.create!(
-          level: 0,
-          tournament_id: tournament.id,
-          # []? - in the case of byes, there may not be players to fill the match
-          player_a_id: player_ids[match_i * 2]?,
-          player_b_id: player_ids[match_i * 2 + 1]?
-        )
-      end
-
-      # TODO break out prepping players, creating matches and processing byes into sub-services?
+      # TODO break out these out into sub-services?
+      player_ids = prepare_player_arrangement
+      initial_matches = create_initial_matches(player_ids)
       create_subsequent_matches(initial_matches)
       process_byes(initial_matches)
 
@@ -76,32 +50,67 @@ class Tournament::StartTournament
     tournament.players.none?
   end
 
-  private def create_subsequent_matches(matches, level = 0)
-    return unless matches.any?
+  private def prepare_player_arrangement
+    players_query = tournament.players_query  # just an optimisation
 
-    new_matches = [] of Match
+    players_query.pluck(:id).tap do |player_ids|
+      player_count = players_query.count
+      filled_tournament_count = (2 ** Math.sqrt(player_count).ceil).to_i32
 
-    (matches.size / 2).times do |i|
-      new_match = Match.create!(
-        level: level + 1,
-        tournament_id: tournament.id,
-        player_a_id: nil,
-        player_b_id: nil
-      )
-
-      matches[i * 2].update!(next_match_id: new_match.id)
-      matches[i * 2 + 1].update!(next_match_id: new_match.id)
-
-      new_matches << new_match
+      # sprinkle the byes into the player ids
+      num_byes = filled_tournament_count - player_count
+      num_byes.times do |bye_i|
+        player_ids.insert(bye_i * 2 + 1, nil)
+      end
     end
+  end
 
-    create_subsequent_matches(new_matches, level + 1)
+  private def create_initial_matches(player_ids)
+    ([] of Match).tap do |initial_matches|
+      # each player will lose two matches expect for the winner
+      # the winner will either lose only one game, or no games at all
+      # this means we can create 2 losing games for everyone, with the exception
+      # of the winner, who may only lose, at most, one game.
+      # matches_to_create = 2 * filled_tournament_count - 1
+
+      player_ids.each_slice(2) do |(player_a_id, player_b_id)|
+        initial_matches << Match.create!(
+          level: 0,
+          tournament_id: tournament.id,
+          player_a_id: player_a_id,
+          player_b_id: player_b_id
+        )
+      end
+    end
+  end
+
+  private def create_subsequent_matches(matches, level = 0)
+    return unless matches.size >= 2
+
+    ([] of Match).tap do |new_matches|
+      matches.each_slice(2) do |(match_a, match_b)|
+        new_match = Match.create!(
+          level: level + 1,
+          tournament_id: tournament.id,
+          player_a_id: nil,
+          player_b_id: nil
+        )
+
+        match_a.update!(next_match_id: new_match.id)
+        match_b.update!(next_match_id: new_match.id)
+
+        new_matches << new_match
+      end
+
+      create_subsequent_matches(new_matches, level + 1)
+    end
   end
 
   private def process_byes(initial_matches : Array(Match))
-    matches_with_byes = initial_matches.select { |match| !match.player_a_id || !match.player_b_id }
-
-    matches_with_byes.each { |match| process_byes(match) }
+    # TODO: split out player checking to method on the model?
+    initial_matches.select { |match| !match.player_a_id || !match.player_b_id }.each do |match|
+      process_byes(match)
+    end
   end
 
   private def process_byes(match : Match)
