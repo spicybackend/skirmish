@@ -34,12 +34,56 @@ class TournamentController < ApplicationController
       begin
         tournament = Tournament::CreateTournament.new(league: league).call.not_nil!
 
+        flash[:success] = "The new tournament is open for entry"
         redirect_to "/leagues/#{league.id}/tournaments/#{tournament.id}"
       rescue exception : Tournament::CreateTournament::TournamentCreationError
         tournament = Tournament.build(league_id: league.id)
 
         flash[:danger] = exception.message.to_s
         render("new.slang")
+      end
+    else
+      flash[:danger] = "Unable to find league"
+      redirect_to "/"
+    end
+  end
+
+  def start
+    if league = League.find(params[:league_id])
+      if tournament = Tournament.find(params[:id])
+        begin
+          Tournament::StartTournament.new(tournament: tournament).call
+
+          flash[:success] = "The tournament has been started!"
+          redirect_to "/leagues/#{league.id}/tournaments/#{tournament.id}"
+        rescue exception : Tournament::StartTournament::TournamentStartError
+          flash[:danger] = exception.message.to_s
+          redirect_to "/leagues/#{league.id}/tournaments/#{tournament.id}"
+        end
+      else
+        flash[:danger] = "Unable to find tournament"
+        redirect_to "/leagues/#{league.id}"
+      end
+    else
+      flash[:danger] = "Unable to find league"
+      redirect_to "/"
+    end
+  end
+
+  def destroy
+    if league = League.find(params[:league_id])
+      if tournament = Tournament.find(params[:id])
+        Jennifer::Adapter.adapter.transaction do
+          tournament.matches_query.destroy
+          tournament.entrants_query.destroy
+          tournament.destroy
+        end
+
+        flash[:success] = "The tournament was destroyed"
+        redirect_to "/leagues/#{league.id}"
+      else
+        flash[:danger] = "Unable to find tournament"
+        redirect_to "/leagues/#{league.id}"
       end
     else
       flash[:danger] = "Unable to find league"

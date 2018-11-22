@@ -3,7 +3,7 @@ class Tournament::StartTournament
 
   class TournamentStartError < Exception; end
 
-  def initialize(tournament : Tournament, double_elimination = true)
+  def initialize(tournament : Tournament, double_elimination = false)
     @tournament = tournament
     # TODO: Determine double elim or other type of tournament from the tournament itself
     @double_elimination = double_elimination
@@ -14,8 +14,8 @@ class Tournament::StartTournament
       raise TournamentStartError.new("The tournament is already in progress")
     end
 
-    if no_players_entered?
-      raise TournamentStartError.new("Nobody has joined the tournament")
+    if not_enough_players?
+      raise TournamentStartError.new("There are not enough entrants to start the tournaments")
     end
 
     Jennifer::Adapter.adapter.transaction do
@@ -28,8 +28,6 @@ class Tournament::StartTournament
       Match.all.each do |match|
         debug_output(match)
       end
-
-      raise "ok stawp"
     end
   end
 
@@ -46,8 +44,8 @@ class Tournament::StartTournament
     tournament.in_progress?
   end
 
-  private def no_players_entered?
-    tournament.players.none?
+  private def not_enough_players?
+    tournament.players_query.count < 2
   end
 
   private def prepare_player_arrangement

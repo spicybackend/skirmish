@@ -23,4 +23,8 @@ class Tournament < Jennifer::Model::Base
   def in_progress?
     matches_query.exists? && finished_at.nil?
   end
+
+  def not_started?
+    matches_query.count.zero?
+  end
 end
