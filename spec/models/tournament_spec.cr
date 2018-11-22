@@ -17,6 +17,11 @@ describe Tournament do
         player_id: player.id,
         tournament_id: tournament_in_progress.id
       )
+      another_player = create_player_with_mock_user
+      Entrant.create!(
+        player_id: another_player.id,
+        tournament_id: tournament_in_progress.id
+      )
       Tournament::StartTournament.new(tournament_in_progress).call
 
       it "includes tournaments that haven't been started" do
