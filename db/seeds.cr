@@ -69,13 +69,21 @@ Jennifer::Adapter.adapter.transaction do
       league_id: hotdog_league.id
     )
 
-    [alice, bob].each do |player|
+    [alice, bob, charlie, danielle].each do |player|
       Membership.create!(
         player_id: player.id,
         league_id: hotdog_league.id,
         joined_at: Time.now
       )
     end
+
+    tournament = Tournament::CreateTournament.new(league: hotdog_league).call.not_nil!
+    [alice, bob, charlie, danielle].each do |player|
+      # TODO: create a service that does this, Tournament::Enter.new(player: player, tournament: tournament)
+      # maybe create one for leaving too?
+      Entrant.create!(player_id: player.id, tournament_id: tournament.id)
+    end
+    Tournament::StartTournament.new(tournament: tournament).call
 
     game_logger = League::LogGame.new(
       league: hotdog_league,
@@ -91,12 +99,18 @@ Jennifer::Adapter.adapter.transaction do
       confirming_player: bob
     ).call
 
-    tournament = Tournament::CreateTournament.new(league: hotdog_league).call.not_nil!
-    [alice, bob, charlie, danielle].each do |player|
-      # TODO: create a service that does this, Tournament::Enter.new(player: player, tournament: tournament)
-      # maybe create one for leaving too?
-      Entrant.create!(player_id: player.id, tournament_id: tournament.id)
-    end
-    Tournament::StartTournament.new(tournament: tournament).call
+    game_logger = League::LogGame.new(
+      league: hotdog_league,
+      winner: charlie,
+      loser: danielle,
+      logger: charlie
+    )
+    game_logger.call
+    logged_hotdog_game = game_logger.game
+
+    Game::Confirm.new(
+      game: logged_hotdog_game,
+      confirming_player: danielle
+    ).call
   end
 end
