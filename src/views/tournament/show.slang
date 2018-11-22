@@ -19,14 +19,15 @@
                 == form(action: "/leagues/#{league.id}/tournaments/#{tournament.id}/start", method: :patch) do
                   == csrf_tag
                   == submit(t("tournament.actions.start"), class: "dropdown-item")
-              .dropdown-divider
+                .dropdown-dividerw
               == link_to(t("general.actions.delete"), "/leagues/#{league.id}/tournaments/#{tournament.id}?_csrf=#{csrf_token}", "data-method": "delete", "data-confirm": "Are you sure you want to delete the tournament?", class: "dropdown-item danger")
 
 p.description = league.name
 
-
 - if tournament.in_progress?
   h3 In Progress
+  - tournament.matches.each do |match|
+    p = match.debug_output
 - elsif tournament.not_started?
   h3 Entrants
   .notifications

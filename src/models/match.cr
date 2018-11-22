@@ -21,4 +21,14 @@ class Match < Jennifer::Model::Base
 
   validates_presence :tournament_id
   validates_presence :level
+
+  def debug_output
+    "
+Match ##{self.id} (lv #{self.level})
+Player #{self.player_a_id} vs,
+Player #{self.player_b_id}
+Winner #{self.winner_id}
+Next match #{self.next_match_id}
+    "
+  end
 end

@@ -26,18 +26,9 @@ class Tournament::StartTournament
       process_byes(initial_matches)
 
       Match.all.each do |match|
-        debug_output(match)
+        puts match.debug_output
       end
     end
-  end
-
-  private def debug_output(match)
-    puts "Match ##{match.id} (lv #{match.level})"
-    puts "Player #{match.player_a_id} vs,"
-    puts "Player #{match.player_b_id}"
-    puts "Winner #{match.winner_id}"
-    puts "Next match #{match.next_match_id}"
-    puts
   end
 
   private def tournament_already_started?
