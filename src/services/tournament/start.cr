@@ -1,7 +1,7 @@
-class Tournament::StartTournament
+class Tournament::Start
   getter :tournament, :double_elimination
 
-  class TournamentStartError < Exception; end
+  class StartError < Exception; end
 
   def initialize(tournament : Tournament, double_elimination = false)
     @tournament = tournament
@@ -11,11 +11,11 @@ class Tournament::StartTournament
 
   def call
     if tournament_already_started?
-      raise TournamentStartError.new("The tournament is already in progress")
+      raise StartError.new("The tournament is already in progress")
     end
 
     if not_enough_players?
-      raise TournamentStartError.new("There are not enough entrants to start the tournaments")
+      raise StartError.new("There are not enough entrants to start the tournaments")
     end
 
     Jennifer::Adapter.adapter.transaction do

@@ -32,11 +32,11 @@ class TournamentController < ApplicationController
   def create
     if league = League.find(params[:league_id])
       begin
-        tournament = Tournament::CreateTournament.new(league: league).call.not_nil!
+        tournament = Tournament::Open.new(league: league).call.not_nil!
 
         flash[:success] = "The new tournament is open for entry"
         redirect_to "/leagues/#{league.id}/tournaments/#{tournament.id}"
-      rescue exception : Tournament::CreateTournament::TournamentCreationError
+      rescue exception : Tournament::Open::OpenError
         tournament = Tournament.build(league_id: league.id)
 
         flash[:danger] = exception.message.to_s
@@ -52,11 +52,11 @@ class TournamentController < ApplicationController
     if league = League.find(params[:league_id])
       if tournament = Tournament.find(params[:id])
         begin
-          Tournament::StartTournament.new(tournament: tournament).call
+          Tournament::Start.new(tournament: tournament).call
 
           flash[:success] = "The tournament has been started!"
           redirect_to "/leagues/#{league.id}/tournaments/#{tournament.id}"
-        rescue exception : Tournament::StartTournament::TournamentStartError
+        rescue exception : Tournament::Start::StartError
           flash[:danger] = exception.message.to_s
           redirect_to "/leagues/#{league.id}/tournaments/#{tournament.id}"
         end

@@ -1,10 +1,10 @@
 require "../spec_helper"
 
-describe Tournament::CreateTournament do
+describe Tournament::Open do
   league = create_league
 
   create_tournament = -> do
-    Tournament::CreateTournament.new(
+    Tournament::Open.new(
       league: league
     ).call
   end
@@ -29,14 +29,14 @@ describe Tournament::CreateTournament do
       it "raises an error" do
         create_tournament.call
 
-        expect_raises(Tournament::CreateTournament::TournamentCreationError, "A tournament for this league is already in progress") do
+        expect_raises(Tournament::Open::OpenError, "A tournament for this league is already in progress") do
           create_tournament.call
         end
       end
 
       context "for a different league" do
         another_league = create_league
-        Tournament::CreateTournament.new(
+        Tournament::Open.new(
           league: another_league
         ).call
 
@@ -61,9 +61,9 @@ describe Tournament::CreateTournament do
       it "raises an error" do
         create_tournament.call
         # started_tournament = create_tournament.call
-        # Tournament::StartTournament.new(started_tournament).call
+        # Tournament::Start.new(started_tournament).call
 
-        expect_raises(Tournament::CreateTournament::TournamentCreationError, "A tournament for this league is already in progress") do
+        expect_raises(Tournament::Open::OpenError, "A tournament for this league is already in progress") do
           create_tournament.call
         end
       end

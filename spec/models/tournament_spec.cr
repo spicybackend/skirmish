@@ -6,12 +6,12 @@ describe Tournament do
       league = create_league
       another_league = create_league
 
-      finished_tournament = Tournament::CreateTournament.new(league).call.not_nil!
+      finished_tournament = Tournament::Open.new(league).call.not_nil!
       finished_tournament.update!(finished_at: Time.now)
 
-      new_tournament = Tournament::CreateTournament.new(league).call.not_nil!
+      new_tournament = Tournament::Open.new(league).call.not_nil!
 
-      tournament_in_progress = Tournament::CreateTournament.new(another_league).call.not_nil!
+      tournament_in_progress = Tournament::Open.new(another_league).call.not_nil!
       player = create_player_with_mock_user
       Entrant.create!(
         player_id: player.id,
@@ -22,7 +22,7 @@ describe Tournament do
         player_id: another_player.id,
         tournament_id: tournament_in_progress.id
       )
-      Tournament::StartTournament.new(tournament_in_progress).call
+      Tournament::Start.new(tournament_in_progress).call
 
       it "includes tournaments that haven't been started" do
         Tournament.unfinished.pluck(:id).should contain new_tournament.id
@@ -41,8 +41,8 @@ describe Tournament do
       league = create_league
       another_league = create_league
 
-      tournament = Tournament::CreateTournament.new(league).call.not_nil!
-      another_tournament = Tournament::CreateTournament.new(another_league).call.not_nil!
+      tournament = Tournament::Open.new(league).call.not_nil!
+      another_tournament = Tournament::Open.new(another_league).call.not_nil!
 
       it "includes tournaments that belong to the given league" do
         Tournament.for_league(league).pluck(:id).should contain tournament.id

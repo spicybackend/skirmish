@@ -19,7 +19,7 @@ end
 
 Jennifer::Adapter.adapter.transaction do
   league = League.all.last.not_nil!
-  tournament = Tournament::CreateTournament.new(league: league).call.not_nil!
+  tournament = Tournament::Open.new(league: league).call.not_nil!
 
   puts league
   puts tournament
@@ -42,5 +42,5 @@ Jennifer::Adapter.adapter.transaction do
   end
 
 
-  Tournament::StartTournament.new(tournament).call
+  Tournament::Start.new(tournament).call
 end

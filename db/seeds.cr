@@ -77,13 +77,13 @@ Jennifer::Adapter.adapter.transaction do
       )
     end
 
-    tournament = Tournament::CreateTournament.new(league: hotdog_league).call.not_nil!
+    tournament = Tournament::Open.new(league: hotdog_league).call.not_nil!
     [alice, bob, charlie, danielle].each do |player|
       # TODO: create a service that does this, Tournament::Enter.new(player: player, tournament: tournament)
       # maybe create one for leaving too?
       Entrant.create!(player_id: player.id, tournament_id: tournament.id)
     end
-    Tournament::StartTournament.new(tournament: tournament).call
+    Tournament::Start.new(tournament: tournament).call
 
     game_logger = League::LogGame.new(
       league: hotdog_league,

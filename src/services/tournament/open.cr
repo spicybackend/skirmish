@@ -1,7 +1,7 @@
-class Tournament::CreateTournament
+class Tournament::Open
   getter :league
 
-  class TournamentCreationError < Exception; end
+  class OpenError < Exception; end
 
   def initialize(league : League)
     @league = league
@@ -9,7 +9,7 @@ class Tournament::CreateTournament
 
   def call
     if tournament_in_progress?
-      raise TournamentCreationError.new("A tournament for this league is already in progress")
+      raise OpenError.new("A tournament for this league is already in progress")
     end
 
     Jennifer::Adapter.adapter.transaction do
