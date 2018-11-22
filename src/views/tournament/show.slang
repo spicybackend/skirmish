@@ -3,12 +3,15 @@
     .btn-group
       span.toggle-button-group
         .btn-group
-          - if current_entrant
-            == link_to(t("tournament.actions.leave"), "/leagues/#{league.id}/tournaments/#{tournament.id}/leave?_csrf=#{csrf_token}", "data-method": "delete", "data-confirm": "Are you sure you want to leave the tournament?", class: "btn btn-danger")
-          - else
-            == form(action: "/leagues/#{league.id}/tournaments/#{tournament.id}/join", method: :post) do
-              == csrf_tag
-              == submit(t("tournament.actions.join"), class: "btn btn-primary")
+          - if tournament.not_started?
+            - if current_entrant
+              == link_to(t("tournament.actions.leave"), "/leagues/#{league.id}/tournaments/#{tournament.id}/leave?_csrf=#{csrf_token}", "data-method": "delete", "data-confirm": "Are you sure you want to leave the tournament?", class: "btn btn-danger")
+            - else
+              == form(action: "/leagues/#{league.id}/tournaments/#{tournament.id}/join", method: :post) do
+                == csrf_tag
+                == submit(t("tournament.actions.join"), class: "btn btn-primary")
+          - elsif current_entrant
+            == link_to(t("league.actions.log_game"), "/leagues/#{league.id}/games/new", class: "btn btn-primary")
       - if current_player.try(&.admin_of?(league))
         span.toggle-button-group
           .btn-group

@@ -23,10 +23,15 @@ class EntrantController < ApplicationController
   def destroy
     if tournament = Tournament.find(params[:tournament_id])
       if entrant = tournament.entrants_query.where { _player_id == current_player.not_nil!.try(&.id) }.first
-        entrant.destroy
+        if tournament.not_started?
+          entrant.destroy
 
-        flash[:success] = "Left the tournament"
-        redirect_to "/leagues/#{tournament.league_id}/tournaments/#{tournament.id}"
+          flash[:success] = "Left the tournament"
+          redirect_to "/leagues/#{tournament.league_id}/tournaments/#{tournament.id}"
+        else
+          flash[:danger] = "Can't leave a tournament that has started"
+          redirect_to "/leagues/#{tournament.league_id}/tournaments/#{tournament.id}"
+        end
       else
         flash[:warning] = "You're not currently entered in the tournament"
         redirect_to "/leagues/#{tournament.league_id}/tournaments/#{tournament.id}"
