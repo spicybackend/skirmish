@@ -23,7 +23,7 @@ class EntrantController < ApplicationController
   def destroy
     if tournament = Tournament.find(params[:tournament_id])
       if entrant = tournament.entrants_query.where { _player_id == current_player.not_nil!.try(&.id) }.first
-        if tournament.not_started?
+        if tournament.open?
           entrant.destroy
 
           flash[:success] = "Left the tournament"

@@ -69,7 +69,11 @@ class Game::Confirm
           next_match.update!(player_a_id: winner.id)
         end
         # also update the lower bracket for double-elim (should this be stored as next_loser_match_id?)
-        # also check if tournament finished at this point?
+
+        tournament = match.tournament.not_nil!
+        if tournament.finished?
+          tournament.update!(finished_at: Time.now)
+        end
       end
     end
   end
