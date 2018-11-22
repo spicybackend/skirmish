@@ -22,6 +22,7 @@ class League::LogGame
     if game.valid? && game.save
       # TODO these should be validated and saved along with the game
       create_participations!
+      update_tournament_matches!
       notify_other_player!
 
       return true
@@ -57,6 +58,13 @@ class League::LogGame
     )
 
     [winner_participation, loser_participation]
+  end
+
+  private def update_tournament_matches!
+    # TODO find a better way to match this independent of being player_a or player_b
+    Match.where { (_player_a_id == winner.id && _player_b_id == loser.id) || (_player_a_id == loser.id && _player_b_id == winner.id) }.each do |match|
+      match.update!(game_id: game.id)
+    end
   end
 
   private def other_player

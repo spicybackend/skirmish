@@ -254,6 +254,7 @@ CREATE TABLE public.matches (
     tournament_id bigint,
     player_a_id bigint,
     player_b_id bigint,
+    game_id bigint,
     winner_id bigint,
     next_match_id bigint,
     level integer,

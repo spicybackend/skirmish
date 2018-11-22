@@ -6,6 +6,7 @@ class CreateMatches < Jennifer::Migration::Base
       t.bigint("tournament_id")
       t.bigint("player_a_id")
       t.bigint("player_b_id")
+      t.bigint("game_id")
       t.bigint("winner_id")
       t.bigint("next_match_id")
       t.integer :level

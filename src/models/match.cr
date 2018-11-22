@@ -10,6 +10,7 @@ class Match < Jennifer::Model::Base
     tournament_id: Int64,
     player_a_id: Int64?,
     player_b_id: Int64?,
+    game_id: Int64?,
     winner_id: Int64?,
     next_match_id: Int64?,
 
@@ -24,10 +25,11 @@ class Match < Jennifer::Model::Base
 
   def debug_output
     "
-Match ##{self.id} (lv #{self.level})
-Player #{self.player_a_id} vs,
-Player #{self.player_b_id}
-Winner #{self.winner_id}
+Match ##{self.id} (lv #{self.level}),
+Player #{self.player_a_id} vs,,
+Player #{self.player_b_id},
+Winner #{self.winner_id},
+Game #{self.game_id},
 Next match #{self.next_match_id}
     "
   end
