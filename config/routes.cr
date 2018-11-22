@@ -41,6 +41,7 @@ Amber::Server.configure do
     resources "/leagues", LeagueController
 
     get "/profile", UserController, :show
+    get "/profile/:player_tag", UserController, :show
     get "/profile/edit", UserController, :edit
     patch "/profile", UserController, :update
 
