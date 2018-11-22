@@ -23,6 +23,7 @@ class Game::Confirm
       if can_be_confirmed_by_player?
         update_game
         update_ratings
+        update_tournament_matches
 
         if game_and_participations_valid?
           save_game_and_participations
@@ -55,6 +56,22 @@ class Game::Confirm
 
     winner_participation.rating = winner_rating
     loser_participation.rating = loser_rating
+  end
+
+  private def update_tournament_matches
+    # TODO find a better way to match this independent of being player_a or player_b
+    Match.where { (_player_a_id == winner.id && _player_b_id == loser.id) || (_player_a_id == loser.id && _player_b_id == winner.id) }.each do |match|
+      match.update!(winner_id: winner.id)
+      if next_match = Match.find(match.next_match_id)
+        if next_match.player_a_id
+          next_match.update!(player_b_id: winner.id)
+        else
+          next_match.update!(player_a_id: winner.id)
+        end
+        # also update the lower bracket for double-elim (should this be stored as next_loser_match_id?)
+        # also check if tournament finished at this point?
+      end
+    end
   end
 
   private def old_ratings
