@@ -41,6 +41,8 @@ Amber::Server.configure do
     resources "/leagues", LeagueController
 
     resources "/leagues/:league_id/tournaments/", TournamentController, only: [:new, :show, :create]
+    post "/leagues/:league_id/tournaments/:tournament_id/join", EntrantController, :create
+    delete "/leagues/:league_id/tournaments/:tournament_id/leave", EntrantController, :destroy
 
     get "/profile", UserController, :show
     get "/profile/:player_tag", UserController, :show

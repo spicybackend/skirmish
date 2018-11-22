@@ -2,13 +2,11 @@
   h2.col.justify-content-between.btn-toolbar Tournament
     .btn-group
       - if current_entrant
-        == form(action: "/leagues/#{league.id}/tournaments/#{tournament.id}/leave", method: :post) do
-          == csrf_tag
-          == submit(t("league.actions.join"), class: "btn btn-primary")
+        == link_to(t("tournament.actions.leave"), "/leagues/#{league.id}/tournaments/#{tournament.id}/leave?_csrf=#{csrf_token}", "data-method": "delete", "data-confirm": "Are you sure you want to leave the tournament?", class: "btn btn-danger")
       - else
         == form(action: "/leagues/#{league.id}/tournaments/#{tournament.id}/join", method: :post) do
           == csrf_tag
-          == submit(t("league.actions.join"), class: "btn btn-primary")
+          == submit(t("tournament.actions.join"), class: "btn btn-primary")
 
       / - if current_player.try(&.admin_of?(league))
         span.toggle-button-group
@@ -21,13 +19,13 @@
               .dropdown-divider
               == link_to(t("general.actions.delete"), "/leagues/#{league.id}?_csrf=#{csrf_token}", "data-method": "delete", "data-confirm": "Are you sure you want to delete #{league.name}?", class: "dropdown-item danger")
 
-span.description = league.name
+p.description = league.name
 
+h3 Entrants
 .notifications
   - tournament.players.each do |player|
     a href="/profile/#"
       .notification
-        span.content = "ranking"
         img.icon.gravatar src="#{gravatar_src_for(player)}"
         span.content = player.tag
         span.time = player.rating_for(league)

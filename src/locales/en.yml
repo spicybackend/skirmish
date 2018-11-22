@@ -63,6 +63,8 @@ tournament:
     double-elimination: "Double-elimination"
   actions:
     open: "Open Tournament"
+    join: "Join"
+    leave: "Leave"
 
 game:
   won: "Won"

@@ -27,7 +27,13 @@
               .dropdown-divider
               == link_to(t("general.actions.delete"), "/leagues/#{league.id}?_csrf=#{csrf_token}", "data-method": "delete", "data-confirm": "Are you sure you want to delete #{league.name}?", class: "dropdown-item danger")
 
-span.description = league.description
+p.description = league.description
+
+h3 Tournaments
+- if tournament.nil?
+  p No tournament has been opened for #{league.name}
+- else
+  == link_to("Tournament", "/leagues/#{league.id}/tournaments/#{tournament.id}", class: "btn btn-secondary")
 
 h3 Recent Games
 == render(partial: "_recent_games.slang")

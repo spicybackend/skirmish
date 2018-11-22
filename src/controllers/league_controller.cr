@@ -18,6 +18,7 @@ class LeagueController < ApplicationController
       player = current_player.not_nil!
 
       membership = player.memberships_query.where { _league_id == league.id }.to_a.first? || Membership.build
+      tournament = Tournament.for_league(league).order(created_at: :desc).first
 
       render("show.slang")
     else
