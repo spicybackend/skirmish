@@ -24,10 +24,6 @@ class Tournament::Start
       initial_matches = create_initial_matches(player_ids)
       create_subsequent_matches(initial_matches)
       process_byes(initial_matches)
-
-      Match.all.each do |match|
-        puts match.debug_output
-      end
     end
   end
 
