@@ -39,9 +39,22 @@ Jennifer::Adapter.adapter.transaction do
     )
     charlie_user.password = "password"
     charlie_user.save!
-    charlie_user = Player.create!(
+    charlie = Player.create!(
       tag: "Charlie",
       user_id: charlie_user.id
+    )
+
+    danielle_user = User.build(
+      email: "danielle@skirmish.online",
+      receive_email_notifications: false,
+      verification_code: Random::Secure.hex(8),
+      activated_at: Time.now
+    )
+    danielle_user.password = "password"
+    danielle_user.save!
+    danielle = Player.create!(
+      tag: "Danielle",
+      user_id: danielle_user.id
     )
 
     hotdog_league = League.create!(
@@ -77,5 +90,13 @@ Jennifer::Adapter.adapter.transaction do
       game: logged_hotdog_game,
       confirming_player: bob
     ).call
+
+    tournament = Tournament::CreateTournament.new(league: hotdog_league).call.not_nil!
+    [alice, bob, charlie, danielle].each do |player|
+      # TODO: create a service that does this, Tournament::Enter.new(player: player, tournament: tournament)
+      # maybe create one for leaving too?
+      Entrant.create!(player_id: player.id, tournament_id: tournament.id)
+    end
+    Tournament::StartTournament.new(tournament: tournament).call
   end
 end
