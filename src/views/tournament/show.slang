@@ -29,7 +29,7 @@ p.description = league.name
 
 - if tournament.in_progress?
   h3 In Progress
-  - tournament.matches.each do |match|
+  - tournament.matches_query.order(level: :asc, created_at: :asc).each do |match|
     p = match.debug_output
 - elsif tournament.open?
   h3 Entrants
@@ -42,5 +42,5 @@ p.description = league.name
           span.time = player.rating_for(league)
 - elsif tournament.finished?
   h3 Finished
-  - tournament.matches.each do |match|
+  - tournament.matches_query.order(level: :asc, created_at: :asc).each do |match|
     p = match.debug_output
