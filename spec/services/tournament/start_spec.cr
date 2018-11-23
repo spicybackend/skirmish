@@ -10,7 +10,7 @@ describe Tournament::Start do
   player_d = create_player_with_mock_user
 
   [player_a, player_b, player_c, player_d].each do |player|
-    Entrant.create!(player_id: player.id, tournament_id: tournament.id)
+    Tournament::Enter.new(player: player, tournament: tournament).call
   end
 
   start_tournament = -> do

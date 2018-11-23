@@ -36,10 +36,10 @@ class TournamentController < ApplicationController
 
         flash[:success] = "The new tournament is open for entry"
         redirect_to "/leagues/#{league.id}/tournaments/#{tournament.id}"
-      rescue exception : Tournament::Open::OpenError
+      rescue ex : Tournament::Open::OpenError
         tournament = Tournament.build(league_id: league.id)
 
-        flash[:danger] = exception.message.to_s
+        flash[:danger] = ex.message.to_s
         render("new.slang")
       end
     else
@@ -56,8 +56,8 @@ class TournamentController < ApplicationController
 
           flash[:success] = "The tournament has been started!"
           redirect_to "/leagues/#{league.id}/tournaments/#{tournament.id}"
-        rescue exception : Tournament::Start::StartError
-          flash[:danger] = exception.message.to_s
+        rescue ex : Tournament::Start::StartError
+          flash[:danger] = ex.message.to_s
           redirect_to "/leagues/#{league.id}/tournaments/#{tournament.id}"
         end
       else
