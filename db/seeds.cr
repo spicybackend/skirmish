@@ -57,6 +57,19 @@ Jennifer::Adapter.adapter.transaction do
       user_id: danielle_user.id
     )
 
+    erik_user = User.build(
+      email: "erik@skirmish.online",
+      receive_email_notifications: false,
+      verification_code: Random::Secure.hex(8),
+      activated_at: Time.now
+    )
+    erik_user.password = "password"
+    erik_user.save!
+    erik = Player.create!(
+      tag: "Erik",
+      user_id: erik_user.id
+    )
+
     hotdog_league = League.create!(
       name: "Hotdog Eating League (HEL)",
       description: "Down a hotdog as fast as possible!",
@@ -69,7 +82,7 @@ Jennifer::Adapter.adapter.transaction do
       league_id: hotdog_league.id
     )
 
-    [alice, bob, charlie, danielle].each do |player|
+    [alice, bob, charlie, danielle, erik].each do |player|
       Membership.create!(
         player_id: player.id,
         league_id: hotdog_league.id,
@@ -78,7 +91,7 @@ Jennifer::Adapter.adapter.transaction do
     end
 
     tournament = Tournament::Open.new(league: hotdog_league).call.not_nil!
-    [alice, bob, charlie, danielle].each do |player|
+    [alice, bob, charlie, danielle, erik].each do |player|
       Tournament::Enter.new(player: player, tournament: tournament).call
     end
     Tournament::Start.new(tournament: tournament).call
