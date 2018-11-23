@@ -62,21 +62,7 @@ class Game::Confirm
     # TODO find a better way to match this independent of being player_a or player_b
     league.tournaments_query.unfinished.each do |tournament|
       tournament.matches_query.where { _winner_id == nil && ((_player_a_id == winner.id && _player_b_id == loser.id) || (_player_a_id == loser.id && _player_b_id == winner.id)) }.each do |match|
-        match.update!(winner_id: winner.id)
-        if next_match = Match.find(match.next_match_id)
-          if next_match.player_a_id
-            next_match.update!(player_b_id: winner.id)
-          else
-            next_match.update!(player_a_id: winner.id)
-          end
-        end
-
-        # also update the lower bracket for double-elim (should this be stored as next_loser_match_id?)
-
-        tournament = match.tournament.not_nil!
-        if tournament.finished?
-          tournament.update!(finished_at: Time.now)
-        end
+        Match::UpdateAndProgress.new(match: match, winner: winner, loser: loser).call
       end
     end
   end

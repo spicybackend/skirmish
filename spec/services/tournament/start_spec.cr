@@ -10,6 +10,10 @@ describe Tournament::Start do
   player_d = create_player_with_mock_user
 
   [player_a, player_b, player_c, player_d].each do |player|
+    Membership.create!(player_id: player.id, league_id: league.id)
+  end
+
+  [player_a, player_b, player_c, player_d].each do |player|
     Tournament::Enter.new(player: player, tournament: tournament).call
   end
 

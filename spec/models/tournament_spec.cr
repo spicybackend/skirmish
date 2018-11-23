@@ -11,11 +11,15 @@ describe Tournament do
 
       new_tournament = Tournament::Open.new(league).call.not_nil!
 
-      tournament_in_progress = Tournament::Open.new(another_league).call.not_nil!
       player = create_player_with_mock_user
       another_player = create_player_with_mock_user
-      Tournament::Enter.new(player: player, tournament: tournament).call
-      Tournament::Enter.new(player: another_player, tournament: tournament).call
+
+      Membership.create!(player_id: player.id, league_id: another_league.id)
+      Membership.create!(player_id: another_player.id, league_id: another_league.id)
+
+      tournament_in_progress = Tournament::Open.new(another_league).call.not_nil!
+      Tournament::Enter.new(player: player, tournament: tournament_in_progress).call
+      Tournament::Enter.new(player: another_player, tournament: tournament_in_progress).call
       Tournament::Start.new(tournament_in_progress).call
 
       it "includes tournaments that haven't been started" do
