@@ -239,6 +239,10 @@ tr.clickable-row {
   .dropdown-menu {
     position: absolute;
   }
+
+  .nav-link.home {
+    display: none;
+  }
 }
 
 .toggle-button-group + .toggle-button-group {
@@ -308,13 +312,16 @@ tr.clickable-row {
     &.signup { display: none; }
 
     .nav-link {
-      // visibility: hidden;
       color: transparent !important;
       width: 32px;
       height: 32px;
       margin: 8px;
       background-size: contain !important;
-      &.home { background: url("https://png.icons8.com/ios-glyphs/160/ffffff/cottage.png"); }
+
+      &.home {
+        display: inherit;
+        background: url("https://png.icons8.com/ios-glyphs/160/ffffff/cottage.png");
+      }
       &.leagues { background: url("https://png.icons8.com/ios-glyphs/160/ffffff/trophy.png"); }
       &.profile, &.login { background: url("https://png.icons8.com/ios-glyphs/160/ffffff/gender-neutral-user.png"); }
       &.notifications { background: url("https://png.icons8.com/ios-glyphs/160/ffffff/appointment-reminders.png") }
