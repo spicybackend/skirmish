@@ -10,14 +10,13 @@ ul.navbar-nav
     a.nav-link.leagues href="/leagues" Leagues
 
   - if player = current_player
-    - active = context.request.path.starts_with?("/notifications") ? "active" : ""
-    li class="nav-item #{active}"
-      a.nav-link.notifications href="/notifications" Notifications
-        - notification_count = notification_count_for(player)
-        - if notification_count > 0
-          span.notification-count == notification_count
-
     span.nav-profile
+      - active = context.request.path.starts_with?("/notifications") ? "active" : ""
+      li class="nav-item #{active}"
+        a.nav-link.notifications href="/notifications" Notifications
+          - notification_count = notification_count_for(player)
+          - if notification_count > 0
+            span.notification-count == notification_count
 
       - active = context.request.path.starts_with?("/profile") ? "active" : ""
       li class="nav-item #{active} dropdown"
