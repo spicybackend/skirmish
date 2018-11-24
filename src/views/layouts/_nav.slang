@@ -2,7 +2,7 @@ a.navbar-brand href="/" Skirmish
 
 ul.navbar-nav
   - active = context.request.path == "/" ? "active" : ""
-  li class="nav-item #{active}"
+  li class="nav-item nav-item-home #{active}"
     a.nav-link.home href="/" Home
 
   - active = context.request.path.starts_with?("/leagues") ? "active" : ""

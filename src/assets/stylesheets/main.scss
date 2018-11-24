@@ -241,7 +241,7 @@ tr.clickable-row {
     position: absolute;
   }
 
-  .nav-link.home {
+  .nav-item-home {
     display: none;
   }
 }
@@ -291,6 +291,10 @@ tr.clickable-row {
 
   nav.navbar {
     padding: 0;
+
+    .nav-item-home {
+      display: inherit;
+    }
   }
 
   span.notification-count {
@@ -319,10 +323,7 @@ tr.clickable-row {
       margin: 8px;
       background-size: contain !important;
 
-      &.home {
-        display: inherit;
-        background: url("https://png.icons8.com/ios-glyphs/160/ffffff/cottage.png");
-      }
+      &.home { background: url("https://png.icons8.com/ios-glyphs/160/ffffff/cottage.png"); }
       &.leagues { background: url("https://png.icons8.com/ios-glyphs/160/ffffff/trophy.png"); }
       &.profile, &.login { background: url("https://png.icons8.com/ios-glyphs/160/ffffff/gender-neutral-user.png"); }
       &.notifications { background: url("https://png.icons8.com/ios-glyphs/160/ffffff/appointment-reminders.png") }
