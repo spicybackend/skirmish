@@ -31,13 +31,7 @@ class Match < Jennifer::Model::Base
     Player.find(player_b_id)
   end
 
-  def debug_output
-    "
-Match ##{self.id} (lv #{self.level}),
-#{player_a.try(&.tag) || "(undetermined)"} vs #{player_b.try(&.tag) || "(undetermined)"},
-Winner #{self.winner_id},
-Game ##{self.game_id},
-Next match #{self.next_match_id}
-    "
+  def winner
+    Player.find(winner_id)
   end
 end
