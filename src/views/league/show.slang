@@ -1,9 +1,9 @@
 .row
   h2.col.justify-content-between.btn-toolbar = league.name
     .btn-group
-      - if membership.id && membership.active?
-        span.toggle-button-group
-          .btn-group
+      span.toggle-button-group
+        .btn-group
+          - if membership.id && membership.active?
             == link_to(t("league.actions.log_game"), "/leagues/#{league.id}/games/new", class: "btn btn-primary")
             button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
               span.sr-only Toggle Dropdown
@@ -11,10 +11,10 @@
               == form(action: "/leagues/#{league.id.to_s}/leave", method: :patch) do
                 == csrf_tag
                 == submit(t("league.actions.leave"), "data-confirm": "Are you sure you want to leave #{league.name}?", class: "dropdown-item danger")
-      - else
-        == form(action: "/leagues/#{league.id.to_s}/join", method: membership.id ? :patch : :post) do
-          == csrf_tag
-          == submit(t("league.actions.join"), class: "btn btn-primary")
+          - else
+            == form(action: "/leagues/#{league.id.to_s}/join", method: membership.id ? :patch : :post) do
+              == csrf_tag
+              == submit(t("league.actions.join"), class: "btn btn-primary")
 
       - if current_player.try(&.admin_of?(league))
         span.toggle-button-group
