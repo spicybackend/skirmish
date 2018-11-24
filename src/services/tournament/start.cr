@@ -15,7 +15,7 @@ class Tournament::Start
     end
 
     if not_enough_players?
-      raise StartError.new("There are not enough entrants to start the tournaments")
+      raise StartError.new("Not enough players entered to start the tournament")
     end
 
     Jennifer::Adapter.adapter.transaction do

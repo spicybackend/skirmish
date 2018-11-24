@@ -72,7 +72,7 @@ describe Tournament::Start do
       it "raises an error" do
         Entrant.where { _player_id.in([player_a.id, player_b.id, player_c.id]) }.where { _tournament_id == tournament.id }.destroy
 
-        expect_raises(Tournament::Start::StartError, "There are not enough entrants to start the tournament") do
+        expect_raises(Tournament::Start::StartError, "Not enough players entered to start the tournament") do
           start_tournament.call
         end
       end
