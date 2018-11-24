@@ -46,6 +46,10 @@
     -webkit-border-radius: 6px;
     -webkit-background-clip: padding-box;
 
+    h2, p {
+      text-align: center;
+    }
+
     hr {
       border: 0;
       border-top: 1px solid darken($dark-grey, 10%);
