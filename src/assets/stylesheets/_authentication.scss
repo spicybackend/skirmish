@@ -1,0 +1,86 @@
+.authentication {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+
+  /* replace glow on focused inputs from bootstrap */
+  .form-control:focus {
+    box-shadow: 0 0 0 2px $babyblue;
+  }
+
+  .background {
+    background-color: $dark-grey;
+    background-image: url("https://images.unsplash.com/photo-1473976345543-9ffc928e648d?fit=crop&w=1920");
+
+    background-size: cover;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -9999;
+  }
+
+  .account-box {
+    background-color: $dark-grey;
+    width: 720px;
+    max-width: 520px;
+    padding: 32px 48px;
+    border: 1px solid darken($dark-grey, 10%);
+    align-self: center;
+    color: $thundergrey;
+
+    -webkit-border-radius: 6px;
+    -webkit-background-clip: padding-box;
+
+    h2 {
+      color: white;
+    }
+
+    hr {
+      border-color: $thundergrey;
+      background-color: $thundergrey;
+      color: $thundergrey;
+    }
+
+    a {
+      color: $babyblue
+    }
+
+    label {
+      font-size: 80%;
+      font-weight: 400;
+      margin-bottom: 2px;
+    }
+
+    input {
+      border: 1px solid darken($dark-grey, 10%);
+      background-color: rgba(0, 0, 0, 0.05);
+      color: white;
+
+      &:focus {
+        background-color: rgba(0, 0, 0, 0.2);
+      }
+    }
+
+    button {
+      width: 100%;
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .authentication {
+    .background {
+      background-image: none;
+    }
+
+    .account-box {
+      padding: 32px 16px;
+
+      border: none;
+    }
+  }
+}
