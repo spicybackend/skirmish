@@ -1,10 +1,13 @@
-- if league.errors
-  ul.errors
-    - league.errors.each do |error|
-      li = error.to_s
-
 == form(action: "/leagues/#{league.id.to_s}", method: league.id ? :patch : :post) do
+  h2 League Details
+  p.subheading Some information about the league
+
   == csrf_tag
+
+  - if league.errors
+    ul.errors
+      - league.errors.each do |error|
+        li = error.to_s
 
   .form-group
     == label(name: "name", content: "Name")

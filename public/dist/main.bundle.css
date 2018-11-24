@@ -220,33 +220,17 @@ table.body.mailer table.button table td {
       background-image: linear-gradient(rgba(0, 0, 0, 0.5), transparent); }
   .authentication .account-box {
     background-color: #343a40;
-    width: 720px;
-    max-width: 520px;
     padding: 32px 48px;
     border: 1px solid #1d2124;
     align-self: center;
     color: #828282;
     -webkit-border-radius: 6px;
     -webkit-background-clip: padding-box; }
-    .authentication .account-box h2 {
-      color: white; }
     .authentication .account-box hr {
       border: 0;
       border-top: 1px solid #1d2124; }
     .authentication .account-box a {
       color: #4eb4f9; }
-    .authentication .account-box label {
-      font-size: 80%;
-      font-weight: 400;
-      margin-bottom: 2px; }
-    .authentication .account-box input {
-      border: 1px solid #1d2124;
-      background-color: rgba(0, 0, 0, 0.05);
-      color: white; }
-      .authentication .account-box input:focus {
-        background-color: rgba(0, 0, 0, 0.2); }
-    .authentication .account-box button {
-      width: 100%; }
 
 @media (max-width: 600px) {
   .authentication .background {
@@ -254,8 +238,47 @@ table.body.mailer table.button table td {
     .authentication .background::after {
       content: none; }
   .authentication .account-box {
+    width: 100%;
+    min-width: 0px;
     padding: 32px 16px;
     border: none; } }
+
+/* replace glow on focused inputs from bootstrap */
+.form-control.is-invalid {
+  box-shadow: 0 0 0 2px #ef4b62;
+  border: none; }
+
+.form-control:focus {
+  box-shadow: 0 0 0 2px #4eb4f9; }
+
+form {
+  width: 640px;
+  margin-left: auto;
+  margin-right: auto;
+  color: #828282; }
+  form label {
+    font-size: 80%;
+    font-weight: 400;
+    margin-bottom: 2px; }
+  form input.form-control {
+    border: 1px solid #1d2124;
+    background-color: rgba(0, 0, 0, 0.05);
+    color: white; }
+    form input.form-control:focus {
+      color: white;
+      background-color: rgba(0, 0, 0, 0.2); }
+  form button {
+    width: 100%; }
+
+@media (max-width: 600px) {
+  form {
+    width: 100%; }
+    form h2, form .subheading {
+      text-align: center; }
+    form .btn {
+      width: 100%; }
+      form .btn + .btn {
+        margin-top: 0.5rem; } }
 
 a.dropdown-item {
   display: flex;
