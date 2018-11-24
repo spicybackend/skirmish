@@ -348,7 +348,7 @@ th.right, td.right {
  */
 body {
   font-family: "Muli", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  color: #555;
+  color: #828282;
   background-color: #343a40;
   display: flex;
   flex-direction: column;
@@ -363,7 +363,10 @@ h6, .h6 {
   margin-top: 0;
   font-family: "Muli", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: normal;
-  color: #333; }
+  color: white; }
+
+pre {
+  color: #828282; }
 
 /*
  * Override Bootstrap's default container.

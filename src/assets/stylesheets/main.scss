@@ -165,8 +165,8 @@ th.right, td.right {
  */
 body {
   font-family: $font-stack;
-  color: #555;
-  background-color: #eee;
+  color: $thundergrey;
+  background-color: $dark-grey;
   display: flex;
   flex-direction: column;
   font-size: 17px;
@@ -181,7 +181,11 @@ h6, .h6 {
   margin-top: 0;
   font-family: $font-stack;
   font-weight: normal;
-  color: #333;
+  color: white;
+}
+
+pre {
+  color: $thundergrey;
 }
 
 /*
