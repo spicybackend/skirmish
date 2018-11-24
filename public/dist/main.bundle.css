@@ -195,6 +195,9 @@ table.body.mailer table.button table td {
   width: 100%;
   height: 100%;
   /* replace glow on focused inputs from bootstrap */ }
+  .authentication .form-control.is-invalid {
+    box-shadow: 0 0 0 2px #ef4b62;
+    border: none; }
   .authentication .form-control:focus {
     box-shadow: 0 0 0 2px #4eb4f9; }
   .authentication .background {
@@ -207,14 +210,14 @@ table.body.mailer table.button table td {
     width: 100%;
     height: 100%;
     z-index: -9999; }
-  .authentication .background::after {
-    content: " ";
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 150px;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.5), transparent); }
+    .authentication .background::after {
+      content: " ";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 150px;
+      background-image: linear-gradient(rgba(0, 0, 0, 0.5), transparent); }
   .authentication .account-box {
     background-color: #343a40;
     width: 720px;
@@ -248,6 +251,8 @@ table.body.mailer table.button table td {
 @media (max-width: 600px) {
   .authentication .background {
     background-image: none; }
+    .authentication .background::after {
+      content: none; }
   .authentication .account-box {
     padding: 32px 16px;
     border: none; } }

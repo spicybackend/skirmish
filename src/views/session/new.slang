@@ -13,10 +13,10 @@
       == csrf_tag
       .form-group
         label Email
-        input.form-control autofocus="true" type="email" name="email"
+        input.form-control autofocus="true" type="email" name="email" required="true"
       .form-group
         label Password
-        input.form-control type="password" name="password"
+        input.form-control type="password" name="password" required="true"
       button.btn.btn-primary type="submit" Login
 
     hr

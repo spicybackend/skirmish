@@ -1,19 +1,29 @@
-h2 Sign Up
+.authentication
+  .background.animated.fadeIn.slow
+  .account-box.animated.fadeInUp.faster
+    h2.text-center Sign Up
+    p.text-center We'll just need some basic details
 
-- if user.errors || player.errors
-  ul.errors
-  - (user.errors.full_messages + player.errors.full_messages).each do |error_message|
-    li = error_message
+    - if user.errors || player.errors
+      ul.errors
+      - (user.errors.full_messages + player.errors.full_messages).each do |error_message|
+        li = error_message
 
-form action="/registration" method="post"
-  == csrf_tag
-  .form-group
-    input.form-control type="username" name="username" placeholder="Username" value="#{params[:username]?}"
-  .form-group
-    input.form-control type="email" name="email" placeholder="Email" value="#{user.email}"
-  .form-group
-    input.form-control type="password" name="password" placeholder="Password"
-  button.btn.btn-primary type="submit"
-    == t("authentication.register")
-<hr/>
-== link_to("Already have an account?", "/signin")
+    form action="/registration" method="post"
+      == csrf_tag
+      .form-group
+        label Username
+        input class="form-control #{"is-invalid" if player.errors[:tag].any?}" autofocus="true" type="username" name="username" value="#{params[:username]?}" required="true"
+      .form-group
+        label Email
+        input class="form-control #{"is-invalid" if user.errors[:email].any?}" type="email" name="email" value="#{user.email}" required="true"
+      .form-group
+        label Password
+        input class="form-control #{"is-invalid" if user.errors[:password].any?}" type="password" name="password" required="true"
+      button.btn.btn-primary type="submit"
+        == t("authentication.register")
+
+    hr
+
+    small
+      == link_to("Already have an account?", "/signin")

@@ -6,6 +6,10 @@
   height: 100%;
 
   /* replace glow on focused inputs from bootstrap */
+  .form-control.is-invalid {
+    box-shadow: 0 0 0 2px $strawberry;
+    border: none;
+  }
   .form-control:focus {
     box-shadow: 0 0 0 2px $babyblue;
   }
@@ -20,16 +24,16 @@
     width: 100%;
     height: 100%;
     z-index: -9999;
-  }
 
-  .background::after {
-    content: " ";
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 150px;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.5), transparent);
+    &::after {
+      content: " ";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 150px;
+      background-image: linear-gradient(rgba(0, 0, 0, 0.5), transparent);
+    }
   }
 
   .account-box {
@@ -83,6 +87,10 @@
   .authentication {
     .background {
       background-image: none;
+
+      &::after {
+        content: none;
+      }
     }
 
     .account-box {
