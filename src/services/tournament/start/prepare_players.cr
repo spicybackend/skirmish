@@ -8,10 +8,10 @@ class Tournament::Start::PreparePlayers
   def call
     players = [] of (Player | Nil)
 
-    players.tap do |entered_players|
-      entered_players += tournament.players.shuffle
-      add_byes(entered_players)
-    end
+    players += tournament.players.shuffle
+    add_byes(players)
+
+    players
   end
 
   private def add_byes(players)

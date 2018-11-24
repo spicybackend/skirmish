@@ -23,41 +23,56 @@ describe Tournament::Start do
     ).call
   end
 
-  # TODO: Rewrite all copied spec contexts
-
   describe "#call" do
-    pending "creates a tournament" do
-      tournaments = Tournament.all.count
-      start_tournament.call
+    context "a single elimination tournament" do
+      context "when the tournament is full (has no byes)" do
+        it "creates a match for each player elimination" do
+          initial_match_count = Match.all.count
+          start_tournament.call
 
-      Tournament.all.count.should eq tournaments + 1
-    end
+          expected_matches_created = tournament.players.size - 1
+          Match.all.count.should eq initial_match_count + expected_matches_created
+        end
+      end
 
-    describe "the created tournament" do
-      pending "belongs to the given league" do
-        tournament = start_tournament.call.not_nil!
+      context "when the tournament has byes" do
+        Entrant.where { _player_id == player_d.id }.destroy
 
-        tournament.league!.id.should eq league.id
+        it "creates defaulted matches without players" do
+          start_tournament.call
+
+          tournament.matches_query.where { _player_a_id == nil || _player_b_id == nil }.exists?.should eq true
+        end
       end
     end
 
-    context "when a tournament has already been created" do
-      pending "raises an error" do
+    it "marks the tournament as in progress" do
+      start_tournament.call
+
+      tournament.in_progress?.should eq true
+    end
+
+    it "marks the tournament as no longer being open" do
+      start_tournament.call
+
+      tournament.open?.should eq false
+    end
+
+    context "when the tournament has already been started" do
+      it "raises an error" do
         start_tournament.call
 
-        expect_raises(Tournament::Start::StartError, "A tournament for this league is already in progress") do
+        expect_raises(Tournament::Start::StartError, "The tournament has already been started") do
           start_tournament.call
         end
       end
     end
 
-    pending "when a tournament has already been started" do
-      pending "raises an error" do
-        start_tournament.call
-        # started_tournament = start_tournament.call
-        # Tournament::Start.new(started_tournament).call
+    context "when there aren't enough players to start" do
+      it "raises an error" do
+        Entrant.where { _player_id.in([player_a.id, player_b.id, player_c.id]) }.where { _tournament_id == tournament.id }.destroy
 
-        expect_raises(Tournament::Start::OpenError, "A tournament for this league is already in progress") do
+        expect_raises(Tournament::Start::StartError, "There are not enough entrants to start the tournament") do
           start_tournament.call
         end
       end

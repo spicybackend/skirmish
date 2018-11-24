@@ -11,7 +11,7 @@ class Tournament::Start
 
   def call
     if tournament_already_started?
-      raise StartError.new("The tournament is already in progress")
+      raise StartError.new("The tournament has already been started")
     end
 
     if not_enough_players?
@@ -26,7 +26,7 @@ class Tournament::Start
   end
 
   private def tournament_already_started?
-    tournament.in_progress?
+    !tournament.open?
   end
 
   private def not_enough_players?

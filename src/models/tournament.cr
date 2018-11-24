@@ -24,11 +24,11 @@ class Tournament < Jennifer::Model::Base
     matches_query.count.zero?
   end
 
-  def finished?
-    !matches_query.where { _winner_id == nil }.exists?
-  end
-
   def in_progress?
     matches_query.exists? && !finished?
+  end
+
+  def finished?
+    matches_query.exists? && !matches_query.where { _winner_id == nil }.exists?
   end
 end
