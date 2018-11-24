@@ -57,7 +57,7 @@ div#simple-logger {
       border-radius: 50%;
       -webkit-border-radius: 50%;
       -webkit-background-clip: padding-box; }
-    .game-results .player-result span.name {
+    .game-results .player-result .name {
       font-size: 24px;
       text-align: center; }
 
@@ -89,18 +89,18 @@ div.leagues {
     padding: 8px 12px;
     margin: 8px 12px;
     margin-top: 0;
-    color: #555;
     text-align: center;
-    background-color: white;
     transition: background-color 0.15s;
-    border: 1px solid #ddd;
-    border-radius: 6px; }
+    color: white;
+    border-radius: 6px;
+    border: 1px solid #1d2124;
+    background-color: rgba(0, 0, 0, 0.05); }
     div.leagues .league:first-child {
       margin-left: 0; }
     div.leagues .league:last-child {
       margin-right: 0; }
     div.leagues .league:hover {
-      background-color: #f8f9fa; }
+      background-color: rgba(0, 0, 0, 0.2); }
     div.leagues .league .icon {
       width: 64px;
       height: 64px;
@@ -146,12 +146,12 @@ div.notifications {
     align-items: center;
     padding: 8px 12px;
     margin-bottom: -1px;
-    color: #555;
-    background-color: white;
     transition: background-color 0.15s;
-    border: 1px solid #ddd; }
+    color: white;
+    border: 1px solid #1d2124;
+    background-color: rgba(0, 0, 0, 0.05); }
     div.notifications .notification:hover {
-      background-color: #f8f9fa; }
+      background-color: rgba(0, 0, 0, 0.2); }
     div.notifications .notification .content ~ .icon {
       margin-left: 12px; }
     div.notifications .notification .icon {
@@ -188,6 +188,98 @@ table.body.mailer table.button table td {
   background: #4eb4f9;
   border-color: #4eb4f9; }
 
+.authentication {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  /* replace glow on focused inputs from bootstrap */ }
+  .authentication .form-control.is-invalid {
+    box-shadow: 0 0 0 2px #ef4b62;
+    border: none; }
+  .authentication .form-control:focus {
+    box-shadow: 0 0 0 2px #4eb4f9; }
+  .authentication .background {
+    background-color: #343a40;
+    background-image: url("https://images.unsplash.com/photo-1473976345543-9ffc928e648d?fit=crop&w=1920");
+    background-size: cover;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -9999; }
+    .authentication .background::after {
+      content: " ";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 150px;
+      background-image: linear-gradient(rgba(0, 0, 0, 0.5), transparent); }
+  .authentication .account-box {
+    background-color: #343a40;
+    padding: 32px 48px;
+    border: 1px solid #1d2124;
+    align-self: center;
+    color: #828282;
+    -webkit-border-radius: 6px;
+    -webkit-background-clip: padding-box; }
+    .authentication .account-box hr {
+      border: 0;
+      border-top: 1px solid #1d2124; }
+    .authentication .account-box a {
+      color: #4eb4f9; }
+
+@media (max-width: 600px) {
+  .authentication .background {
+    background-image: none; }
+    .authentication .background::after {
+      content: none; }
+  .authentication .account-box {
+    width: 100%;
+    min-width: 0px;
+    padding: 32px 16px;
+    border: none; } }
+
+/* replace glow on focused inputs from bootstrap */
+.form-control.is-invalid {
+  box-shadow: 0 0 0 2px #ef4b62;
+  border: none; }
+
+.form-control:focus {
+  box-shadow: 0 0 0 2px #4eb4f9; }
+
+form.main {
+  width: 640px;
+  margin-left: auto;
+  margin-right: auto;
+  color: #828282; }
+  form.main label {
+    font-size: 80%;
+    font-weight: 400;
+    margin-bottom: 2px; }
+  form.main input.form-control {
+    border: 1px solid #1d2124;
+    background-color: rgba(0, 0, 0, 0.05);
+    color: white; }
+    form.main input.form-control:focus {
+      color: white;
+      background-color: rgba(0, 0, 0, 0.2); }
+  form.main button {
+    width: 100%; }
+
+@media (max-width: 600px) {
+  form.main {
+    width: 100%; }
+    form.main h2, form.main .subheading {
+      text-align: center; }
+    form.main .btn {
+      width: 100%; }
+      form.main .btn + .btn {
+        margin-top: 0.5rem; } }
+
 a.dropdown-item {
   display: flex;
   justify-content: space-between; }
@@ -213,6 +305,14 @@ h6.section-header {
 .dropdown-item.danger {
   color: #ef4b62; }
 
+.list-group-item {
+  color: white;
+  background-color: rgba(0, 0, 0, 0.05);
+  border: 1px solid #1d2124; }
+  .list-group-item:hover {
+    color: white;
+    background-color: rgba(0, 0, 0, 0.2); }
+
 .player-profile {
   display: flex;
   flex-direction: column;
@@ -226,7 +326,7 @@ h6.section-header {
     background-clip: padding-box;
     -webkit-border-radius: 50%;
     -webkit-background-clip: padding-box; }
-  .player-profile span.name {
+  .player-profile .name {
     font-size: 24px;
     text-align: center; }
 
@@ -291,8 +391,8 @@ th.right, td.right {
  */
 body {
   font-family: "Muli", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  color: #555;
-  background-color: #eee;
+  color: #828282;
+  background-color: #343a40;
   display: flex;
   flex-direction: column;
   font-size: 17px; }
@@ -306,7 +406,10 @@ h6, .h6 {
   margin-top: 0;
   font-family: "Muli", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: normal;
-  color: #333; }
+  color: white; }
+
+pre {
+  color: #828282; }
 
 /*
  * Override Bootstrap's default container.
@@ -324,9 +427,7 @@ h6, .h6 {
  * Masthead for nav
  */
 .masthead {
-  -webkit-box-shadow: inset 0 -2px 5px rgba(0, 0, 0, 0.1);
-  box-shadow: inset 0 -2px 5px rgba(0, 0, 0, 0.1);
-  background: #343a40; }
+  padding: 12px 0; }
 
 nav .nav-profile, nav .nav-auth {
   display: flex;
@@ -339,6 +440,7 @@ nav img.gravatar {
   height: 40px;
   margin-left: auto;
   border-radius: 50%;
+  background-clip: padding-box;
   -webkit-border-radius: 50%;
   -webkit-background-clip: padding-box; }
 
@@ -403,6 +505,8 @@ tr.clickable-row {
 
 @media only screen and (max-width: 768px) {
   .masthead {
+    background: #343a40;
+    padding: 0;
     position: fixed;
     left: 0px;
     bottom: 0px;

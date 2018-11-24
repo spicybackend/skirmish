@@ -1,10 +1,12 @@
-- if tournament.errors
-  ul.errors
-    - tournament.errors.each do |error|
-      li = error.to_s
-
-== form(action: "/leagues/#{league.id}/tournaments", method: tournament.id ? :patch : :post) do
+== form(action: "/leagues/#{league.id}/tournaments", method: tournament.id ? :patch : :post, class: "main") do
   == csrf_tag
+
+  h2 Tournament Details
+
+  - if tournament.errors
+    ul.errors
+      - tournament.errors.each do |error|
+        li = error.to_s
 
   .form-group
     .btn-group.btn-group-toggle data-toggle="buttons"

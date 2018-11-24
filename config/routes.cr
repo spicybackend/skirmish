@@ -46,8 +46,8 @@ Amber::Server.configure do
     delete "/leagues/:league_id/tournaments/:tournament_id/leave", EntrantController, :destroy
 
     get "/profile", UserController, :show
-    get "/profile/:player_tag", UserController, :show
     get "/profile/edit", UserController, :edit
+    get "/profile/:player_tag", UserController, :show
     patch "/profile", UserController, :update
 
     get "/signin", SessionController, :new

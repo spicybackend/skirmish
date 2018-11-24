@@ -18,12 +18,12 @@ div.leagues {
     padding: 8px 12px;
     margin: 8px 12px;
     margin-top: 0;
-    color: #555;
     text-align: center;
-    background-color: white;
     transition: background-color 0.15s;
-    border: 1px solid #ddd;
+    color: white;
     border-radius: 6px;
+    border: 1px solid darken($dark-grey, 10%);
+    background-color: rgba(0, 0, 0, 0.05);
 
     &:first-child {
       margin-left: 0;
@@ -34,7 +34,7 @@ div.leagues {
     }
 
     &:hover {
-      background-color: #f8f9fa;
+      background-color: rgba(0, 0, 0, 0.2);
     }
 
     .icon {

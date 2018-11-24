@@ -6,7 +6,7 @@
 
 .player-profile
   img.gravatar src="#{gravatar_src_for(player)}"
-  span.name = player.tag
+  h3.name = player.tag
 
 - if own_profile?
   h3 Unconfirmed Games

@@ -27,6 +27,8 @@ $nav-item-color: $babyblue;
 @import "league";
 @import "notification";
 @import "mailer";
+@import "authentication";
+@import "form";
 
 a.dropdown-item {
   display: flex;
@@ -60,6 +62,17 @@ h6.section-header {
   color: $strawberry;
 }
 
+.list-group-item {
+  color: white;
+  background-color: rgba(0, 0, 0, 0.05);
+  border: 1px solid darken($dark-grey, 10%);
+
+  &:hover {
+    color: white;
+    background-color: rgba(0, 0, 0, 0.2);
+  }
+}
+
 .player-profile {
   display: flex;
   flex-direction: column;
@@ -76,7 +89,7 @@ h6.section-header {
     -webkit-background-clip: padding-box;
   }
 
-  span.name {
+  .name {
     font-size: 24px;
     text-align: center;
   }
@@ -164,8 +177,8 @@ th.right, td.right {
  */
 body {
   font-family: $font-stack;
-  color: #555;
-  background-color: #eee;
+  color: $thundergrey;
+  background-color: $dark-grey;
   display: flex;
   flex-direction: column;
   font-size: 17px;
@@ -180,7 +193,11 @@ h6, .h6 {
   margin-top: 0;
   font-family: $font-stack;
   font-weight: normal;
-  color: #333;
+  color: white;
+}
+
+pre {
+  color: $thundergrey;
 }
 
 /*
@@ -202,13 +219,10 @@ h6, .h6 {
  * Masthead for nav
  */
 .masthead {
-  -webkit-box-shadow: inset 0 -2px 5px rgba(0,0,0,.1);
-          box-shadow: inset 0 -2px 5px rgba(0,0,0,.1);
-  background: $dark-grey;
+  padding: 12px 0;
 }
 
 nav {
-
   .nav-profile, .nav-auth {
     display: flex;
     flex-direction: row;
@@ -221,6 +235,7 @@ nav {
     height: 40px;
     margin-left: auto;
     border-radius: 50%;
+    background-clip: padding-box;
     -webkit-border-radius: 50%;
     -webkit-background-clip: padding-box;
   }
@@ -307,6 +322,8 @@ tr.clickable-row {
 
 @media only screen and (max-width: 768px) {
   .masthead {
+    background: $dark-grey;
+    padding: 0;
     position: fixed;
     left: 0px;
     bottom: 0px;

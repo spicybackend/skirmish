@@ -1,7 +1,7 @@
-h2 New Game
-
-== form(action: "/leagues/#{league.id}/games", method: :post) do
+== form(action: "/leagues/#{league.id}/games", method: :post, class: "main") do
   == csrf_tag
+  h2 New Game
+
   .form-group
     div id="simple-logger"
       span class="sentence-part" I

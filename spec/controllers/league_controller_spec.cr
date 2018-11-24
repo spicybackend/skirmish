@@ -76,7 +76,7 @@ describe LeagueControllerTest do
         response = subject.get "/leagues/new", headers: basic_authenticated_headers
 
         response.status_code.should eq(200)
-        response.body.should contain("New League")
+        response.body.should contain("League Details")
       end
     end
 
@@ -97,7 +97,7 @@ describe LeagueControllerTest do
         response = subject.get "/leagues/#{league.id}/edit", headers: admin_authenticated_headers(league)
 
         response.status_code.should eq(200)
-        response.body.should contain("Edit League")
+        response.body.should contain("League Details")
       end
     end
 
