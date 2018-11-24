@@ -1,0 +1,55 @@
+.btn-toolbar {
+  .btn {
+    vertical-align: text-top;
+  }
+}
+
+.btn-primary {
+  background-color: $babyblue;
+  border-color: $babyblue;
+
+  &:hover {
+    background-color: darken($babyblue, 10%);
+    border-color: darken($babyblue, 10%);
+  }
+}
+
+.btn-success {
+  background-color: $limegreen;
+  border-color: $limegreen;
+
+  &:hover {
+    background-color: darken($limegreen, 10%);
+    border-color: darken($limegreen, 10%);
+  }
+}
+
+.btn-danger {
+  background-color: $strawberry;
+  border-color: $strawberry;
+
+  &:hover {
+    background-color: darken($strawberry, 10%);
+    border-color: darken($strawberry, 10%);
+  }
+}
+
+.btn-light {
+  background-color: #fff;
+  border-color: #fff;
+
+  &:hover {
+    background-color: darken(#fff, 10%);
+    border-color: darken(#fff, 10%);
+  }
+}
+
+.btn-dark {
+  background-color: $dark-grey;
+  border-color: $dark-grey;
+
+  &:hover {
+    background-color: darken($dark-grey, 10%);
+    border-color: darken($dark-grey, 10%);
+  }
+}
