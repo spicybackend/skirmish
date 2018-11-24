@@ -1,9 +1,17 @@
-.row
+.home.row
   #logo
   .col-sm-12.col-md-6
-    h2 = t "application.welcome"
-    p Thank you for trying out the Amber Framework.  We are working hard to provide a super fast and reliable framework that provides all the productivity tools you are used to without sacrificing the speed.
-    .list-group
-      a.list-group-item.list-group-item-action target="_blank" href="https://docs.amberframework.org" Getting Started with Amber Framework
-      a.list-group-item.list-group-item-action target="_blank" href="https://github.com/veelenga/awesome-crystal" List of Awesome Crystal projects and shards
-      a.list-group-item.list-group-item-action target="_blank" href="https://crystalshards.xyz" What's hot in Crystal right now
+    h2 = t("home.heading")
+    p = t("home.subtext")
+    == link_to(t("authentication.sign_up"), "/signup", class: "btn btn-primary")
+
+    hr
+
+    h3 = t("home.sections.leagues.heading")
+    p = t("home.sections.leagues.subtext")
+    == link_to(t("home.sections.leagues.action"), "/leagues", class: "btn btn-primary")
+
+    hr
+
+    h3 = t("home.sections.tournaments.heading")
+    p = t("home.sections.tournaments.subtext")

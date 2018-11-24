@@ -32,6 +32,7 @@ $nav-item-color: $babyblue;
 @import "form";
 @import "buttons";
 @import "alert";
+@import "home";
 
 a.dropdown-item {
   display: flex;
@@ -119,6 +120,11 @@ h6, .h6 {
   font-family: $font-stack;
   font-weight: normal;
   color: white;
+}
+
+hr {
+  border: 0;
+  border-top: 1px solid darken($dark-grey, 10%);
 }
 
 pre {

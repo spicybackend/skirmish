@@ -10,6 +10,19 @@ general:
     delete: "Delete"
     back: "Back"
 
+home:
+  heading: "Scrap the blackboard"
+  subtext: "Enjoy your games and forget the hassle of managing tournaments."
+
+  sections:
+    leagues:
+      heading: "Leagues"
+      subtext: "Create configurable leagues to track 1v1 competitive games and sports for your players and teams."
+      action: "View Open Leagues"
+    tournaments:
+      heading: "Tournaments"
+      subtext: "More than loging games and tracking stats, Skirmish let's you pitch players against each other in an all-out elimination tournaments."
+
 authentication:
   register: "Register"
   sign_up: "Sign Up"
