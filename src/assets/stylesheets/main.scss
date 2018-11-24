@@ -301,6 +301,10 @@ tr.clickable-row {
   }
 }
 
+.toggle-button-group + .toggle-button-group {
+  margin-left: 8px;
+}
+
 @media only screen and (max-width: 768px) {
   .masthead {
     position: fixed;

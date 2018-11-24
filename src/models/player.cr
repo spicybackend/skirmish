@@ -4,7 +4,7 @@ class Player < Jennifer::Model::Base
   with_timestamps
 
   mapping(
-    id: { type: Int64, primary: true },
+    id: Primary64,
     user_id: Int64?,
 
     tag: String,

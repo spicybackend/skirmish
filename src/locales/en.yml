@@ -57,6 +57,16 @@ league:
     leave: "Leave"
     log_game: "Log Game"
 
+tournament:
+  types:
+    single-elimination: "Instant Knockout"
+    double-elimination: "Double-elimination"
+  actions:
+    open: "Open Tournament"
+    start: "Start Tournament"
+    join: "Join"
+    leave: "Leave"
+
 game:
   won: "Won"
   lost: "Lost"

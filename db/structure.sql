@@ -2,8 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 10.5 (Ubuntu 10.5-0ubuntu0.18.04)
--- Dumped by pg_dump version 10.5 (Ubuntu 10.5-0ubuntu0.18.04)
+-- Dumped from database version 10.6 (Ubuntu 10.6-0ubuntu0.18.04.1)
+-- Dumped by pg_dump version 10.6 (Ubuntu 10.6-0ubuntu0.18.04.1)
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -112,6 +112,42 @@ ALTER SEQUENCE public.administrators_player_id_seq OWNED BY public.administrator
 
 
 --
+-- Name: entrants; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.entrants (
+    id bigint NOT NULL,
+    tournament_id bigint,
+    player_id bigint,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+ALTER TABLE public.entrants OWNER TO postgres;
+
+--
+-- Name: entrants_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.entrants_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.entrants_id_seq OWNER TO postgres;
+
+--
+-- Name: entrants_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.entrants_id_seq OWNED BY public.entrants.id;
+
+
+--
 -- Name: games; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -207,6 +243,47 @@ ALTER TABLE public.leagues_id_seq OWNER TO postgres;
 --
 
 ALTER SEQUENCE public.leagues_id_seq OWNED BY public.leagues.id;
+
+
+--
+-- Name: matches; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.matches (
+    id bigint NOT NULL,
+    tournament_id bigint,
+    player_a_id bigint,
+    player_b_id bigint,
+    game_id bigint,
+    winner_id bigint,
+    next_match_id bigint,
+    level integer,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+ALTER TABLE public.matches OWNER TO postgres;
+
+--
+-- Name: matches_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.matches_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.matches_id_seq OWNER TO postgres;
+
+--
+-- Name: matches_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.matches_id_seq OWNED BY public.matches.id;
 
 
 --
@@ -504,6 +581,42 @@ ALTER SEQUENCE public.players_user_id_seq OWNED BY public.players.user_id;
 
 
 --
+-- Name: tournaments; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.tournaments (
+    id bigint NOT NULL,
+    league_id bigint,
+    finished_at timestamp without time zone,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+ALTER TABLE public.tournaments OWNER TO postgres;
+
+--
+-- Name: tournaments_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.tournaments_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.tournaments_id_seq OWNER TO postgres;
+
+--
+-- Name: tournaments_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.tournaments_id_seq OWNED BY public.tournaments.id;
+
+
+--
 -- Name: users; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -564,6 +677,13 @@ ALTER TABLE ONLY public.administrators ALTER COLUMN player_id SET DEFAULT nextva
 
 
 --
+-- Name: entrants id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.entrants ALTER COLUMN id SET DEFAULT nextval('public.entrants_id_seq'::regclass);
+
+
+--
 -- Name: games id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -582,6 +702,13 @@ ALTER TABLE ONLY public.games ALTER COLUMN league_id SET DEFAULT nextval('public
 --
 
 ALTER TABLE ONLY public.leagues ALTER COLUMN id SET DEFAULT nextval('public.leagues_id_seq'::regclass);
+
+
+--
+-- Name: matches id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.matches ALTER COLUMN id SET DEFAULT nextval('public.matches_id_seq'::regclass);
 
 
 --
@@ -655,6 +782,13 @@ ALTER TABLE ONLY public.players ALTER COLUMN user_id SET DEFAULT nextval('public
 
 
 --
+-- Name: tournaments id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tournaments ALTER COLUMN id SET DEFAULT nextval('public.tournaments_id_seq'::regclass);
+
+
+--
 -- Name: users id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -667,6 +801,14 @@ ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_
 
 ALTER TABLE ONLY public.administrators
     ADD CONSTRAINT administrators_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: entrants entrants_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.entrants
+    ADD CONSTRAINT entrants_pkey PRIMARY KEY (id);
 
 
 --
@@ -683,6 +825,14 @@ ALTER TABLE ONLY public.games
 
 ALTER TABLE ONLY public.leagues
     ADD CONSTRAINT leagues_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: matches matches_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.matches
+    ADD CONSTRAINT matches_pkey PRIMARY KEY (id);
 
 
 --
@@ -723,6 +873,14 @@ ALTER TABLE ONLY public.participations
 
 ALTER TABLE ONLY public.players
     ADD CONSTRAINT players_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: tournaments tournaments_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tournaments
+    ADD CONSTRAINT tournaments_pkey PRIMARY KEY (id);
 
 
 --

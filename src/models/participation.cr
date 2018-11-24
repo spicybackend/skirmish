@@ -2,7 +2,7 @@ class Participation < Jennifer::Model::Base
   with_timestamps
 
   mapping(
-    id: { type: Int64, primary: true },
+    id: Primary64,
     game_id: Int64,
     player_id: Int64,
 

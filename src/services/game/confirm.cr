@@ -23,6 +23,7 @@ class Game::Confirm
       if can_be_confirmed_by_player?
         update_game
         update_ratings
+        update_tournament_matches
 
         if game_and_participations_valid?
           save_game_and_participations
@@ -55,6 +56,15 @@ class Game::Confirm
 
     winner_participation.rating = winner_rating
     loser_participation.rating = loser_rating
+  end
+
+  private def update_tournament_matches
+    # TODO find a better way to match this independent of being player_a or player_b
+    league.tournaments_query.unfinished.each do |tournament|
+      tournament.matches_query.where { _winner_id == nil && ((_player_a_id == winner.id && _player_b_id == loser.id) || (_player_a_id == loser.id && _player_b_id == winner.id)) }.each do |match|
+        Match::UpdateAndProgress.new(match: match, winner: winner, loser: loser).call
+      end
+    end
   end
 
   private def old_ratings
