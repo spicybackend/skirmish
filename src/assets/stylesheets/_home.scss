@@ -1,0 +1,14 @@
+.home {
+  .btn {
+    width: 100%;
+    max-width: 200px;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .home {
+    .btn {
+      max-width: 100%;
+    }
+  }
+}
