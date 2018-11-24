@@ -251,33 +251,33 @@ table.body.mailer table.button table td {
 .form-control:focus {
   box-shadow: 0 0 0 2px #4eb4f9; }
 
-form {
+form.main {
   width: 640px;
   margin-left: auto;
   margin-right: auto;
   color: #828282; }
-  form label {
+  form.main label {
     font-size: 80%;
     font-weight: 400;
     margin-bottom: 2px; }
-  form input.form-control {
+  form.main input.form-control {
     border: 1px solid #1d2124;
     background-color: rgba(0, 0, 0, 0.05);
     color: white; }
-    form input.form-control:focus {
+    form.main input.form-control:focus {
       color: white;
       background-color: rgba(0, 0, 0, 0.2); }
-  form button {
+  form.main button {
     width: 100%; }
 
 @media (max-width: 600px) {
-  form {
+  form.main {
     width: 100%; }
-    form h2, form .subheading {
+    form.main h2, form.main .subheading {
       text-align: center; }
-    form .btn {
+    form.main .btn {
       width: 100%; }
-      form .btn + .btn {
+      form.main .btn + .btn {
         margin-top: 0.5rem; } }
 
 a.dropdown-item {

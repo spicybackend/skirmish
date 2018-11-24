@@ -1,6 +1,6 @@
 .authentication
   .background.animated.fadeIn.slow
-  form.account-box.animated.fadeInUp.faster action="/registration" method="post"
+  form.main.account-box.animated.fadeInUp.faster action="/registration" method="post"
     == csrf_tag
 
     h2 Sign Up

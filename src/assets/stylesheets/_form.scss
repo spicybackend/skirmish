@@ -7,7 +7,7 @@
   box-shadow: 0 0 0 2px $babyblue;
 }
 
-form {
+form.main {
   width: 640px;
   margin-left: auto;
   margin-right: auto;
@@ -85,7 +85,7 @@ form {
 // }
 
 @media (max-width: 600px) {
-  form {
+  form.main {
     width: 100%;
 
     h2, .subheading {

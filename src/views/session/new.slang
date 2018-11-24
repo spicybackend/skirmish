@@ -1,6 +1,6 @@
 .authentication
   .background.animated.fadeIn.slow
-  form.account-box.animated.fadeInUp.faster action="/session" method="post"
+  form.main.account-box.animated.fadeInUp.faster action="/session" method="post"
     == csrf_tag
 
     h2 Welcome back!

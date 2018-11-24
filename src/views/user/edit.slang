@@ -1,7 +1,7 @@
-== form(action: "/profile", method: :patch) do
+== form(action: "/profile", method: :patch, class: "main") do
   == csrf_tag
 
-  h2 Edit Profile
+  h2 Account Details
 
   - if user.errors || player.errors
     ul.errors

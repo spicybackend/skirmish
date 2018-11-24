@@ -1,4 +1,4 @@
-== form(action: "/leagues/#{league.id}/tournaments", method: tournament.id ? :patch : :post) do
+== form(action: "/leagues/#{league.id}/tournaments", method: tournament.id ? :patch : :post, class: "main") do
   == csrf_tag
 
   h2 Tournament Details

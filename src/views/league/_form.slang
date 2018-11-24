@@ -1,4 +1,4 @@
-== form(action: "/leagues/#{league.id.to_s}", method: league.id ? :patch : :post) do
+== form(action: "/leagues/#{league.id.to_s}", method: league.id ? :patch : :post, class: "main") do
   h2 League Details
   p.subheading Some information about the league
 
