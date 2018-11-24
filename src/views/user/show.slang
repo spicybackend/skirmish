@@ -11,7 +11,7 @@
 - if own_profile?
   h3 Unconfirmed Games
   .notifications
-    - player.games_query.unconfirmed.each do |game|
+    - player.unconfirmed_games.each do |game|
       - league = game.league!
       a href="/leagues/#{league.id}/games/#{game.id}"
         .notification
