@@ -52,6 +52,10 @@ class Player < Jennifer::Model::Base
     latest_participation.try(&.rating) || league.start_rating || League::DEFAULT_START_RATING
   end
 
+  def unconfirmed_games
+    games_query.unconfirmed.order(confirmed_at: :desc, created_at: :desc).to_a
+  end
+
   def recent_games
     games_query.order(confirmed_at: :desc, created_at: :desc).limit(RECENT_GAMES_LIMIT).to_a
   end
