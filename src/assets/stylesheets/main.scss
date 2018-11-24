@@ -28,7 +28,9 @@ $nav-item-color: $babyblue;
 @import "notification";
 @import "mailer";
 @import "authentication";
+@import "profile";
 @import "form";
+@import "buttons";
 
 a.dropdown-item {
   display: flex;
@@ -73,28 +75,6 @@ h6.section-header {
   }
 }
 
-.player-profile {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 16px;
-
-  img.gravatar {
-    width: 200px;
-    height: 200px;
-    padding: 14px;
-    border-radius: 50%;
-    background-clip: padding-box;
-    -webkit-border-radius: 50%;
-    -webkit-background-clip: padding-box;
-  }
-
-  .name {
-    font-size: 24px;
-    text-align: center;
-  }
-}
-
 span.notification-count {
   font-size: 13px;
   font-weight: bold;
@@ -114,62 +94,6 @@ form.single-btn {
 
 th.right, td.right {
   text-align: right;
-}
-
-.btn-toolbar {
-  .btn {
-    vertical-align: text-top;
-  }
-}
-
-.btn-primary {
-  background-color: $babyblue;
-  border-color: $babyblue;
-
-  &:hover {
-    background-color: darken($babyblue, 10%);
-    border-color: darken($babyblue, 10%);
-  }
-}
-
-.btn-success {
-  background-color: $limegreen;
-  border-color: $limegreen;
-
-  &:hover {
-    background-color: darken($limegreen, 10%);
-    border-color: darken($limegreen, 10%);
-  }
-}
-
-.btn-danger {
-  background-color: $strawberry;
-  border-color: $strawberry;
-
-  &:hover {
-    background-color: darken($strawberry, 10%);
-    border-color: darken($strawberry, 10%);
-  }
-}
-
-.btn-light {
-  background-color: #fff;
-  border-color: #fff;
-
-  &:hover {
-    background-color: darken(#fff, 10%);
-    border-color: darken(#fff, 10%);
-  }
-}
-
-.btn-dark {
-  background-color: $dark-grey;
-  border-color: $dark-grey;
-
-  &:hover {
-    background-color: darken($dark-grey, 10%);
-    border-color: darken($dark-grey, 10%);
-  }
 }
 
 /*
@@ -209,6 +133,7 @@ pre {
   }
 }
 
+/* Fix some bootstrap borders for hover effects on split buttons */
 .form-toggle-split {
   border-top-right-radius: 0px;
   border-bottom-right-radius: 0px;
@@ -407,13 +332,6 @@ tr.clickable-row {
       .dropdown-menu {
         position: relative;
       }
-    }
-  }
-
-  .player-profile {
-    img.gravatar {
-      width: 160px;
-      height: 160px;
     }
   }
 }
