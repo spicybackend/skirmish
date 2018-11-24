@@ -1,0 +1,21 @@
+.alert {
+  background-color: $dark-grey;
+  border: none;
+  color: white;
+
+  &.alert-info {
+    box-shadow: 0 0 0 2px $babyblue;
+  }
+
+  &.alert-success {
+    box-shadow: 0 0 0 2px $limegreen;
+  }
+
+  &.alert-warning {
+    box-shadow: 0 0 0 2px $pumpkin;
+  }
+
+  &.alert-danger {
+    box-shadow: 0 0 0 2px $strawberry;
+  }
+}
