@@ -9,7 +9,7 @@ ul.navbar-nav
   li class="nav-item #{active}"
     a.nav-link.leagues href="/leagues" Leagues
 
-    span.navbar-split
+  span.navbar-split
 
   - if player = current_player
     - active = context.request.path.starts_with?("/notifications") ? "active" : ""

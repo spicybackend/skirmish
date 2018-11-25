@@ -480,6 +480,9 @@ pre {
 .masthead {
   padding: 12px 0; }
 
+nav .navbar-split {
+  flex-grow: 1; }
+
 nav .nav-profile, nav .nav-auth {
   display: flex;
   flex-direction: row;
@@ -577,6 +580,8 @@ tr.clickable-row {
     .image-content .image {
       margin: 24px auto; }
   .navbar-brand {
+    display: none; }
+  nav .navbar-split {
     display: none; }
   nav .gravatar {
     display: none; }

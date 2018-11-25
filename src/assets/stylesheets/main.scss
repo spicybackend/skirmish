@@ -161,6 +161,10 @@ pre {
 }
 
 nav {
+  .navbar-split {
+    flex-grow: 1;
+  }
+
   .nav-profile, .nav-auth {
     display: flex;
     flex-direction: row;
@@ -297,6 +301,10 @@ tr.clickable-row {
   }
 
   nav {
+    .navbar-split {
+      display: none;
+    }
+
     .gravatar {
       display: none;
     }
