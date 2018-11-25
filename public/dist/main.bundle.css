@@ -559,7 +559,8 @@ tr.clickable-row {
 @media only screen and (max-width: 768px) {
   .masthead {
     background: #343a40;
-    padding: 0;
+    border-top: 1px solid #1d2124;
+    padding: 4px;
     position: fixed;
     left: 0px;
     bottom: 0px;
@@ -592,7 +593,7 @@ tr.clickable-row {
   .nav-profile, .nav-auth {
     margin-left: 0 !important; }
   .nav-item {
-    padding: 4px 14px; }
+    border-radius: 50%; }
     .nav-item.signup {
       display: none; }
     .nav-item .nav-link {
@@ -609,7 +610,12 @@ tr.clickable-row {
         background: url("https://png.icons8.com/ios-glyphs/160/ffffff/gender-neutral-user.png"); }
       .nav-item .nav-link.notifications {
         background: url("https://png.icons8.com/ios-glyphs/160/ffffff/appointment-reminders.png"); }
-    .nav-item.active, .nav-item .dropdown-item.active {
+    .nav-item.active::before {
+      content: " ";
+      position: absolute;
+      width: 50px;
+      height: 4px;
+      margin-top: 48px;
       background-color: #4eb4f9; }
     .nav-item .dropdown-menu-wrapper {
       position: absolute;

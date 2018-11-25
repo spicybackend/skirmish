@@ -265,7 +265,8 @@ tr.clickable-row {
 @media only screen and (max-width: 768px) {
   .masthead {
     background: $dark-grey;
-    padding: 0;
+    border-top: 1px solid darken($dark-grey, 10%);
+    padding: 4px;
     position: fixed;
     left: 0px;
     bottom: 0px;
@@ -324,7 +325,7 @@ tr.clickable-row {
   }
 
   .nav-item {
-    padding: 4px 14px;
+    border-radius: 50%;
 
     &.signup { display: none; }
 
@@ -341,8 +342,15 @@ tr.clickable-row {
       &.notifications { background: url("https://png.icons8.com/ios-glyphs/160/ffffff/appointment-reminders.png") }
     }
 
-    &.active, .dropdown-item.active {
-      background-color: $babyblue;
+    &.active {
+      &::before {
+        content: " ";
+        position: absolute;
+        width: 50px;
+        height: 4px;
+        margin-top: 48px;
+        background-color: $babyblue;
+      }
     }
 
     .dropdown-menu-wrapper {
