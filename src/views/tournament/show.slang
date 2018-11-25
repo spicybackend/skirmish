@@ -28,7 +28,7 @@
 p.description = league.name
 
 - if tournament.in_progress?
-  h3 In Progress
+  h3 Progression
   == render(partial: "_graph.slang")
   == render(partial: "_matches.slang")
 - elsif tournament.open?

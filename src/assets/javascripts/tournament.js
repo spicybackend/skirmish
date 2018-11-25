@@ -63,26 +63,26 @@ if (tournamentGraphElement) {
       autounselectify: true,
 
       maxZoom: 2,
-      minZoom: 0.5,
+      minZoom: 0.25,
 
       style: cytoscape.stylesheet()
         .selector('node')
           .css({
-            'height': 80,
-            'width': 80,
+            'height': '80rem',
+            'width': '80rem',
             'background-image': 'data(background)',
             'background-fit': 'cover',
             'background-color': '#343a40',
             'border-color': 'data(outline)',
-            'border-width': 8,
+            'border-width': '8rem',
             'border-opacity': 1,
             'content': 'data(players_vs)',
             'color': 'white',
-            'text-outline-width': 2,
+            'text-outline-width': '2rem',
             'text-outline-color': '#343a40',
             'text-valign': 'bottom',
             'font-weight': 'bold',
-            'font-size': '20px',
+            'font-size': '20rem',
             'font-family': 'Muli, Helvetica Neue, Helvetica, Arial, sans-serif'
           })
         .selector('.eating')
@@ -95,7 +95,7 @@ if (tournamentGraphElement) {
           })
         .selector('edge')
           .css({
-            'curve-style': 'bezier',
+            'curve-style': 'unbundled-bezier',
             'width': 8,
             'source-arrow-shape': 'triangle',
             'line-color': 'data(color)',
