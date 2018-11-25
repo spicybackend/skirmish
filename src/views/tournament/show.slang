@@ -29,6 +29,7 @@ p.description = league.name
 
 - if tournament.in_progress?
   h3 In Progress
+  == render(partial: "_graph.slang")
   == render(partial: "_matches.slang")
 - elsif tournament.open?
   h3 Entrants
@@ -41,4 +42,5 @@ p.description = league.name
           span.time = player.rating_for(league)
 - elsif tournament.finished?
   h3 Finished
+  == render(partial: "_graph.slang")
   == render(partial: "_matches.slang")

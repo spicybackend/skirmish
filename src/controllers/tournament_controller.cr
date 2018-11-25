@@ -5,9 +5,16 @@ class TournamentController < ApplicationController
 
   def show
     if league = League.find(params[:league_id])
-      if tournament = Tournament.find(params[:id])
+      # strip the format from the id
+      tournament_id = params[:id].gsub(/\..*/, "")
+
+      if tournament = Tournament.find(tournament_id)
         current_entrant = tournament.entrants_query.where { _player_id == current_player.try(&.id) }.first
-        render("show.slang")
+
+        respond_with do
+          html render("show.slang")
+          json "{}"
+        end
       else
         flash[:danger] = "Unable to find tournament"
         redirect_to "/leagues/#{league.id}"
