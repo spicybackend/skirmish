@@ -479,11 +479,17 @@ pre {
 .masthead {
   padding: 12px 0; }
 
-nav .nav-profile, nav .nav-auth {
-  display: flex;
-  flex-direction: row;
-  align-self: flex-end;
-  margin-left: auto; }
+nav.navbar {
+  align-items: baseline; }
+
+nav .navbar-nav {
+  width: 100%;
+  align-items: baseline; }
+  nav .navbar-nav .nav-item {
+    height: 100%; }
+
+nav .navbar-split {
+  flex-grow: 1; }
 
 nav img.gravatar {
   width: 40px;
@@ -544,77 +550,7 @@ tr.clickable-row {
   color: white;
   background-color: #4eb4f9; }
 
-.navbar-nav {
-  flex-direction: row;
-  width: 100%; }
-  .navbar-nav .dropdown-menu {
-    position: absolute; }
-  .navbar-nav .nav-item-home {
-    display: none; }
-
 .toggle-button-group + .toggle-button-group {
   margin-left: 8px; }
-
-@media only screen and (max-width: 768px) {
-  .masthead {
-    background: #343a40;
-    padding: 0;
-    position: fixed;
-    left: 0px;
-    bottom: 0px;
-    height: 56px;
-    width: 100%;
-    z-index: 999; }
-  body {
-    flex-direction: column-reverse;
-    justify-content: space-between; }
-    body .container {
-      margin-bottom: 56px; }
-  .image-content {
-    flex-direction: column; }
-    .image-content .image {
-      margin: 24px auto; }
-  .navbar-brand {
-    display: none; }
-  nav .gravatar {
-    display: none; }
-  nav.navbar {
-    padding: 0; }
-    nav.navbar .nav-item-home {
-      display: inherit; }
-  span.notification-count {
-    position: absolute;
-    margin-left: 24px;
-    margin-top: -36px; }
-  .navbar-nav {
-    justify-content: space-between; }
-  .nav-profile, .nav-auth {
-    margin-left: 0 !important; }
-  .nav-item {
-    padding: 4px 14px; }
-    .nav-item.signup {
-      display: none; }
-    .nav-item .nav-link {
-      color: transparent !important;
-      width: 32px;
-      height: 32px;
-      margin: 8px;
-      background-size: contain !important; }
-      .nav-item .nav-link.home {
-        background: url("https://png.icons8.com/ios-glyphs/160/ffffff/cottage.png"); }
-      .nav-item .nav-link.leagues {
-        background: url("https://png.icons8.com/ios-glyphs/160/ffffff/trophy.png"); }
-      .nav-item .nav-link.profile, .nav-item .nav-link.login {
-        background: url("https://png.icons8.com/ios-glyphs/160/ffffff/gender-neutral-user.png"); }
-      .nav-item .nav-link.notifications {
-        background: url("https://png.icons8.com/ios-glyphs/160/ffffff/appointment-reminders.png"); }
-    .nav-item.active, .nav-item .dropdown-item.active {
-      background-color: #4eb4f9; }
-    .nav-item .dropdown-menu-wrapper {
-      position: absolute;
-      bottom: calc(100% - 5px);
-      right: 0; }
-      .nav-item .dropdown-menu-wrapper .dropdown-menu {
-        position: relative; } }
 
 /*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJtYWluLmJ1bmRsZS5jc3MiLCJzb3VyY2VSb290IjoiIn0=*/
