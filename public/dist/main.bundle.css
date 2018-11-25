@@ -555,6 +555,8 @@ tr.clickable-row {
     position: absolute; }
   .navbar-nav .nav-item-home {
     display: none; }
+  .navbar-nav .dropdown-item.active, .navbar-nav .dropdown-item:active {
+    background-color: #4eb4f9; }
 
 .toggle-button-group + .toggle-button-group {
   margin-left: 8px; }

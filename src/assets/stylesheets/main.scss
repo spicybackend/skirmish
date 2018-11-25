@@ -260,6 +260,10 @@ tr.clickable-row {
   .nav-item-home {
     display: none;
   }
+
+  .dropdown-item.active, .dropdown-item:active {
+    background-color: $babyblue;
+  }
 }
 
 .toggle-button-group + .toggle-button-group {
