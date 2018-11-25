@@ -99,6 +99,11 @@ th.right, td.right {
   text-align: right;
 }
 
+.home.row {
+  // animation fix
+  overflow: hidden;
+}
+
 /*
  * Globals
  */

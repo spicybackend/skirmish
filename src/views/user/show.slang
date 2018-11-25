@@ -4,7 +4,7 @@
       .button-group
         == link_to(t("general.actions.edit"), "/profile/edit", class: "btn btn-primary")
 
-.player-profile
+.player-profile.animated.zoomIn.fast
   img.gravatar src="#{gravatar_src_for(player)}"
   h3.name = player.tag
 

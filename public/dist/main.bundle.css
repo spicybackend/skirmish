@@ -428,6 +428,9 @@ form.single-btn {
 th.right, td.right {
   text-align: right; }
 
+.home.row {
+  overflow: hidden; }
+
 /*
  * Globals
  */
