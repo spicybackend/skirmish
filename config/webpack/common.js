@@ -5,7 +5,8 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 let config = {
   entry: {
     'main.bundle.js': './src/assets/javascripts/main.js',
-    'main.bundle.css': './src/assets/stylesheets/main.scss'
+    'main.bundle.css': './src/assets/stylesheets/main.scss',
+    'cytoscape.min.js': './node_modules/cytoscape/dist/cytoscape.min.js'
   },
   output: {
     filename: '[name]',

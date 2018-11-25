@@ -23,6 +23,8 @@ class Match < Jennifer::Model::Base
   validates_presence :tournament_id
   validates_presence :level
 
+  scope :without_byes { where { (_level > 0) || (_player_a_id != nil && _player_b_id != nil) } }
+
   def player_a
     Player.find(player_a_id)
   end

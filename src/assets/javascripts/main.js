@@ -1,6 +1,7 @@
 import Amber from 'amber'
 
 import "./game.js"
+import "./tournament.js"
 
 if (!Date.prototype.toGranite) {
   (function() {
@@ -24,6 +25,9 @@ if (!Date.prototype.toGranite) {
   }());
 }
 
+/*
+ * Ensure the data-confirm elements show popup confirmations
+ */
 document.querySelectorAll("form").forEach((form) => {
   form.querySelectorAll("form input[type=submit]").forEach((submissionElem) => {
     let confirmationMessage = submissionElem.getAttribute("data-confirm");

@@ -28,17 +28,8 @@
 p.description = league.name
 
 - if tournament.in_progress?
-  h3 In Progress
-  == render(partial: "_matches.slang")
+  == render(partial: "_in_progress.slang")
 - elsif tournament.open?
-  h3 Entrants
-  .notifications
-    - tournament.players.each do |player|
-      a href="/profile/#"
-        .notification
-          img.icon.gravatar src="#{gravatar_src_for(player)}"
-          span.content = player.tag
-          span.time = player.rating_for(league)
+  == render(partial: "_open.slang")
 - elsif tournament.finished?
-  h3 Finished
-  == render(partial: "_matches.slang")
+  == render(partial: "_finished.slang")

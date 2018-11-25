@@ -24,6 +24,6 @@ class ErrorController < Amber::Controller::Error
       ExceptionMailer.new(exception: @ex, user: current_user).send
     end
 
-    render("internal_server_error.slang")
+    render("internal_server_error.slang", layout: nil)
   end
 end

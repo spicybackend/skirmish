@@ -33,6 +33,7 @@ $nav-item-color: $babyblue;
 @import "buttons";
 @import "alert";
 @import "home";
+@import "tournament";
 
 a.dropdown-item {
   display: flex;
@@ -96,6 +97,11 @@ form.single-btn {
 
 th.right, td.right {
   text-align: right;
+}
+
+.home.row {
+  // animation fix
+  overflow: hidden;
 }
 
 /*

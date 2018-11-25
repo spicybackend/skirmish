@@ -38,6 +38,15 @@ div.notifications {
       margin-left: 12px;
     }
 
+    .vs {
+      margin-left: 12px;
+      margin-right: 12px;
+
+      & ~ .icon {
+        margin-left: 0px;
+      }
+    }
+
     .icon {
       width: 32px;
       height: 32px;
