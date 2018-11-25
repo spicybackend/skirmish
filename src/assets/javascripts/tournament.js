@@ -6,9 +6,8 @@ let tournamentGraphElement = document.getElementById('tournament-graph');
 if (tournamentGraphElement) {
   let tournamentDataUrl = tournamentGraphElement.getAttribute('tournament-data-url');
   fetch(`${tournamentDataUrl}.json`)
-  .then(response => {
-    return response.json();
-  }).then(tournamentData => {
+  .then(response => response.json())
+  .then(tournamentData => {
     // Get rid of bye matches
     let filteredMatchData = tournamentData.matches.filter((match) => { return match.level > 0 || (match.player_a_id && match.player_b_id) });
     let matchNodes = filteredMatchData.map((match) => {
@@ -167,5 +166,8 @@ if (tournamentGraphElement) {
     //     delay += duration;
     //   })(); }
     // });
-  })
+  }).catch(function(error) {
+    console.log(error);
+    tournamentGraphElement.innerText = "Something went wrong."
+  });
 }
