@@ -23,6 +23,6 @@ h3 Matches
             - if match.next_match_id
               = "#{winner.tag} won"
             - else
-              = "#{winner.tag} is champion"
+              = "#{winner.tag} is the champion"
           - else
             | To be played

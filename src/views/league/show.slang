@@ -33,11 +33,19 @@ h3 Tournaments
 - if tournament.nil?
   p No tournament has been opened for #{league.name}
 - else
-  == link_to("Tournament", "/leagues/#{league.id}/tournaments/#{tournament.id}", class: "btn btn-secondary")
+  - if tournament.in_progress?
+    p There's currently a tournament in progress.
+    == render(partial: "tournament/_tournament_tree.slang")
+  - elsif tournament.finished?
+    p = "The winner of the last tournament was #{tournament.winner.try(&.tag)}."
+  - else tournament.open?
+    p A new tournament is open for entry!
 
-h3 Recent Games
-== render(partial: "_recent_games.slang")
+  == link_to("Open Tournament", "/leagues/#{league.id}/tournaments/#{tournament.id}", class: "btn btn-primary")
 
 h3 Leaderboard
 - leaderboard = Leaderboard::PureSkill.new(league: league)
 == render(partial: "_leaderboard.slang")
+
+h3 Recent Games
+== render(partial: "_recent_games.slang")

@@ -369,6 +369,7 @@ form.main {
 #tournament-graph {
   height: 400px;
   width: 100%;
+  margin-bottom: 1rem;
   background-color: rgba(0, 0, 0, 0.05);
   border: 1px solid #1d2124;
   border-radius: 6px; }

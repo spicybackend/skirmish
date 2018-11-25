@@ -31,4 +31,11 @@ class Tournament < Jennifer::Model::Base
   def finished?
     matches_query.exists? && !matches_query.where { _winner_id == nil }.exists?
   end
+
+  def winner
+    if finished?
+      last_match = matches_query.where { _next_match_id == nil }.first
+      Player.find(last_match.try(&.winner_id))
+    end
+  end
 end
