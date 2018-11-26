@@ -102,19 +102,20 @@ class TournamentController < ApplicationController
 
   private def json_tournament(tournament : Tournament)
     {
-      matches: tournament.matches.map { |match| hashed(match) },
+      matches: tournament.matches.map { |match| hashed(match, tournament) },
       players: tournament.players.map { |player| hashed(player) }
     }.to_json
   end
 
-  private def hashed(match : Match)
+  private def hashed(match : Match, tournament : Tournament)
     {
       id: match.id,
       level: match.level,
       player_a_id: match.player_a_id,
       player_b_id: match.player_b_id,
       winner_id: match.winner_id,
-      next_match_id: match.next_match_id
+      next_match_id: match.next_match_id,
+      url: match.game_id ? "/leagues/#{tournament.league_id}/games/#{match.game_id}" : "/leagues/#{match.tournament.not_nil!.league_id}/games/new"
     }
   end
 
