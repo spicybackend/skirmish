@@ -61,7 +61,7 @@ class Game::Confirm
   private def update_tournament_matches
     # TODO find a better way to match this independent of being player_a or player_b
     league.tournaments_query.unfinished.each do |tournament|
-      tournament.matches_query.where { _winner_id == nil && ((_player_a_id == winner.id && _player_b_id == loser.id) || (_player_a_id == loser.id && _player_b_id == winner.id)) }.each do |match|
+      tournament.matches_query.where { (_winner_id == nil) & g(g((_player_a_id == winner.id) & (_player_b_id == loser.id)) | g((_player_a_id == loser.id) & (_player_b_id == winner.id))) }.each do |match|
         Match::UpdateAndProgress.new(match: match, winner: winner, loser: loser).call
       end
     end
