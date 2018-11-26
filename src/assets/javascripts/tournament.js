@@ -27,6 +27,7 @@ if (tournamentGraphElement) {
         data: {
           id: `m${match.id}`,
           name: `Match #${match.id}`,
+          href: match.url,
           players_vs: `${ player_a ? player_a.tag : "undetermined" } vs ${ player_b ? player_b.tag : "undetermined" }`,
           background: winner ? winner.image_url : 'none',
           outline: outlineColor
@@ -117,55 +118,13 @@ if (tournamentGraphElement) {
       }
     }); // cy init
 
-    // cy.on('tap', 'node', function() {
-    //   var nodes = this;
-    //   var tapped = nodes;
-    //   var food = [];
+    cy.on('tap', 'node', function () {
+      let node = this._private;
+      let href = node.data.href;
 
-    //   nodes.addClass('eater');
-
-    //   for(;;){
-    //     var connectedEdges = nodes.connectedEdges(function(el){
-    //       return !el.target().anySame( nodes );
-    //     });
-
-    //     var connectedNodes = connectedEdges.targets();
-
-    //     Array.prototype.push.apply( food, connectedNodes );
-
-    //     nodes = connectedNodes;
-
-    //     if( nodes.empty() ){ break; }
-    //   }
-
-    //   var delay = 0;
-    //   var duration = 500;
-    //   for( var i = food.length - 1; i >= 0; i-- ){ (function(){
-    //     var thisFood = food[i];
-    //     var eater = thisFood.connectedEdges(function(el){
-    //       return el.target().same(thisFood);
-    //     }).source();
-
-    //     thisFood.delay( delay, function(){
-    //       eater.addClass('eating');
-    //     } ).animate({
-    //       position: eater.position(),
-    //       css: {
-    //         'width': 10,
-    //         'height': 10,
-    //         'border-width': 0,
-    //         'opacity': 0
-    //       }
-    //     }, {
-    //       duration: duration,
-    //       complete: function(){
-    //         thisFood.remove();
-    //       }
-    //     });
-
-    //     delay += duration;
-    //   })(); }
-    // });
+      if (href)
+        window.location.href = href;
+    });
   }).catch(function(error) {
     console.log(error);
     tournamentGraphElement.innerText = "Something went wrong."
