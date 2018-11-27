@@ -1,9 +1,17 @@
-div#simple-logger {
+div.game-logger {
   display: flex; }
-  div#simple-logger span.sentence-part {
+  div.game-logger span.sentence-part {
     line-height: 1.5;
     font-weight: 400;
     padding: .375rem .75rem; }
+  div.game-logger .game-logger-field {
+    display: flex; }
+
+@media only screen and (max-width: 768px) {
+  div.game-logger {
+    flex-direction: column; }
+  .game-logger-field {
+    margin-top: 1em; } }
 
 .game-results {
   display: flex;

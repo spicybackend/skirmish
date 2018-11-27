@@ -36,8 +36,12 @@ class League < Jennifer::Model::Base
   validates_numericality :k_factor, greater_than_or_equal_to: 1, less_than_or_equal_to: 100
   validates_format :accent_color, /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/
 
+  def active_players_query
+    players_query.where { Membership._left_at == nil }
+  end
+
   def active_players
-    players_query.where { Membership._left_at == nil }.to_a
+    active_players_query.to_a
   end
 
   def recent_games

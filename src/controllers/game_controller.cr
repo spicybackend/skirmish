@@ -53,9 +53,19 @@ class GameController < ApplicationController
   def new
     game = Game.build
     league = League.find(params[:league_id])
+    player_id_preselect = nil
 
     if league
-      other_players = league.active_players.to_a.reject { |player| player == current_player }
+      if tournament = Tournament.for_league(league).order(created_at: :desc).first
+        if tournament.in_progress?
+          current_player_id = current_player.not_nil!.id
+          next_tournament_match = tournament.matches_query.where { (_winner_id == nil) & g((_player_a_id == current_player_id) | (_player_b_id == current_player_id)) }.order(level: :asc).limit(1).first
+
+          player_id_preselect = [next_tournament_match.try(&.player_a_id), next_tournament_match.try(&.player_b_id)].reject { |player_id| player_id == current_player_id }.first
+        end
+      end
+
+      other_players = league.active_players_query.where { _id != current_player.try(&.id) }.order(tag: :asc).to_a
 
       if other_players.empty?
         flash["warning"] = "There are no other players to log against"
@@ -81,7 +91,8 @@ class GameController < ApplicationController
 
     unless other_player
       flash["danger"] = "Can't find opponent"
-      other_players = league.active_players.to_a.reject { |other| other == player }
+      other_players = league.active_players_query.where { _id != current_player.try(&.id) }.order(tag: :asc).to_a
+      player_id_preselect = nil
       render("new.slang"); return
     end
 
@@ -101,7 +112,8 @@ class GameController < ApplicationController
       redirect_to "/leagues/#{league.id}/games/#{game.id}"
     else
       flash["danger"] = game_logger.errors.to_s
-      other_players = league.active_players.to_a.reject { |other| other == player }
+      other_players = league.active_players_query.where { _id != current_player.try(&.id) }.order(tag: :asc).to_a
+      player_id_preselect = nil
 
       render("new.slang")
     end
