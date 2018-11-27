@@ -45,7 +45,7 @@ mailer:
     subject: "Welcome to Skirmish"
     title: "Welcome to Skirmish"
     subtitle: "Hey %{name}, it's game on!"
-    content: "Once last thing before we get you all set up, we need to confirm you're really who you say you are."
+    content: "One last thing before we get you all set up, we need to confirm you're really who you say you are."
     verification:
       content: "Please follow the link to confirm your email address."
       action: "Verify Account"
@@ -55,7 +55,7 @@ mailer:
     title: "Game Logged"
     subtitle: "%{logger} has logged a game against you!"
     confirmation:
-      content: "Follow the link below to confirm the game."
+      content: "Awh, shucks. Follow the link below to confirm the game, and better luck next time!"
       action: "Confirm"
 
 verification:
