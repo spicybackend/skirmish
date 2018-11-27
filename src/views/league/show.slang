@@ -32,7 +32,7 @@ p.description = league.description
 h3.justify-content-between.btn-toolbar Tournaments
   - if tournament
     .btn-group
-      == link_to("View Tournament", "/leagues/#{league.id}/tournaments/#{tournament.id}", class: "btn btn-primary")
+      == link_to(t("general.actions.view"), "/leagues/#{league.id}/tournaments/#{tournament.id}", class: "btn btn-primary")
 - if tournament
   - if tournament.in_progress?
     p There's currently a tournament in progress.

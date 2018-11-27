@@ -1,7 +1,7 @@
 .home.row
   #logo
   .col-sm-12.col-md-6.animated.fadeInRight.fast
-    h2 = t("home.heading")
+    h1 = t("home.heading")
     p = t("home.subtext")
     - if current_user.nil?
       == link_to(t("authentication.sign_up"), "/signup", class: "btn btn-primary")
