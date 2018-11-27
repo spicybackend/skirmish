@@ -3,6 +3,7 @@
     - if own_profile?
       .button-group
         == link_to(t("general.actions.edit"), "/profile/edit", class: "btn btn-primary")
+        == link_to(t("authentication.sign_out"), "/signout", class: "btn btn-danger")
 
 .player-profile.animated.zoomIn.fast
   img.gravatar src="#{gravatar_src_for(player)}"

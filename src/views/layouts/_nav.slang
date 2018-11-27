@@ -20,14 +20,10 @@ ul.navbar-nav
           span.notification-count == notification_count
 
     - active = context.request.path.starts_with?("/profile") ? "active" : ""
-    li class="nav-item #{active} dropdown"
-      a.nav-link.dropdown-toggle.profile data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" = player.tag
-      span.dropdown-menu-wrapper
-        .dropdown-menu.dropdown-menu-right
-          a class="dropdown-item #{active}" href="/profile" Profile
-          .dropdown-divider
-          a.dropdown-item href="/signout" == t "authentication.sign_out"
-    img.gravatar src="#{gravatar_src_for(player)}"
+    li class="nav-item #{active}"
+      a.nav-link.profile href="/profile" = player.tag
+    a.gravatar href="/profile"
+      img.gravatar src="#{gravatar_src_for(player)}"
 
   - else
     span.nav-auth

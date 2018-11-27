@@ -599,17 +599,20 @@ tr.clickable-row {
     flex-direction: column-reverse;
     justify-content: space-between; }
     body .container {
-      margin-bottom: 56px; }
+      margin-bottom: 56px;
+      overflow-x: hidden; }
   .image-content {
     flex-direction: column; }
     .image-content .image {
       margin: 24px auto; }
   .navbar-brand {
     display: none; }
-  nav .navbar-split {
-    display: none; }
-  nav .gravatar {
-    display: none; }
+  nav {
+    overflow: hidden; }
+    nav .navbar-split {
+      display: none; }
+    nav .gravatar {
+      display: none; }
   nav.navbar {
     padding: 0; }
     nav.navbar .nav-item-home {
@@ -645,7 +648,7 @@ tr.clickable-row {
       position: absolute;
       width: 50px;
       height: 4px;
-      margin-top: 48px;
+      margin-top: 44px;
       background-color: #4eb4f9; }
     .nav-item .dropdown-menu-wrapper {
       position: absolute;

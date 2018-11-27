@@ -289,6 +289,7 @@ tr.clickable-row {
 
     .container {
       margin-bottom: 56px;
+      overflow-x: hidden;
     }
   }
 
@@ -305,6 +306,7 @@ tr.clickable-row {
   }
 
   nav {
+    overflow: hidden;
     .navbar-split {
       display: none;
     }
@@ -360,7 +362,7 @@ tr.clickable-row {
         position: absolute;
         width: 50px;
         height: 4px;
-        margin-top: 48px;
+        margin-top: 44px;
         background-color: $babyblue;
       }
     }
