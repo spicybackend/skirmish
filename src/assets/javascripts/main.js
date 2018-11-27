@@ -1,6 +1,7 @@
 import Amber from 'amber'
 
 import "./tournament.js"
+import "./party-popper.js"
 
 /*
  * Ensure the data-confirm elements show popup confirmations

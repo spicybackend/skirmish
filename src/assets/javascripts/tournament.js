@@ -136,7 +136,6 @@ if (tournamentGraphElement) {
         window.location.href = href;
     });
   }).catch(function(error) {
-    console.log(error);
     tournamentGraphElement.innerText = "Something went wrong."
   });
 }

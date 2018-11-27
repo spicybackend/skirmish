@@ -386,6 +386,21 @@ form.main {
   #tournament-graph {
     height: 280px; } }
 
+.tournament-closure {
+  color: white;
+  font-size: 1.25em;
+  margin-bottom: 0.5em; }
+  .tournament-closure .party-popper {
+    cursor: pointer;
+    display: inline-block; }
+    .tournament-closure .party-popper .party-popper-effects {
+      position: absolute;
+      transform: rotate(30deg) translate(1em, -3em);
+      z-index: 1; }
+    .tournament-closure .party-popper .party-popper-emoji {
+      font-size: 1.5em;
+      z-index: 2; }
+
 a.dropdown-item {
   display: flex;
   justify-content: space-between; }
