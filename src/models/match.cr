@@ -23,7 +23,7 @@ class Match < Jennifer::Model::Base
   validates_presence :tournament_id
   validates_presence :level
 
-  scope :without_byes { where { (_level != 0) | g((_player_a_id != nil) & (_player_b_id != nil)) } }
+  scope :without_byes { where { sql("(matches.player_a_id IS NOT NULL AND matches.player_b_id IS NOT NULL) OR matches.level != 0") } }
 
   def player_a
     Player.find(player_a_id)
