@@ -10,6 +10,16 @@ if (tournamentGraphElement) {
   .then(tournamentData => {
     // Get rid of bye matches
     let filteredMatchData = tournamentData.matches.filter((match) => { return match.level > 0 || (match.player_a_id && match.player_b_id) });
+
+    // Sort by lowest level, and then by id for consistent rendering order
+    filteredMatchData.sort((a, b) => {
+      if (a.level != b.level) {
+        b.level - a.level
+      } else {
+        b.id - a.id
+      }
+    })
+
     let matchNodes = filteredMatchData.map((match) => {
       let player_a = tournamentData.players.find((player) => player.id == match.player_a_id)
       let player_b = tournamentData.players.find((player) => player.id == match.player_b_id)
