@@ -21,7 +21,7 @@ class Authenticate < Amber::Pipe::Base
       return call_next(context) if public_path?(context.request.path) || whitelisted_request?(context.request)
 
       context.flash[:warning] = "Please Sign In"
-      context.response.headers.add "Location", "/signin"
+      context.response.headers.add "Location", "/signin?redirect=#{context.request.path}"
       context.response.status_code = 302
     end
   end

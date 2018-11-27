@@ -3,6 +3,9 @@
   form.main.account-box.animated.fadeInUp.faster action="/session" method="post"
     == csrf_tag
 
+    - if redirect_url
+      == hidden_field name: "redirect", value: redirect_url
+
     h2 Welcome back!
     p.subheading Login to get back into the action
 

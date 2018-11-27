@@ -22,7 +22,7 @@ class ApplicationController < Amber::Controller::Base
   private def redirect_signed_out_user
     unless signed_in?
       flash[:info] = "Must be logged in"
-      redirect_to "/signin"
+      redirect_to "/signin?redirect=#{context.request.path}"
     end
   end
 end
