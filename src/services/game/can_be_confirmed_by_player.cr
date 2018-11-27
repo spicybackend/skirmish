@@ -1,11 +1,15 @@
 class Game::CanBeConfirmedByPlayer
-  getter :game, :player
+  getter :game, :player, :include_admin
 
-  def initialize(@game : Game, @player : Player)
+  def initialize(@game : Game, @player : Player, @include_admin : Bool = true)
   end
 
   def call
-    game_not_confirmed? && (player_opposes_game_logger? || player.admin_of?(game.league!))
+    game_not_confirmed? && (player_opposes_game_logger? || admin_confirmation?)
+  end
+
+  private def admin_confirmation?
+    include_admin && player.admin_of?(game.league!)
   end
 
   private def game_not_confirmed?

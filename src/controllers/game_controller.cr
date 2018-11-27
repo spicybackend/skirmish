@@ -12,7 +12,8 @@ class GameController < ApplicationController
       if player = current_player
         show_game_confirmation = Game::CanBeConfirmedByPlayer.new(
           game: game,
-          player: player
+          player: player,
+          include_admin: false
         ).call
       end
 
