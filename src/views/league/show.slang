@@ -29,10 +29,11 @@
 
 p.description = league.description
 
-h3 Tournaments
-- if tournament.nil?
-  p No tournament has been opened for #{league.name}
-- else
+h3.justify-content-between.btn-toolbar Tournaments
+  - if tournament
+    .btn-group
+      == link_to("View Tournament", "/leagues/#{league.id}/tournaments/#{tournament.id}", class: "btn btn-primary")
+- if tournament
   - if tournament.in_progress?
     p There's currently a tournament in progress.
     == render(partial: "tournament/_tournament_tree.slang")
@@ -40,8 +41,8 @@ h3 Tournaments
     p = "The winner of the last tournament was #{tournament.winner.try(&.tag)}."
   - else tournament.open?
     p A new tournament is open for entry!
-
-  == link_to("Open Tournament", "/leagues/#{league.id}/tournaments/#{tournament.id}", class: "btn btn-primary")
+- else
+  p No tournament has been opened for #{league.name}
 
 h3 Leaderboard
 - leaderboard = Leaderboard::PureSkill.new(league: league)
