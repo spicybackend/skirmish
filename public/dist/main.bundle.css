@@ -638,6 +638,8 @@ tr.clickable-row {
       .nav-item .nav-link.home {
         background: url("https://png.icons8.com/ios-glyphs/160/ffffff/cottage.png"); }
       .nav-item .nav-link.leagues {
+        background: url("https://png.icons8.com/ios-glyphs/160/ffffff/baseball.png"); }
+      .nav-item .nav-link.tournaments {
         background: url("https://png.icons8.com/ios-glyphs/160/ffffff/trophy.png"); }
       .nav-item .nav-link.profile, .nav-item .nav-link.login {
         background: url("https://png.icons8.com/ios-glyphs/160/ffffff/gender-neutral-user.png"); }
