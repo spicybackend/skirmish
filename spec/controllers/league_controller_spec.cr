@@ -47,7 +47,7 @@ describe LeagueControllerTest do
       response = subject.get "/leagues/#{league.id}", headers: basic_authenticated_headers
 
       response.status_code.should eq(200)
-      response.body.should contain("League")
+      response.body.should contain(league.name)
     end
 
     context "when the league doesn't exist" do
