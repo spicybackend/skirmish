@@ -629,6 +629,11 @@ tr.clickable-row {
     border-radius: 50%; }
     .nav-item.signup {
       display: none; }
+    .nav-item.nav-log-game {
+      background: #ef4b62;
+      border-radius: 50%; }
+      .nav-item.nav-log-game.active::before {
+        display: none; }
     .nav-item .nav-link {
       color: transparent !important;
       width: 32px;
@@ -641,6 +646,9 @@ tr.clickable-row {
         background: url("https://png.icons8.com/ios-glyphs/160/ffffff/baseball.png"); }
       .nav-item .nav-link.tournaments {
         background: url("https://png.icons8.com/ios-glyphs/160/ffffff/trophy.png"); }
+      .nav-item .nav-link.log-game {
+        z-index: 1;
+        background: url("https://png.icons8.com/ios-glyphs/160/ffffff/edit.png"); }
       .nav-item .nav-link.profile, .nav-item .nav-link.login {
         background: url("https://png.icons8.com/ios-glyphs/160/ffffff/gender-neutral-user.png"); }
       .nav-item .nav-link.notifications {
@@ -648,7 +656,7 @@ tr.clickable-row {
     .nav-item.active::before {
       content: " ";
       position: absolute;
-      width: 50px;
+      width: 48px;
       height: 4px;
       margin-top: 44px;
       background-color: #4eb4f9; }
