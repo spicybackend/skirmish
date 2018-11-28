@@ -17,6 +17,7 @@ class Game < Jennifer::Model::Base
   belongs_to :logger, Player, nil, "logged_by_id"
   belongs_to :confirmed_by, Player, nil, "confirmed_by_id"
 
+  has_one :match, Match
   has_many :participations, Participation
   has_and_belongs_to_many :players, Player, nil, nil, nil, "participations", "player_id"
 

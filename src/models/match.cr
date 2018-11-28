@@ -19,6 +19,7 @@ class Match < Jennifer::Model::Base
   )
 
   belongs_to :tournament, Tournament
+  belongs_to :game, Game
 
   validates_presence :tournament_id
   validates_presence :level

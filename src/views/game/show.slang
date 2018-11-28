@@ -13,6 +13,15 @@
             == csrf_tag
             == submit(t("general.actions.delete"), "data-confirm": "Are you sure you want to delete this unconfirmed game?", class: "dropdown-item danger")
 
+p.description
+  - if match = game.match
+    | For a
+    == link_to("tournament match", "/leagues/#{league.id}/tournaments/#{match.tournament_id}")
+    | in
+  - else
+    | For
+  == link_to(league.name, "/leagues/#{league.id}")
+
 .game-results
   .winning-result
     .player-result
