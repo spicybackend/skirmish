@@ -9,7 +9,9 @@
             .dropdown-menu.dropdown-menu-right
               == link_to(t("tournament.actions.open"), "/leagues/#{league.id}/tournaments/new", class: "dropdown-item")
 
-p.description for #{league.name}
+p.description
+  | For
+  == link_to(league.name, "/leagues/#{league.id}")
 
 .notifications
   - tournaments.each do |tournament|

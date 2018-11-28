@@ -25,7 +25,9 @@
                 .dropdown-dividerw
               == link_to(t("general.actions.delete"), "/leagues/#{league.id}/tournaments/#{tournament.id}?_csrf=#{csrf_token}", "data-method": "delete", "data-confirm": "Are you sure you want to delete the tournament?", class: "dropdown-item danger")
 
-p.description for #{league.name}
+p.description
+  | For
+  == link_to(league.name, "/leagues/#{league.id}")
 
 - if tournament.in_progress?
   == render(partial: "_in_progress.slang")
