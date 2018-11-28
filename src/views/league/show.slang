@@ -28,6 +28,9 @@
               == link_to(t("general.actions.delete"), "/leagues/#{league.id}?_csrf=#{csrf_token}", "data-method": "delete", "data-confirm": "Are you sure you want to delete #{league.name}?", class: "dropdown-item danger")
 
 p.description = league.description
+p.description
+  | Not the league you're looking for?
+  == link_to("Browse other leagues", "/leagues")
 
 h3.justify-content-between.btn-toolbar Tournaments
   - if tournament

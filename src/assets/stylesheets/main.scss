@@ -44,6 +44,14 @@ a.dropdown-item {
   text-align: center;
 }
 
+a {
+  color: $babyblue;
+
+  &:hover {
+    color: darken($babyblue, 10%);
+  }
+}
+
 h3 {
   font-size: 28px;
   margin-top: 16px !important;

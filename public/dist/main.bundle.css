@@ -408,6 +408,11 @@ a.dropdown-item {
 .centered {
   text-align: center; }
 
+a {
+  color: #4eb4f9; }
+  a:hover {
+    color: #1d9ff7; }
+
 h3 {
   font-size: 28px;
   margin-top: 16px !important; }
