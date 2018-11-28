@@ -524,6 +524,42 @@ ALTER SEQUENCE public.participations_player_id_seq OWNED BY public.participation
 
 
 --
+-- Name: player_contexts; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.player_contexts (
+    id bigint NOT NULL,
+    player_id bigint,
+    league_id bigint,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+ALTER TABLE public.player_contexts OWNER TO postgres;
+
+--
+-- Name: player_contexts_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.player_contexts_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.player_contexts_id_seq OWNER TO postgres;
+
+--
+-- Name: player_contexts_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.player_contexts_id_seq OWNED BY public.player_contexts.id;
+
+
+--
 -- Name: players; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -768,6 +804,13 @@ ALTER TABLE ONLY public.participations ALTER COLUMN player_id SET DEFAULT nextva
 
 
 --
+-- Name: player_contexts id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.player_contexts ALTER COLUMN id SET DEFAULT nextval('public.player_contexts_id_seq'::regclass);
+
+
+--
 -- Name: players id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -865,6 +908,14 @@ ALTER TABLE ONLY public.notifications
 
 ALTER TABLE ONLY public.participations
     ADD CONSTRAINT participations_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: player_contexts player_contexts_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.player_contexts
+    ADD CONSTRAINT player_contexts_pkey PRIMARY KEY (id);
 
 
 --
