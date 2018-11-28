@@ -7,7 +7,6 @@ import mojs from 'mo-js';
  * @property {string}  selector - DOM selector to attach the animation to
  */
 function partyPopper(selector) {
-
   const colors = [
     '#bea4ff',
     '#feb535',
@@ -91,8 +90,8 @@ function partyPopper(selector) {
   flakeBurst.play()
 };
 
-setTimeout(() => partyPopper('.party-popper-effects'), 400);
-
+if (document.querySelector('.party-popper-effects'))
+  setTimeout(() => partyPopper('.party-popper-effects'), 400);
 
 document.querySelectorAll('.party-popper-emoji').forEach((elem) => {
   elem.addEventListener("click", function () {
