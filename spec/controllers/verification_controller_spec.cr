@@ -29,7 +29,7 @@ describe VerificationControllerTest do
         response = subject.get "/verification/#{user.email}"
 
         response.status_code.should eq(302)
-        response.headers["Location"].should eq "/signin"
+        response.headers["Location"].should match(/\/signin/)
       end
     end
 
@@ -74,7 +74,7 @@ describe VerificationControllerTest do
         response = subject.get "/verify/#{user.verification_code}"
 
         response.status_code.should eq(302)
-        response.headers["Location"].should eq "/signin"
+        response.headers["Location"].should match(/\/signin/)
       end
     end
 
@@ -93,7 +93,7 @@ describe VerificationControllerTest do
         response = subject.get "/verify/#{user.verification_code}"
 
         response.status_code.should eq(302)
-        response.headers["Location"].should eq "/signin"
+        response.headers["Location"].should match(/\/signin/)
       end
 
       it "successfully activates the user" do

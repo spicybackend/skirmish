@@ -1,5 +1,6 @@
 .row
-  h2.col.justify-content-between.btn-toolbar Profile
+  h2.col.justify-content-between.btn-toolbar
+    span.heading-text Profile
     - if own_profile?
       .button-group
         == link_to(t("general.actions.edit"), "/profile/edit", class: "btn btn-primary")

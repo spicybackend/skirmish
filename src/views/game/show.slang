@@ -1,5 +1,6 @@
 .row
-  h2.col.justify-content-between.btn-toolbar Game Results
+  h2.col.justify-content-between.btn-toolbar
+    span.heading-text Game Results
     - player = current_player
     - if current_player.try(&.admin_of?(league)) && game.unconfirmed?
       .btn-group
@@ -12,6 +13,15 @@
           == form(action: "/leagues/#{game.league_id}/games/#{game.id}", method: :delete) do
             == csrf_tag
             == submit(t("general.actions.delete"), "data-confirm": "Are you sure you want to delete this unconfirmed game?", class: "dropdown-item danger")
+
+p.description
+  - if match = game.match
+    | For a
+    == link_to("tournament match", "/leagues/#{league.id}/tournaments/#{match.tournament_id}")
+    | in
+  - else
+    | For
+  == link_to(league.name, "/leagues/#{league.id}")
 
 .game-results
   .winning-result

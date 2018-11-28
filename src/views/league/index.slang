@@ -1,5 +1,6 @@
 .row
-  h2.col.justify-content-between.btn-toolbar Leagues
+  h2.col.justify-content-between.btn-toolbar
+    span.heading-text Leagues
     - if current_user
       .button-group
         a.btn.btn-primary href="/leagues/new" New

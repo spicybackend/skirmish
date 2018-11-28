@@ -1,5 +1,6 @@
 .row
-  h2.col.justify-content-between.btn-toolbar Tournament
+  h2.col.justify-content-between.btn-toolbar
+    span.heading-text Tournament
     .btn-group
       span.toggle-button-group
         .btn-group
@@ -25,7 +26,9 @@
                 .dropdown-dividerw
               == link_to(t("general.actions.delete"), "/leagues/#{league.id}/tournaments/#{tournament.id}?_csrf=#{csrf_token}", "data-method": "delete", "data-confirm": "Are you sure you want to delete the tournament?", class: "dropdown-item danger")
 
-p.description = league.name
+p.description
+  | For
+  == link_to(league.name, "/leagues/#{league.id}")
 
 - if tournament.in_progress?
   == render(partial: "_in_progress.slang")

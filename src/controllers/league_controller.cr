@@ -1,4 +1,6 @@
 class LeagueController < ApplicationController
+  include PlayerContextHelper
+
   before_action do
     only [:show, :new, :create, :edit, :update, :destroy] { redirect_signed_out_user }
   end
@@ -16,6 +18,8 @@ class LeagueController < ApplicationController
   def show
     if league = League.find(params[:id])
       player = current_player.not_nil!
+
+      update_player_context(player: player, league: league)
 
       membership = player.memberships_query.where { _league_id == league.id }.to_a.first? || Membership.build
       tournament = Tournament.for_league(league).order(created_at: :desc).first

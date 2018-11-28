@@ -44,6 +44,20 @@ a.dropdown-item {
   text-align: center;
 }
 
+a {
+  color: $babyblue;
+
+  &:hover {
+    color: darken($babyblue, 10%);
+  }
+}
+
+h2.btn-toolbar {
+  .heading-text {
+    margin-right: 32px;
+  }
+}
+
 h3 {
   font-size: 28px;
   margin-top: 16px !important;
@@ -342,6 +356,16 @@ tr.clickable-row {
     border-radius: 50%;
 
     &.signup { display: none; }
+    &.nav-log-game {
+      background: $strawberry;
+      border-radius: 50%;
+
+      &.active {
+        &::before {
+          display: none;
+        }
+      }
+    }
 
     .nav-link {
       color: transparent !important;
@@ -351,7 +375,9 @@ tr.clickable-row {
       background-size: contain !important;
 
       &.home { background: url("https://png.icons8.com/ios-glyphs/160/ffffff/cottage.png"); }
-      &.leagues { background: url("https://png.icons8.com/ios-glyphs/160/ffffff/trophy.png"); }
+      &.leagues { background: url("https://png.icons8.com/ios-glyphs/160/ffffff/baseball.png"); }
+      &.tournaments { background: url("https://png.icons8.com/ios-glyphs/160/ffffff/trophy.png"); }
+      &.log-game { z-index: 1; background: url("https://png.icons8.com/ios-glyphs/160/ffffff/edit.png"); }
       &.profile, &.login { background: url("https://png.icons8.com/ios-glyphs/160/ffffff/gender-neutral-user.png"); }
       &.notifications { background: url("https://png.icons8.com/ios-glyphs/160/ffffff/appointment-reminders.png") }
     }
@@ -360,7 +386,7 @@ tr.clickable-row {
       &::before {
         content: " ";
         position: absolute;
-        width: 50px;
+        width: 48px;
         height: 4px;
         margin-top: 44px;
         background-color: $babyblue;

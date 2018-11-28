@@ -4,7 +4,7 @@ class SessionController < ApplicationController
 
     if signed_in?
       flash[:warning] = I18n.translate("session.already_signed_in")
-      redirect_to redirect_url || "/"
+      redirect_to redirect_url || landing_url
     else
       user = User.build({
         email: "",
@@ -28,7 +28,7 @@ class SessionController < ApplicationController
         session[:player_id] = Player.where { _user_id == user.id }.to_a.first.id
 
         flash[:info] = I18n.translate("session.logged_in_successfully")
-        redirect_to redirect_url || "/"
+        redirect_to redirect_url || landing_url
       end
     else
       flash[:danger] = I18n.translate("session.authentication_failed")
@@ -46,5 +46,13 @@ class SessionController < ApplicationController
 
     flash[:info] = I18n.translate("session.logged_out")
     redirect_to "/"
+  end
+
+  private def landing_url
+    if league_id = current_player_context.try(&.league_id)
+      "/leagues/#{league_id}"
+    else
+      "/leagues"
+    end
   end
 end

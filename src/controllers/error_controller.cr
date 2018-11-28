@@ -12,11 +12,11 @@ class ErrorController < Amber::Controller::Error
   end
 
   def forbidden
-    render("forbidden.slang")
+    render("forbidden.slang", layout: nil)
   end
 
   def not_found
-    render("not_found.slang")
+    render("not_found.slang", layout: nil)
   end
 
   def internal_server_error

@@ -40,7 +40,7 @@ Amber::Server.configure do
     get "/leagues/:league_id/games/:game_id/confirm/:confirmation_code", GameController, :quick_confirm
     resources "/leagues", LeagueController
 
-    resources "/leagues/:league_id/tournaments/", TournamentController, only: [:new, :show, :create, :destroy]
+    resources "/leagues/:league_id/tournaments/", TournamentController, only: [:index, :new, :show, :create, :destroy]
     patch "/leagues/:league_id/tournaments/:id/start", TournamentController, :start
     post "/leagues/:league_id/tournaments/:tournament_id/join", EntrantController, :create
     delete "/leagues/:league_id/tournaments/:tournament_id/leave", EntrantController, :destroy
