@@ -28,7 +28,7 @@ describe SessionControllerSpec do
         response = subject.get "/signin", headers: authenticated_headers_for(player)
 
         response.status_code.should eq(302)
-        response.headers["Location"].should eq "/"
+        response.headers["Location"].should eq "/leagues"
       end
     end
 
@@ -103,7 +103,7 @@ describe SessionControllerSpec do
         response = subject.post "/session", body: params_from_hash(login_params)
 
         response.status_code.should eq(302)
-        response.headers["Location"].should eq "/"
+        response.headers["Location"].should eq "/leagues"
       end
     end
   end
