@@ -65,7 +65,7 @@ describe LeagueControllerTest do
         response = subject.get "/leagues/#{league.id}"
 
         response.status_code.should eq(302)
-        response.headers["Location"].should eq "/signin"
+        response.headers["Location"].should match(/\/signin/)
       end
     end
   end
@@ -85,7 +85,7 @@ describe LeagueControllerTest do
         response = subject.get "/leagues/new"
 
         response.status_code.should eq(302)
-        response.headers["Location"].should eq "/signin"
+        response.headers["Location"].should match(/\/signin/)
       end
     end
   end
@@ -107,7 +107,7 @@ describe LeagueControllerTest do
         response = subject.get "/leagues/#{league.id}/edit"
 
         response.status_code.should eq(302)
-        response.headers["Location"].should eq "/signin"
+        response.headers["Location"].should match(/\/signin/)
       end
     end
   end
@@ -179,7 +179,7 @@ describe LeagueControllerTest do
         response = subject.post "/leagues", body: body
 
         response.status_code.should eq(302)
-        response.headers["Location"].should eq "/signin"
+        response.headers["Location"].should match(/\/signin/)
       end
     end
   end
@@ -226,7 +226,7 @@ describe LeagueControllerTest do
         response = subject.patch "/leagues/#{league.id}", body: body
 
         response.status_code.should eq(302)
-        response.headers["Location"].should eq "/signin"
+        response.headers["Location"].should match(/\/signin/)
       end
     end
   end
@@ -264,7 +264,7 @@ describe LeagueControllerTest do
         response = subject.get "/leagues/new"
 
         response.status_code.should eq(302)
-        response.headers["Location"].should eq "/signin"
+        response.headers["Location"].should match(/\/signin/)
       end
     end
   end

@@ -98,7 +98,7 @@ describe MembershipControllerTest do
         response = subject.post "/leagues/#{league.id}/join"
 
         response.status_code.should eq(302)
-        response.headers["Location"].should eq "/signin"
+        response.headers["Location"].should match(/\/signin/)
       end
     end
   end
@@ -158,7 +158,7 @@ describe MembershipControllerTest do
           response = subject.patch "/leagues/#{league.id}/leave"
 
           response.status_code.should eq(302)
-          response.headers["Location"].should eq "/signin"
+          response.headers["Location"].should match(/\/signin/)
         end
       end
     end
@@ -217,7 +217,7 @@ describe MembershipControllerTest do
           response = subject.patch "/leagues/#{league.id}/join"
 
           response.status_code.should eq(302)
-          response.headers["Location"].should eq "/signin"
+          response.headers["Location"].should match(/\/signin/)
         end
       end
     end
