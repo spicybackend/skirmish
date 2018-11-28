@@ -5,6 +5,16 @@ class TournamentController < ApplicationController
     all { redirect_signed_out_user }
   end
 
+  def index
+    if league = League.find(params[:league_id])
+      tournaments = league.tournaments_query.order(created_at: :desc).to_a
+      render("index.slang")
+    else
+      flash[:danger] = "Unable to find league"
+      redirect_to "/leagues"
+    end
+  end
+
   def show
     if league = League.find(params[:league_id])
       # strip the format from the id
@@ -23,7 +33,7 @@ class TournamentController < ApplicationController
       end
     else
       flash[:danger] = "Unable to find league"
-      redirect_to "/"
+      redirect_to "/leagues"
     end
   end
 
@@ -34,7 +44,7 @@ class TournamentController < ApplicationController
       render("new.slang")
     else
       flash[:danger] = "Unable to find league"
-      redirect_to "/"
+      redirect_to "/leagues"
     end
   end
 
@@ -53,7 +63,7 @@ class TournamentController < ApplicationController
       end
     else
       flash[:danger] = "Unable to find league"
-      redirect_to "/"
+      redirect_to "/leagues"
     end
   end
 
@@ -75,7 +85,7 @@ class TournamentController < ApplicationController
       end
     else
       flash[:danger] = "Unable to find league"
-      redirect_to "/"
+      redirect_to "/leagues"
     end
   end
 
@@ -96,7 +106,7 @@ class TournamentController < ApplicationController
       end
     else
       flash[:danger] = "Unable to find league"
-      redirect_to "/"
+      redirect_to "/leagues"
     end
   end
 
