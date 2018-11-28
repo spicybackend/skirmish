@@ -14,5 +14,5 @@ class PlayerContext < Jennifer::Model::Base
   validates_presence :player_id
 
   belongs_to :player, Player
-  belongs_to :league, Tournament
+  belongs_to :league, League
 end
