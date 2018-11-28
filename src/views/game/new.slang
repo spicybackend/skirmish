@@ -18,6 +18,9 @@
           - else
             option value="#{player.id}" #{player.tag}
 
+    .game-logger-field
+      span class="sentence-part" in #{league.name}
+
   .form-group
     == submit t("game.actions.log_game"), class: "btn btn-primary"
     == link_to(t("general.actions.back"), "/leagues/#{league.id}", class: "btn btn-light")
