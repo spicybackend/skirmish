@@ -63,7 +63,8 @@ class League::LogGame
   private def update_tournament_matches!
     # TODO find a better way to match this independent of being player_a or player_b
     league.tournaments_query.unfinished.each do |tournament|
-      tournament.matches_query.where { g((_player_a_id == winner.id) & (_player_b_id == loser.id)) | g((_player_a_id == loser.id) & (_player_b_id == winner.id)) }.each do |match|
+      player_match_query = "(matches.player_a_id = #{winner.id} AND matches.player_b_id = #{loser.id}) OR (matches.player_a_id = #{loser.id} AND matches.player_b_id = #{winner.id})"
+      tournament.matches_query.where { sql(player_match_query) }.each do |match|
         match.update!(game_id: game.id)
       end
     end
