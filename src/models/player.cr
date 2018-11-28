@@ -14,6 +14,7 @@ class Player < Jennifer::Model::Base
   )
 
   belongs_to :user, User
+  has_one :player_context, PlayerContext
 
   has_many :memberships, Membership
   has_many :participations, Participation
@@ -27,6 +28,8 @@ class Player < Jennifer::Model::Base
 
   validates_uniqueness :user_id
   validates_with_method :user_exists
+
+  after_create :create_player_context
 
   def ==(other)
     !other.nil? && self.class == other.class && self.id == other.id
@@ -64,5 +67,9 @@ class Player < Jennifer::Model::Base
     if User.find(user_id).nil?
       errors.add(:user, "must exist")
     end
+  end
+
+  private def create_player_context
+    PlayerContext.create!(player_id: self.id)
   end
 end
