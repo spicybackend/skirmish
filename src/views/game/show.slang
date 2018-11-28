@@ -1,5 +1,6 @@
 .row
-  h2.col.justify-content-between.btn-toolbar Game Results
+  h2.col.justify-content-between.btn-toolbar
+    span.heading-text Game Results
     - player = current_player
     - if current_player.try(&.admin_of?(league)) && game.unconfirmed?
       .btn-group

@@ -413,6 +413,9 @@ a {
   a:hover {
     color: #1d9ff7; }
 
+h2.btn-toolbar .heading-text {
+  margin-right: 32px; }
+
 h3 {
   font-size: 28px;
   margin-top: 16px !important; }

@@ -1,5 +1,6 @@
 .row
-  h2.col.justify-content-between.btn-toolbar = league.name
+  h2.col.justify-content-between.btn-toolbar
+    span.heading-text = league.name
     .btn-group
       span.toggle-button-group
         .btn-group

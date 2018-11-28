@@ -1,5 +1,6 @@
 .row
-  h2.col.justify-content-between.btn-toolbar Tournament
+  h2.col.justify-content-between.btn-toolbar
+    span.heading-text Tournament
     .btn-group
       span.toggle-button-group
         .btn-group

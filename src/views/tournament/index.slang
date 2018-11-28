@@ -1,5 +1,6 @@
 .row
-  h2.col.justify-content-between.btn-toolbar Tournaments
+  h2.col.justify-content-between.btn-toolbar
+    span.heading-text Tournaments
     .btn-group
       - if current_player.try(&.admin_of?(league)) && tournaments.all? { |tournament| tournament.finished_at }
         span.toggle-button-group

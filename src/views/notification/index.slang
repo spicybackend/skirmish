@@ -1,5 +1,6 @@
 .row
-  h2.col.justify-content-between.btn-toolbar Notifications
+  h2.col.justify-content-between.btn-toolbar
+    span.heading-text Notifications
     .button-group
       == form(action: "/notifications/read_all", method: :patch, class: "single-btn") do
         == csrf_tag
