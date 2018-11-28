@@ -15,6 +15,10 @@ class ApplicationController < Amber::Controller::Base
     context.current_player
   end
 
+  def current_player_context
+    current_player.try(&.player_context)
+  end
+
   def signed_in?
     current_user && current_player ? true : false
   end
