@@ -13,9 +13,6 @@
       label.btn.btn-secondary.active
         input checked="checked" type="radio" name="type" id="type-single-elimination" autocomplete="off" value="single-elimination"
           = I18n.translate("tournament.types.single-elimination")
-      label.btn.btn-secondary.disabled
-        input disabled="true" type="radio" name="type" id="type-double-elimination" autocomplete="off" value="double-elimination"
-          = I18n.translate("tournament.types.double-elimination")
 
   == submit("Submit", class: "btn btn-primary")
   == link_to(t("general.actions.back"), "/leagues/#{league.id}", class: "btn btn-light")
