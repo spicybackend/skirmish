@@ -143,24 +143,16 @@ div.notifications {
   margin-bottom: 16px; }
   div.notifications a:hover {
     text-decoration: none !important; }
-  div.notifications a:first-child .notification {
-    border-top-left-radius: 6px;
-    border-top-right-radius: 6px; }
-  div.notifications a:last-child .notification {
-    margin-bottom: 8px;
-    border-bottom-left-radius: 6px;
-    border-bottom-right-radius: 6px; }
+  div.notifications .notification + .notification {
+    border-top: 4px solid black; }
   div.notifications .notification {
     display: flex;
     align-items: center;
     padding: 8px 12px;
-    margin-bottom: -1px;
     transition: background-color 0.15s;
-    color: white;
-    border: 1px solid #1d2124;
-    background-color: rgba(0, 0, 0, 0.05); }
+    color: white; }
     div.notifications .notification:hover {
-      background-color: rgba(0, 0, 0, 0.2); }
+      background-color: #292d32; }
     div.notifications .notification .content ~ .icon {
       margin-left: 12px; }
     div.notifications .notification .vs {
@@ -665,7 +657,7 @@ tr.clickable-row {
       content: " ";
       position: absolute;
       width: 48px;
-      height: 4px;
+      height: 5px;
       margin-top: 44px;
       background-color: #4eb4f9; }
     .nav-item .dropdown-menu-wrapper {

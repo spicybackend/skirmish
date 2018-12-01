@@ -5,33 +5,47 @@ div.notifications {
     text-decoration: none !important;
   }
 
-  a:first-child {
-    .notification {
-      border-top-left-radius: 6px;
-      border-top-right-radius: 6px;
-    }
+  // a:first-child {
+  //   .notification {
+  //     border-top-left-radius: 6px;
+  //     border-top-right-radius: 6px;
+  //   }
+  // }
+
+  // a:last-child {
+  //   .notification {
+  //     margin-bottom: 8px;
+  //     border-bottom-left-radius: 6px;
+  //     border-bottom-right-radius: 6px;
+  //   }
+  // }
+
+  .notification + .notification {
+    border-top: 4px solid black;
   }
 
-  a:last-child {
-    .notification {
-      margin-bottom: 8px;
-      border-bottom-left-radius: 6px;
-      border-bottom-right-radius: 6px;
-    }
-  }
 
   .notification {
     display: flex;
     align-items: center;
     padding: 8px 12px;
-    margin-bottom: -1px;
+    // margin-bottom: 8px;
+    // margin-bottom: -1px;
     transition: background-color 0.15s;
     color: white;
-    border: 1px solid darken($dark-grey, 10%);
-    background-color: rgba(0, 0, 0, 0.05);
+    // border: 1px solid darken($dark-grey, 5%);
+    // border-radius: .25rem;
+    // background-color: #6c757d;
+    // background-color: lighten($dark-grey, 5%);
+    // border-right: 5px solid $pumpkin;
+
+    // -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.5);  /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
+    // -moz-box-shadow:    0 1px 3px rgba(0,0,0,0.5);  /* Firefox 3.5 - 3.6 */
+    // box-shadow:         0 1px 3px rgba(0,0,0,0.5);
+
 
     &:hover {
-      background-color: rgba(0, 0, 0, 0.2);
+      background-color: darken($dark-grey, 5%);
     }
 
     .content ~ .icon {
