@@ -3,6 +3,13 @@
 
   h2 Account Details
 
+  p Note that we don't currently handle profile avatars directly, and instead use
+    a href="https://en.gravatar.com/" Gravatar.
+    | Find out
+    a href="https://en.gravatar.com/support/what-is-gravatar/" more information
+    | or
+    a href="https://en.gravatar.com/connect/?source=_signup" create your own.
+
   - if user.errors || player.errors
     ul.errors
     - (user.errors.full_messages + player.errors.full_messages).each do |error|
