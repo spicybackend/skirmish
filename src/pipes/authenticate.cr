@@ -4,6 +4,8 @@ class HTTP::Server::Context
 end
 
 class Authenticate < Amber::Pipe::Base
+  include PlayerContextHelper
+
   PUBLIC_PATHS = ["/", "/signin", "/session", "/signup", "/registration"]
 
   def call(context)
@@ -16,6 +18,12 @@ class Authenticate < Amber::Pipe::Base
     if user && player
       context.current_user = user
       context.current_player = player
+
+      if match_data = context.request.path.match(/leagues\/(\d+)/)
+        league_id = match_data[1].to_i64
+        update_player_context(player: player, league_id: league_id)
+      end
+
       call_next(context)
     else
       return call_next(context) if public_path?(context.request.path) || whitelisted_request?(context.request)
