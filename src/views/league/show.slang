@@ -25,6 +25,7 @@
             .dropdown-menu.dropdown-menu-right
               == link_to(t("tournament.actions.open"), "/leagues/#{league.id}/tournaments/new", class: "dropdown-item")
               == link_to(t("general.actions.edit"), "/leagues/#{league.id}/edit", class: "dropdown-item")
+              == link_to(t("league.actions.manage_admins"), "/leagues/#{league.id}/admin_management", class: "dropdown-item")
               .dropdown-divider
               == link_to(t("general.actions.delete"), "/leagues/#{league.id}?_csrf=#{csrf_token}", "data-method": "delete", "data-confirm": "Are you sure you want to delete #{league.name}?", class: "dropdown-item danger")
 
