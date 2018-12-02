@@ -31,6 +31,23 @@ html
         .col-sm-12.main
           == content
 
+    footer class="page-footer font-small"
+        div.container
+          div.row
+            div.col-md-6
+              h5 Skirmish
+              p We've just arrived and are brand new to the scene.
+                | Let us know of any bugs or improvements by contacting us using one of the links to the right.
+
+            div.col-md-6.text-right
+                h5 Links
+
+                ul.list-unstyled
+                  li
+                    a href="https://gitlab.com/yumoose/skirmish" GitLab
+                  li
+                    a href="mailto:#{ApplicationMailer::SUPPORT_EMAIL_ADDRESS}?Subject=Enquiry" Email
+
     script src="https://code.jquery.com/jquery-3.3.1.min.js"
     script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"
     script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"

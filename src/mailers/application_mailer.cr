@@ -5,7 +5,9 @@ class ApplicationMailer < Mailer::Message
   include JasperHelpers
 
   # TODO Move these to env config
-  FROM_SUPPORT = "Skirmish <support@skirmish.online>"
+  SUPPORT_EMAIL_ADDRESS = "support@skirmish.online"
+
+  FROM_SUPPORT = "Skirmish <#{SUPPORT_EMAIL_ADDRESS}>"
   FROM_GAMES = "Skirmish <games@skirmish.online>"
   FROM_ERRORS = "Skirmish <errors@skirmish.online>"
 
