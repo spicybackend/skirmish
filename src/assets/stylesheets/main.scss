@@ -288,6 +288,25 @@ tr.clickable-row {
   margin-left: 8px;
 }
 
+.social-icon {
+  width: 1.5em;
+  height: 1.5em;
+  margin-left: 0.5em;
+  background-color: white;
+
+  &.gitlab {
+    -webkit-mask: url(../images/gitlab.svg) no-repeat center;
+    mask: url(../images/gitlab.svg) no-repeat center;
+    background-color: $pumpkin;
+  }
+
+  &.gmail {
+    -webkit-mask: url(../images/gmail.svg) no-repeat center;
+    mask: url(../images/gmail.svg) no-repeat center;
+    background-color: $strawberry;
+  }
+}
+
 @media only screen and (max-width: 768px) {
   .masthead {
     background: $dark-grey;

@@ -595,6 +595,20 @@ tr.clickable-row {
 .toggle-button-group + .toggle-button-group {
   margin-left: 8px; }
 
+.social-icon {
+  width: 1.5em;
+  height: 1.5em;
+  margin-left: 0.5em;
+  background-color: white; }
+  .social-icon.gitlab {
+    -webkit-mask: url(/dist/images/gitlab.svg) no-repeat center;
+    mask: url(/dist/images/gitlab.svg) no-repeat center;
+    background-color: #ffa039; }
+  .social-icon.gmail {
+    -webkit-mask: url(/dist/images/gmail.svg) no-repeat center;
+    mask: url(/dist/images/gmail.svg) no-repeat center;
+    background-color: #ef4b62; }
+
 @media only screen and (max-width: 768px) {
   .masthead {
     background: #343a40;

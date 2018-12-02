@@ -45,8 +45,10 @@ html
                 ul.list-unstyled
                   li
                     a href="https://gitlab.com/yumoose/skirmish" GitLab
+                      img.social-icon.gitlab
                   li
                     a href="mailto:#{ApplicationMailer::SUPPORT_EMAIL_ADDRESS}?Subject=Enquiry" Email
+                      img.social-icon.gmail
 
     script src="https://code.jquery.com/jquery-3.3.1.min.js"
     script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"
