@@ -228,6 +228,17 @@ nav {
   background-position-y: 50%;
 }
 
+footer {
+  hr {
+    margin-top: 2em;
+    margin-bottom: 2em;
+  }
+
+  .social-links {
+    text-align: right;
+  }
+}
+
 /* Hide logo in small screens */
 @media (max-width: 767px) {
   #logo {
@@ -284,6 +295,25 @@ tr.clickable-row {
   margin-left: 8px;
 }
 
+.social-icon {
+  width: 1.5em;
+  height: 1.5em;
+  margin-left: 0.5em;
+  background-color: white;
+
+  &.gitlab {
+    -webkit-mask: url(../images/gitlab.svg) no-repeat center;
+    mask: url(../images/gitlab.svg) no-repeat center;
+    background-color: $pumpkin;
+  }
+
+  &.gmail {
+    -webkit-mask: url(../images/gmail.svg) no-repeat center;
+    mask: url(../images/gmail.svg) no-repeat center;
+    background-color: $strawberry;
+  }
+}
+
 @media only screen and (max-width: 768px) {
   .masthead {
     background: $dark-grey;
@@ -297,12 +327,24 @@ tr.clickable-row {
     z-index: 999;
   }
 
+  footer {
+    margin-bottom: 56px;
+
+    .social-links {
+      text-align: left;
+
+      li {
+        display:  flex;
+        flex-direction: row-reverse;
+        justify-content: flex-end;
+      }
+    }
+  }
+
   body {
-    flex-direction: column-reverse;
     justify-content: space-between;
 
     .container {
-      margin-bottom: 56px;
       overflow-x: hidden;
     }
   }

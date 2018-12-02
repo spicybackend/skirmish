@@ -554,6 +554,13 @@ nav img.gravatar {
   background-position-x: 50%;
   background-position-y: 50%; }
 
+footer hr {
+  margin-top: 2em;
+  margin-bottom: 2em; }
+
+footer .social-links {
+  text-align: right; }
+
 /* Hide logo in small screens */
 @media (max-width: 767px) {
   #logo {
@@ -592,6 +599,20 @@ tr.clickable-row {
 .toggle-button-group + .toggle-button-group {
   margin-left: 8px; }
 
+.social-icon {
+  width: 1.5em;
+  height: 1.5em;
+  margin-left: 0.5em;
+  background-color: white; }
+  .social-icon.gitlab {
+    -webkit-mask: url(/dist/images/gitlab.svg) no-repeat center;
+    mask: url(/dist/images/gitlab.svg) no-repeat center;
+    background-color: #ffa039; }
+  .social-icon.gmail {
+    -webkit-mask: url(/dist/images/gmail.svg) no-repeat center;
+    mask: url(/dist/images/gmail.svg) no-repeat center;
+    background-color: #ef4b62; }
+
 @media only screen and (max-width: 768px) {
   .masthead {
     background: #343a40;
@@ -603,11 +624,17 @@ tr.clickable-row {
     height: 56px;
     width: 100%;
     z-index: 999; }
+  footer {
+    margin-bottom: 56px; }
+    footer .social-links {
+      text-align: left; }
+      footer .social-links li {
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: flex-end; }
   body {
-    flex-direction: column-reverse;
     justify-content: space-between; }
     body .container {
-      margin-bottom: 56px;
       overflow-x: hidden; }
   .image-content {
     flex-direction: column; }

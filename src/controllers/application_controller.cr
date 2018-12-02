@@ -7,6 +7,15 @@ class ApplicationController < Amber::Controller::Base
   include ReadableTimeHelpers
   include ProfileHelper
 
+  def auth_page?
+    auth_url_regexes = [/signup/, /signin/, /session/, /registration/]
+    current_path = context.request.path
+
+    auth_url_regexes.any? do |auth_url_regex|
+      current_path.match(auth_url_regex)
+    end
+  end
+
   def current_user
     context.current_user
   end
