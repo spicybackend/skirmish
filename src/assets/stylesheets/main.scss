@@ -229,7 +229,14 @@ nav {
 }
 
 footer {
-  margin-top: 4em;
+  hr {
+    margin-top: 2em;
+    margin-bottom: 2em;
+  }
+
+  .social-links {
+    text-align: right;
+  }
 }
 
 /* Hide logo in small screens */
@@ -320,12 +327,24 @@ tr.clickable-row {
     z-index: 999;
   }
 
+  footer {
+    margin-bottom: 56px;
+
+    .social-links {
+      text-align: left;
+
+      li {
+        display:  flex;
+        flex-direction: row-reverse;
+        justify-content: flex-end;
+      }
+    }
+  }
+
   body {
-    flex-direction: column-reverse;
     justify-content: space-between;
 
     .container {
-      margin-bottom: 56px;
       overflow-x: hidden;
     }
   }

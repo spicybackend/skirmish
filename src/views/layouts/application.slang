@@ -33,13 +33,15 @@ html
 
     footer class="page-footer font-small"
         div.container
+          hr
+
           div.row
             div.col-md-6
               h5 Skirmish
               p We've just arrived and are brand new to the scene.
-                | Let us know of any bugs or improvements by contacting us using one of the links to the right.
+                | You can let us know of any bugs or improvements we can make through these channels.
 
-            div.col-md-6.text-right
+            div.social-links.col-md-6
                 h5 Links
 
                 ul.list-unstyled
