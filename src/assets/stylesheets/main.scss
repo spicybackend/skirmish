@@ -337,6 +337,17 @@ tr.clickable-row {
         display:  flex;
         flex-direction: row-reverse;
         justify-content: flex-end;
+
+        a {
+          display: flex;
+          flex-direction: row-reverse;
+          text-align: left;
+
+          .social-icon {
+            margin-left: 0;
+            margin-right: 0.5em;
+          }
+        }
       }
     }
   }
