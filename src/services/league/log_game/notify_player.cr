@@ -8,7 +8,7 @@ class League::LogGame::NotifyPlayer
     Jennifer::Adapter.adapter.transaction do
       Notification.create!({
         player_id: player.id.not_nil!,
-        event_type: Notification::GAME_LOGGED,
+        type: Notification::GAME_LOGGED,
         title: title,
         content: content,
         source_type: game.class.to_s,

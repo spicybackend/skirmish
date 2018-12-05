@@ -23,13 +23,15 @@ class Notification < Jennifer::Model::Base
 
   mapping(
     id: Primary64,
+    # event_type: String,
+    type: String,
+
     player_id: Int64?,
-    source_type: String?,
-    source_id: Int64?,
 
     title: String,
     content: String,
-    event_type: String,
+    source_type: String?,
+    source_id: Int64?,
 
     sent_at: { type: Time, default: Time.now },
     read_at: Time?,
@@ -47,16 +49,16 @@ class Notification < Jennifer::Model::Base
   validates_presence :player_id
   validates_presence :title
   validates_presence :content
-  validates_presence :event_type
+  validates_presence :type
   validates_presence :sent_at
 
-  validates_inclusion :event_type, in: EVENT_TYPES
+  validates_inclusion :type, in: EVENT_TYPES
 
   validates_with PlayerRelationValidator
   validates_with_method :source_present_and_valid
 
   def source_present_and_valid
-    source_class = SOURCE_CLASS_BY_EVENT_TYPE[event_type]?
+    source_class = SOURCE_CLASS_BY_EVENT_TYPE[type]?
 
     if source_class
       if source_type != source_class.name
@@ -65,7 +67,7 @@ class Notification < Jennifer::Model::Base
         errors.add(:source, "must exist")
       end
     elsif source_type
-      errors.add(:source, "must be nil for #{event_type} notifications")
+      errors.add(:source, "must be nil for #{type} notifications")
     end
 
     return unless source_id || source_type
@@ -78,14 +80,15 @@ class Notification < Jennifer::Model::Base
       end
     end
   end
+
   def source
-    if source_class = SOURCE_CLASS_BY_EVENT_TYPE[event_type]?
+    if source_class = SOURCE_CLASS_BY_EVENT_TYPE[type]?
       source_class.find(source_id)
     end
   end
 
   def presented
-    PRESENTER_BY_EVENT_TYPE[event_type].new(self)
+    PRESENTER_BY_EVENT_TYPE[type].new(self)
   end
 
   def read?

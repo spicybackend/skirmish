@@ -20,10 +20,10 @@ describe Notification do
       it "must be a specified event type" do
         notification = create_notification(player: Player.all.first!)
 
-        notification.event_type = "some-made-up-event-type"
+        notification.type = "some-made-up-event-type"
         notification.valid?.should be_false
 
-        notification.event_type = Notification::EVENT_TYPES.first
+        notification.type = Notification::EVENT_TYPES.first
         notification.valid?.should be_true
       end
     end
@@ -44,19 +44,19 @@ describe Notification do
 
         notification = create_notification(player: player)
 
-        notification.event_type = Notification::GENERAL
+        notification.type = Notification::GENERAL
         notification.source_type = nil
         notification.source_id = nil
         notification.valid?.should be_true
 
-        notification.event_type = Notification::GAME_LOGGED
+        notification.type = Notification::GAME_LOGGED
         notification.valid?.should be_false
 
         notification.source_type = game.class.name
         notification.source_id = game.id
         notification.valid?.should be_true
 
-        notification.event_type = Notification::GENERAL
+        notification.type = Notification::GENERAL
         notification.valid?.should be_false
       end
 
@@ -73,7 +73,7 @@ describe Notification do
         game_logger.call
         game = game_logger.game
 
-        notification = create_notification(player: player, event_type: Notification::GAME_LOGGED, source: game)
+        notification = create_notification(player: player, type: Notification::GAME_LOGGED, source: game)
         notification.source_id = nil
         notification.valid?.should be_false
       end
@@ -170,7 +170,7 @@ describe Notification do
         game_logger.call
         game = game_logger.game
 
-        notification = create_notification(player: player, event_type: Notification::GAME_LOGGED, source: game)
+        notification = create_notification(player: player, type: Notification::GAME_LOGGED, source: game)
 
         notification.source.class.should eq Game
         notification.source.not_nil!.id.should eq game.id

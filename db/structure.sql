@@ -407,7 +407,7 @@ ALTER SEQUENCE public.migration_versions_id_seq OWNED BY public.migration_versio
 CREATE TABLE public.notifications (
     id bigint NOT NULL,
     player_id bigint NOT NULL,
-    event_type character varying NOT NULL,
+    type character varying NOT NULL,
     title character varying NOT NULL,
     content character varying NOT NULL,
     source_type character varying,

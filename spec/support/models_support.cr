@@ -40,10 +40,10 @@ def create_and_pit_players(league : League)
   [player_one, player_two, player_three]
 end
 
-def create_notification(player : Player, event_type : String? = nil, source : Jennifer::Model::Base? = nil, title : String? = nil, content : String? = nil, sent_at : Time? = Time.now, read_at : Time? = nil)
+def create_notification(player : Player, notification_type : String? = nil, source : Jennifer::Model::Base? = nil, title : String? = nil, content : String? = nil, sent_at : Time? = Time.now, read_at : Time? = nil)
   Notification.create!({
     player_id: player.id,
-    event_type: event_type || Notification::GENERAL,
+    type: notification_type || Notification::GENERAL,
     source_type: source.nil? ? nil : source.class.name,
     source_id: source.try(&.id),
     title: title || "New Notification",

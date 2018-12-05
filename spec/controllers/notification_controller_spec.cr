@@ -67,7 +67,7 @@ describe NotificationControllerTest do
         game_logger.call
         game = game_logger.game
 
-        notification = create_notification(player: player, event_type: Notification::GAME_LOGGED, source: game)
+        notification = create_notification(player: player, type: Notification::GAME_LOGGED, source: game)
 
         notification.read?.should be_false
         response = subject.get "/notifications/#{notification.id}", headers: authenticated_headers_for(user)
@@ -90,7 +90,7 @@ describe NotificationControllerTest do
         game_logger.call
         game = game_logger.game
 
-        notification = create_notification(player: player, event_type: Notification::GAME_LOGGED, source: game)
+        notification = create_notification(player: player, type: Notification::GAME_LOGGED, source: game)
 
         notification.read?.should be_false
         response = subject.get "/notifications/#{notification.id}", headers: authenticated_headers_for(user)
