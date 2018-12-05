@@ -23,6 +23,10 @@
           span.content = "#{won_or_lost} against #{other_player} in #{league.name}"
           span.time = time_units_since(game.created_at)
 
+h3 Tournament Stats
+h5 Rating Over Time
+canvas id="tournamentRating"
+
 h3 Recent Games
 == render(partial: "_recent_games.slang")
 

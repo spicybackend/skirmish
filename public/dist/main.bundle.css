@@ -613,6 +613,10 @@ tr.clickable-row {
     mask: url(/dist/images/gmail.svg) no-repeat center;
     background-color: #ef4b62; }
 
+#tournamentRating {
+  width: 400px;
+  height: 400px; }
+
 @media only screen and (max-width: 768px) {
   .masthead {
     background: #343a40;

@@ -314,6 +314,11 @@ tr.clickable-row {
   }
 }
 
+#tournamentRating {
+  width: 400px;
+  height: 400px;
+}
+
 @media only screen and (max-width: 768px) {
   .masthead {
     background: $dark-grey;
