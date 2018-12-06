@@ -16,6 +16,11 @@
     == label(name: "description", content: "Description")
     == text_field(name: "description", value: league.description, placeholder: "What's it all about?", class: "form-control")
   .form-group
+    == label(name: "visibility", content: "Visibility")
+    select.form-control.btn.btn-secondary name="visibility"
+      - League::VISIBILITY_OPTIONS.each do |visibility_option|
+        option value="#{visibility_option}" = visibility_option.capitalize
+  .form-group
     == label(name: "accent_color", content: "Accent Colour")
     == text_field(name: "accent_color", value: league.accent_color, placeholder: "A splash of hex to make your league truly yours", class: "form-control")
   .form-group

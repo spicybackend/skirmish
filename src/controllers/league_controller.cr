@@ -43,6 +43,7 @@ class LeagueController < ApplicationController
       name: params[:name],
       description: params[:description],
       accent_color: params[:accent_color],
+      visibility: params[:visibility],
       start_rating: params[:start_rating].to_i,
       k_factor: params[:k_factor].to_f,
     })
@@ -76,6 +77,7 @@ class LeagueController < ApplicationController
         name: params[:name],
         description: params[:description],
         accent_color: params[:accent_color],
+        visibility: params[:visibility],
         start_rating: params[:start_rating].to_i,
         k_factor: params[:k_factor].to_f,
       })
