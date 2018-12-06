@@ -53,6 +53,10 @@ class LeagueController < ApplicationController
         player_id: current_player.not_nil!.id,
         league_id: league.id
       )
+      Membership.create!(
+        player_id: current_player.not_nil!.id,
+        league_id: league.id
+      )
 
       flash["success"] = "Created League successfully"
       redirect_to "/leagues/#{league.id}"
