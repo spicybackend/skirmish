@@ -17,7 +17,7 @@
 
   .form-group
     label Player Tag
-    input.form-control type="username" name="username" placeholder="Player Tag" value="#{player.tag}"
+    input.form-control type="tag" name="tag" placeholder="Player Tag" value="#{player.tag}"
   .form-group
     label Name
     input.form-control type="name" name="name" placeholder="Name" value="#{user.name}"

@@ -34,7 +34,7 @@ class RegistrationController < ApplicationController
   end
 
   private def build_player_from_params
-    Player.build(tag: params["username"])
+    Player.build(tag: params["tag"])
   end
 
   private def create_user_from_params
@@ -50,7 +50,7 @@ class RegistrationController < ApplicationController
 
   private def registration_params
     params.validation do
-      required(:username) { |f| !f.nil? }
+      required(:tag) { |f| !f.nil? }
       required(:name) { |f| !f.nil? }
       required(:email) { |f| !f.nil? }
       required(:password) { |f| !f.nil? }

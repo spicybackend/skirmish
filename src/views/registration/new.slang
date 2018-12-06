@@ -13,7 +13,7 @@
 
     .form-group
       label Player Tag
-      input class="form-control #{"is-invalid" if player.errors[:tag].any?}" autofocus="true" type="username" name="username" value="#{params[:username]?}" required="true"
+      input class="form-control #{"is-invalid" if player.errors[:tag].any?}" autofocus="true" type="tag" name="tag" value="#{params[:tag]?}" required="true"
     .form-group
       label Name
       input class="form-control #{"is-invalid" if user.errors[:name].any?}" autofocus="true" type="name" name="name" value="#{params[:name]?}" required="true"
