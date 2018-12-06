@@ -3,10 +3,11 @@ class LeagueController < ApplicationController
 
   before_action do
     only [:show, :new, :create, :edit, :update, :destroy] { redirect_signed_out_user }
+    only [:show] { redirect_from_closed_league }
   end
 
   def index
-    leagues = League.all.left_join(Membership) { League._id == _league_id }
+    leagues = League.publicly_visible.left_join(Membership) { League._id == _league_id }
       .select("leagues.*, COUNT(memberships.league_id) as membership_count")
       .where { Membership._left_at == nil }
       .group("leagues.id")
@@ -64,7 +65,7 @@ class LeagueController < ApplicationController
     if league = League.find params["id"]
       render("edit.slang")
     else
-      flash["warning"] = "League with ID #{params["id"]} Not Found"
+      flash["warning"] = "Can't find league"
       redirect_to "/leagues"
     end
   end
@@ -87,7 +88,7 @@ class LeagueController < ApplicationController
         render("edit.slang")
       end
     else
-      flash["warning"] = "League with ID #{params["id"]} Not Found"
+      flash["warning"] = "Can't find league"
       redirect_to "/leagues"
     end
   end
@@ -98,10 +99,20 @@ class LeagueController < ApplicationController
         league.administrators_query.destroy
         league.destroy
       else
-        flash["warning"] = "League with ID #{params["id"]} Not Found"
+        flash["warning"] = "Can't find league"
       end
     end
 
     redirect_to "/leagues"
+  end
+
+  private def redirect_from_closed_league
+    player = current_player.not_nil!
+    league = League.find(params[:id])
+
+    if league && !player.in_league?(league)
+      flash["warning"] = "Can't find league"
+      redirect_to "/leagues"
+    end
   end
 end
