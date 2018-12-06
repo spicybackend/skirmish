@@ -8,6 +8,7 @@ class User < Jennifer::Model::Base
   mapping(
     id: Primary64,
     email: String,
+    name: String,
     hashed_password: String?,
     receive_email_notifications: { type: Bool, default: true },
 
