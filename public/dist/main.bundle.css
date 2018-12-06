@@ -382,9 +382,35 @@ form.main {
   border: 1px solid #1d2124;
   border-radius: 6px; }
 
+.tournament-graph-legend {
+  display: flex;
+  justify-content: center;
+  margin: 1em; }
+  .tournament-graph-legend .key {
+    display: flex;
+    align-items: center; }
+    .tournament-graph-legend .key + .key {
+      margin-left: 1.5em; }
+    .tournament-graph-legend .key .circle {
+      width: 1em;
+      height: 1em;
+      border-radius: 50%;
+      margin-right: 0.5em; }
+      .tournament-graph-legend .key .circle.undetermined {
+        background-color: #828282; }
+      .tournament-graph-legend .key .circle.ready {
+        background-color: #ffa039; }
+      .tournament-graph-legend .key .circle.played {
+        background-color: #ef4b62; }
+
 @media (max-width: 600px) {
   #tournament-graph {
-    height: 280px; } }
+    height: 280px; }
+  .tournament-graph-legend {
+    flex-direction: column;
+    justify-content: left; }
+    .tournament-graph-legend .key + .key {
+      margin-left: 0; } }
 
 .tournament-closure {
   color: white;

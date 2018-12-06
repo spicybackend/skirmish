@@ -1,4 +1,8 @@
+require "../helpers/profile_helper.cr"
+
 class Player < Jennifer::Model::Base
+  include ProfileHelper  # Used for profile gravatar urls in json generation
+
   RECENT_GAMES_LIMIT = 3
 
   with_timestamps
@@ -61,6 +65,14 @@ class Player < Jennifer::Model::Base
 
   def recent_games
     games_query.order(confirmed_at: :desc, created_at: :desc).limit(RECENT_GAMES_LIMIT).to_a
+  end
+
+  def to_h
+    {
+      id: id,
+      tag: tag,
+      image_url: gravatar_src_for(self)
+    }
   end
 
   private def user_exists
