@@ -1,6 +1,6 @@
 class RegistrationController < ApplicationController
   def new
-    user = User.build(email: "", verification_code: "")
+    user = User.build(name: "", email: "", verification_code: "")
     player = Player.build(tag: "")
 
     render("new.slang")
@@ -24,7 +24,7 @@ class RegistrationController < ApplicationController
   end
 
   private def build_user_from_params
-    User.build(email: "", verification_code: "").tap do |user|
+    User.build(name: "", email: "", verification_code: "").tap do |user|
       user.email = params[:email]
       user.receive_email_notifications = true
       user.verification_code = Random::Secure.hex(8)

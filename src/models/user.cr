@@ -23,6 +23,7 @@ class User < Jennifer::Model::Base
 
   has_one :player, Player
 
+  validates_presence :name
   validates_presence :email
   validates_uniqueness :email
   validates_format :email, /^[a-zA-Z0-9.!#$%&’*+\/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/

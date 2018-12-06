@@ -7,6 +7,7 @@ class SessionController < ApplicationController
       redirect_to redirect_url || landing_url
     else
       user = User.build({
+        name: "",
         email: "",
         verification_code: ""
       })
@@ -33,6 +34,7 @@ class SessionController < ApplicationController
     else
       flash[:danger] = I18n.translate("session.authentication_failed")
       user = User.build({
+        name: "",
         email: "",
         verification_code: ""
       })
