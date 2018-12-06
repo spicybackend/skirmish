@@ -8,12 +8,12 @@ class MembershipController < ApplicationController
     league = League.find(params[:league_id])
 
     if !league
-      flash["danger"] = "Can't find league."
+      flash["danger"] = "Can't find league"
       redirect_to "/leagues"; return
     end
 
     if league && player.in_league?(league)
-      flash["danger"] = "Already a member of #{league.name}."
+      flash["danger"] = "Already a member of #{league.name}"
       redirect_to "/leagues/#{params[:league_id]}"; return
     end
 

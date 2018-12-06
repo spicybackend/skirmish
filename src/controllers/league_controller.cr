@@ -52,7 +52,7 @@ class LeagueController < ApplicationController
         league_id: league.id
       )
 
-      flash["success"] = "Created League successfully."
+      flash["success"] = "Created League successfully"
       redirect_to "/leagues/#{league.id}"
     else
       flash["danger"] = "Could not create League!"
@@ -80,7 +80,7 @@ class LeagueController < ApplicationController
       })
 
       if league.valid? && league.save
-        flash["success"] = "Updated League successfully."
+        flash["success"] = "Updated League successfully"
         redirect_to "/leagues/#{league.id}"
       else
         flash["danger"] = "Could not update League!"

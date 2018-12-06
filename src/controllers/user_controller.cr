@@ -27,7 +27,7 @@ class UserController < ApplicationController
       Jennifer::Adapter.adapter.transaction do
         update!(user, player)
 
-        flash[:success] = "Updated Profile successfully."
+        flash[:success] = "Updated Profile successfully"
         redirect_to "/profile"
       end
     rescue ex : Jennifer::RecordInvalid
