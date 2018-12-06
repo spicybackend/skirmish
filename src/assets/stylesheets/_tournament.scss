@@ -7,9 +7,52 @@
   border-radius: 6px;
 }
 
+.tournament-graph-legend {
+  display: flex;
+  justify-content: center;
+  margin: 1em;
+
+  .key {
+    display: flex;
+    align-items: center;
+
+    & + .key {
+      margin-left: 1.5em;
+    }
+
+    .circle {
+      width: 1em;
+      height: 1em;
+      border-radius: 50%;
+      margin-right: 0.5em;
+
+      &.undetermined {
+        background-color: $thundergrey;
+      }
+
+      &.ready {
+        background-color: $pumpkin;
+      }
+
+      &.played {
+        background-color: $strawberry;
+      }
+    }
+  }
+}
+
 @media (max-width: 600px) {
   #tournament-graph {
     height: 280px;
+  }
+
+  .tournament-graph-legend {
+    flex-direction: column;
+    justify-content: left;
+
+    .key  + .key {
+      margin-left: 0;
+    }
   }
 }
 
