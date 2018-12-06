@@ -1,6 +1,15 @@
 h2 League Management
 p.description = "For #{league.name}"
 
+h3 Invite Requests
+p TODO LIST FORM LIKE ADMINS DELETE / APPROVE
+
+h3 Players
+p TODO LIST
+
+h4 Invite Player
+p TODO FORM
+
 h3 Admins
 .notifications
   - admin_players.each do |player|
