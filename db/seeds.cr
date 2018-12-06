@@ -6,6 +6,7 @@ Jennifer::Migration::Runner.migrate
 Jennifer::Adapter.adapter.transaction do
   if Amber.env.development?
     alice_user = User.build(
+      name: "Alice",
       email: "alice@skirmish.online",
       receive_email_notifications: false,
       verification_code: Random::Secure.hex(8),
@@ -19,6 +20,7 @@ Jennifer::Adapter.adapter.transaction do
     )
 
     bob_user = User.build(
+      name: "Bob",
       email: "bob@skirmish.online",
       receive_email_notifications: false,
       verification_code: Random::Secure.hex(8),
@@ -32,6 +34,7 @@ Jennifer::Adapter.adapter.transaction do
     )
 
     charlie_user = User.build(
+      name: "Charlie",
       email: "charlie@skirmish.online",
       receive_email_notifications: false,
       verification_code: Random::Secure.hex(8),
@@ -45,6 +48,7 @@ Jennifer::Adapter.adapter.transaction do
     )
 
     danielle_user = User.build(
+      name: "Danielle",
       email: "danielle@skirmish.online",
       receive_email_notifications: false,
       verification_code: Random::Secure.hex(8),
@@ -58,6 +62,7 @@ Jennifer::Adapter.adapter.transaction do
     )
 
     erik_user = User.build(
+      name: "Erik",
       email: "erik@skirmish.online",
       receive_email_notifications: false,
       verification_code: Random::Secure.hex(8),
