@@ -585,12 +585,13 @@ nav img.gravatar {
   background-position-x: 50%;
   background-position-y: 50%; }
 
-footer hr {
-  margin-top: 2em;
-  margin-bottom: 2em; }
-
-footer .social-links {
-  text-align: right; }
+footer {
+  font-size: 90%; }
+  footer hr {
+    margin-top: 4em;
+    margin-bottom: 4em; }
+  footer .social-links {
+    text-align: right; }
 
 /* Hide logo in small screens */
 @media (max-width: 767px) {
