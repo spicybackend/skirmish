@@ -14,7 +14,14 @@
     -webkit-background-clip: padding-box;
   }
 
-  .name {
+  h3.name {
+    margin-top: 0;
+    font-size: 18px;
+    text-align: center;
+    color: $thundergrey;
+  }
+
+  .tag {
     font-size: 24px;
     text-align: center;
   }
