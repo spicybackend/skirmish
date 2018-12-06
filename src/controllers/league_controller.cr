@@ -113,10 +113,10 @@ class LeagueController < ApplicationController
   end
 
   private def redirect_from_closed_league
-    player = current_player.not_nil!
+    player = current_player
     league = League.find(params[:id])
 
-    if league && !player.in_league?(league)
+    if player && league && league.closed? && !player.in_league?(league)
       flash["warning"] = "Can't find league"
       redirect_to "/leagues"
     end

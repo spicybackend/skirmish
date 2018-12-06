@@ -71,4 +71,8 @@ class League < Jennifer::Model::Base
   def active_memberships_query
     memberships_query.where { Membership._left_at == nil }
   end
+
+  def closed?
+    visibility == CLOSED
+  end
 end

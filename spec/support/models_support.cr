@@ -20,6 +20,7 @@ def create_league(name : String? = nil, description : String? = nil, start_ratin
   League.create!(
     name: name || Random::Secure.hex,
     description: description || Random::Secure.hex,
+    visibility: League::OPEN,
     start_rating: start_rating || League::DEFAULT_START_RATING,
     k_factor: k_factor || League::DEFAULT_K_FACTOR
   )
