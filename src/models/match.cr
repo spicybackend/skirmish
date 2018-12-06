@@ -37,4 +37,16 @@ class Match < Jennifer::Model::Base
   def winner
     Player.find(winner_id)
   end
+
+  def to_h
+    {
+      id: id,
+      level: level,
+      player_a_id: player_a_id,
+      player_b_id: player_b_id,
+      winner_id: winner_id,
+      next_match_id: next_match_id,
+      url: game_id ? "/leagues/#{tournament!.league_id}/games/#{game_id}" : "/leagues/#{tournament!.league_id}/games/new"
+    }
+  end
 end

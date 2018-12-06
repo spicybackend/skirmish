@@ -38,4 +38,11 @@ class Tournament < Jennifer::Model::Base
       Player.find(last_match.try(&.winner_id))
     end
   end
+
+  def to_h
+    {
+      matches: matches.map { |match| match.to_h },
+      players: players.map { |player| player.to_h }
+    }
+  end
 end
