@@ -12,10 +12,14 @@
               == form(action: "/leagues/#{league.id.to_s}/leave", method: :patch) do
                 == csrf_tag
                 == submit(t("league.actions.leave"), "data-confirm": "Are you sure you want to leave #{league.name}?", class: "dropdown-item danger")
-          - else
+          - elsif league.open?
             == form(action: "/leagues/#{league.id.to_s}/join", method: membership.id ? :patch : :post) do
               == csrf_tag
               == submit(t("league.actions.join"), class: "btn btn-primary")
+          / - elsif league.closed?
+            == form(action: "/leagues/#{league.id.to_s}/request", method: :post) do
+              == csrf_tag
+              == submit(t("league.actions.request_invite"), class: "btn btn-primary")
 
       - if current_player.try(&.admin_of?(league))
         span.toggle-button-group
