@@ -3,7 +3,7 @@ class LeagueController < ApplicationController
 
   before_action do
     only [:show, :new, :create, :edit, :update, :destroy] { redirect_signed_out_user }
-    only [:show, :edit] { redirect_from_closed_league }
+    only [:show, :edit] { redirect_from_secret_league }
   end
 
   def index
@@ -126,11 +126,11 @@ class LeagueController < ApplicationController
     redirect_to "/leagues"
   end
 
-  private def redirect_from_closed_league
+  private def redirect_from_secret_league
     player = current_player
     league = League.find(params[:id])
 
-    if player && league && league.closed? && !player.in_league?(league)
+    if player && league && league.secret? && !player.in_league?(league)
       flash["warning"] = "Can't find league"
       redirect_to "/leagues"
     end

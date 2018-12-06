@@ -72,7 +72,7 @@ class League < Jennifer::Model::Base
     memberships_query.where { Membership._left_at == nil }
   end
 
-  def closed?
-    visibility == CLOSED
+  def secret?
+    visibility == SECRET
   end
 end
