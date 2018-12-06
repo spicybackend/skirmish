@@ -27,7 +27,7 @@ class UserController < ApplicationController
       Jennifer::Adapter.adapter.transaction do
         update!(user, player)
 
-        flash[:success] = "Updated Profile successfully."
+        flash[:success] = "Updated Profile successfully"
         redirect_to "/profile"
       end
     rescue ex : Jennifer::RecordInvalid
@@ -37,16 +37,18 @@ class UserController < ApplicationController
   end
 
   private def update!(user : User, player : Player)
+    user.name = params[:name]
     user.email = params[:email]
-    player.tag = params[:username]
+    player.tag = params[:tag]
 
     (!user.changed? || user.save!) && (!player.changed? || player.save!)
   end
 
   private def profile_params
     params.validation do
+      required(:name) { |f| !f.nil? && !f.empty? }
       required(:email) { |f| !f.nil? && !f.empty? }
-      required(:username) { |f| !f.nil? && !f.empty? }
+      required(:tag) { |f| !f.nil? && !f.empty? }
       optional(:password) { |f| !f.nil? && !f.empty? }
     end
   end

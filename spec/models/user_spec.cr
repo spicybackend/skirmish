@@ -19,9 +19,27 @@ describe User do
   end
 
   describe "validations" do
+    describe "name" do
+      it "must be present" do
+        user = User.new({
+          name: "",
+          email: "lebron.james@skirmish.online",
+          verification_code: Random::Secure.hex(8),
+          receive_email_notifications: false
+        })
+        user.password = Random::Secure.hex
+
+        user.valid?.should be_false
+
+        user.name = "LeBron James"
+        user.valid?.should be_true
+      end
+    end
+
     describe "email_address" do
       it "must be present" do
         user = User.new({
+          name: "Cristiano Ronaldo",
           email: "",
           verification_code: Random::Secure.hex(8),
           receive_email_notifications: false
@@ -36,6 +54,7 @@ describe User do
 
       it "must be a valid email address" do
         user = User.new({
+          name: "Cristiano Ronaldo",
           email: "#{Random::Secure.hex}@test.com",
           verification_code: Random::Secure.hex(8),
           receive_email_notifications: false
@@ -61,6 +80,7 @@ describe User do
     describe "verification_code" do
       it "must be present" do
         user = User.new({
+          name: "Cristiano Ronaldo",
           email: "#{Random::Secure.hex}@test.com",
           verification_code: "",
           receive_email_notifications: false
@@ -75,6 +95,7 @@ describe User do
 
       it "must be 16 characters long" do
         user = User.new({
+          name: "Cristiano Ronaldo",
           email: "#{Random::Secure.hex}@test.com",
           verification_code: "123456789012345",
           receive_email_notifications: false
@@ -92,6 +113,7 @@ describe User do
 
       it "must not contain special characters" do
         user = User.new({
+          name: "Cristiano Ronaldo",
           email: "#{Random::Secure.hex}@test.com",
           verification_code: "abc456789012345",
           receive_email_notifications: false
@@ -104,6 +126,7 @@ describe User do
 
       it "must be lowercase" do
         user = User.new({
+          name: "Cristiano Ronaldo",
           email: "#{Random::Secure.hex}@test.com",
           verification_code: "abc4567890123456",
           receive_email_notifications: false
@@ -188,9 +211,5 @@ describe User do
         user.unverified?.should be_false
       end
     end
-  end
-
-  pending do
-    it "has specs"
   end
 end

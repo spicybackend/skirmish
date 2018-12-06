@@ -1,6 +1,6 @@
 class RegistrationController < ApplicationController
   def new
-    user = User.build(email: "", verification_code: "")
+    user = User.build(name: "", email: "", verification_code: "")
     player = Player.build(tag: "")
 
     render("new.slang")
@@ -24,7 +24,8 @@ class RegistrationController < ApplicationController
   end
 
   private def build_user_from_params
-    User.build(email: "", verification_code: "").tap do |user|
+    User.build(name: "", email: "", verification_code: "").tap do |user|
+      user.name = params[:name]
       user.email = params[:email]
       user.receive_email_notifications = true
       user.verification_code = Random::Secure.hex(8)
@@ -33,7 +34,7 @@ class RegistrationController < ApplicationController
   end
 
   private def build_player_from_params
-    Player.build(tag: params["username"])
+    Player.build(tag: params["tag"])
   end
 
   private def create_user_from_params
@@ -49,21 +50,10 @@ class RegistrationController < ApplicationController
 
   private def registration_params
     params.validation do
-      required(:username) { |f| !f.nil? }
+      required(:tag) { |f| !f.nil? }
+      required(:name) { |f| !f.nil? }
       required(:email) { |f| !f.nil? }
       required(:password) { |f| !f.nil? }
-    end
-  end
-
-  private def valid_username?(user)
-    username = params[:username]
-
-    if username.empty?
-      user.errors << Granite::Error.new(:username, "is required")
-    else
-      if Player.find_by(tag: username)
-        user.errors << Granite::Error.new(:username, "is already taken")
-      end
     end
   end
 end

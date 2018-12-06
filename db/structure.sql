@@ -664,7 +664,8 @@ CREATE TABLE public.users (
     updated_at timestamp without time zone,
     receive_email_notifications boolean DEFAULT true NOT NULL,
     activated_at timestamp without time zone,
-    verification_code character varying(16)
+    verification_code character varying(16),
+    name character varying(128)
 );
 
 

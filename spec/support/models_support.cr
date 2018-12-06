@@ -1,6 +1,8 @@
 def create_player_with_mock_user(tag : String? = nil, password : String? = nil, verified : Bool = true)
+  name = Random::Secure.hex
   user = User.new({
-    email: "#{Random::Secure.hex}@test.com",
+    name: name,
+    email: "#{name}@test.com",
     receive_email_notifications: false,
     verification_code: Random::Secure.hex(8),
     activated_at: verified ? Time.now : nil

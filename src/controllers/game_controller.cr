@@ -109,7 +109,7 @@ class GameController < ApplicationController
     if game_logger.call
       game = game_logger.game
 
-      flash["success"] = "Game logged."
+      flash["success"] = "Game logged"
       redirect_to "/leagues/#{league.id}/games/#{game.id}"
     else
       flash["danger"] = game_logger.errors.to_s

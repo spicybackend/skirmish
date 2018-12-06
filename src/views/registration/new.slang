@@ -12,8 +12,11 @@
         li = error_message
 
     .form-group
-      label Username
-      input class="form-control #{"is-invalid" if player.errors[:tag].any?}" autofocus="true" type="username" name="username" value="#{params[:username]?}" required="true"
+      label Player Tag
+      input class="form-control #{"is-invalid" if player.errors[:tag].any?}" autofocus="true" type="tag" name="tag" value="#{params[:tag]?}" required="true"
+    .form-group
+      label Name
+      input class="form-control #{"is-invalid" if user.errors[:name].any?}" autofocus="true" type="name" name="name" value="#{params[:name]?}" required="true"
     .form-group
       label Email
       input class="form-control #{"is-invalid" if user.errors[:email].any?}" type="email" name="email" value="#{user.email}" required="true"

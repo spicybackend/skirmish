@@ -8,7 +8,8 @@
 
 .player-profile.animated.zoomIn.fast
   img.gravatar src="#{gravatar_src_for(player)}"
-  h3.name = player.tag
+  h3.tag = player.tag
+  h3.name = user.name
 
 - if own_profile?
   h3 Unconfirmed Games
