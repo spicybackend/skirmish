@@ -5,8 +5,8 @@ class NotificationController < ApplicationController
 
   def index
     player = current_player.not_nil!
-    unread_notifications = Notification.for_player(player).unread.order(created_at: :desc).to_a.map(&.presented)
-    read_notifications = Notification.for_player(player).read.order(created_at: :desc).to_a.map(&.presented)
+    unread_notifications = Notification.for_player(player).unread.order(created_at: :desc).to_a
+    read_notifications = Notification.for_player(player).read.order(created_at: :desc).to_a
 
     render("index.slang")
   end
@@ -20,10 +20,9 @@ class NotificationController < ApplicationController
         redirect_to "/notifications"; return
       end
 
-      presented_notification = notification.presented
       notification.read!
 
-      redirect_to presented_notification.action_url
+      redirect_to notification.action_url
     else
       flash[:danger] = "Can't find notification"
       redirect_to "/notifications"

@@ -23,7 +23,6 @@ class Notification < Jennifer::Model::Base
 
   mapping(
     id: Primary64,
-    # event_type: String,
     type: String,
 
     player_id: Int64?,
@@ -52,34 +51,34 @@ class Notification < Jennifer::Model::Base
   validates_presence :type
   validates_presence :sent_at
 
-  validates_inclusion :type, in: EVENT_TYPES
+  # validates_inclusion :type, in: EVENT_TYPES
 
   validates_with PlayerRelationValidator
-  validates_with_method :source_present_and_valid
+  # validates_with_method :source_present_and_valid
 
-  def source_present_and_valid
-    source_class = SOURCE_CLASS_BY_EVENT_TYPE[type]?
+  # def source_present_and_valid
+  #   source_class = SOURCE_CLASS_BY_EVENT_TYPE[type]?
 
-    if source_class
-      if source_type != source_class.name
-        errors.add(:source_type, "must be a #{source_class.name}")
-      elsif source_class.find(source_id).nil?
-        errors.add(:source, "must exist")
-      end
-    elsif source_type
-      errors.add(:source, "must be nil for #{type} notifications")
-    end
+  #   if source_class
+  #     if source_type != source_class.name
+  #       errors.add(:source_type, "must be a #{source_class.name}")
+  #     elsif source_class.find(source_id).nil?
+  #       errors.add(:source, "must exist")
+  #     end
+  #   elsif source_type
+  #     errors.add(:source, "must be nil for #{type} notifications")
+  #   end
 
-    return unless source_id || source_type
+  #   return unless source_id || source_type
 
-    if source_id.nil? || source_type.nil?
-      if source_id
-        errors.add(:source_type, "must also be present if source_id is given")
-      else
-        errors.add(:source_id, "must also be present if source_type is given")
-      end
-    end
-  end
+  #   if source_id.nil? || source_type.nil?
+  #     if source_id
+  #       errors.add(:source_type, "must also be present if source_id is given")
+  #     else
+  #       errors.add(:source_id, "must also be present if source_type is given")
+  #     end
+  #   end
+  # end
 
   def source
     if source_class = SOURCE_CLASS_BY_EVENT_TYPE[type]?
@@ -87,8 +86,8 @@ class Notification < Jennifer::Model::Base
     end
   end
 
-  def presented
-    PRESENTER_BY_EVENT_TYPE[type].new(self)
+  def action_url
+    "/notifications"
   end
 
   def read?
