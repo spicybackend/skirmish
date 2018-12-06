@@ -3,7 +3,7 @@ class LeagueController < ApplicationController
 
   before_action do
     only [:show, :new, :create, :edit, :update, :destroy] { redirect_signed_out_user }
-    only [:show] { redirect_from_closed_league }
+    only [:show, :edit] { redirect_from_closed_league }
   end
 
   def index
@@ -67,8 +67,15 @@ class LeagueController < ApplicationController
   end
 
   def edit
+    player = current_player
+
     if league = League.find params["id"]
-      render("edit.slang")
+      if player && player.admin_of?(league)
+        render("edit.slang")
+      else
+        flash["warning"] = "Must be an admin of #{league.name} to edit it"
+        redirect_to "/leagues/#{league.id}"
+      end
     else
       flash["warning"] = "Can't find league"
       redirect_to "/leagues"
@@ -76,22 +83,29 @@ class LeagueController < ApplicationController
   end
 
   def update
-    if league = League.find(params["id"])
-      league.update_attributes({
-        name: params[:name],
-        description: params[:description],
-        accent_color: params[:accent_color],
-        visibility: params[:visibility],
-        start_rating: params[:start_rating].to_i,
-        k_factor: params[:k_factor].to_f,
-      })
+    player = current_player
 
-      if league.valid? && league.save
-        flash["success"] = "Updated League successfully"
-        redirect_to "/leagues/#{league.id}"
+    if league = League.find(params["id"])
+      if player && player.admin_of?(league)
+        league.update_attributes({
+          name: params[:name],
+          description: params[:description],
+          accent_color: params[:accent_color],
+          visibility: params[:visibility],
+          start_rating: params[:start_rating].to_i,
+          k_factor: params[:k_factor].to_f,
+        })
+
+        if league.valid? && league.save
+          flash["success"] = "Updated League successfully"
+          redirect_to "/leagues/#{league.id}"
+        else
+          flash["danger"] = "Could not update League!"
+          render("edit.slang")
+        end
       else
-        flash["danger"] = "Could not update League!"
-        render("edit.slang")
+        flash["warning"] = "Must be an admin of #{league.name} to edit it"
+        redirect_to "/leagues/#{league.id}"
       end
     else
       flash["warning"] = "Can't find league"
