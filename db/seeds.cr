@@ -78,6 +78,7 @@ Jennifer::Adapter.adapter.transaction do
     hotdog_league = League.create!(
       name: "Hotdog Eating League (HEL)",
       description: "Down a hotdog as fast as possible!",
+      visibility: League::OPEN,
       start_rating: League::DEFAULT_START_RATING,
       k_factor: League::DEFAULT_K_FACTOR,
     )
