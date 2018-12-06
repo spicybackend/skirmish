@@ -1,6 +1,7 @@
-h2 Admin Management
+h2 League Management
 p.description = "For #{league.name}"
 
+h3 Admins
 .notifications
   - admin_players.each do |player|
     a href="/profile/#{player.tag}"
@@ -16,7 +17,7 @@ p.description = "For #{league.name}"
 == form(action: "/leagues/#{league.id}/admins", method: :post, class: "main") do
   == csrf_tag
 
-  h3 Add Admin
+  h4 Add Admin
 
   .form-group
     select.form-control.btn.btn-secondary name="player_id"

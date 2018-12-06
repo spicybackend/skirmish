@@ -45,8 +45,8 @@ Amber::Server.configure do
     post "/leagues/:league_id/tournaments/:tournament_id/join", EntrantController, :create
     delete "/leagues/:league_id/tournaments/:tournament_id/leave", EntrantController, :destroy
 
-    resources "/leagues/:league_id/admin_management", AdministratorController, only: [:index]
-    resources "/leagues/:league_id/admins", AdministratorController, only: [:create, :destroy]
+    get "/leagues/:league_id/management", LeagueController, :management
+    resources "/leagues/:league_id/admins", LeagueAdministratorController, only: [:create, :destroy]
 
     get "/profile", UserController, :show
     get "/profile/edit", UserController, :edit

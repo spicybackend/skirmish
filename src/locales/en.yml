@@ -71,7 +71,7 @@ league:
     log_game: "Log Game"
     add_admin: "Make Admin"
     remove_admin: "Remove"
-    manage_admins: "Manage Admins"
+    manage_admins: "Manage League"
 
 tournament:
   types:

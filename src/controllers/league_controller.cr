@@ -30,6 +30,27 @@ class LeagueController < ApplicationController
     end
   end
 
+  def management
+    if league = League.find(params[:league_id])
+      if current_player.not_nil!.admin_of?(league)
+        _admin_players_query = Player.all.where {
+          _id == any(league.administrators_query.select(:player_id))
+        }
+
+        admin_players = _admin_players_query.order(tag: :asc).to_a
+        available_players_for_admin = league.players_query.where { sql("players.id not in (#{_admin_players_query.pluck(:id).join(", ")}) ") }.to_a
+
+        render("management.slang")
+      else
+        flash[:danger] = "Must be an admin of #{league.name} to manage it"
+        redirect_to "/leagues/#{league.id}"
+      end
+    else
+      flash[:danger] = "Unable to find league"
+      redirect_to "/leagues"
+    end
+  end
+
   def new
     league = League.build({
       name: ""
