@@ -37,6 +37,7 @@ class UserController < ApplicationController
   end
 
   private def update!(user : User, player : Player)
+    user.name = params[:name]
     user.email = params[:email]
     player.tag = params[:username]
 
@@ -45,6 +46,7 @@ class UserController < ApplicationController
 
   private def profile_params
     params.validation do
+      required(:name) { |f| !f.nil? && !f.empty? }
       required(:email) { |f| !f.nil? && !f.empty? }
       required(:username) { |f| !f.nil? && !f.empty? }
       optional(:password) { |f| !f.nil? && !f.empty? }

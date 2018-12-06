@@ -16,8 +16,13 @@
       li = error
 
   .form-group
-    input.form-control type="username" name="username" placeholder="Display name" value="#{player.tag}"
+    label Player Tag
+    input.form-control type="username" name="username" placeholder="Player Tag" value="#{player.tag}"
   .form-group
+    label Name
+    input.form-control type="name" name="name" placeholder="Name" value="#{user.name}"
+  .form-group
+    label Email
     input.form-control type="email" name="email" placeholder="Email" value="#{user.email}"
 
   == submit("Update", class: "btn btn-primary")
