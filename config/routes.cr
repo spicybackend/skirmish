@@ -48,6 +48,9 @@ Amber::Server.configure do
     get "/leagues/:league_id/management", LeagueController, :management
     resources "/leagues/:league_id/admins", LeagueAdministratorController, only: [:create, :destroy]
 
+    resources "/leagues/:league_id/invites/", InvitationController, only: [:new, :create, :update]
+    resources "/leagues/:league_id/requests/", RequestController, only: [:create, :update]
+
     get "/profile", UserController, :show
     get "/profile/edit", UserController, :edit
     get "/profile/:player_tag", UserController, :show
