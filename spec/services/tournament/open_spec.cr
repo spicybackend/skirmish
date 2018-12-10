@@ -57,12 +57,22 @@ describe Tournament::Open do
       end
     end
 
-    pending "when a tournament has already been started" do
-      it "raises an error" do
-        create_tournament.call
-        # started_tournament = create_tournament.call
-        # Tournament::Start.new(started_tournament).call
+    context "when a tournament for the league has already been started" do
+      started_tournament = create_tournament.call.not_nil!
+      player_a = create_player_with_mock_user
+      player_b = create_player_with_mock_user
 
+      [player_a, player_b].each do |player|
+        Membership.create!(player_id: player.id, league_id: league.id)
+      end
+
+      [player_a, player_b].each do |player|
+        Tournament::Enter.new(player: player, tournament: started_tournament).call
+      end
+
+      Tournament::Start.new(tournament: started_tournament).call
+
+      it "raises an error" do
         expect_raises(Tournament::Open::OpenError, "A tournament for this league is already in progress") do
           create_tournament.call
         end
