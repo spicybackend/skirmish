@@ -1,6 +1,6 @@
 import Amber from 'amber'
 
-import "./tournament.js"
+import "./tournament-graph.js"
 import "./party-popper.js"
 
 /*
