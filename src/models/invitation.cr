@@ -17,7 +17,7 @@ class Invitation < Jennifer::Model::Base
 
   belongs_to :league, League
   belongs_to :player, Player
-  belongs_to :approver, Player
+  belongs_to :approver, Player, nil, "approver_id"
 
   validates_presence :player_id
   validates_presence :league_id
