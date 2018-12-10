@@ -8,17 +8,17 @@ def can_be_confirmed?(game : Game, player : Player)
 end
 
 describe Game::CanBeConfirmedByPlayer do
+  league = create_league
+  winner = create_player_with_mock_user
+  loser = create_player_with_mock_user
+
+  [winner, loser].each do |player|
+    Membership.create!(player_id: player.id, league_id: league.id, joined_at: Time.now)
+  end
+
   describe "#call" do
     context "a game logged by the winner" do
       it "is able to be confirmed by the loser" do
-        league = create_league
-        winner = create_player_with_mock_user
-        loser = create_player_with_mock_user
-
-        [winner, loser].each do |player|
-          Membership.create!(player_id: player.id, league_id: league.id, joined_at: Time.now)
-        end
-
         game_logger = League::LogGame.new(league: league, winner: winner, loser: loser, logger: winner)
         game_logger.call
         game = game_logger.game
@@ -27,14 +27,6 @@ describe Game::CanBeConfirmedByPlayer do
       end
 
       it "is unable to be confirmed by the winner" do
-        league = create_league
-        winner = create_player_with_mock_user
-        loser = create_player_with_mock_user
-
-        [winner, loser].each do |player|
-          Membership.create!(player_id: player.id, league_id: league.id, joined_at: Time.now)
-        end
-
         game_logger = League::LogGame.new(league: league, winner: winner, loser: loser, logger: winner)
         game_logger.call
         game = game_logger.game
@@ -43,14 +35,6 @@ describe Game::CanBeConfirmedByPlayer do
       end
 
       it "is able to be confirmed by a league admin" do
-        league = create_league
-        winner = create_player_with_mock_user
-        loser = create_player_with_mock_user
-
-        [winner, loser].each do |player|
-          Membership.create!(player_id: player.id, league_id: league.id, joined_at: Time.now)
-        end
-
         game_logger = League::LogGame.new(league: league, winner: winner, loser: loser, logger: winner)
         game_logger.call
         game = game_logger.game
@@ -64,14 +48,6 @@ describe Game::CanBeConfirmedByPlayer do
 
     context "a game logged by the loser" do
       it "is able to be confirmed by the winner" do
-        league = create_league
-        winner = create_player_with_mock_user
-        loser = create_player_with_mock_user
-
-        [winner, loser].each do |player|
-          Membership.create!(player_id: player.id, league_id: league.id, joined_at: Time.now)
-        end
-
         game_logger = League::LogGame.new(league: league, winner: winner, loser: loser, logger: loser)
         game_logger.call
         game = game_logger.game
@@ -80,14 +56,6 @@ describe Game::CanBeConfirmedByPlayer do
       end
 
       it "is unable to be confirmed by the loser" do
-        league = create_league
-        winner = create_player_with_mock_user
-        loser = create_player_with_mock_user
-
-        [winner, loser].each do |player|
-          Membership.create!(player_id: player.id, league_id: league.id, joined_at: Time.now)
-        end
-
         game_logger = League::LogGame.new(league: league, winner: winner, loser: loser, logger: loser)
         game_logger.call
         game = game_logger.game
@@ -96,14 +64,6 @@ describe Game::CanBeConfirmedByPlayer do
       end
 
       it "is able to be confirmed by a league admin" do
-        league = create_league
-        winner = create_player_with_mock_user
-        loser = create_player_with_mock_user
-
-        [winner, loser].each do |player|
-          Membership.create!(player_id: player.id, league_id: league.id, joined_at: Time.now)
-        end
-
         game_logger = League::LogGame.new(league: league, winner: winner, loser: loser, logger: loser)
         game_logger.call
         game = game_logger.game
