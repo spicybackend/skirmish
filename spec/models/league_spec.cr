@@ -3,28 +3,24 @@ require "../../src/models/league.cr"
 
 def create_league!
   League.create!(
-    name: "new league",
+    name: "a newly created league",
     description: "some description",
     start_rating: League::DEFAULT_START_RATING,
     k_factor: League::DEFAULT_K_FACTOR
   )
 end
 
-def build_league
-  League.new({
-    name: "new league",
+describe League do
+  league = League.build(
+    name: "a newly built league",
     description: "some description",
     start_rating: League::DEFAULT_START_RATING,
     k_factor: League::DEFAULT_K_FACTOR
-  })
-end
+  )
 
-describe League do
   describe "validations" do
     describe "name" do
       it "must be present" do
-        league = build_league
-
         league.name = ""
         league.valid?.should be_false
 
@@ -34,7 +30,6 @@ describe League do
 
       it "must be unique" do
         existing_league = create_league!
-        league = build_league
         league.name = existing_league.name
 
         league.valid?.should be_false
@@ -44,8 +39,6 @@ describe League do
 
     describe "description" do
       it "must be present" do
-        league = build_league
-
         league.description = ""
         league.valid?.should be_false
 
@@ -56,8 +49,6 @@ describe League do
 
     describe "accent color" do
       it "must be present" do
-        league = build_league
-
         league.accent_color = ""
         league.valid?.should be_false
 
@@ -66,8 +57,6 @@ describe League do
       end
 
       it "must be of hex format" do
-        league = build_league
-
         league.accent_color = "rgb(123,123,123)"
         league.valid?.should be_false
 
@@ -78,8 +67,6 @@ describe League do
 
     describe "start rating" do
       it "must be between 100 and 3000" do
-        league = build_league
-
         league.start_rating = 99
         league.valid?.should be_false
         league.errors.full_messages.join(", ").should match /Start rating must be greater than or equal to 100/
@@ -96,8 +83,6 @@ describe League do
 
     describe "k-factor" do
       it "must be between 1 and 100" do
-        league = build_league
-
         league.k_factor = 0.9
         league.valid?.should be_false
         league.errors.full_messages.join(", ").should match /K factor must be greater than or equal to 1/
@@ -114,38 +99,32 @@ describe League do
   end
 
   describe "#active_players" do
+    league = create_league!
+
     context "a brand new league" do
       it "has no active players" do
-        league = create_league!
-
         league.active_players.size.should eq 0
       end
     end
 
     context "when there is a player with a membership in the league" do
-      it "has an active player" do
-        league = create_league!
-        player = create_player_with_mock_user("player_one")
-        membership = Membership.create!(
-          league_id: league.id,
-          player_id: player.id,
-          joined_at: Time.now
-        )
+      player = create_player_with_mock_user("player_one")
+      membership = Membership.create!(
+        league_id: league.id,
+        player_id: player.id,
+        joined_at: Time.now
+      )
 
+      it "has an active player" do
         league.active_players.size.should eq 1
       end
 
       context "but the membership is expired" do
-        it "has no active players" do
-          league = create_league!
-          player = create_player_with_mock_user("player_one")
-          membership = Membership.create!(
-            league_id: league.id,
-            player_id: player.id,
-            joined_at: Time.now,
-            left_at: Time.now
-          )
+        membership.update!(
+          left_at: Time.now
+        )
 
+        it "has no active players" do
           league.active_players.size.should eq 0
         end
       end
