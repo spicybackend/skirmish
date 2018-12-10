@@ -18,9 +18,6 @@ describe Player do
         player.user_id = another_player.user!.id
         player.valid?.should be_false
         player.errors.full_messages.join(",").should match /User has already been taken/
-
-        another_player.destroy
-        player.valid?.should be_true
       end
     end
 
