@@ -2,9 +2,7 @@ require "./spec_helper"
 require "../../src/models/notification.cr"
 
 describe Notification do
-  Spec.before_each do
-    create_player_with_mock_user
-  end
+  player = create_player_with_mock_user
 
   describe "validations" do
     describe "player" do
