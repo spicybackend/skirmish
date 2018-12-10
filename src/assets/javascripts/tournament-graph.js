@@ -33,12 +33,21 @@ if (tournamentGraphElement) {
       else
         outlineColor = '#828282'
 
+      let playersLabel = ""
+      if (player_a && player_b) {
+        playersLabel = `${player_a.tag} vs ${player_b.tag}`
+      } else if (player_a) {
+        playersLabel = `${player_a.tag} vs ?`
+      } else if (player_b) {
+        playersLabel = `${player_b.tag} vs ?`
+      }
+
       return {
         data: {
           id: `m${match.id}`,
           name: `Match #${match.id}`,
           href: match.url,
-          players_vs: `${ player_a ? player_a.tag : "undetermined" } vs ${ player_b ? player_b.tag : "undetermined" }`,
+          players_vs: playersLabel,
           background: winner ? winner.image_url : 'none',
           outline: outlineColor
         }
