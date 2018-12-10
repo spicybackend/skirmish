@@ -6,12 +6,18 @@ class RequestController < ApplicationController
   # request an invite to the league
   def create
     if league = League.find(params[:league_id])
-      # already in league?
-      # already invited?
-
+      Jennifer::Adapter.adapter.transaction do
+        Invitation::Create.new(
+          league: league,
+          player: current_player.not_nil!
+        ).call
+      rescue ex : Invitation::Create::InviteError
+        flash["danger"] = ex.message.to_s
+        redirect_to "/leagues/#{league.id}"
+      end
     else
-      flash["danger"] = "Can't find league"
-      redirect_to "/leagues"; return
+      flash["danger"] = "Couldn't find league"
+      redirect_to "/leagues"
     end
   end
 

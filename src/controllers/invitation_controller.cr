@@ -8,12 +8,32 @@ class InvitationController < ApplicationController
       players = Player.all.where { sql("id != all (#{league.players_query.pluck(:id).join(",")})") }
     else
       flash["danger"] = "Couldn't find league"
-      redirect_to "leagues"
+      redirect_to "/leagues"
     end
   end
 
+  # sent an invite to join the league to another player
   def create
-    # shared service with request controller
+    if league = League.find(params[:league_id])
+      if player = Player.where { _tag == params[:tag] }.first
+        Jennifer::Adapter.adapter.transaction do
+          Invitation::Create.new(
+            league: league,
+            player: player,
+            approver: current_player.not_nil!
+          ).call
+        rescue ex : Invitation::Create::InviteError
+          flash["danger"] = ex.message.to_s
+          redirect_to "/leagues/#{league.id}"
+        end
+      else
+        flash["danger"] = "Couldn't find a player called '#{params[:tag]}'"
+        redirect_to "/leagues/#{league.id}"
+      end
+    else
+      flash["danger"] = "Couldn't find league"
+      redirect_to "/leagues"
+    end
   end
 
   # player confirming an invitation
