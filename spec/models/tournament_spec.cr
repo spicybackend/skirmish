@@ -1,11 +1,11 @@
 require "./spec_helper"
 
 describe Tournament do
+  league = create_league
+  another_league = create_league
+
   describe "scopes" do
     describe ".unfinished" do
-      league = create_league
-      another_league = create_league
-
       finished_tournament = Tournament::Open.new(league).call.not_nil!
       finished_tournament.update!(finished_at: Time.now)
 
@@ -36,9 +36,7 @@ describe Tournament do
     end
 
     describe ".for_league" do
-      league = create_league
-      another_league = create_league
-
+      Tournament.all.destroy
       tournament = Tournament::Open.new(league).call.not_nil!
       another_tournament = Tournament::Open.new(another_league).call.not_nil!
 

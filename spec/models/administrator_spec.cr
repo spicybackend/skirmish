@@ -1,22 +1,15 @@
 require "./spec_helper"
 require "../../src/models/administrator.cr"
 
-def build_admin
+describe Administrator do
   player = create_player_with_mock_user
   league = create_league
 
-  Administrator.build.tap do |admin|
-    admin.player_id = player.id.not_nil!
-    admin.league_id = league.id.not_nil!
-  end
-end
-
-describe Administrator do
   describe "validations" do
     context "player" do
       context "a valid player" do
         it "is valid" do
-          admin = build_admin
+          admin = Administrator.build(player_id: player.id, league_id: league.id)
 
           admin.valid?.should be_true
           admin.errors.size.should eq 0
@@ -25,8 +18,7 @@ describe Administrator do
 
       context "when no player is given" do
         it "is invalid" do
-          admin = build_admin
-          admin.update_attributes(player_id: nil)
+          admin = Administrator.build(player_id: nil, league_id: league.id)
 
           admin.valid?.should be_false
           admin.errors.full_messages.join(", ").should match /Player can't be blank/
@@ -35,8 +27,7 @@ describe Administrator do
 
       context "when the player doesn't exist" do
         it "is invalid" do
-          admin = build_admin
-          admin.player_id = 9999
+          admin = Administrator.build(player_id: 9999.to_i64, league_id: league.id)
 
           admin.valid?.should be_false
           admin.errors.full_messages.join(", ").should match /Player must exist/
@@ -47,7 +38,7 @@ describe Administrator do
     context "league" do
       context "a valid league" do
         it "is valid" do
-          admin = build_admin
+          admin = Administrator.build(player_id: player.id, league_id: league.id)
 
           admin.valid?.should be_true
           admin.errors.size.should eq 0
@@ -56,8 +47,7 @@ describe Administrator do
 
       context "when no league is given" do
         it "is invalid" do
-          admin = build_admin
-          admin.update_attributes(league_id: nil)
+          admin = Administrator.build(player_id: player.id, league_id: nil)
 
           admin.valid?.should be_false
           admin.errors.full_messages.join(", ").should match /League can't be blank/
@@ -66,8 +56,7 @@ describe Administrator do
 
       context "when the league doesn't exist" do
         it "is invalid" do
-          admin = build_admin
-          admin.update_attributes(league_id: 9999.to_i64)
+          admin = Administrator.build(player_id: player.id, league_id: 9999.to_i64)
 
           admin.valid?.should be_false
           admin.errors.full_messages.join(", ").should match /League must exist/
