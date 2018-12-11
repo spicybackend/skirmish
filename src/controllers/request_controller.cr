@@ -21,6 +21,7 @@ class RequestController < ApplicationController
     end
   end
 
+  # admin approving a request
   def update
     if invite = Invitation.find(params[:id])
       if current_player.not_nil!.admin_of?(invite.league!)

@@ -36,20 +36,24 @@ class InvitationController < ApplicationController
     end
   end
 
-  # player confirming an invitation
+  # player accepting an invitation
   def update
     if invite = Invitation.find(params[:id])
-      if invite.player_id == current_player.not_nil!.id
-        invite.update!(accepted_at: Time.now)
+      player = current_player.not_nil!
 
-        # check not already confirmed
+      if invite.player_id == player.id
+        Jennifer::Adapter.adapter.transaction do
+          Invitation::Accept.new(
+            invitation: invite,
+            player: player
+          ).call
 
-        # check not already in the league
-
-        # pull into service. Shared with request controller and some option for invite/request?
-
-        flash["success"] = "Invite accepted"
-        redirect_to "/leagues/#{invite.league_id}"
+          flash["success"] = "Invite accepted"
+          redirect_to "/leagues/#{invite.league_id}"
+        rescue ex : Invitation::Accept::AcceptError
+          flash["danger"] = ex.message.to_s
+          redirect_to "/leagues/#{invite.league_id}"
+        end
       else
         flash["danger"] = "Invite belongs to someone else"
         redirect_to "/leagues/#{invite.league_id}"

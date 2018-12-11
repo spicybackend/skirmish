@@ -21,4 +21,12 @@ class Invitation < Jennifer::Model::Base
 
   validates_presence :player_id
   validates_presence :league_id
+
+  def accepted?
+    !!accepted_at
+  end
+
+  def approved?
+    !!approved_at
+  end
 end
