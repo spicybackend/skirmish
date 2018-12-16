@@ -16,15 +16,14 @@
             == form(action: "/leagues/#{league.id}/join", method: membership.id ? :patch : :post) do
               == csrf_tag
               == submit(t("league.actions.join"), class: "btn btn-primary")
+          - elsif unaccepted_invite
+            == form(action: "/leagues/#{league.id}/invites/#{unaccepted_invite.id}", method: :patch) do
+              == csrf_tag
+              == submit(t("invitation.actions.accept"), class: "btn btn-success")
           - elsif league.closed?
-            - if unaccepted_invite
-              == form(action: "/leagues/#{league.id}/invites/#{unaccepted_invite.id}", method: :patch) do
-                == csrf_tag
-                == submit(t("invitation.actions.accept"), class: "btn btn-success")
-            - else
-              == form(action: "/leagues/#{league.id}/requests", method: :post) do
-                == csrf_tag
-                == submit(t("invitation.actions.request"), class: "btn btn-primary")
+            == form(action: "/leagues/#{league.id}/requests", method: :post) do
+              == csrf_tag
+              == submit(t("invitation.actions.request"), class: "btn btn-primary")
 
       - if current_player.try(&.admin_of?(league))
         span.toggle-button-group

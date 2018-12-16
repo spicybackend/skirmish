@@ -7,9 +7,14 @@ class LeagueController < ApplicationController
   end
 
   def index
-    leagues = League.publicly_visible.left_join(Membership) { League._id == _league_id }
+    current_player_id = current_player.try(&.id)
+
+    leagues = League.all
+      .left_join(Membership) { League._id == _league_id }
+      .left_join(Invitation) { League._id == _league_id }
       .select("leagues.*, COUNT(memberships.league_id) as membership_count")
-      .where { Membership._left_at == nil }
+      .where { (Membership._left_at == nil) }
+      .where { (_visibility != League::SECRET) | (Invitation._player_id == current_player_id) }
       .group("leagues.id")
       .order { { "membership_count" => :desc } }
 
@@ -160,7 +165,7 @@ class LeagueController < ApplicationController
     player = current_player
     league = League.find(params[:id])
 
-    if player && league && league.secret? && !player.in_league?(league)
+    if player && league && league.secret? && !player.in_league?(league) && !league.invites_query.where { _player_id == player.try(&.id) }.exists?
       flash["warning"] = "Can't find league"
       redirect_to "/leagues"
     end
