@@ -83,6 +83,13 @@ tournament:
     join: "Join"
     leave: "Leave"
 
+invitation:
+  actions:
+    invite: "Invite"
+    uninvite: "Retract"
+    approve: "Approve"
+    reject: "Reject"
+
 game:
   won: "Won"
   lost: "Lost"

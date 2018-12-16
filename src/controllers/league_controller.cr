@@ -38,7 +38,13 @@ class LeagueController < ApplicationController
         }
 
         admin_players = _admin_players_query.order(tag: :asc).to_a
-        available_players_for_admin = league.players_query.where { sql("players.id not in (#{_admin_players_query.pluck(:id).join(", ")}) ") }.to_a
+        available_players_for_admin = league.active_players_query.where { sql("players.id not in (#{_admin_players_query.pluck(:id).join(", ")}) ") }.to_a
+
+        players = league.players
+        active_and_invited_player_ids = league.active_players_query.pluck(:id) + league.invites_query.pluck(:player_id)
+        available_players = Player.where { sql("players.id not in (#{active_and_invited_player_ids.join(", ")}) ") }
+
+        invites = league.invites_query.where { (_accepted_at == nil) | (_approved_at == nil) }.to_a
 
         render("management.slang")
       else

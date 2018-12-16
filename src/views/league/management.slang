@@ -2,13 +2,38 @@ h2 League Management
 p.description = "For #{league.name}"
 
 h3 Invite Requests
-p TODO LIST FORM LIKE ADMINS DELETE / APPROVE
+.notifications
+  - invites.each do |invite|
+    - player = invite.player!
+    a href="/profile/#{player.tag}"
+      .notification
+        img.icon.gravatar src="#{gravatar_src_for(player)}"
+        span.content = player.tag
+        - unless player.id == current_player.not_nil!.id
+          span.time
+          - if invite.accepted? && !invite.approved?
+            == form(action: "/leagues/#{league.id}/requests/#{invite.id}", method: :patch) do
+              == csrf_tag
+              == submit(t("invitation.actions.approve"), class: "btn btn-success")
 
-h3 Players
-p TODO LIST
+          - if invite.approved? && !invite.accepted?
+            == form(action: "/leagues/#{league.id}/invites/#{invite.id}", method: :delete) do
+              == csrf_tag
+              == submit(t("invitation.actions.uninvite"), class: "btn btn-danger")
 
-h4 Invite Player
-p TODO FORM
+  == form(action: "/leagues/#{league.id}/invites", method: :post, class: "main") do
+    == csrf_tag
+
+    h4 Invite Player
+
+    .form-group
+      select.form-control.btn.btn-secondary name="player_id"
+        - available_players.each do |player|
+          option value="#{player.id}" = player.tag
+
+    .form-group
+      == submit t("invitation.actions.invite"), class: "btn btn-primary"
+
 
 h3 Admins
 .notifications
