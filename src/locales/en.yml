@@ -85,6 +85,7 @@ tournament:
 
 invitation:
   actions:
+    request: "Request Invite"
     invite: "Invite"
     uninvite: "Retract"
     approve: "Approve"

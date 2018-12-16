@@ -1,9 +1,10 @@
 h2 League Management
 p.description = "For #{league.name}"
 
-h3 Invite Requests
+h3 Invites
+h4 Requests
 .notifications
-  - invites.each do |invite|
+  - invites_received.each do |invite|
     - player = invite.player!
     a href="/profile/#{player.tag}"
       .notification
@@ -16,10 +17,19 @@ h3 Invite Requests
               == csrf_tag
               == submit(t("invitation.actions.approve"), class: "btn btn-success")
 
-          - if invite.approved? && !invite.accepted?
-            == form(action: "/leagues/#{league.id}/invites/#{invite.id}", method: :delete) do
-              == csrf_tag
-              == submit(t("invitation.actions.uninvite"), class: "btn btn-danger")
+h4 Pending
+.notifications
+  - invites_sent.each do |invite|
+    - player = invite.player!
+    a href="/profile/#{player.tag}"
+      .notification
+        img.icon.gravatar src="#{gravatar_src_for(player)}"
+        span.content = player.tag
+        - unless player.id == current_player.not_nil!.id
+          span.time
+          == form(action: "/leagues/#{league.id}/invites/#{invite.id}", method: :delete) do
+            == csrf_tag
+            == submit(t("invitation.actions.uninvite"), class: "btn btn-danger")
 
   == form(action: "/leagues/#{league.id}/invites", method: :post, class: "main") do
     == csrf_tag

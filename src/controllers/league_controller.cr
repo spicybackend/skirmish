@@ -44,7 +44,8 @@ class LeagueController < ApplicationController
         active_and_invited_player_ids = league.active_players_query.pluck(:id) + league.invites_query.pluck(:player_id)
         available_players = Player.where { sql("players.id not in (#{active_and_invited_player_ids.join(", ")}) ") }
 
-        invites = league.invites_query.where { (_accepted_at == nil) | (_approved_at == nil) }.to_a
+        invites_sent = league.invites_query.where { (_accepted_at == nil) & (_approved_at != nil) }
+        invites_received = league.invites_query.where { (_accepted_at != nil) & (_approved_at == nil) }
 
         render("management.slang")
       else

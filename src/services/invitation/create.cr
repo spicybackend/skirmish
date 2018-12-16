@@ -30,8 +30,12 @@ class Invitation::Create
   end
 
   private def assert_invite_not_already_created!
-    if Invitation.where { (_league_id == league.id) & (_player_id == player.id) }.exists?
-      raise InviteError.new("#{player.tag} has already been invited to join #{league.name}")
+    if invite = Invitation.where { (_league_id == league.id) & (_player_id == player.id) }.first
+      if invite.approved?
+        raise InviteError.new("#{player.tag} has already been invited to join #{league.name}")
+      else
+        raise InviteError.new("#{player.tag} has already requested to join #{league.name}")
+      end
     end
   end
 

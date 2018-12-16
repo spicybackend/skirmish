@@ -16,10 +16,10 @@
             == form(action: "/leagues/#{league.id.to_s}/join", method: membership.id ? :patch : :post) do
               == csrf_tag
               == submit(t("league.actions.join"), class: "btn btn-primary")
-          / - elsif league.closed?
-            == form(action: "/leagues/#{league.id.to_s}/request", method: :post) do
+          - elsif league.closed?
+            == form(action: "/leagues/#{league.id.to_s}/requests", method: :post) do
               == csrf_tag
-              == submit(t("league.actions.request_invite"), class: "btn btn-primary")
+              == submit(t("invitation.actions.request"), class: "btn btn-primary")
 
       - if current_player.try(&.admin_of?(league))
         span.toggle-button-group
