@@ -9,17 +9,22 @@
             button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
               span.sr-only Toggle Dropdown
             .dropdown-menu.dropdown-menu-right
-              == form(action: "/leagues/#{league.id.to_s}/leave", method: :patch) do
+              == form(action: "/leagues/#{league.id}/leave", method: :patch) do
                 == csrf_tag
                 == submit(t("league.actions.leave"), "data-confirm": "Are you sure you want to leave #{league.name}?", class: "dropdown-item danger")
           - elsif league.open?
-            == form(action: "/leagues/#{league.id.to_s}/join", method: membership.id ? :patch : :post) do
+            == form(action: "/leagues/#{league.id}/join", method: membership.id ? :patch : :post) do
               == csrf_tag
               == submit(t("league.actions.join"), class: "btn btn-primary")
           - elsif league.closed?
-            == form(action: "/leagues/#{league.id.to_s}/requests", method: :post) do
-              == csrf_tag
-              == submit(t("invitation.actions.request"), class: "btn btn-primary")
+            - if unaccepted_invite
+              == form(action: "/leagues/#{league.id}/invites/#{unaccepted_invite.id}", method: :patch) do
+                == csrf_tag
+                == submit(t("invitation.actions.accept"), class: "btn btn-success")
+            - else
+              == form(action: "/leagues/#{league.id}/requests", method: :post) do
+                == csrf_tag
+                == submit(t("invitation.actions.request"), class: "btn btn-primary")
 
       - if current_player.try(&.admin_of?(league))
         span.toggle-button-group

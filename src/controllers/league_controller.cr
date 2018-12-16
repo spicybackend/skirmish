@@ -23,6 +23,8 @@ class LeagueController < ApplicationController
       membership = player.memberships_query.where { _league_id == league.id }.to_a.first? || Membership.build
       tournament = Tournament.for_league(league).order(created_at: :desc).first
 
+      unaccepted_invite = league.invites_query.where { (_player_id == player.id) & (_accepted_at == nil) & (_approved_at != nil) }.first
+
       render("show.slang")
     else
       flash["warning"] = "Can't find league"
