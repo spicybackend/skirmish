@@ -30,7 +30,7 @@ shards:
 
   db:
     github: crystal-lang/crystal-db
-    version: 0.5.0
+    version: 0.5.1
 
   garnet_spec:
     github: amberframework/garnet-spec
@@ -50,11 +50,11 @@ shards:
 
   jasper_helpers:
     github: amberframework/jasper-helpers
-    version: 0.2.0
+    version: 0.2.3
 
   jennifer:
     github: imdrasil/jennifer.cr
-    version: 0.6.1
+    version: 0.6.2
 
   kilt:
     github: jeromegn/kilt
@@ -72,9 +72,13 @@ shards:
     github: amberframework/micrate
     version: 0.3.3
 
+  multi_auth:
+    github: msa7/multi_auth
+    version: 1.0.0
+
   mysql:
     github: crystal-lang/crystal-mysql
-    version: 0.5.0
+    version: 0.5.1
 
   optarg:
     github: mosop/optarg

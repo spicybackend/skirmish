@@ -30,3 +30,6 @@
 
     small
       == link_to("Already have an account?", "/signin")
+    
+    small
+      == link_to("Connect with Google", "/multi_auth/google")

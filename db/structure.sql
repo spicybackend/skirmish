@@ -119,8 +119,8 @@ CREATE TABLE public.entrants (
     id bigint NOT NULL,
     tournament_id bigint,
     player_id bigint,
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
 );
 
 
@@ -217,8 +217,8 @@ CREATE TABLE public.invitations (
     approver_id bigint,
     accepted_at timestamp without time zone,
     approved_at timestamp without time zone,
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
 );
 
 
@@ -298,8 +298,8 @@ CREATE TABLE public.matches (
     winner_id bigint,
     next_match_id bigint,
     level integer,
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
 );
 
 
@@ -571,8 +571,8 @@ CREATE TABLE public.player_contexts (
     id bigint NOT NULL,
     player_id bigint,
     league_id bigint,
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
 );
 
 
@@ -664,8 +664,8 @@ CREATE TABLE public.tournaments (
     id bigint NOT NULL,
     league_id bigint,
     finished_at timestamp without time zone,
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
 );
 
 
