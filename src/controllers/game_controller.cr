@@ -40,7 +40,7 @@ class GameController < ApplicationController
         winner_delta = (new_winner_rating - winner_rating).abs
         loser_delta = (new_loser_rating - loser_rating).abs
 
-        notifications = Notification.unread.where { (_event_type == Notification::GAME_LOGGED) & (_source_id == game.id) & (_player_id == current_player.not_nil!.id) }
+        notifications = GameLoggedNotification.unread.where { (_source_id == game.id) & (_player_id == current_player.not_nil!.id) }
         notifications.each(&.read!)
       end
 

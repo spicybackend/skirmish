@@ -207,6 +207,45 @@ ALTER SEQUENCE public.games_league_id_seq OWNED BY public.games.league_id;
 
 
 --
+-- Name: invitations; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.invitations (
+    id bigint NOT NULL,
+    league_id bigint,
+    player_id bigint,
+    approver_id bigint,
+    accepted_at timestamp without time zone,
+    approved_at timestamp without time zone,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+ALTER TABLE public.invitations OWNER TO postgres;
+
+--
+-- Name: invitations_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.invitations_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.invitations_id_seq OWNER TO postgres;
+
+--
+-- Name: invitations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.invitations_id_seq OWNED BY public.invitations.id;
+
+
+--
 -- Name: leagues; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -218,7 +257,8 @@ CREATE TABLE public.leagues (
     k_factor double precision DEFAULT 32.0 NOT NULL,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
-    accent_color character varying(9) DEFAULT '#fd971f'::character varying
+    accent_color character varying(9) DEFAULT '#fd971f'::character varying,
+    visibility character varying(32)
 );
 
 
@@ -407,7 +447,7 @@ ALTER SEQUENCE public.migration_versions_id_seq OWNED BY public.migration_versio
 CREATE TABLE public.notifications (
     id bigint NOT NULL,
     player_id bigint NOT NULL,
-    event_type character varying NOT NULL,
+    type character varying,
     title character varying NOT NULL,
     content character varying NOT NULL,
     source_type character varying,
@@ -735,6 +775,13 @@ ALTER TABLE ONLY public.games ALTER COLUMN league_id SET DEFAULT nextval('public
 
 
 --
+-- Name: invitations id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.invitations ALTER COLUMN id SET DEFAULT nextval('public.invitations_id_seq'::regclass);
+
+
+--
 -- Name: leagues id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -861,6 +908,14 @@ ALTER TABLE ONLY public.entrants
 
 ALTER TABLE ONLY public.games
     ADD CONSTRAINT games_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: invitations invitations_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.invitations
+    ADD CONSTRAINT invitations_pkey PRIMARY KEY (id);
 
 
 --

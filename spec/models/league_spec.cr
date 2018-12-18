@@ -5,6 +5,7 @@ def create_league!
   League.create!(
     name: "a newly created league",
     description: "some description",
+    visibility: League::OPEN,
     start_rating: League::DEFAULT_START_RATING,
     k_factor: League::DEFAULT_K_FACTOR
   )
@@ -14,6 +15,7 @@ describe League do
   league = League.build(
     name: "a newly built league",
     description: "some description",
+    visibility: League::OPEN,
     start_rating: League::DEFAULT_START_RATING,
     k_factor: League::DEFAULT_K_FACTOR
   )

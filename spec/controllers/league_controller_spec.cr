@@ -117,6 +117,7 @@ describe LeagueControllerTest do
       name: "new league",
       description: "some description",
       accent_color: "#abc123",
+      visibility: League::OPEN,
       start_rating: League::DEFAULT_START_RATING,
       k_factor: League::DEFAULT_K_FACTOR
     }.to_h
@@ -138,6 +139,13 @@ describe LeagueControllerTest do
         Administrator.all.count.should eq(administrators_before + 1)
       end
 
+      it "creates a membership" do
+        administrators_before = Membership.all.count
+        subject.post "/leagues", headers: basic_authenticated_headers, body: body
+
+        Membership.all.count.should eq(administrators_before + 1)
+      end
+
       it "redirects to the new league" do
         response = subject.post "/leagues", headers: basic_authenticated_headers, body: body
 
@@ -155,6 +163,7 @@ describe LeagueControllerTest do
 
           league.name.should eq league_props[:name]
           league.description.should eq league_props[:description]
+          league.visibility.should eq league_props[:visibility]
           league.start_rating.should eq league_props[:start_rating]
           league.k_factor.should eq league_props[:k_factor]
         end
@@ -170,6 +179,19 @@ describe LeagueControllerTest do
 
           admin.player_id.should eq player.id
           admin.league_id.should eq league.id
+        end
+      end
+
+      describe "the created membership" do
+        it "is created for the logged in player in the new league" do
+          player = create_player_with_mock_user
+          subject.post "/leagues", headers: authenticated_headers_for(player.user.not_nil!), body: body
+
+          membership = Membership.all.last!
+          league = League.all.last!
+
+          membership.player_id.should eq player.id
+          membership.league_id.should eq league.id
         end
       end
     end
@@ -189,6 +211,7 @@ describe LeagueControllerTest do
       name: "new league",
       description: "some description",
       accent_color: "#abc123",
+      visibility: League::OPEN,
       start_rating: League::DEFAULT_START_RATING,
       k_factor: League::DEFAULT_K_FACTOR
     }.to_h
@@ -214,6 +237,7 @@ describe LeagueControllerTest do
 
           league.name.should eq league_props[:name]
           league.description.should eq league_props[:description]
+          league.visibility.should eq league_props[:visibility]
           league.start_rating.should eq league_props[:start_rating]
           league.k_factor.should eq league_props[:k_factor]
         end
