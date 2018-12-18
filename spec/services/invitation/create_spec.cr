@@ -69,21 +69,21 @@ describe Invitation::Create do
 
   describe "the created invite" do
     it "is associated with the player and league" do
-      invite = create_invite_service.call
+      invite = create_invite_service.call.not_nil!
 
       invite.player_id.should eq player.id
       invite.league_id.should eq league.id
     end
 
     it "is not approved" do
-      invite = create_invite_service.call
+      invite = create_invite_service.call.not_nil!
 
       invite.approver.should eq nil
       invite.approved_at.should eq nil
     end
 
     it "is accepted" do
-      invite = create_invite_service.call
+      invite = create_invite_service.call.not_nil!
 
       invite.accepted_at.should_not eq nil
     end
@@ -99,21 +99,21 @@ describe Invitation::Create do
     end
 
     it "is associated with the player and league" do
-      invite = create_invite_service.call
+      invite = create_invite_service.call.not_nil!
 
       invite.player_id.should eq player.id
       invite.league_id.should eq league.id
     end
 
     it "is approved by the approver" do
-      invite = create_invite_service.call
+      invite = create_invite_service.call.not_nil!
 
       invite.approver.should eq approver
       invite.approved_at.should_not eq nil
     end
 
     it "is not accepted" do
-      invite = create_invite_service.call
+      invite = create_invite_service.call.not_nil!
 
       invite.accepted_at.should eq nil
     end

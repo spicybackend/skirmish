@@ -13,7 +13,7 @@ describe Invitation::Accept do
       league: league,
       player: player,
       approver: approver
-    ).call
+    ).call.not_nil!
 
     Invitation::Accept.new(
       invitation: invite,
@@ -24,21 +24,21 @@ describe Invitation::Accept do
   end
 
   it "accepts the invite" do
-    invite = create_and_accept_invite_service.call
+    invite = create_and_accept_invite_service.call.not_nil!
 
     invite.accepted?.should eq true
   end
 
   it "creates a membership" do
     initial_membership_count = Membership.all.count
-    invite = create_and_accept_invite_service.call
+    invite = create_and_accept_invite_service.call.not_nil!
 
     Membership.all.count.should eq initial_membership_count.succ
   end
 
   describe "the created membership" do
     it "is associated to the player and league" do
-      invite = create_and_accept_invite_service.call
+      invite = create_and_accept_invite_service.call.not_nil!
 
       membership = Membership.all.last!
       membership.league_id.should eq league.id
@@ -48,7 +48,7 @@ describe Invitation::Accept do
 
   context "when the invite has already been accepted" do
     it "raises an error" do
-      invite = create_and_accept_invite_service.call
+      invite = create_and_accept_invite_service.call.not_nil!
 
       expect_raises(Invitation::Accept::AcceptError, "Invite has already been accepted") do
         Invitation::Accept.new(
@@ -65,7 +65,7 @@ describe Invitation::Accept do
         league: league,
         player: player,
         approver: approver
-      ).call
+      ).call.not_nil!
 
       Membership.create!(player_id: player.id, league_id: league.id)
 

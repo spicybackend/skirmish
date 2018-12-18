@@ -12,7 +12,7 @@ describe Invitation::Approve do
     invite = Invitation::Create.new(
       league: league,
       player: player
-    ).call
+    ).call.not_nil!
 
     Invitation::Approve.new(
       invitation: invite,
@@ -63,7 +63,7 @@ describe Invitation::Approve do
       invite = Invitation::Create.new(
         league: league,
         player: player
-      ).call
+      ).call.not_nil!
 
       Membership.create!(player_id: player.id, league_id: league.id)
 
