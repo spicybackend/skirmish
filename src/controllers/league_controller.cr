@@ -14,7 +14,7 @@ class LeagueController < ApplicationController
       .left_join(Invitation) { League._id == _league_id }
       .select("leagues.*, COUNT(memberships.league_id) as membership_count")
       .where { (Membership._left_at == nil) }
-      .where { (_visibility != League::SECRET) | (Invitation._player_id == current_player_id) }
+      .where { (_visibility != League::SECRET) | (Invitation._player_id == current_player_id) | (Membership._player_id == current_player_id) }
       .group("leagues.id")
       .order { { "membership_count" => :desc } }
 
