@@ -25,7 +25,7 @@ class LeagueController < ApplicationController
     if league = League.find(params[:id])
       player = current_player.not_nil!
 
-      membership = player.memberships_query.where { _league_id == league.id }.to_a.first? || Membership.build
+      membership = player.memberships_query.where { _league_id == league.id }.to_a.last? || Membership.build
       tournament = Tournament.for_league(league).order(created_at: :desc).first
 
       unaccepted_invite = league.invites_query.where { (_player_id == player.id) & (_accepted_at == nil) & (_approved_at != nil) }.first
