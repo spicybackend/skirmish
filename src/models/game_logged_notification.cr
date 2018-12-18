@@ -1,13 +1,10 @@
-class Notification::LoggedGamePresenter
-  getter notification
+require "./notification"
 
-  property game : Game
-
-  delegate id, read?, read_at, created_at, to: notification
-
-  def initialize(@notification : Notification)
-    @game = notification.source.not_nil!
-  end
+class GameLoggedNotification < Notification
+  mapping(
+    source_type: String,
+    source_id: Int64
+  )
 
   def title
     if won?
@@ -29,6 +26,10 @@ class Notification::LoggedGamePresenter
     "/leagues/#{league.id}/games/#{game.id}"
   end
 
+  private def game
+    Game.find(source_id).not_nil!
+  end
+
   private def league
     game.league!
   end
@@ -38,6 +39,6 @@ class Notification::LoggedGamePresenter
   end
 
   private def won?
-    game.winner.id == notification.player_id
+    game.winner.id == player_id
   end
 end

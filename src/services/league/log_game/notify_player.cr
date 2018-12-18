@@ -6,9 +6,9 @@ class League::LogGame::NotifyPlayer
 
   def call!
     Jennifer::Adapter.adapter.transaction do
-      Notification.create!({
+      GameLoggedNotification.create!({
+        type: "GameLoggedNotification",
         player_id: player.id.not_nil!,
-        event_type: Notification::GAME_LOGGED,
         title: title,
         content: content,
         source_type: game.class.to_s,

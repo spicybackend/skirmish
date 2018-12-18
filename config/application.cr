@@ -8,7 +8,6 @@ require "../src/validators/**"
 require "../src/services/**"
 require "../src/helpers/**"
 require "../src/concepts/**"
-require "../src/presenters/**"
 require "../src/mailers/**"
 require "../src/pipes/**"
 

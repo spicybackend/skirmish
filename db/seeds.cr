@@ -88,13 +88,21 @@ Jennifer::Adapter.adapter.transaction do
       league_id: hotdog_league.id
     )
 
-    [alice, bob, charlie, danielle, erik].each do |player|
+    [alice, bob, charlie].each do |player|
       Membership.create!(
         player_id: player.id,
         league_id: hotdog_league.id,
         joined_at: Time.now
       )
     end
+
+    # danielle gets invited
+    invite = Invitation::Create.new(league: hotdog_league, player: danielle, approver: alice).call.not_nil!
+    Invitation::Accept.new(invitation: invite, player: danielle).call
+
+    # erik goes through the requesting process
+    request = Invitation::Create.new(league: hotdog_league, player: erik).call.not_nil!
+    Invitation::Approve.new(invitation: request, approver: alice).call
 
     tournament = Tournament::Open.new(league: hotdog_league).call.not_nil!
     [alice, bob, charlie, danielle, erik].each do |player|
