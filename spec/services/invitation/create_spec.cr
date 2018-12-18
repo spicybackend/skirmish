@@ -21,11 +21,38 @@ describe Invitation::Create do
   end
 
   context "when the invite has already been created" do
-    it "raises an error" do
-      create_invite_service.call
+    context "by an admin inviting a player" do
+      create_invite_service = -> do
+        Invitation::Create.new(
+          league: league,
+          player: player,
+          approver: approver
+        ).call
+      end
 
-      expect_raises(Invitation::Create::InviteError, "#{player.tag} has already been invited to join #{league.name}") do
+      it "raises an error" do
         create_invite_service.call
+
+        expect_raises(Invitation::Create::InviteError, "#{player.tag} has already been invited to join #{league.name}") do
+          create_invite_service.call
+        end
+      end
+    end
+
+    context "by a player requesting the invite" do
+      create_invite_service = -> do
+        Invitation::Create.new(
+          league: league,
+          player: player
+        ).call
+      end
+
+      it "raises an error" do
+        create_invite_service.call
+
+        expect_raises(Invitation::Create::InviteError, "#{player.tag} has already requested to join #{league.name}") do
+          create_invite_service.call
+        end
       end
     end
   end
