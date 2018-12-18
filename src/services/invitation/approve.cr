@@ -18,6 +18,14 @@ class Invitation::Approve
 
     Jennifer::Adapter.adapter.transaction do
       invitation.update!(approved_at: Time.now, approver_id: approver.id)
+
+      GeneralNotification.create(
+        player_id: player.id,
+        title: "Invite request approved",
+        content: "#{approver.tag} has approved your request to join #{league.name}",
+        sent_at: Time.now
+      )
+
       Membership.create!(league_id: invitation.league_id, player_id: invitation.player_id)
     end
   end
