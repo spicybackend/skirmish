@@ -22,6 +22,7 @@ class User < Jennifer::Model::Base
   scope :unverified { where { _activated_at == nil } }
 
   has_one :player, Player
+  has_many :auth_providers, AuthProvider
 
   validates_presence :name
   validates_presence :email
