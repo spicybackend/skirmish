@@ -383,6 +383,11 @@ form.main {
     background-color: #1d2124;
     border-color: #1d2124; }
 
+.btn-link {
+  color: #4eb4f9; }
+  .btn-link:hover {
+    color: #1d9ff7; }
+
 .alert {
   background-color: #343a40;
   border: none;

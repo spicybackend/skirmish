@@ -85,3 +85,11 @@
     border-color: darken($dark-grey, 10%);
   }
 }
+
+.btn-link {
+  color: $babyblue;
+
+  &:hover {
+    color: darken($babyblue, 10%);
+  }
+}
