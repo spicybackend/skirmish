@@ -15,6 +15,7 @@ html
     link rel="icon" href="/favicon.png"
     link rel="icon" type="image/x-icon" href="/favicon.ico"
     link href="https://fonts.googleapis.com/css?family=Muli" rel="stylesheet"
+    link href="https://fonts.googleapis.com/css?family=Roboto:500" rel="stylesheet"
 
   body
     .masthead
