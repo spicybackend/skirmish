@@ -160,3 +160,4 @@ And comment out lines 60 -> 63 and line 65
 
 - [yumoose](https://gitlab.com/yumoose) Jordane Lew - creator, maintainer
 - [nandahibatullah](https://gitlab.com/nandahibatullah) Nanda Hibatullah - developer
+- [ricky.mcmillen](https://gitlab.com/ricky.mcmillen) Ricky McMillen - developer
