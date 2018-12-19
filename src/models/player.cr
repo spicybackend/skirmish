@@ -33,6 +33,8 @@ class Player < Jennifer::Model::Base
   validates_uniqueness :user_id
   validates_with_method :user_exists
 
+  validates_with PlayerTagValidator
+
   after_create :create_player_context
 
   def ==(other)

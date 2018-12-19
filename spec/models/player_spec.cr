@@ -36,6 +36,21 @@ describe Player do
         player.tag = "nametag"
         player.valid?.should be_true
       end
+
+      it "must only letters, numbers, or symbols" do
+        player.tag = "a a a 1 2 3"
+        player.valid?.should be_false
+        player.errors.full_messages.join(",").should match /Tag must start with a letter and can only include letters, numbers, or symbols/
+
+        player = player.reload
+        player.tag = "_sexgod_"
+        player.valid?.should be_false
+        player.errors.full_messages.join(",").should match /Tag must start with a letter and can only include letters, numbers, or symbols/
+
+        player = player.reload
+        player.tag = "N-4_.n._D-4"
+        player.valid?.should be_true
+      end
     end
   end
 

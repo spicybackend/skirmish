@@ -12,7 +12,7 @@ def create_player_with_mock_user(tag : String? = nil, password : String? = nil, 
 
   Player.create!(
     user_id: user.id,
-    tag: tag || Random::Secure.hex(8)
+    tag: tag || "player_#{Random::Secure.hex(4)}"
   )
 end
 
