@@ -40,6 +40,16 @@ session:
   authentication_failed: "Invalid email or password"
   logged_out: "Logged out. See ya later!"
 
+error:
+  title:
+    internal_server_error: "Explosions and Craziness"
+    forbidden: "Access Denied"
+    not_found: "Page not found"
+  message:
+    internal_server_error: "Something didn't quite go right, we're taking a look into it!"
+    forbidden: "Sorry, it looks like you don't have the permissions needed to access this page."
+    not_found: "You stumbled across the unknown! Sorry about that."
+
 mailer:
   welcome:
     subject: "Welcome to Skirmish"

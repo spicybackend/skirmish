@@ -15,5 +15,5 @@
           pre.backtrace = @ex.inspect_with_backtrace
 
 - else
-  h1 Explosions and Craziness
-  h6.section-header Something didn't quite go right, we're taking a look into it!
+  h1 = I18n.translate("error.title.internal_server_error")
+  h6.section-header = I18n.translate("error.message.internal_server_error")
