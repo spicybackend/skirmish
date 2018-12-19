@@ -59,7 +59,7 @@ class MultiAuthController < ApplicationController
       ENV["GOOGLE_SECRET"],
       authorize_uri: "/o/oauth2/v2/auth",
       token_uri: "https://www.googleapis.com/oauth2/v4/token",
-      redirect_uri: "http://localhost:3000/multi_auth/callback"
+      redirect_uri: "#{ENV["BASE_URL"]}/multi_auth/callback"
     )
   end
 end
