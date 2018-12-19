@@ -112,6 +112,43 @@ ALTER SEQUENCE public.administrators_player_id_seq OWNED BY public.administrator
 
 
 --
+-- Name: auth_providers; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.auth_providers (
+    id bigint NOT NULL,
+    provider character varying(254),
+    token character varying(254),
+    user_id bigint,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE public.auth_providers OWNER TO postgres;
+
+--
+-- Name: auth_providers_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.auth_providers_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_providers_id_seq OWNER TO postgres;
+
+--
+-- Name: auth_providers_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.auth_providers_id_seq OWNED BY public.auth_providers.id;
+
+
+--
 -- Name: entrants; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -754,6 +791,13 @@ ALTER TABLE ONLY public.administrators ALTER COLUMN player_id SET DEFAULT nextva
 
 
 --
+-- Name: auth_providers id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_providers ALTER COLUMN id SET DEFAULT nextval('public.auth_providers_id_seq'::regclass);
+
+
+--
 -- Name: entrants id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -892,6 +936,14 @@ ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_
 
 ALTER TABLE ONLY public.administrators
     ADD CONSTRAINT administrators_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_providers auth_providers_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auth_providers
+    ADD CONSTRAINT auth_providers_pkey PRIMARY KEY (id);
 
 
 --
