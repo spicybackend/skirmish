@@ -62,6 +62,8 @@ Amber::Server.configure do
 
     get "/signup", RegistrationController, :new
     post "/registration", RegistrationController, :create
+    get "/multi_auth/google", MultiAuthController, :google
+    get "/multi_auth/callback", MultiAuthController, :callback
 
     get "/verification/:email", VerificationController, :show
     get "/verify/:verification_code", VerificationController, :verify

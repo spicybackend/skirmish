@@ -28,5 +28,8 @@
 
     hr
 
+    == render(partial: "_google_auth_button.slang")
+
     small
       == link_to("Already have an account?", "/signin")
+

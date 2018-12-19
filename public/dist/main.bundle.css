@@ -323,6 +323,31 @@ form.main {
 .btn-toolbar .btn {
   vertical-align: text-top; }
 
+.btn-google-signin {
+  display: flex;
+  padding: 0;
+  font-family: "Roboto";
+  font-size: 14px;
+  background-color: white;
+  width: auto; }
+  .btn-google-signin:hover {
+    background-color: #e6e6e6;
+    border-color: #e6e6e6; }
+  .btn-google-signin .logo {
+    display: inline-block;
+    width: 36px;
+    height: 36px;
+    margin-right: 12px;
+    background-image: url(/dist/images/btn_google_light_normal_ios.svg);
+    background-position: center; }
+  .btn-google-signin .text {
+    margin-top: 2px;
+    text-align: left;
+    color: rgba(0, 0, 0, 0.54);
+    display: flex;
+    justify-content: center;
+    flex-direction: column; }
+
 .btn-primary {
   background-color: #4eb4f9;
   border-color: #4eb4f9; }

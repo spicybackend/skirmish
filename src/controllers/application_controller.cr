@@ -8,7 +8,7 @@ class ApplicationController < Amber::Controller::Base
   include ProfileHelper
 
   def auth_page?
-    auth_url_regexes = [/signup/, /signin/, /session/, /registration/]
+    auth_url_regexes = [/signup/, /signin/, /session/, /registration/, /multi_auth/]
     current_path = context.request.path
 
     auth_url_regexes.any? do |auth_url_regex|
