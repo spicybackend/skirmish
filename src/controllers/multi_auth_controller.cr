@@ -12,44 +12,40 @@ class MultiAuthController < ApplicationController
     api_response = google_auth.get("/oauth2/v2/userinfo", auth_code: params[:code])
 
     data = JSON.parse(api_response.body)
-    # {
-    #   "id" => "113153016673667482625",
-    #   "email" => "some.one@gmail.com",
-    #   "verified_email" => true,
-    #   "name" => "Some One",
-    #   "given_name" => "Some",
-    #   "family_name" => "One",
-    #   "link" => "https://plus.google.com/113153016673667482625",
-    #   "picture" => "https://lh5.googleusercontent.com/-2xS4_k7Wjvw/AAAAAAAAAAI/AAAAAAAAABU/5BmPG3e6pJz/photo.jpg",
-    #   "locale" => "en-GB",
-    #   "hd" => "gmail.com"
-    # }
 
-    unless user = User.where { _email == data["email"].to_s }.first
-      Jennifer::Adapter.adapter.transaction do
-        # create another model for signing in and use "id" from data to auth against
-        # then link to the user
+    if auth_provider = AuthProvider.where { _token == data["id"].to_s }.first
+      if user = User.find(auth_provider.user_id)
+        session[:user_id] = user.id
+        session[:player_id] = user.player!.id
 
-        # also handle a case where the user (id) already exists, and link it to the user
+        flash[:info] = I18n.translate("session.logged_in_successfully")
 
-        user = User.create(
-          email: data["email"].to_s,
-          name: data["name"].to_s,
-          receive_email_notifications: true,
-          verification_code: Random::Secure.hex(8),
-          hashed_password: "$2a$04$gCUzhaAZExsPDdAfQV7ZW.K7PMUFQg9N57uKINeMQ2GuQp4wf6kc6"  # "password"
-        )
+        redirect_to("/profile")
+      else
+        session[:auth_provider_details] = {
+          auth_provider_id: auth_provider.id,
+          email: data["email"]?,
+          name: data["name"]?,
+          tag: data["given_name"]?
+        }.to_json
 
-        player = Player.build(tag: data["given_name"].to_s)
-        player.add_user(user.not_nil!)
-        player.save!
+        redirect_to("/signup")
       end
+    else
+      auth_provider = AuthProvider.create(
+        provider: AuthProvider::GOOGLE_PROVIDER,
+        token: data["id"].to_s
+      )
+
+      session[:auth_provider_details] = {
+        auth_provider_id: auth_provider.id,
+        email: data["email"]?,
+        name: data["name"]?,
+        tag: data["given_name"]?
+      }.to_json
+
+      redirect_to("/signup")
     end
-
-    session[:user_id] = user.not_nil!.id
-    session[:player_id] = user.not_nil!.player!.id
-
-    redirect_to("/profile")
   end
 
   private def google_auth
