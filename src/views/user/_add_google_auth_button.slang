@@ -2,10 +2,10 @@
   - if google_provider = auth_providers.google.first
     a.btn.btn-google-signin.disabled disabled="true"
       span.logo
-      span.text Unlink from Google
+      span.text = I18n.translate("authentication.google.unlink_account")
   - else
     a.btn.btn-google-signin href="/multi_auth/google"
       span.logo
-      span.text Sign in with Google
+      span.text = I18n.translate("authentication.google.sign_in")
 
   br
