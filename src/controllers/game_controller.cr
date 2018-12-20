@@ -21,24 +21,14 @@ class GameController < ApplicationController
       winner_rating = game.winner.rating_for(league)
       loser_rating = game.loser.rating_for(league)
 
+      delta = 0
+
       if !game.confirmed?
-        # calculate point increase for display
-        new_winner_rating = Rating::DetermineNewRating.new(
-          old_rating: winner_rating,
-          other_rating: loser_rating,
-          won: true,
+        delta = Rating::DetermineDelta.new(
+          winner_rating: winner_rating,
+          loser_rating: loser_rating,
           league: game.league!
         ).call
-
-        new_loser_rating = Rating::DetermineNewRating.new(
-          old_rating: loser_rating,
-          other_rating: winner_rating,
-          won: false,
-          league: game.league!
-        ).call
-
-        winner_delta = (new_winner_rating - winner_rating).abs
-        loser_delta = (new_loser_rating - loser_rating).abs
 
         notifications = GameLoggedNotification.unread.where { (_source_id == game.id) & (_player_id == current_player.not_nil!.id) }
         notifications.each(&.read!)

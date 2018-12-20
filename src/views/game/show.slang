@@ -31,7 +31,7 @@ p.description
     - if game.confirmed?
       span.rating = winner_rating
     - else
-      span.rating.delta = winner_delta
+      span.rating.delta = delta
   span.versus VS
   .losing-result
     .player-result
@@ -40,7 +40,7 @@ p.description
     - if game.confirmed?
       span.rating = loser_rating
     - else
-      span.rating.delta = loser_delta
+      span.rating.delta = delta
 
 .centered
   h3 #{game.winner.tag} won against #{game.loser.tag}
