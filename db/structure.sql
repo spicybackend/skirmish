@@ -736,7 +736,7 @@ ALTER SEQUENCE public.tournaments_id_seq OWNED BY public.tournaments.id;
 CREATE TABLE public.users (
     id bigint NOT NULL,
     email character varying(255) NOT NULL,
-    hashed_password character varying(60) NOT NULL,
+    hashed_password character varying(60),
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
     receive_email_notifications boolean DEFAULT true NOT NULL,
