@@ -23,7 +23,8 @@ class MultiAuthController < ApplicationController
         redirect_to("/profile")
       else
         session[:auth_provider_details] = {
-          auth_provider_id: auth_provider.id,
+          provider: AuthProvider::GOOGLE_PROVIDER,
+          token: data["id"].to_s,
           email: data["email"]?,
           name: data["name"]?,
           tag: data["given_name"]?
@@ -32,22 +33,21 @@ class MultiAuthController < ApplicationController
         redirect_to("/signup")
       end
     else
-      auth_provider = AuthProvider.build(
-        provider: AuthProvider::GOOGLE_PROVIDER,
-        token: data["id"].to_s
-      )
-
       if signed_in_user = current_user
+        auth_provider = AuthProvider.build(
+          provider: AuthProvider::GOOGLE_PROVIDER,
+          token: data["id"].to_s
+        )
+
         auth_provider.user_id = signed_in_user.id
         auth_provider.save!
 
         flash[:success] = "Successfully linked your account with Google"
         redirect_to("/profile/edit")
       else
-        auth_provider.save!
-
         session[:auth_provider_details] = {
-          auth_provider_id: auth_provider.id,
+          provider: AuthProvider::GOOGLE_PROVIDER,
+          token: data["id"].to_s,
           email: data["email"]?,
           name: data["name"]?,
           tag: data["given_name"]?
