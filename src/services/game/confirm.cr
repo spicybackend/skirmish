@@ -74,21 +74,16 @@ class Game::Confirm
   private def new_ratings
     old_winner_rating, old_loser_rating = old_ratings
 
-    new_winner_rating = Rating::DetermineNewRating.new(
-      old_rating: old_winner_rating,
-      other_rating: old_loser_rating,
-      won: true,
-      league: league
-    ).call
+    delta = Rating::DetermineDelta.new(
+          winner_rating: old_winner_rating,
+          loser_rating: old_loser_rating,
+          league: league
+        ).call
 
-    new_loser_rating = Rating::DetermineNewRating.new(
-      old_rating: old_loser_rating,
-      other_rating: old_winner_rating,
-      won: false,
-      league: league
-    ).call
+    new_winner_rating = old_winner_rating + delta
+    new_loser_rating = old_loser_rating - delta
 
-    [new_winner_rating, new_loser_rating]
+    [new_winner_rating.abs, new_loser_rating.abs]
   end
 
   private def game_and_participations_valid?
