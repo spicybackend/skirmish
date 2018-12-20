@@ -27,12 +27,20 @@ class RegistrationController < ApplicationController
           user_id: user.id
         )
 
+        user.update!(activated_at: Time.now)
         session.delete("auth_provider_details")
+
+        session[:user_id] = user.id
+        session[:player_id] = user.player!.id
+
+        flash[:info] = I18n.translate("session.logged_in_successfully")
+
+        redirect_to("/profile")
+      else
+        WelcomeMailer.new(player).send
+
+        redirect_to "/verification/#{user.email}"
       end
-
-      WelcomeMailer.new(player).send
-
-      redirect_to "/verification/#{user.email}"
     end
   rescue ex : Jennifer::RecordInvalid
     user = build_user_from_params.tap(&.valid?)
