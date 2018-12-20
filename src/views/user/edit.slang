@@ -25,5 +25,9 @@
     label Email
     input.form-control type="email" name="email" placeholder="Email" value="#{user.email}"
 
+  hr
+
+  == render(partial: "_add_google_auth_button.slang")
+
   == submit("Update", class: "btn btn-primary")
   == link_to("Cancel", "/profile", class: "btn btn-light")

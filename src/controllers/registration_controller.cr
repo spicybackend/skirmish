@@ -21,10 +21,13 @@ class RegistrationController < ApplicationController
       player = create_player_from_params(user)
 
       if auth_provider_details = fetch_provider_details
-        if auth_provider = AuthProvider.find(auth_provider_details["auth_provider_id"])
-          auth_provider.update!(user_id: user.id)
-        end
-        session.delete(:auth_provider_details)
+        AuthProvider.create!(
+          provider: auth_provider_details["provider"].to_s,
+          token: auth_provider_details["token"].to_s,
+          user_id: user.id
+        )
+
+        session.delete("auth_provider_details")
       end
 
       WelcomeMailer.new(player).send

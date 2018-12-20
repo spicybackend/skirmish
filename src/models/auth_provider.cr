@@ -18,6 +18,7 @@ class AuthProvider < Jennifer::Model::Base
 
   scope :linked { where { _user_id != nil } }
   scope :unlinked { where { _user_id == nil } }
+  scope :google { where { _provider == GOOGLE_PROVIDER } }
 
   with_timestamps
 
