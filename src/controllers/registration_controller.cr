@@ -1,7 +1,16 @@
 class RegistrationController < ApplicationController
   def new
-    user = User.build(name: "", email: "", verification_code: "")
-    player = Player.build(tag: "")
+    auth_provider_details = fetch_provider_details
+
+    user = User.build(
+      name: auth_provider_details["name"]?.to_s,
+      email: auth_provider_details["email"]?.to_s,
+      verification_code: ""
+    )
+
+    player = Player.build(
+      tag: auth_provider_details["tag"]?.to_s
+    )
 
     render("new.slang")
   end
@@ -10,6 +19,13 @@ class RegistrationController < ApplicationController
     Jennifer::Adapter.adapter.transaction do
       user = create_user_from_params
       player = create_player_from_params(user)
+
+      if auth_provider_details = fetch_provider_details
+        if auth_provider = AuthProvider.find(auth_provider_details["auth_provider_id"])
+          auth_provider.update!(user_id: user.id)
+        end
+        session.delete(:auth_provider_details)
+      end
 
       WelcomeMailer.new(player).send
 
@@ -54,6 +70,14 @@ class RegistrationController < ApplicationController
       required(:name) { |f| !f.nil? }
       required(:email) { |f| !f.nil? }
       required(:password) { |f| !f.nil? }
+    end
+  end
+
+  private def fetch_provider_details
+    if raw_auth_details = session[:auth_provider_details]
+      JSON.parse(raw_auth_details)
+    else
+      {} of String => String
     end
   end
 end
