@@ -14,15 +14,20 @@
     .form-group
       label Player Tag
       input class="form-control #{"is-invalid" if player.errors[:tag].any?}" autofocus="true" type="tag" name="tag" value="#{player.tag}" required="true"
+
     .form-group
       label Name
       input class="form-control #{"is-invalid" if user.errors[:name].any?}" autofocus="true" type="name" name="name" value="#{user.name}" required="true"
+
     .form-group
       label Email
       input class="form-control #{"is-invalid" if user.errors[:email].any?}" type="email" name="email" value="#{user.email}" required="true"
-    .form-group
-      label Password
-      input class="form-control #{"is-invalid" if user.errors[:password].any?}" type="password" name="password" required="true"
+
+    - if !auth_provider_details
+      .form-group
+        label Password
+        input class="form-control #{"is-invalid" if user.errors[:password].any?}" type="password" name="password" required="true"
+
     button.btn.btn-primary type="submit"
       == t("authentication.register")
 

@@ -32,11 +32,6 @@ class User < Jennifer::Model::Base
   validates_presence :verification_code
   validates_format :verification_code, /^[0-9a-z]{16}$/
 
-  # validates_length :password, greater_than_or_equal_to: 8
-  # validate :password, "is too short", ->(user : User) do
-  #   user.password_changed? ? user.valid_password_size? : true
-  # end
-
   def activate!
     update!(activated_at: Time.now) unless activated?
   end

@@ -29,6 +29,12 @@ authentication:
   sign_in: "Sign In"
   sign_out: "Sign Out"
 
+  google:
+    sign_up: "Sign up with Google"
+    sign_in: "Sign in with Google"
+    switch_account: "Switch linked Google account"
+    unlink_account: "Remove linked Google account"
+
 registration:
   registered: "Account Created"
   content: "Thanks for creating your account. Before you get started there's just one more step!"

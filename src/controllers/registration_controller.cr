@@ -1,16 +1,15 @@
 class RegistrationController < ApplicationController
   def new
-    auth_provider_details = fetch_provider_details || {} of String => String
+    user = User.build(name: "", email: "", verification_code: "")
+    player = Player.build(tag: "")
 
-    user = User.build(
-      name: auth_provider_details["name"]?.to_s,
-      email: auth_provider_details["email"]?.to_s,
-      verification_code: ""
-    )
+    auth_provider_details = fetch_provider_details
 
-    player = Player.build(
-      tag: auth_provider_details["tag"]?.to_s
-    )
+    if auth_provider_details
+      user.name = auth_provider_details["name"]?.to_s
+      user.email = auth_provider_details["email"]?.to_s
+      player.tag = auth_provider_details["tag"]?.to_s
+    end
 
     render("new.slang")
   end
@@ -45,19 +44,25 @@ class RegistrationController < ApplicationController
   rescue ex : Jennifer::RecordInvalid
     user = build_user_from_params.tap(&.valid?)
     player = build_player_from_params.tap(&.valid?)
+    auth_provider_details = fetch_provider_details
 
     flash["danger"] = "Could not complete registration!"
     render("new.slang")
   end
 
   private def build_user_from_params
-    User.build(name: "", email: "", verification_code: "").tap do |user|
-      user.name = params[:name]
-      user.email = params[:email]
-      user.receive_email_notifications = true
-      user.verification_code = Random::Secure.hex(8)
+    user = User.build(
+      name: params[:name]? || "",
+      email: params[:email]? || "",
+      verification_code: Random::Secure.hex(8),
+      receive_email_notifications: true
+    )
+
+    if params["password"]?
       user.password = params["password"].to_s
     end
+
+    user
   end
 
   private def build_player_from_params
