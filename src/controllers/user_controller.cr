@@ -15,6 +15,7 @@ class UserController < ApplicationController
   def edit
     user = current_user.not_nil!
     player = current_player.not_nil!
+    auth_providers = AuthProvider.where { _user_id == user.id }
 
     render("edit.slang")
   end
@@ -22,6 +23,7 @@ class UserController < ApplicationController
   def update
     user = current_user.not_nil!
     player = current_player.not_nil!
+    auth_providers = AuthProvider.where { _user_id == user.id }
 
     begin
       Jennifer::Adapter.adapter.transaction do
