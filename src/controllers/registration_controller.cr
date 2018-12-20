@@ -1,6 +1,6 @@
 class RegistrationController < ApplicationController
   def new
-    auth_provider_details = fetch_provider_details
+    auth_provider_details = fetch_provider_details || {} of String => String
 
     user = User.build(
       name: auth_provider_details["name"]?.to_s,
@@ -77,10 +77,8 @@ class RegistrationController < ApplicationController
   end
 
   private def fetch_provider_details
-    if raw_auth_details = session[:auth_provider_details]
-      JSON.parse(raw_auth_details)
-    else
-      {} of String => String
+    if auth_provider_details = session[:auth_provider_details]
+      JSON.parse(auth_provider_details)
     end
   end
 end
