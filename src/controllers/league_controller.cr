@@ -4,6 +4,7 @@ class LeagueController < ApplicationController
   before_action do
     only [:show, :new, :create, :edit, :update, :destroy] { redirect_signed_out_user }
     only [:show, :edit] { redirect_from_secret_league }
+    # only [:active_players, :inactive_players, :admins, :invites, :requests] { fetch_league_and_authorize! }
   end
 
   def index
@@ -21,6 +22,68 @@ class LeagueController < ApplicationController
     render("index.slang")
   end
 
+  def players
+    if league = League.find(params[:league_id])
+      if current_player.not_nil!.admin_of?(league)
+        active_memberships = league.memberships_query.where { Membership._joined_at != nil  && Membership._left_at == nil  }.includes(:player).to_a
+        render("league_management/players.slang")
+      else
+        flash[:danger] = "Must be an admin of #{league.name} to manage it"
+        redirect_to "/leagues/#{league.id}"
+      end
+    else
+      flash[:danger] = "Unable to find league"
+      redirect_to "/leagues"
+    end
+  end
+
+  def inactive_players
+    if league = League.find(params[:league_id])
+      if current_player.not_nil!.admin_of?(league)
+        inactive_memberships = league.memberships_query.where { Membership._left_at != nil }.includes(:player).to_a
+        render("league_management/inactive_players.slang")
+      else
+        flash[:danger] = "Must be an admin of #{league.name} to manage it"
+        redirect_to "/leagues/#{league.id}"
+      end
+    else
+      flash[:danger] = "Unable to find league"
+      redirect_to "/leagues"
+    end
+  end
+
+  def requests
+    if league = League.find(params[:league_id])
+      if current_player.not_nil!.admin_of?(league)
+        requests = league.invites_query.where { (_accepted_at != nil) & (_approved_at == nil) }.to_a
+        render("league_management/requests.slang")
+      else
+        flash[:danger] = "Must be an admin of #{league.name} to manage it"
+        redirect_to "/leagues/#{league.id}"
+      end
+    else
+      flash[:danger] = "Unable to find league"
+      redirect_to "/leagues"
+    end
+  end
+
+  def invites
+    if league = League.find(params[:league_id])
+      if current_player.not_nil!.admin_of?(league)
+        active_and_invited_player_ids = league.active_players_query.pluck(:id) + league.invites_query.pluck(:player_id)
+        available_players = Player.where { sql("players.id not in (#{active_and_invited_player_ids.join(", ")}) ") }
+        invites_sent = league.invites_query.where { (_accepted_at == nil) & (_approved_at != nil) }.to_a
+        render("league_management/invites.slang")
+      else
+        flash[:danger] = "Must be an admin of #{league.name} to manage it"
+        redirect_to "/leagues/#{league.id}"
+      end
+    else
+      flash[:danger] = "Unable to find league"
+      redirect_to "/leagues"
+    end
+  end
+
   def show
     if league = League.find(params[:id])
       player = current_player.not_nil!
@@ -33,34 +96,6 @@ class LeagueController < ApplicationController
       render("show.slang")
     else
       flash["warning"] = "Can't find league"
-      redirect_to "/leagues"
-    end
-  end
-
-  def management
-    if league = League.find(params[:league_id])
-      if current_player.not_nil!.admin_of?(league)
-        _admin_players_query = Player.all.where {
-          _id == any(league.administrators_query.select(:player_id))
-        }
-
-        admin_players = _admin_players_query.order(tag: :asc).to_a
-        available_players_for_admin = league.active_players_query.where { sql("players.id not in (#{_admin_players_query.pluck(:id).join(", ")}) ") }.to_a
-
-        players = league.players
-        active_and_invited_player_ids = league.active_players_query.pluck(:id) + league.invites_query.pluck(:player_id)
-        available_players = Player.where { sql("players.id not in (#{active_and_invited_player_ids.join(", ")}) ") }
-
-        invites_sent = league.invites_query.where { (_accepted_at == nil) & (_approved_at != nil) }
-        invites_received = league.invites_query.where { (_accepted_at != nil) & (_approved_at == nil) }
-
-        render("management.slang")
-      else
-        flash[:danger] = "Must be an admin of #{league.name} to manage it"
-        redirect_to "/leagues/#{league.id}"
-      end
-    else
-      flash[:danger] = "Unable to find league"
       redirect_to "/leagues"
     end
   end
@@ -170,4 +205,18 @@ class LeagueController < ApplicationController
       redirect_to "/leagues"
     end
   end
+
+  private def fetch_league_and_authorize!
+
+    if league = League.find(params[:id])
+      if !current_player.not_nil!.admin_of?(league)
+        flash[:danger] = "Must be an admin of #{league.name} to manage it"
+        redirect_to "/leagues/#{league.id}"
+      end
+    else
+      flash["warning"] = "Can't find league"
+      redirect_to "/leagues"
+    end
+  end
+
 end
