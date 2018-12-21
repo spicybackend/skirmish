@@ -40,7 +40,18 @@ def create_and_pit_players(league : League)
   game = game_logger.game
   Game::Confirm.new(game: game, confirming_player: player_three).call
 
+  game_logger = League::LogGame.new(league: league, winner: player_two, loser: player_three, logger: player_two)
+  game_logger.call
+  game = game_logger.game
+  Game::Confirm.new(game: game, confirming_player: player_three).call
+
   [player_one, player_two, player_three]
+end
+
+def set_player_rating(league : League, player : Player, rating : Int32)
+  participation = player.participations.last
+  participation.rating = rating
+  participation.save
 end
 
 def create_notification(player : Player, type : String? = "GeneralNotification", source : Jennifer::Model::Base? = nil, title : String? = nil, content : String? = nil, sent_at : Time? = Time.now, read_at : Time? = nil)

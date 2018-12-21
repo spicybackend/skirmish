@@ -1,8 +1,8 @@
 .notifications
-  - leaderboard.rankings.each do |ranking, player|
-    a href="/profile/#{player.tag}"
+  - leaderboard.rankings.not_nil!.each do |ranked_player|
+    a href="/profile/#{ranked_player[:player].tag}"
       .notification
-        span.content = ranking
-        img.icon.gravatar src="#{gravatar_src_for(player)}"
-        span.content = player.tag
-        span.time = player.rating_for(league)
+        span.content = ranked_player[:rank]
+        img.icon.gravatar src="#{gravatar_src_for(ranked_player[:player])}"
+        span.content = ranked_player[:player].tag
+        span.time = ranked_player[:rating]
