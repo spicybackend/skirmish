@@ -61,7 +61,7 @@ class Invitation::Create
         LeagueRequestNotification.create(
           player_id: admin_player.id,
           title: "Invite request for #{league.name}",
-          content: "#{player.tag} has requested to join #{league.name}",
+          content: "#{player.display_name} has requested to join #{league.name}",
           sent_at: Time.now,
           source_type: invite.class.to_s,
           source_id: invite.id
@@ -71,7 +71,7 @@ class Invitation::Create
       LeagueInviteNotification.create(
         player_id: player.id,
         title: "You've been invited to join #{league.name}",
-        content: "#{approver.not_nil!.tag} has invited you to join #{league.name}",
+        content: "#{approver.not_nil!.display_name} has invited you to join #{league.name}",
         sent_at: Time.now,
         source_type: invite.class.to_s,
         source_id: invite.id

@@ -11,7 +11,7 @@ class LeagueInviteNotification < Notification
   end
 
   def content
-    "#{approver.tag} has invited you to join #{league.name}"
+    "#{approver.display_name} has invited you to join #{league.name}"
   end
 
   def action_url

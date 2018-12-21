@@ -77,6 +77,10 @@ class Player < Jennifer::Model::Base
     }
   end
 
+  def display_name
+    tag == user.not_nil!.name ? tag : "#{tag} (#{user.not_nil!.name})"
+  end
+
   private def user_exists
     if User.find(user_id).nil?
       errors.add(:user, "must exist")

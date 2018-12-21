@@ -11,7 +11,7 @@ class LeagueRequestNotification < Notification
   end
 
   def content
-    "#{requester.tag} has requested to join #{league.name}"
+    "#{requester.display_name} has requested to join #{league.name}"
   end
 
   def action_url

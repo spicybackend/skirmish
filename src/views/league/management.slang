@@ -9,7 +9,7 @@ h4 Requests
     a href="/profile/#{player.tag}"
       .notification
         img.icon.gravatar src="#{gravatar_src_for(player)}"
-        span.content = player.tag
+        span.content = player.display_name
         - unless player.id == current_player.not_nil!.id
           span.time
           - if invite.accepted? && !invite.approved?
@@ -24,7 +24,7 @@ h4 Pending
     a href="/profile/#{player.tag}"
       .notification
         img.icon.gravatar src="#{gravatar_src_for(player)}"
-        span.content = player.tag
+        span.content = player.display_name
         - unless player.id == current_player.not_nil!.id
           span.time
           == form(action: "/leagues/#{league.id}/invites/#{invite.id}", method: :delete) do
@@ -39,7 +39,7 @@ h4 Pending
     .form-group
       select.form-control.btn.btn-secondary name="player_id"
         - available_players.each do |player|
-          option value="#{player.id}" = player.tag
+          option value="#{player.id}" = player.display_name
 
     .form-group
       == submit t("invitation.actions.invite"), class: "btn btn-primary"
@@ -51,7 +51,7 @@ h3 Admins
     a href="/profile/#{player.tag}"
       .notification
         img.icon.gravatar src="#{gravatar_src_for(player)}"
-        span.content = player.tag
+        span.content = player.display_name
         - unless player.id == current_player.not_nil!.id
           span.time
             == form(action: "/leagues/#{league.id}/admins/#{player.id}", method: :delete) do
@@ -66,7 +66,7 @@ h3 Admins
   .form-group
     select.form-control.btn.btn-secondary name="player_id"
       - available_players_for_admin.each do |player|
-        option value="#{player.id}" = player.tag
+        option value="#{player.id}" = player.display_name
 
   .form-group
     == submit t("league.actions.add_admin"), class: "btn btn-warning"
