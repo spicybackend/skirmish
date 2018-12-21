@@ -9,6 +9,13 @@ class UserController < ApplicationController
 
     own_profile? = player.id == current_player.not_nil!.id
 
+    # TODO: add leagues they have been invited to?
+    viewers_leagues = current_player.not_nil!.leagues.not_nil!.map(&.id) || [] of Int64
+
+    leagues = player.leagues.select do |league|
+      viewers_leagues.includes?(league.id) || League::OPEN == league.visibility
+    end
+
     render("show.slang")
   end
 

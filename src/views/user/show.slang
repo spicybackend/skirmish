@@ -28,5 +28,4 @@ h3 Recent Games
 == render(partial: "_recent_games.slang")
 
 h3 Memberships
-- leagues = player.leagues
 == render(partial: "_memberships.slang")
