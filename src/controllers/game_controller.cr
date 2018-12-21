@@ -55,7 +55,7 @@ class GameController < ApplicationController
         end
       end
 
-      other_players = league.active_players_query.where { _id != current_player.try(&.id) }.order(tag: :asc).to_a
+      other_players = available_opponents(league)
 
       if other_players.empty?
         flash["warning"] = "There are no other players to log against"
@@ -81,7 +81,7 @@ class GameController < ApplicationController
 
     unless other_player
       flash["danger"] = "Can't find opponent"
-      other_players = league.active_players_query.where { _id != current_player.try(&.id) }.order(tag: :asc).to_a
+      other_players = available_opponents(league)
       player_id_preselect = nil
       render("new.slang"); return
     end
@@ -102,7 +102,7 @@ class GameController < ApplicationController
       redirect_to "/leagues/#{league.id}/games/#{game.id}"
     else
       flash["danger"] = game_logger.errors.to_s
-      other_players = league.active_players_query.where { _id != current_player.try(&.id) }.order(tag: :asc).to_a
+      other_players = available_opponents(league)
       player_id_preselect = nil
 
       render("new.slang")
@@ -209,5 +209,15 @@ class GameController < ApplicationController
   private def read_game_logged_notification(game : Game)
     notifications = GameLoggedNotification.unread.where { (_source_id == game.id) & (_player_id == current_player.not_nil!.id) }
     notifications.each(&.read!)
+  end
+
+  private def available_opponents(league)
+    league.active_players_query.where { _id != current_player.try(&.id) }.order(tag: :asc).to_a
+      .map do |player|
+        [
+          player.id,
+          player.display_name
+        ]
+      end
   end
 end
