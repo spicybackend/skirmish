@@ -30,8 +30,7 @@ class GameController < ApplicationController
           league: game.league!
         ).call
 
-        notifications = GameLoggedNotification.unread.where { (_source_id == game.id) & (_player_id == current_player.not_nil!.id) }
-        notifications.each(&.read!)
+        read_game_logged_notification(game)
       end
 
       render("show.slang")
@@ -134,6 +133,7 @@ class GameController < ApplicationController
 
       if game_confirmation_service.call
         flash["success"] = "Confirmed game"
+        read_game_logged_notification(game)
         redirect_to("/leagues/#{game.league_id}/games/#{game.id}"); return
       else
         flash["danger"] = game_confirmation_service.errors.join(", ")
@@ -161,6 +161,7 @@ class GameController < ApplicationController
 
         if game_confirmation_service.call
           flash["success"] = "Confirmed game"
+          read_game_logged_notification(game)
           redirect_to "/leagues/#{game.league_id}/games/#{game.id}"
         else
           flash["danger"] = game_confirmation_service.errors.join(", ")
@@ -203,5 +204,10 @@ class GameController < ApplicationController
       required("opponent-id") { |f| !f.blank? }
       required(:status) { |f| !f.blank? }
     end
+  end
+
+  private def read_game_logged_notification(game : Game)
+    notifications = GameLoggedNotification.unread.where { (_source_id == game.id) & (_player_id == current_player.not_nil!.id) }
+    notifications.each(&.read!)
   end
 end
