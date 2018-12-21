@@ -139,48 +139,56 @@ div.leagues {
     div.leagues .league {
       width: inherit; } }
 
-div.notifications {
-  margin-bottom: 16px; }
-  div.notifications a:hover {
-    text-decoration: none !important; }
-  div.notifications a:first-child .notification {
-    border-top-left-radius: 6px;
-    border-top-right-radius: 6px; }
-  div.notifications a:last-child .notification {
-    margin-bottom: 8px;
-    border-bottom-left-radius: 6px;
-    border-bottom-right-radius: 6px; }
-  div.notifications .notification {
+.tiles {
+  margin-bottom: 24px; }
+  .tiles .tile {
     display: flex;
     align-items: center;
-    padding: 8px 12px;
-    margin-bottom: -1px;
-    transition: background-color 0.15s;
+    padding: 12px 16px;
+    min-height: 68px;
     color: white;
+    background-color: rgba(0, 0, 0, 0.05);
+    transition: background-color 0.15s;
     border: 1px solid #1d2124;
-    background-color: rgba(0, 0, 0, 0.05); }
-    div.notifications .notification:hover {
-      background-color: rgba(0, 0, 0, 0.2); }
-    div.notifications .notification .content ~ .icon {
-      margin-left: 12px; }
-    div.notifications .notification .vs {
-      margin-left: 12px;
-      margin-right: 12px; }
-      div.notifications .notification .vs ~ .icon {
-        margin-left: 0px; }
-    div.notifications .notification .icon {
-      width: 32px;
-      height: 32px;
-      margin: 5px 12px 5px 5px;
-      padding: 6px;
-      background-color: #fd971f;
-      border-radius: 50%; }
-      div.notifications .notification .icon.gravatar {
-        padding: 0px; }
-    div.notifications .notification .time {
+    margin-bottom: -1px; }
+    .tiles .tile .icon {
+      z-index: 2;
+      width: 42px;
+      height: 42px;
+      flex-shrink: 0; }
+      .tiles .tile .icon img {
+        border-radius: 50%;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        overflow: hidden; }
+        .tiles .tile .icon img.glyph {
+          padding: 15%; }
+      .tiles .tile .icon + .icon {
+        margin-left: -16px;
+        z-index: 1; }
+    .tiles .tile .secondary {
+      color: #828282;
       flex-grow: 1;
-      text-align: right;
-      color: #888; }
+      text-align: right; }
+    .tiles .tile:hover {
+      background-color: rgba(0, 0, 0, 0.2);
+      text-decoration: none; }
+    .tiles .tile * {
+      margin: 0px 8px; }
+      .tiles .tile *:first-child {
+        margin-left: 0; }
+      .tiles .tile *:last-child {
+        margin-right: 0; }
+  .tiles a:first-child {
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px; }
+  .tiles a:last-child {
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px; }
+
+.notifications .tile .icon img {
+  background-color: #ffa039; }
 
 table.body.mailer table.container p, table.body.mailer table.container a {
   font-family: "Muli", "Helvetica Neue", Helvetica, Arial, sans-serif; }
@@ -702,10 +710,8 @@ tr.clickable-row {
           footer .social-links li a .social-icon {
             margin-left: 0;
             margin-right: 0.5em; }
-  body {
-    justify-content: space-between; }
-    body .container {
-      overflow-x: hidden; }
+  body .container {
+    overflow: hidden; }
   .image-content {
     flex-direction: column; }
     .image-content .image {

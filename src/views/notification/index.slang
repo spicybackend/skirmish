@@ -7,19 +7,12 @@
         == submit(t("notification.actions.mark_all_as_read"), class: "btn btn-danger")
 
 h6.section-header Unread
-.notifications
+.notifications.tiles
   - unread_notifications.each do |notification|
-    a href="/notifications/#{notification.id}"
-      .notification
-        img.icon src="https://png.icons8.com/ios-glyphs/200/ffffff/trophy.png"
-        span.content = notification.title
-        span.time = time_units_since(notification.created_at)
+    == render(partial: "_notification_tile.slang")
+
 
 h6.section-header Read
-.notifications
+.notifications.tiles
   - read_notifications.each do |notification|
-    a href="/notifications/#{notification.id}"
-      .notification
-        img.icon src="https://png.icons8.com/ios-glyphs/200/ffffff/trophy.png"
-        span.content = notification.title
-        span.time = time_units_since(notification.created_at)
+    == render(partial: "_notification_tile.slang")

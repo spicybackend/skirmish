@@ -1,8 +1,8 @@
 h3 Entrants
-.notifications
+.entrants.tiles
   - tournament.players.each do |player|
-    a href="/profile/#{player.tag}"
-      .notification
-        img.icon.gravatar src="#{gravatar_src_for(player)}"
-        span.content = player.tag
-        span.time = player.rating_for(league)
+    a.tile href="/profile/#{player.tag}"
+      .icon
+        img src="#{gravatar_src_for(player)}"
+      span.content = player.tag
+      span.secondary = player.rating_for(league)

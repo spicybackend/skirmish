@@ -14,15 +14,15 @@ p.description
   | For
   == link_to(league.name, "/leagues/#{league.id}")
 
-.notifications
+.tournaments.tiles
   - tournaments.each do |tournament|
-    a href="/leagues/#{league.id}/tournaments/#{tournament.id}"
-      .notification
-        img.icon src="https://png.icons8.com/ios-glyphs/200/ffffff/trophy.png"
-        - if tournament.open?
-          span.content Open to join
-        - elsif tournament.in_progress?
-          span.content In progress
-        - else
-          span.content Won by #{tournament.winner.try(&.tag)}
-        span.time Created #{time_units_since(tournament.created_at)}
+    a.tile href="/leagues/#{league.id}/tournaments/#{tournament.id}"
+      .icon
+        img.glyph style="background-color: #{league.accent_color};" src="https://png.icons8.com/ios-glyphs/200/ffffff/trophy.png"
+      - if tournament.open?
+        content Open to join
+      - elsif tournament.in_progress?
+        content In progress
+      - else
+        content Won by #{tournament.winner.try(&.tag)}
+      .secondary Created #{time_units_since(tournament.created_at)}
