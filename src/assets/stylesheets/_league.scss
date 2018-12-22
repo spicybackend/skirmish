@@ -1,3 +1,23 @@
+.management.nav-tabs {
+  margin-bottom: 16px;
+  border-color: darken($dark-grey, 10%);
+
+  .nav-item {
+    .nav-link {
+      &:hover {
+        border-color: darken($dark-grey, 10%);
+        background-color: darken($dark-grey, 5%);
+      }
+
+      &.active {
+        color: white;
+        border-color: $babyblue;
+        background-color: $babyblue;
+      }
+    }
+  }
+}
+
 div.leagues {
   display: flex;
   justify-content: space-between;

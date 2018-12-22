@@ -15,7 +15,7 @@ class LeagueRequestNotification < Notification
   end
 
   def action_url
-    "/leagues/#{league.id}/management"
+    "/leagues/#{league.id}/requests"
   end
 
   def invitation

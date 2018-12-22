@@ -3,6 +3,10 @@ class MembershipController < ApplicationController
     all { redirect_signed_out_user }
   end
 
+  def index
+
+  end
+
   def create
     player = current_player.not_nil!
     league = League.find(params[:league_id])
@@ -52,6 +56,56 @@ class MembershipController < ApplicationController
       else
         flash["danger"] = "Couldn't find your membership #{league.name}"
         redirect_to "leagues/#{league.id}"
+      end
+    else
+      flash["danger"] = "Couldn't find league"
+      redirect_to "leagues"
+    end
+  end
+
+  ##
+  # Admin action
+    def rejoin
+    league = League.find(params[:league_id])
+    if league
+      if current_player.not_nil!.admin_of?(league)
+        if membership = league.memberships_query.where { _league_id == league.id && _id == params[:id] }.to_a.first
+          membership.update(left_at: nil)
+          player = membership.player!
+          flash["success"] = "#{player.tag} added back to #{league.name}"
+          redirect_to "/leagues/#{league.id}/players"
+        else
+          flash["danger"] = "Couldn't find your membership #{league.name}"
+          redirect_to "leagues/#{league.id}"
+        end
+      else
+        flash[:danger] = "Must be an admin of #{league.name} to manage it"
+        redirect_to "/leagues/#{league.id}"
+      end
+    else
+      flash["danger"] = "Couldn't find league"
+      redirect_to "leagues"
+    end
+  end
+
+  ##
+  # Admin action
+  def leave
+    league = League.find(params[:league_id])
+    if league
+      if current_player.not_nil!.admin_of?(league)
+        if membership = league.memberships_query.where { _league_id == league.id && _id == params[:id] }.to_a.first
+          membership.update(left_at: Time.now)
+          player = membership.player!
+          flash["success"] = "#{player.tag} removed from #{league.name}"
+          redirect_to "/leagues/#{league.id}/players"
+        else
+          flash["danger"] = "Couldn't find your membership #{league.name}"
+          redirect_to "leagues/#{league.id}"
+        end
+      else
+        flash[:danger] = "Must be an admin of #{league.name} to manage it"
+        redirect_to "/leagues/#{league.id}"
       end
     else
       flash["danger"] = "Couldn't find league"

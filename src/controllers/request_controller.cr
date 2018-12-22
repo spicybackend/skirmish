@@ -32,7 +32,7 @@ class RequestController < ApplicationController
           Invitation::Approve.new(invitation: invite, approver: current_player.not_nil!).call
 
           flash["success"] = "Invite approved"
-          redirect_to "/leagues/#{invite.league_id}/management"
+          redirect_to "/leagues/#{invite.league_id}/requests"
         rescue ex : Invitation::Approve::ApproveError
           flash["danger"] = ex.message.to_s
           redirect_to "/leagues/#{invite.league_id}"
@@ -56,7 +56,7 @@ class RequestController < ApplicationController
           invite.destroy
 
           flash["success"] = "Invite deleted"
-          redirect_to "/leagues/#{invite.league_id}/management"
+          redirect_to "/leagues/#{invite.league_id}/requests"
         end
       else
         flash["danger"] = "Must be an admin to manage invites"

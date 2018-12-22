@@ -35,6 +35,8 @@ Amber::Server.configure do
 
     post "/leagues/:league_id/join", MembershipController, :create
     patch "/leagues/:league_id/:leave_or_join", MembershipController, :update
+    patch "/leagues/:league_id/membership/:id/leave", MembershipController, :leave
+    patch "/leagues/:league_id/membership/:id/rejoin", MembershipController, :rejoin
     resources "/leagues/:league_id/games", GameController, except: [:index, :edit, :update]
     patch "/leagues/:league_id/games/:game_id/:action", GameController, :update
     get "/leagues/:league_id/games/:game_id/confirm/:confirmation_code", GameController, :quick_confirm
@@ -45,8 +47,11 @@ Amber::Server.configure do
     post "/leagues/:league_id/tournaments/:tournament_id/join", EntrantController, :create
     delete "/leagues/:league_id/tournaments/:tournament_id/leave", EntrantController, :destroy
 
-    get "/leagues/:league_id/management", LeagueController, :management
-    resources "/leagues/:league_id/admins", LeagueAdministratorController, only: [:create, :destroy]
+    get "/leagues/:league_id/players", LeagueController, :players
+    get "/leagues/:league_id/inactive_players", LeagueController, :inactive_players
+    get "/leagues/:league_id/requests", LeagueController, :requests
+    get "/leagues/:league_id/invites", LeagueController, :invites
+    resources "/leagues/:league_id/admins", LeagueAdministratorController, only: [:index, :create, :destroy]
 
     resources "/leagues/:league_id/invites/", InvitationController, only: [:create, :update, :destroy]
     resources "/leagues/:league_id/requests/", RequestController, only: [:create, :update, :destroy]

@@ -81,6 +81,17 @@ div.game-logger {
     width: 100px;
     height: 100px; } }
 
+.management.nav-tabs {
+  margin-bottom: 16px;
+  border-color: #1d2124; }
+  .management.nav-tabs .nav-item .nav-link:hover {
+    border-color: #1d2124;
+    background-color: #292d32; }
+  .management.nav-tabs .nav-item .nav-link.active {
+    color: white;
+    border-color: #4eb4f9;
+    background-color: #4eb4f9; }
+
 div.leagues {
   display: flex;
   justify-content: space-between;
