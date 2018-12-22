@@ -1,6 +1,7 @@
 class ErrorController < Amber::Controller::Error
   LAYOUT = "application.slang"
 
+  include ApplicationHelper
   include ProfileHelper
 
   def current_user
