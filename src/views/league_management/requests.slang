@@ -1,18 +1,19 @@
-== render(partial: "league_management/_navs.slang")
-.notifications
-  - if requests.empty?
-    .notification
-      span No pending requests.
-  - else
+== render(partial: "league_management/_nav.slang")
+
+- if requests.empty?
+    h3 No pending requests
+- else
+  .requests.tiles
     - requests.each do |invite|
       - player = invite.player!
-      a href="/profile/#{player.tag}"
-        .notification
-          img.icon.gravatar src="#{gravatar_src_for(player)}"
-          span.content = player.tag
-          - unless player.id == current_player.not_nil!.id
-            span.time
-            - if invite.accepted? && !invite.approved?
+
+      a.tile href="/profile/#{player.tag}"
+        .icon
+          img src="#{gravatar_src_for(player)}"
+        .content = player.display_name
+        - unless player.id == current_player.not_nil!.id
+          - if invite.accepted? && !invite.approved?
+            .secondary
               == form(action: "/leagues/#{league.id}/requests/#{invite.id}", method: :patch) do
                 == csrf_tag
                 == submit(t("invitation.actions.approve"), class: "btn btn-success")
