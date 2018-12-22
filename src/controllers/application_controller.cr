@@ -4,6 +4,7 @@ class ApplicationController < Amber::Controller::Base
   LAYOUT = "application.slang"
 
   include JasperHelpers
+  include ApplicationHelper
   include ReadableTimeHelpers
   include ProfileHelper
 
