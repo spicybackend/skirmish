@@ -3,7 +3,7 @@ h2 League Management
 p.description = "For #{league.name}"
 - path = context.request.path
 
-ul.nav.nav-tabs
+ul.management.nav.nav-tabs
   li.nav-item
     - active = path.match(/\/leagues\/\d+\/players/) ? "active" : ""
     a class="nav-link #{active}" href="/leagues/#{league.id}/players" Active Players

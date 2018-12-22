@@ -16,7 +16,7 @@ class InvitationController < ApplicationController
             ).call
 
             flash["success"] = "Invited #{player.tag} to #{league.name}"
-            redirect_to "/leagues/#{league.id}/management"
+            redirect_to "/leagues/#{league.id}/invites"
           rescue ex : Invitation::Create::InviteError
             flash["danger"] = ex.message.to_s
             redirect_to "/leagues/#{league.id}"
@@ -72,7 +72,7 @@ class InvitationController < ApplicationController
           invite.destroy
 
           flash["success"] = "Invite deleted"
-          redirect_to "/leagues/#{invite.league_id}/management"
+          redirect_to "/leagues/#{invite.league_id}/invites"
         end
       else
         flash["danger"] = "Must be an admin to manage invites"

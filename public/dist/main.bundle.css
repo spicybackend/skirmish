@@ -81,6 +81,9 @@ div.game-logger {
     width: 100px;
     height: 100px; } }
 
+.management.nav-tabs {
+  margin-bottom: 16px; }
+
 div.leagues {
   display: flex;
   justify-content: space-between;
