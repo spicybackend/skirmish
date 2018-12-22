@@ -25,7 +25,7 @@ $nav-item-color: $babyblue;
 
 @import "game";
 @import "league";
-@import "notification";
+@import "tiles";
 @import "mailer";
 @import "authentication";
 @import "profile";
@@ -356,10 +356,8 @@ tr.clickable-row {
   }
 
   body {
-    justify-content: space-between;
-
     .container {
-      overflow-x: hidden;
+      overflow: hidden;
     }
   }
 
