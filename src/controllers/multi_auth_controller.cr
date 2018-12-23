@@ -1,4 +1,8 @@
 class MultiAuthController < ApplicationController
+  before_action do
+    only [:unlink] { redirect_signed_out_user }
+  end
+
   def google
     scopes = [
       "https://www.googleapis.com/auth/userinfo.profile",
@@ -55,6 +59,18 @@ class MultiAuthController < ApplicationController
 
         redirect_to("/signup")
       end
+    end
+  end
+
+  def unlink
+    if auth_provider = AuthProvider.find(params[:id])
+      auth_provider.destroy
+
+      flash[:success] = "Unlinked #{auth_provider.provider.capitalize} provider"
+      redirect_to "/profile/edit"
+    else
+      flash[:error] = "Can't find linked authentication provider"
+      redirect_to "/"
     end
   end
 
