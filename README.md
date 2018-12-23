@@ -101,11 +101,14 @@ brew services restart postgresql
 To start your Amber server (Both Linux and Mac):
 
 ```shell
-shards install                      # install dependencies
-shards build                        # build executable binaries
-crystal ./src/sam.cr -- db:setup    # create the database and bring it up to speed
-bin/amber db seed                   # optionally seed the database with some mock data
-bin/amber watch                     # start the server and watch for file changes
+# update the development environment settings to your liking
+mv config/environments/development.yml.example config/environments/development.yml
+
+shards install                    # install dependencies
+shards build                      # build executable binaries
+crystal ./src/sam.cr -- db:setup  # create the database and bring it up to speed
+bin/amber db seed                 # optionally seed the database with some mock data
+bin/amber watch                   # start the server and watch for file changes
 ```
 
 Now you can visit http://localhost:3000/ from your browser.
