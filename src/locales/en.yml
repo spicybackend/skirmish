@@ -83,11 +83,11 @@ verification:
 admin:
   league:
     actions:
-      leave: "Kick Player"
-      rejoin: "Resurrect Player"
+      leave: "Kick"
+      rejoin: "Resurrect"
       add_admin: "Make Admin"
       remove_admin: "Remove"
-      manage_admins: "Manage League"
+      manage: "Manage League"
 
 league:
   actions:
