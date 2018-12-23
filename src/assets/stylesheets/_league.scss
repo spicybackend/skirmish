@@ -16,6 +16,26 @@
       }
     }
   }
+
+  @media only screen and (max-width: 768px) {
+    .nav-item {
+      display: flex;
+      align-items: flex-end;
+
+      .nav-link {
+        font-size: 75%;
+        color: white !important;
+        display: inline-table;
+        min-width: 100%;
+        margin: 0;
+        padding: 4px 8px;
+
+        &.active {
+          margin-bottom: 1px;
+        }
+      }
+    }
+  }
 }
 
 div.leagues {

@@ -91,6 +91,19 @@ div.game-logger {
     color: white;
     border-color: #4eb4f9;
     background-color: #4eb4f9; }
+  @media only screen and (max-width: 768px) {
+    .management.nav-tabs .nav-item {
+      display: flex;
+      align-items: flex-end; }
+      .management.nav-tabs .nav-item .nav-link {
+        font-size: 75%;
+        color: white !important;
+        display: inline-table;
+        min-width: 100%;
+        margin: 0;
+        padding: 4px 8px; }
+        .management.nav-tabs .nav-item .nav-link.active {
+          margin-bottom: 1px; } }
 
 div.leagues {
   display: flex;
