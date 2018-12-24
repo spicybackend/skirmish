@@ -23,8 +23,7 @@ class MultiAuthController < ApplicationController
         session[:player_id] = user.player!.id
 
         flash[:info] = I18n.translate("session.logged_in_successfully")
-
-        redirect_to("/profile")
+        redirect_to landing_url
       else
         session[:auth_provider_details] = {
           provider: AuthProvider::GOOGLE_PROVIDER,

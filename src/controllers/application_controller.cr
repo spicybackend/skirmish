@@ -39,4 +39,12 @@ class ApplicationController < Amber::Controller::Base
       redirect_to "/signin?redirect=#{context.request.path}"
     end
   end
+
+  private def landing_url
+    if league_id = current_player_context.try(&.league_id)
+      "/leagues/#{league_id}"
+    else
+      "/leagues"
+    end
+  end
 end

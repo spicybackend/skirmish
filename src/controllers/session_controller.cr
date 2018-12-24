@@ -49,12 +49,4 @@ class SessionController < ApplicationController
     flash[:info] = I18n.translate("session.logged_out")
     redirect_to "/"
   end
-
-  private def landing_url
-    if league_id = current_player_context.try(&.league_id)
-      "/leagues/#{league_id}"
-    else
-      "/leagues"
-    end
-  end
 end
