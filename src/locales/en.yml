@@ -79,6 +79,7 @@ verification:
   already_activated: "User has already been activated"
   not_yet_activated: "Account hasn't been verified"
   user_not_found: "Can't find an account linked to that email address"
+  invalid_code: "Oops, we can't find the game on record"
 
 admin:
   league:
@@ -117,6 +118,7 @@ invitation:
 game:
   won: "Won"
   lost: "Lost"
+  already_confirmed: "This game has already been confirmed"
 
   actions:
     log_game: "Log Game"

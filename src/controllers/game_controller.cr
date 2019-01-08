@@ -151,7 +151,7 @@ class GameController < ApplicationController
       player = participation.player!
 
       if game.confirmed?
-        flash[:warning] = "already confirmed" # I18n.translate("game.already_confirmed")
+        flash[:warning] = I18n.translate("game.already_confirmed")
         redirect_to "/leagues/#{game.league_id}/games/#{game.id}"
       else
         game_confirmation_service = Game::Confirm.new(
@@ -169,7 +169,7 @@ class GameController < ApplicationController
         end
       end
     else
-      flash[:warning] = "confirmation code not valid" # I18n.translate("verification.game_not_found")
+      flash[:warning] = I18n.translate("verification.invalid_code")
       redirect_to "/"
     end
   end
