@@ -2,5 +2,10 @@
 <%= "-" * I18n.translate("mailer.game_logged.title").size %>
 <%= I18n.translate("mailer.game_logged.subtitle", { logger: logger.tag }) %>
 
-<%= I18n.translate("mailer.game_logged.confirmation.content") %>
+<% if won %>
+  <%= I18n.translate("mailer.game_logged.confirmation.win_content") %>
+<% else %>
+  <%= I18n.translate("mailer.game_logged.confirmation.lose_content") %>
+<% end %>
+
 <%= ENV["BASE_URL"] %>/leagues/<%= game.league_id %>/games/<%= game.id %>/confirm/<%= confirmation_code %>
