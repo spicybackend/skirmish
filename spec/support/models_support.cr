@@ -40,7 +40,7 @@ def create_and_pit_players(league : League)
   game = game_logger.game
   Game::Confirm.new(game: game, confirming_player: player_three).call
 
-  game_logger = League::LogGame.new(league: league, winner: player_two, loser: player_three, logger: player_two)
+  game_logger = League::LogGame.new(league: league, winner: player_two, loser: player_three, logger: player_three)
   game_logger.call
   game = game_logger.game
   Game::Confirm.new(game: game, confirming_player: player_three).call

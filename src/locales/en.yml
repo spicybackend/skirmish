@@ -71,7 +71,8 @@ mailer:
     title: "Game Logged"
     subtitle: "%{logger} has logged a game against you!"
     confirmation:
-      content: "Awh, shucks. Follow the link below to confirm the game, and better luck next time!"
+      win_content: "Nice one! Follow the link below to confirm the game."
+      lose_content: "Awh, shucks. Follow the link below to confirm the game, and better luck next time!"
       action: "Confirm"
 
 verification:

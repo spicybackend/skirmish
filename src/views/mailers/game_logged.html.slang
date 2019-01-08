@@ -8,7 +8,10 @@ table.container style="border-spacing: 0; border-collapse: collapse; padding: 0;
   tr.section style="padding: 0; vertical-align: top; text-align: left;" valign="top" align="left"
     td.content style="text-align: left; word-wrap: break-word; -moz-hyphens: auto; hyphens: auto; border-collapse: collapse; line-height: 1.3; vertical-align: top; -webkit-hyphens: auto; color: white; font-family: Helvetica, Arial, sans-serif; font-weight: normal; margin: 0; Margin: 0; font-size: 16px; padding: 16px;" valign="top" align="left"
       p style="padding: 0; margin: 0; color: white; margin-bottom: 10px; font-weight: normal; Margin: 0; text-align: left; line-height: 1.3; font-size: 16px; Margin-bottom: 10px; font-family: 'Muli', 'Helvetica Neue', Helvetica, Arial, sans-serif;"
-        = I18n.translate("mailer.game_logged.confirmation.content")
+        - if won
+          = I18n.translate("mailer.game_logged.confirmation.win_content")
+        - else
+          = I18n.translate("mailer.game_logged.confirmation.lose_content")
 
       table.button.radius style="border-spacing: 0; border-collapse: collapse; padding: 0; vertical-align: top; text-align: left; width: auto; margin: 0 0 16px 0; Margin: 0 0 16px 0;" valign="top" align="left"
         tr style="padding: 0; vertical-align: top; text-align: left;" valign="top" align="left"

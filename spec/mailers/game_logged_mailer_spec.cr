@@ -73,17 +73,38 @@ describe GameLoggedMailer do
       mailer.text.should contain I18n.translate("mailer.game_logged.title")
     end
 
-    it "asks the user to confirm the game" do
-      league = create_league
-      _, _, loser_and_confirmer = create_and_pit_players(league)
+    context "when the player has lost the game" do
+      it "asks the user to confirm their loss" do
+        league = create_league
+        _, _, loser_and_confirmer = create_and_pit_players(league)
 
-      player = loser_and_confirmer
-      game = league.games.first
+        player = loser_and_confirmer
+        game = league.games.first
 
-      mailer = GameLoggedMailer.new(player, game)
+        mailer = GameLoggedMailer.new(player, game)
 
-      mailer.html.should contain HTML.escape(I18n.translate("mailer.game_logged.confirmation.content"))
-      mailer.text.should contain I18n.translate("mailer.game_logged.confirmation.content")
+        mailer.html.should contain HTML.escape(I18n.translate("mailer.game_logged.confirmation.lose_content"))
+        mailer.text.should contain I18n.translate("mailer.game_logged.confirmation.lose_content")
+      end
+    end
+
+    context "when the player has won the game" do
+      it "asks the user to confirm their win" do
+        league = create_league
+        player_one = create_player_with_mock_user
+        player_two = create_player_with_mock_user
+        Membership.create!(player_id: player_one.id, league_id: league.id, joined_at: Time.now)
+        Membership.create!(player_id: player_two.id, league_id: league.id, joined_at: Time.now)
+
+        game_logger = League::LogGame.new(league: league, winner: player_one, loser: player_two, logger: player_two)
+        game_logger.call
+        game = league.games.first
+
+        mailer = GameLoggedMailer.new(player_one, game)
+
+        mailer.html.should contain HTML.escape(I18n.translate("mailer.game_logged.confirmation.win_content"))
+        mailer.text.should contain I18n.translate("mailer.game_logged.confirmation.win_content")
+      end
     end
 
     it "contains a link to confirm the game" do

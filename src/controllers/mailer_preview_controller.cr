@@ -16,9 +16,10 @@ class MailerPreviewController < ApplicationController
       end
     elsif params[:mailer_name] == "game_logged"
       game = Game.all.last.not_nil!
-      player = game.loser.not_nil!
+      player = game.players.first.not_nil!
       user = player.user!
       logger = game.winner.not_nil!
+      won = player == game.winner
       confirmation_code = game.participations.first.confirmation_code
 
       if text_only_preview?
