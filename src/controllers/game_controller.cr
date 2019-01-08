@@ -160,8 +160,9 @@ class GameController < ApplicationController
         )
 
         if game_confirmation_service.call
+          read_game_logged_notification(game, player)
+
           flash["success"] = "Confirmed game"
-          read_game_logged_notification(game)
           redirect_to "/leagues/#{game.league_id}/games/#{game.id}"
         else
           flash["danger"] = game_confirmation_service.errors.join(", ")
@@ -206,8 +207,10 @@ class GameController < ApplicationController
     end
   end
 
-  private def read_game_logged_notification(game : Game)
-    notifications = GameLoggedNotification.unread.where { (_source_id == game.id) & (_player_id == current_player.not_nil!.id) }
+  private def read_game_logged_notification(game : Game, player : Player | Nil = nil)
+    player ||= current_player
+
+    notifications = GameLoggedNotification.unread.where { (_source_id == game.id) & (_player_id == player.try(&.id)) }
     notifications.each(&.read!)
   end
 
