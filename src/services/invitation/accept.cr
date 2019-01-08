@@ -16,6 +16,7 @@ class Invitation::Accept
     Jennifer::Adapter.adapter.transaction do
       invitation.update!(accepted_at: Time.now)
       Membership.create!(league_id: invitation.league_id, player_id: invitation.player_id)
+      read_invite_request_notification!
     end
   end
 
@@ -37,5 +38,10 @@ class Invitation::Accept
     if player.in_league?(league)
       raise AcceptError.new("#{player.tag} is already a member of #{league.name}")
     end
+  end
+
+  private def read_invite_request_notification!
+    notifications = LeagueInviteNotification.unread.where { (_source_id == invitation.id) & (_player_id == player.id) }
+    notifications.each(&.read!)
   end
 end
