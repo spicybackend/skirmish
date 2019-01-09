@@ -72,7 +72,7 @@ Amber::Server.configure do
     get "/multi_auth/callback", MultiAuthController, :callback
     delete "/multi_auth/unlink/:id", MultiAuthController, :unlink
 
-    get "/verification/:email", VerificationController, :show
+    get "/verification", VerificationController, :show
     get "/verify/:verification_code", VerificationController, :verify
 
     get "/mailer_preview/:mailer_name", MailerPreviewController, :show

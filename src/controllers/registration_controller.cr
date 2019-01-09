@@ -38,7 +38,7 @@ class RegistrationController < ApplicationController
       else
         WelcomeMailer.new(player).send
 
-        redirect_to "/verification/#{user.email}"
+        redirect_to "/verification?email=#{user.email}"
       end
     end
   rescue ex : Jennifer::RecordInvalid

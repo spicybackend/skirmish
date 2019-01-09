@@ -23,7 +23,7 @@ class SessionController < ApplicationController
     if user && user.authenticate(params["password"].to_s)
       if user.unverified?
         flash[:warning] = I18n.translate("verification.not_yet_activated")
-        redirect_to "/verification/#{user.email}"
+        redirect_to "/verification?email=#{user.email}"
       else
         session[:user_id] = user.id
         session[:player_id] = Player.where { _user_id == user.id }.to_a.first.id
