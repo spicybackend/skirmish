@@ -199,7 +199,7 @@ class LeagueController < ApplicationController
     player = current_player
     league = League.find(params[:id])
 
-    if player && league && league.secret? && !player.in_league?(league) && !league.invites_query.where { _player_id == player.try(&.id) }.exists?
+    if player && league && league.secret? && !player.member_of?(league) && !league.invites_query.where { _player_id == player.try(&.id) }.exists?
       flash["warning"] = "Can't find league"
       redirect_to "/leagues"
     end

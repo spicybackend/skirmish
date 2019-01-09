@@ -9,9 +9,10 @@
   li class="nav-item #{active}"
     a.nav-link.tournaments href="/leagues/#{current_league.id}/tournaments" Tournaments
 
-  - active = path.match(/\/leagues\/\d+\/games\/new/) ? "active" : ""
-  li class="nav-item #{active} nav-log-game"
-    a.nav-link.log-game href="/leagues/#{current_league.id}/games/new" Log Game
+  - if player.member_of?(current_league)
+    - active = path.match(/\/leagues\/\d+\/games\/new/) ? "active" : ""
+    li class="nav-item #{active} nav-log-game"
+      a.nav-link.log-game href="/leagues/#{current_league.id}/games/new" Log Game
 
 - else
   - active = path.starts_with?("/leagues") ? "active" : ""
