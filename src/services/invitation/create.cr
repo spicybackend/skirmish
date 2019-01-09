@@ -32,7 +32,7 @@ class Invitation::Create
   end
 
   private def assert_player_not_already_in_league!
-    if player.in_league?(league)
+    if player.member_of?(league)
       raise InviteError.new("#{player.tag} is already a member of #{league.name}")
     end
   end

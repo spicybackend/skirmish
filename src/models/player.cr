@@ -45,7 +45,7 @@ class Player < Jennifer::Model::Base
     administrators_query.where { _league_id == league.id }.exists?
   end
 
-  def in_league?(league : League)
+  def member_of?(league : League)
     memberships_query.where { _league_id == league.id }.where { _left_at == nil }.exists?
   end
 

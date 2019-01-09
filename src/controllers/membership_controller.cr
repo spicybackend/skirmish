@@ -16,7 +16,7 @@ class MembershipController < ApplicationController
       redirect_to "/leagues"; return
     end
 
-    if league && player.in_league?(league)
+    if league && player.member_of?(league)
       flash["danger"] = "Already a member of #{league.name}"
       redirect_to "/leagues/#{params[:league_id]}"; return
     end

@@ -73,6 +73,45 @@ describe Player do
     end
   end
 
+  describe "#member_of?" do
+    context "when the player has a membership in the league" do
+      context "that is active" do
+        it "is true" do
+          league = create_league
+
+          Membership.create!(
+            player_id: player.id,
+            league_id: league.id
+          )
+
+          player.member_of?(league).should be_true
+        end
+      end
+
+      context "that has ended" do
+        it "is false" do
+          league = create_league
+
+          Membership.create!(
+            player_id: player.id,
+            league_id: league.id,
+            left_at: Time.now
+          )
+
+          player.member_of?(league).should be_false
+        end
+      end
+    end
+
+    context "when the player has no membership in the league" do
+      it "is false" do
+        league = create_league
+
+        player.member_of?(league).should be_false
+      end
+    end
+  end
+
   pending do
     it "has specs"
   end

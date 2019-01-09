@@ -39,7 +39,7 @@ class Invitation::Approve
   end
 
   private def assert_player_not_already_in_league!
-    if player.in_league?(league)
+    if player.member_of?(league)
       raise ApproveError.new("#{player.tag} is already a member of #{league.name}")
     end
   end

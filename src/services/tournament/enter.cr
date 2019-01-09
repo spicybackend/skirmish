@@ -11,7 +11,7 @@ class Tournament::Enter
   def call
     league = tournament.league.not_nil!
 
-    if player.in_league?(league: league)
+    if player.member_of?(league: league)
       Entrant.create!(player_id: player.id, tournament_id: tournament.id)
     else
       raise EntryError.new("Must be a member of #{league.name} to join it's tournaments")
