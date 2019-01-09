@@ -130,7 +130,7 @@ describe User do
     context "when the user is already activated" do
       it "doesn't update the activation time" do
         user.update!(activated_at: nil)
-        original_activation_time = Time.epoch(0)
+        original_activation_time = Time.unix(0)
         user.update!(activated_at: original_activation_time)
 
         user.activate!

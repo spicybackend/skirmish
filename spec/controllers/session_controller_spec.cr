@@ -66,7 +66,7 @@ describe SessionControllerSpec do
         response = subject.post "/session", body: params_from_hash(login_params)
 
         response.status_code.should eq(302)
-        response.headers["Location"].should eq "/verification/#{user.email}"
+        response.headers["Location"].should eq "/verification?email=#{user.email}"
       end
     end
 

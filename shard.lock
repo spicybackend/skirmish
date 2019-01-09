@@ -2,11 +2,11 @@ version: 1.0
 shards:
   amber:
     github: amberframework/amber
-    version: 0.9.0
+    version: 0.11.2
 
   amber_router:
     github: amberframework/amber-router
-    version: 0.2.0
+    version: 0.2.1
 
   ameba:
     github: veelenga/ameba
@@ -31,6 +31,10 @@ shards:
   db:
     github: crystal-lang/crystal-db
     version: 0.5.1
+
+  exception_page:
+    github: crystal-loot/exception_page
+    version: 0.1.1
 
   garnet_spec:
     github: amberframework/garnet-spec
@@ -122,5 +126,5 @@ shards:
 
   teeplate:
     github: mosop/teeplate
-    version: 0.6.1
+    version: 0.7.0
 
