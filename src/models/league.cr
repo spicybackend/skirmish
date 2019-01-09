@@ -49,7 +49,8 @@ class League < Jennifer::Model::Base
   validates_presence :k_factor
 
   validates_numericality :start_rating, greater_than_or_equal_to: 100, less_than_or_equal_to: 3000
-  validates_numericality :k_factor, greater_than_or_equal_to: 1, less_than_or_equal_to: 100
+  # TODO: Re-enable once Jennifer Numericality is fixed. Float64#even? and #odd? removed in 0.27.0.
+  # validates_numericality :k_factor, greater_than_or_equal_to: 1, less_than_or_equal_to: 100
   validates_format :accent_color, /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/
 
   scope :open { where { _visibility == OPEN } }

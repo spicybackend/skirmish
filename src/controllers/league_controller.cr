@@ -4,7 +4,6 @@ class LeagueController < ApplicationController
   before_action do
     only [:show, :new, :create, :edit, :update, :destroy] { redirect_signed_out_user }
     only [:show, :edit] { redirect_from_secret_league }
-    # only [:active_players, :inactive_players, :admins, :invites, :requests] { fetch_league_and_authorize! }
   end
 
   def index
@@ -157,14 +156,14 @@ class LeagueController < ApplicationController
 
     if league = League.find(params["id"])
       if player && player.admin_of?(league)
-        league.update_attributes({
+        league.update(
           name: params[:name],
           description: params[:description],
           accent_color: params[:accent_color],
           visibility: params[:visibility],
           start_rating: params[:start_rating].to_i,
           k_factor: params[:k_factor].to_f,
-        })
+        )
 
         if league.valid? && league.save
           flash["success"] = "Updated League successfully"
@@ -205,18 +204,4 @@ class LeagueController < ApplicationController
       redirect_to "/leagues"
     end
   end
-
-  private def fetch_league_and_authorize!
-
-    if league = League.find(params[:id])
-      if !current_player.not_nil!.admin_of?(league)
-        flash[:danger] = "Must be an admin of #{league.name} to manage it"
-        redirect_to "/leagues/#{league.id}"
-      end
-    else
-      flash["warning"] = "Can't find league"
-      redirect_to "/leagues"
-    end
-  end
-
 end

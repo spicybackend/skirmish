@@ -58,7 +58,7 @@ shards:
 
   jennifer:
     github: imdrasil/jennifer.cr
-    version: 0.6.2
+    version: 0.7.0
 
   kilt:
     github: jeromegn/kilt
@@ -102,7 +102,7 @@ shards:
 
   sam:
     github: imdrasil/sam.cr
-    version: 0.2.4
+    version: 0.3.0
 
   selenium:
     github: ysbaddaden/selenium-webdriver-crystal

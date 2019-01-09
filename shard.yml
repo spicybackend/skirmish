@@ -34,7 +34,7 @@ dependencies:
 
   jennifer:
     github: imdrasil/jennifer.cr
-    version: "~> 0.6.1"
+    version: "~> 0.7.0"
 
   sam:
     github: imdrasil/sam.cr
@@ -49,7 +49,7 @@ dependencies:
   citrine-i18n:
     github: amberframework/citrine-i18n
     version: 0.3.2
-  
+
   multi_auth:
     github: msa7/multi_auth
 
