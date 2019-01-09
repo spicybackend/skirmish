@@ -186,6 +186,19 @@ class LeagueController < ApplicationController
     Jennifer::Adapter.adapter.transaction do
       if league = League.find params["id"]
         league.administrators_query.destroy
+        league.memberships_query.destroy
+        league.invites_query.destroy
+
+        league.tournaments_query.each do |tournament|
+          tournament.matches_query.destroy
+        end
+        league.tournaments_query.destroy
+
+        league.games_query.each do |game|
+          game.participations_query.destroy
+        end
+        league.games_query.destroy
+
         league.destroy
       else
         flash["warning"] = "Can't find league"
