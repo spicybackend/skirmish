@@ -1,4 +1,6 @@
-a.navbar-brand href="/" Skirmish
+a.navbar-brand href="/"
+  img.brand-logo src="/dist/images/logo-transparent.svg"
+  span.brand-text Skirmish
 
 ul.navbar-nav
   - if player = current_player
