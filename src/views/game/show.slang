@@ -4,7 +4,7 @@
     - player = current_player
     - if current_player.try(&.admin_of?(league)) && game.unconfirmed?
       .btn-group
-        button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+        button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
           | Admin Tools
         .dropdown-menu.dropdown-menu-right
           == form(action: "/leagues/#{game.league_id}/games/#{game.id}/confirm", method: :patch) do

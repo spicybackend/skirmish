@@ -32,7 +32,7 @@ h4 Pending
           .secondary
             == form(action: "/leagues/#{league.id}/invites/#{invite.id}", method: :delete) do
               == csrf_tag
-              == submit(t("invitation.actions.uninvite"), class: "btn btn-danger")
+              == submit(t("invitation.actions.uninvite"), class: "btn btn-warning")
 
 == form(action: "/leagues/#{league.id}/invites", method: :post, class: "main") do
   == csrf_tag
@@ -59,7 +59,7 @@ h3 Admins
         .secondary
           == form(action: "/leagues/#{league.id}/admins/#{player.id}", method: :delete) do
             == csrf_tag
-            == submit(t("league.actions.remove_admin"), class: "btn btn-danger")
+            == submit(t("league.actions.remove_admin"), class: "btn btn-warning")
 
 == form(action: "/leagues/#{league.id}/admins", method: :post, class: "main") do
   == csrf_tag

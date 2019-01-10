@@ -37,12 +37,12 @@
 }
 
 .btn-primary {
-  background-color: $babyblue;
-  border-color: $babyblue;
+  background-color: $brand-primary;
+  border-color: $brand-primary;
 
   &:hover {
-    background-color: darken($babyblue, 10%);
-    border-color: darken($babyblue, 10%);
+    background-color: darken($brand-primary, 7%);
+    border-color: darken($brand-primary, 7%);
   }
 }
 
@@ -77,8 +77,8 @@
 }
 
 .btn-dark {
-  background-color: $dark-grey;
-  border-color: $dark-grey;
+  background-color: darken($dark-grey, 5%);
+  border-color: darken($dark-grey, 5%);
 
   &:hover {
     background-color: darken($dark-grey, 10%);

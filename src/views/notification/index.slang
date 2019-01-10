@@ -4,7 +4,7 @@
     .button-group
       == form(action: "/notifications/read_all", method: :patch, class: "single-btn") do
         == csrf_tag
-        == submit(t("notification.actions.mark_all_as_read"), class: "btn btn-danger")
+        == submit(t("notification.actions.mark_all_as_read"), class: "btn btn-dark")
 
 h6.section-header Unread
 .notifications.tiles

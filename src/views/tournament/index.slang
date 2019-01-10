@@ -5,7 +5,7 @@
       - if current_player.try(&.admin_of?(league)) && tournaments.all? { |tournament| tournament.finished_at }
         span.toggle-button-group
           .btn-group
-            button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+            button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
               | Admin Tools
             .dropdown-menu.dropdown-menu-right
               == link_to(t("tournament.actions.open"), "/leagues/#{league.id}/tournaments/new", class: "dropdown-item")

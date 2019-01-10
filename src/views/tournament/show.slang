@@ -6,7 +6,7 @@
         .btn-group
           - if tournament.open?
             - if current_entrant
-              == link_to(t("tournament.actions.leave"), "/leagues/#{league.id}/tournaments/#{tournament.id}/leave?_csrf=#{csrf_token}", "data-method": "delete", "data-confirm": "Are you sure you want to leave the tournament?", class: "btn btn-danger")
+              == link_to(t("tournament.actions.leave"), "/leagues/#{league.id}/tournaments/#{tournament.id}/leave?_csrf=#{csrf_token}", "data-method": "delete", "data-confirm": "Are you sure you want to leave the tournament?", class: "btn btn-warning")
             - else
               == form(action: "/leagues/#{league.id}/tournaments/#{tournament.id}/join", method: :post) do
                 == csrf_tag
@@ -16,7 +16,7 @@
       - if current_player.try(&.admin_of?(league))
         span.toggle-button-group
           .btn-group
-            button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+            button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
               | Admin Tools
             .dropdown-menu.dropdown-menu-right
               - if tournament.open?

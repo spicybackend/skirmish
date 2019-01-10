@@ -385,11 +385,11 @@ form.main {
     flex-direction: column; }
 
 .btn-primary {
-  background-color: #4eb4f9;
-  border-color: #4eb4f9; }
+  background-color: #ef4b62;
+  border-color: #ef4b62; }
   .btn-primary:hover {
-    background-color: #1d9ff7;
-    border-color: #1d9ff7; }
+    background-color: #ec2a45;
+    border-color: #ec2a45; }
 
 .btn-success {
   background-color: #aef72f;
@@ -413,8 +413,8 @@ form.main {
     border-color: #e6e6e6; }
 
 .btn-dark {
-  background-color: #343a40;
-  border-color: #343a40; }
+  background-color: #292d32;
+  border-color: #292d32; }
   .btn-dark:hover {
     background-color: #1d2124;
     border-color: #1d2124; }
@@ -509,7 +509,7 @@ a {
   color: #ef4b62;
   transition: all 0.2s ease; }
   a:hover {
-    color: #eb1c39; }
+    color: #ec2a45; }
 
 h2.btn-toolbar .heading-text {
   margin-right: 32px; }

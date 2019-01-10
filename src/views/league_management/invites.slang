@@ -16,7 +16,7 @@
             .secondary
               == form(action: "/leagues/#{league.id}/invites/#{invite.id}", method: :delete) do
                 == csrf_tag
-                == submit(t("invitation.actions.uninvite"), class: "btn btn-danger")
+                == submit(t("invitation.actions.uninvite"), class: "btn btn-warning")
 
 == form(action: "/leagues/#{league.id}/invites", method: :post, class: "main") do
   h4 Invite Player
