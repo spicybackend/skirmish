@@ -83,27 +83,31 @@ div.game-logger {
 
 .management.nav-tabs {
   margin-bottom: 16px;
-  border-color: #1d2124; }
-  .management.nav-tabs .nav-item .nav-link:hover {
-    border-color: #1d2124;
-    background-color: #292d32; }
-  .management.nav-tabs .nav-item .nav-link.active {
-    color: white;
-    border-color: #4eb4f9;
-    background-color: #4eb4f9; }
+  border-color: #1d2124;
+  border: none; }
+  .management.nav-tabs .nav-item .nav-link {
+    color: rgba(255, 255, 255, 0.75); }
+    .management.nav-tabs .nav-item .nav-link:hover, .management.nav-tabs .nav-item .nav-link.active {
+      color: white;
+      border-color: transparent;
+      background-color: transparent; }
+    .management.nav-tabs .nav-item .nav-link.active {
+      background-size: 100% 2px, auto; }
   @media only screen and (max-width: 768px) {
     .management.nav-tabs .nav-item {
       display: flex;
       align-items: flex-end; }
       .management.nav-tabs .nav-item .nav-link {
+        background-image: none;
         font-size: 75%;
-        color: white !important;
+        color: rgba(255, 255, 255, 0.75) !important;
         display: inline-table;
         min-width: 100%;
         margin: 0;
         padding: 4px 8px; }
         .management.nav-tabs .nav-item .nav-link.active {
-          margin-bottom: 1px; } }
+          color: white !important;
+          border-bottom: 4px solid #ef4b62; } }
 
 div.leagues {
   display: flex;
@@ -814,7 +818,7 @@ tr.clickable-row {
       width: 48px;
       height: 4px;
       margin-top: 44px;
-      background-color: #4eb4f9; }
+      background-color: #ef4b62; }
     .nav-item .dropdown-menu-wrapper {
       position: absolute;
       bottom: calc(100% - 5px);
