@@ -38,13 +38,20 @@ authentication:
 registration:
   registered: "Account Created"
   content: "Thanks for creating your account. Before you get started there's just one more step!"
-  verification: "An email has been sent to %{email_address} with instructions to confirm and verify your account"
+  verification: "An email has been sent to %{email_address} with instructions to verify your account"
 
 session:
   already_signed_in: "Already signed in"
   logged_in_successfully: "Successfully logged in"
   authentication_failed: "Invalid email or password"
   logged_out: "Logged out. See ya later!"
+
+password_reset:
+  reset_sent: "An email has been sent to %{email_address} with instructions to reset your password"
+  email_mismatch: "We couldn't find an account for %{email_address}"
+  success: "Your password has been reset successfully"
+  already_sent: "An email has been sent to %{email_address} with instructions to verify your account"
+  check_expiration: "The password reset has expired"
 
 profile:
   actions:
