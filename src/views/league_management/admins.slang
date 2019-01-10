@@ -10,7 +10,7 @@
         .secondary
           == form(action: "/leagues/#{league.id}/admins/#{player.id}", method: :delete) do
             == csrf_tag
-            == submit(t("admin.league.actions.remove_admin"), class: "btn btn-danger")
+            == submit(t("admin.league.actions.remove_admin"), class: "btn btn-warning")
 
 == form(action: "/leagues/#{league.id}/admins", method: :post, class: "main") do
   h4 Add Admin

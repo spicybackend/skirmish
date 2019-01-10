@@ -1,18 +1,20 @@
 .management.nav-tabs {
   margin-bottom: 16px;
   border-color: darken($dark-grey, 10%);
+  border: none;
 
   .nav-item {
     .nav-link {
-      &:hover {
-        border-color: darken($dark-grey, 10%);
-        background-color: darken($dark-grey, 5%);
+      color: rgba(255, 255, 255, 0.75);
+
+      &:hover, &.active {
+        color: white;
+        border-color: transparent;
+        background-color: transparent;
       }
 
       &.active {
-        color: white;
-        border-color: $babyblue;
-        background-color: $babyblue;
+        background-size: 100% 2px, auto;
       }
     }
   }
@@ -23,15 +25,17 @@
       align-items: flex-end;
 
       .nav-link {
+        background-image: none;
         font-size: 75%;
-        color: white !important;
+        color: rgba(255, 255, 255, 0.75) !important;
         display: inline-table;
         min-width: 100%;
         margin: 0;
         padding: 4px 8px;
 
         &.active {
-          margin-bottom: 1px;
+          color: white !important;
+          border-bottom: 4px solid $strawberry;
         }
       }
     }

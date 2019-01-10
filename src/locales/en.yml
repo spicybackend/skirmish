@@ -46,6 +46,10 @@ session:
   authentication_failed: "Invalid email or password"
   logged_out: "Logged out. See ya later!"
 
+profile:
+  actions:
+    edit: "Edit Profile"
+
 error:
   title:
     internal_server_error: "Explosions and Craziness"

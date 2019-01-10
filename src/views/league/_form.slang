@@ -29,4 +29,4 @@
     == text_field(:k_factor, type: :number, value: league.k_factor || League::DEFAULT_K_FACTOR, placeholder: League::DEFAULT_K_FACTOR, class: "form-control")
 
   == submit("Submit", class: "btn btn-primary")
-  == link_to(t("general.actions.back"), "/leagues/#{league.id}", class: "btn btn-light")
+  == link_to(t("general.actions.back"), "/leagues/#{league.id}", class: "btn btn-dark")

@@ -21,8 +21,6 @@ $thundergrey:	#828282;
 $brand-primary: $strawberry;
 $dark-grey: #343a40;
 
-$nav-item-color: $babyblue;
-
 @import "game";
 @import "league";
 @import "tiles";
@@ -45,10 +43,11 @@ a.dropdown-item {
 }
 
 a {
-  color: $babyblue;
+  color: $brand-primary;
+  transition:all 0.2s ease;
 
   &:hover {
-    color: darken($babyblue, 10%);
+    color: darken($brand-primary, 7%);
   }
 }
 
@@ -472,7 +471,7 @@ tr.clickable-row {
         width: 48px;
         height: 4px;
         margin-top: 44px;
-        background-color: $babyblue;
+        background-color: $strawberry;
       }
     }
 

@@ -14,4 +14,4 @@
           .secondary
             == form(action: "/leagues/#{league.id}/membership/#{membership.id}/leave", method: :patch) do
               == csrf_tag
-              == submit(t("admin.league.actions.leave"), "data-confirm": "Are you sure you want to kick #{player.tag} from the league?", class: "btn btn-danger")
+              == submit(t("admin.league.actions.leave"), "data-confirm": "Are you sure you want to kick #{player.tag} from the league?", class: "btn btn-warning")

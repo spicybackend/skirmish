@@ -37,13 +37,22 @@
 }
 
 .btn-primary {
-  background-color: $babyblue;
-  border-color: $babyblue;
+  background-color: $brand-primary;
+  border-color: $brand-primary;
 
   &:hover {
-    background-color: darken($babyblue, 10%);
-    border-color: darken($babyblue, 10%);
+    background-color: darken($brand-primary, 7%);
+    border-color: darken($brand-primary, 7%);
   }
+}
+
+// Bootstrap overrides -- probably define the colours properly later...
+.btn-primary:not(:disabled):not(.disabled):active, .show > .btn-primary.dropdown-toggle {
+  background-color: darken($brand-primary, 7%);
+  border-color: darken($brand-primary, 7%);
+}
+.show > .btn-primary.dropdown-toggle:focus {
+  box-shadow: none;
 }
 
 .btn-success {
@@ -77,8 +86,8 @@
 }
 
 .btn-dark {
-  background-color: $dark-grey;
-  border-color: $dark-grey;
+  background-color: darken($dark-grey, 5%);
+  border-color: darken($dark-grey, 5%);
 
   &:hover {
     background-color: darken($dark-grey, 10%);

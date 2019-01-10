@@ -15,4 +15,4 @@
           = I18n.translate("tournament.types.single-elimination")
 
   == submit("Submit", class: "btn btn-primary")
-  == link_to(t("general.actions.back"), "/leagues/#{league.id}", class: "btn btn-light")
+  == link_to(t("general.actions.back"), "/leagues/#{league.id}", class: "btn btn-dark")
