@@ -45,10 +45,11 @@ a.dropdown-item {
 }
 
 a {
-  color: $babyblue;
+  color: $brand-primary;
+  transition:all 0.2s ease;
 
   &:hover {
-    color: darken($babyblue, 10%);
+    color: darken($brand-primary, 10%);
   }
 }
 

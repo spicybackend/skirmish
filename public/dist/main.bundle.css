@@ -506,9 +506,10 @@ a.dropdown-item {
   text-align: center; }
 
 a {
-  color: #4eb4f9; }
+  color: #ef4b62;
+  transition: all 0.2s ease; }
   a:hover {
-    color: #1d9ff7; }
+    color: #eb1c39; }
 
 h2.btn-toolbar .heading-text {
   margin-right: 32px; }
