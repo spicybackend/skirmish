@@ -68,6 +68,35 @@ h6.section-header {
   margin-bottom: 16px;
 }
 
+.brand-logo {
+  width: 50px;
+  height: 50px;
+  margin: -10px 0px -10px -10px;
+  transition:all 0.2s ease;
+}
+
+.navbar-brand {
+  &:hover {
+    .brand-logo {
+      -webkit-transform: scale(1.25) rotateZ(-15deg);
+      -ms-transform: scale(1.25) rotateZ(-15deg);
+      transform: scale(1.25) rotateZ(-15deg);
+    }
+  }
+}
+
+a.nav-link {
+  background-image: linear-gradient($brand-primary, $brand-primary); //, linear-gradient(silver, silver);
+  background-size: 0 2px, auto;
+  background-repeat: no-repeat;
+  background-position: center bottom;
+  transition: all 0.2s ease-out;
+
+  &:hover {
+    background-size: 100% 2px, auto;
+  }
+}
+
 .btn.dropdown-toggle.dropdown-toggle-split {
   border-left: 1px solid rgba($dark-grey, 0.25) !important;
   margin-left: 0;
@@ -269,7 +298,7 @@ tr.clickable-row {
     background-color: $babyblue;
   }
 
-  transition: color .15s ease-in-out, background-color .15s ease-in-out//, border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+  transition: color .15s ease-in-out, background-color .15s ease-in-out
 }
 .table-striped tbody tr.clickable-row:nth-of-type(2n+1):hover {
   color: white;
