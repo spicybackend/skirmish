@@ -36,6 +36,10 @@ shards:
     github: crystal-loot/exception_page
     version: 0.1.1
 
+  form_object:
+    github: imdrasil/form_object
+    version: 0.2.0
+
   garnet_spec:
     github: amberframework/garnet-spec
     version: 0.2.1
@@ -127,4 +131,8 @@ shards:
   teeplate:
     github: mosop/teeplate
     version: 0.7.0
+
+  view_model:
+    github: imdrasil/view_model.cr
+    version: 0.2.0
 

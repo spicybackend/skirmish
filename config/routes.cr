@@ -68,6 +68,8 @@ Amber::Server.configure do
     get "/signup", RegistrationController, :new
     post "/registration", RegistrationController, :create
 
+    resources "/reset_password", PasswordResetController, only: [:new, :create, :edit, :update]
+
     get "/multi_auth/google", MultiAuthController, :google
     get "/multi_auth/callback", MultiAuthController, :callback
     delete "/multi_auth/unlink/:id", MultiAuthController, :unlink

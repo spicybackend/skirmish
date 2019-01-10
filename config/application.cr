@@ -1,6 +1,11 @@
 require "./initializers/**"
 
 require "amber"
+require "jennifer"
+require "form_object"
+require "form_object/coercer/pg" # for PG::Numeric
+require "view_model"
+
 require "../src/pipes/error.cr"
 
 require "../src/models/**"
@@ -10,6 +15,9 @@ require "../src/helpers/**"
 require "../src/concepts/**"
 require "../src/mailers/**"
 require "../src/pipes/**"
+require "../src/controllers/concerns/**"
+require "../src/views/**"
+require "../src/form_objects/**"
 
 require "../src/controllers/application_controller"
 require "../src/controllers/**"

@@ -15,6 +15,9 @@ class User < Jennifer::Model::Base
     verification_code: String,
     activated_at: Time?,
 
+    reset_digest: String?,
+    reset_sent_at: Time?,
+
     created_at: { type: Time, default: Time.now },
     updated_at: { type: Time, default: Time.now }
   )
@@ -38,6 +41,18 @@ class User < Jennifer::Model::Base
 
   def activated?
     !!activated_at
+  end
+
+  {% for method in %i(reset) %}
+    {% method = method.id %}
+    def {{method}}_valid?(token : String)
+      return false if {{method}}_digest.nil?
+      Crypto::Bcrypt::Password.new({{method}}_digest.not_nil!) == token
+    end
+  {% end %}
+
+  def password_reset_expired?
+    reset_sent_at.nil? || reset_sent_at! < 2.hours.ago
   end
 
   def unverified?
