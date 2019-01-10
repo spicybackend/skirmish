@@ -391,6 +391,13 @@ form.main {
     background-color: #ec2a45;
     border-color: #ec2a45; }
 
+.btn-primary:not(:disabled):not(.disabled):active, .show > .btn-primary.dropdown-toggle {
+  background-color: #ec2a45;
+  border-color: #ec2a45; }
+
+.show > .btn-primary.dropdown-toggle:focus {
+  box-shadow: none; }
+
 .btn-success {
   background-color: #aef72f;
   border-color: #aef72f; }

@@ -46,6 +46,15 @@
   }
 }
 
+// Bootstrap overrides -- probably define the colours properly later...
+.btn-primary:not(:disabled):not(.disabled):active, .show > .btn-primary.dropdown-toggle {
+  background-color: darken($brand-primary, 7%);
+  border-color: darken($brand-primary, 7%);
+}
+.show > .btn-primary.dropdown-toggle:focus {
+  box-shadow: none;
+}
+
 .btn-success {
   background-color: $limegreen;
   border-color: $limegreen;
