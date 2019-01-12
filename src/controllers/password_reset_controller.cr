@@ -21,10 +21,10 @@ class PasswordResetController < ApplicationController
     if user
       PasswordReset::Init.call(user!)
 
-      flash[:info] = t("password_reset.reset_sent")
+      flash[:info] = t("password_reset.reset_sent", { email_address: user!.email })
       redirect_to current_user ? user_path(user!) : sign_in_path
     else
-      flash[:danger] = t("password_reset.email_mismatch")
+      flash[:danger] = t("password_reset.email_mismatch", { email_address: params["email"]? || params["password_reset[email]"]? })
       page(PasswordReset::NewView)
     end
   end
