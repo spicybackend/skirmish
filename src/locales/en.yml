@@ -86,6 +86,16 @@ mailer:
       lose_content: "Awh, shucks. Follow the link below to confirm the game, and better luck next time!"
       action: "Confirm"
 
+  password_reset:
+    subject: "Password reset request"
+    title: "Password reset"
+    subtitle: "A request to change your password has been made"
+    content: |
+      Your Skirmish password was requested to be reset.
+      If this is the case, please reset your password by following the link below.
+      If you have not requested to change your password, you can safely ignore this email.
+    action: "Reset Password"
+
 verification:
   activated_successfully: "Activated successfully"
   already_activated: "User has already been activated"

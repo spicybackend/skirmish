@@ -1,12 +1,12 @@
 class PasswordResetMailer < ApplicationMailer
-  def initialize(user : User)
+  def initialize(user : User, reset_token : String)
     super()
 
     player = user.player!
     to(user.email!, player.tag.to_s)
 
-    self.subject = "Password Reset" # I18n.translate("mailer.welcome.subject")
-    self.text = "Reset Time!" # render("mailers/welcome.text.ecr")
-    self.html = "Time to reset" # render("mailers/welcome.html.slang", "mailer_layout.html.slang")
+    self.subject = I18n.translate("mailer.password_reset.subject")
+    self.text = render("mailers/password_reset.text.ecr")
+    self.html = render("mailers/password_reset.html.slang", "mailer_layout.html.slang")
   end
 end
