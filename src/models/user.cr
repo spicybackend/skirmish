@@ -9,7 +9,7 @@ class User < Jennifer::Model::Base
     id: Primary64,
     email: String,
     name: String,
-    hashed_password: String?,
+    password_digest: String?,
     receive_email_notifications: { type: Bool, default: true },
 
     verification_code: String,
@@ -65,11 +65,11 @@ class User < Jennifer::Model::Base
 
   def password=(password)
     @new_password = password
-    @hashed_password = Bcrypt::Password.create(password, cost: 10).to_s
+    @password_digest = Bcrypt::Password.create(password, cost: 10).to_s
   end
 
   def password
-    (hash = hashed_password) ? Bcrypt::Password.new(hash) : nil
+    (hash = password_digest) ? Bcrypt::Password.new(hash) : nil
   end
 
   def password_changed?

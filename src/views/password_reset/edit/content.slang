@@ -1,6 +1,6 @@
 h1 Password reset
 .row
-  .clo-md-6.col-md-offset-3
+  .col-md-6.col-md-offset-3
     - build_form :password_reset, password_reset_path(id), method: :patch do |f|
       == csrf_tag
       - render_partial :error_messages, form.errors
@@ -15,4 +15,4 @@ h1 Password reset
         == f.label_for :password_confirmation, "Password confirmation"
         == f.password_field :password_confirmation
 
-button.btn.btn-primary Update password
+      button.btn.btn-primary Update password

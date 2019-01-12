@@ -65,9 +65,9 @@ describe PasswordResetMailer do
 
       mailer = PasswordResetMailer.new(user, token)
 
-      verification_link = "#{ENV["BASE_URL"]}/reset_password/#{token}/edit"
+      verification_link = "#{ENV["BASE_URL"]}/reset_password/#{token}/edit?email=#{user.email}"
 
-      mailer.html.should contain verification_link
+      mailer.html.should contain HTML.escape(verification_link)
       mailer.text.should contain verification_link
     end
   end

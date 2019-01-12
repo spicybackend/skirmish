@@ -31,6 +31,7 @@ class PasswordResetController < ApplicationController
 
   def update
     form = PasswordResetForm.new(user!)
+
     if form.verify(request) && form.save
       session[:user_id] = user!.id
 

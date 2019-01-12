@@ -8,7 +8,7 @@ class PasswordResetForm < FormObject::Base(User)
   delegate :email, :id, to: :resource
 
   def persist
-    resource.hashed_password = password_digest
+    resource.password_digest = password_digest
     resource.save
   end
 
