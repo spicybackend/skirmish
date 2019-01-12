@@ -14,6 +14,17 @@ class MailerPreviewController < ApplicationController
       else
         render("mailers/welcome.html.slang", layout: "mailer_layout.html.slang")
       end
+    elsif params[:mailer_name] == "password_reset"
+      player = current_player.not_nil!
+      user = player.user!
+
+      reset_token = "abc123"
+
+      if text_only_preview?
+        render("mailers/password_reset.text.ecr")
+      else
+        render("mailers/password_reset.html.slang", layout: "mailer_layout.html.slang")
+      end
     elsif params[:mailer_name] == "game_logged"
       game = Game.all.last.not_nil!
       player = game.players.first.not_nil!
