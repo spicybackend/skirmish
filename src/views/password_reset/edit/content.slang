@@ -1,18 +1,18 @@
-h1 Password reset
-.row
-  .col-md-6.col-md-offset-3
-    - build_form :password_reset, password_reset_path(id), method: :patch do |f|
-      == csrf_tag
-      - render_partial :error_messages, form.errors
+- build_form :password_reset, password_reset_path(id), { "class" => "main" }, method: :patch do |f|
+  h2 Password reset
 
-      == f.hidden_field :email, form.email
+  == csrf_tag
 
-      .form-group
-        == f.label_for :password, "Password"
-        == f.password_field :password
+  - render_partial :error_messages, form.errors
 
-      .form-group
-        == f.label_for :password_confirmation, "Password confirmation"
-        == f.password_field :password_confirmation
+  == f.hidden_field :email, form.email
 
-      button.btn.btn-primary Update password
+  .form-group
+    == f.label_for :password, "Password"
+    == f.password_field :password, { "class" => "form-control" }
+
+  .form-group
+    == f.label_for :password_confirmation, "Password confirmation"
+    == f.password_field :password_confirmation, { "class" => "form-control" }
+
+  button.btn.btn-primary Update password

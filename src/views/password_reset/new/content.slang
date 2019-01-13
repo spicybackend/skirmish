@@ -1,11 +1,10 @@
-h1 Forgot password
+- build_form :password_reset, password_reset_path, { "class" => "main" } do |f|
+  h2 Forgot password
 
-.row
-  .col-md-6.col-md-offset-3
-    - build_form :password_reset, password_reset_path do |f|
-      == csrf_tag
-      .form-group
-        == f.label_for :email, "Email"
-        == f.text_field :email
+  == csrf_tag
 
-      button.btn.btn-primary Submit
+  .form-group
+    == f.label_for :email, "Email"
+    == f.text_field :email, "", { "class" => "form-control" }
+
+  button.btn.btn-primary Submit
