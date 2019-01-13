@@ -39,7 +39,8 @@ class Authenticate < Amber::Pipe::Base
       quick_confirmation_url?(path) ||
       path.starts_with?("/verify/") ||
       path.starts_with?("/multi_auth/") ||
-      path.starts_with?("/verification")
+      path.starts_with?("/verification") ||
+      path.starts_with?("/reset_password")
 
     # Different strategies can be used to determine if a path is public
     # Example, if /admin/* paths are the only private paths

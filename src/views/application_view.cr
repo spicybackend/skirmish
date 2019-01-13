@@ -36,7 +36,7 @@ abstract class ApplicationView < ViewModel::Base
   end
 
   private def t(key, *args, **opts)
-    I18n.translate("#{self.class.to_s.underscore}.#{key}", *args, **opts)
+    I18n.translate(key, *args, **opts)
   end
 
   private def l(*args)
