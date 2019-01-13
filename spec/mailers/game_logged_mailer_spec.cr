@@ -31,7 +31,7 @@ describe GameLoggedMailer do
   end
 
   describe "sender" do
-    it "is from the support address" do
+    it "is from the games address" do
       league = create_league
       _, _, loser_and_confirmer = create_and_pit_players(league)
 

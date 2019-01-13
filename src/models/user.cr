@@ -9,11 +9,14 @@ class User < Jennifer::Model::Base
     id: Primary64,
     email: String,
     name: String,
-    hashed_password: String?,
+    password_digest: String?,
     receive_email_notifications: { type: Bool, default: true },
 
     verification_code: String,
     activated_at: Time?,
+
+    reset_digest: String?,
+    reset_sent_at: Time?,
 
     created_at: { type: Time, default: Time.now },
     updated_at: { type: Time, default: Time.now }
@@ -40,6 +43,18 @@ class User < Jennifer::Model::Base
     !!activated_at
   end
 
+  {% for method in %i(reset) %}
+    {% method = method.id %}
+    def {{method}}_valid?(token : String)
+      return false if {{method}}_digest.nil?
+      Crypto::Bcrypt::Password.new({{method}}_digest.not_nil!) == token
+    end
+  {% end %}
+
+  def password_reset_expired?
+    reset_sent_at.nil? || reset_sent_at! < 2.hours.ago
+  end
+
   def unverified?
     !activated?
   end
@@ -50,11 +65,11 @@ class User < Jennifer::Model::Base
 
   def password=(password)
     @new_password = password
-    @hashed_password = Bcrypt::Password.create(password, cost: 10).to_s
+    @password_digest = Bcrypt::Password.create(password, cost: 10).to_s
   end
 
   def password
-    (hash = hashed_password) ? Bcrypt::Password.new(hash) : nil
+    (hash = password_digest) ? Bcrypt::Password.new(hash) : nil
   end
 
   def password_changed?

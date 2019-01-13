@@ -63,9 +63,9 @@ class MultiAuthController < ApplicationController
 
   def unlink
     if auth_provider = AuthProvider.find(params[:id])
-      hashed_password =  auth_provider.user!.hashed_password
+      password_digest =  auth_provider.user!.password_digest
 
-      if hashed_password.nil? || hashed_password.empty?
+      if password_digest.nil? || password_digest.empty?
         flash[:danger] = "A password must be set on the account before removing other authentication providers"
         redirect_to "/profile/edit"
       else

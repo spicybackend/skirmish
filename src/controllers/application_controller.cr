@@ -1,12 +1,22 @@
 require "jasper_helpers"
+require "./concerns/session_helper"
 
 class ApplicationController < Amber::Controller::Base
-  LAYOUT = "application.slang"
-
+  include ViewModel
+  include SessionHelper
   include JasperHelpers
   include ApplicationHelper
   include ReadableTimeHelpers
   include ProfileHelper
+  include RouterHelper
+
+  LAYOUT = "application.slang"
+
+  @page_title : String? = nil
+
+  macro page(klass, *args)
+    {{klass}}.new({{args.splat}}{% if args.size > 0 %},{% end %} context, flash, current_user, @page_title).render
+  end
 
   def auth_page?
     auth_url_regexes = [/signup/, /signin/, /session/, /registration/, /multi_auth/]
@@ -15,22 +25,6 @@ class ApplicationController < Amber::Controller::Base
     auth_url_regexes.any? do |auth_url_regex|
       current_path.match(auth_url_regex)
     end
-  end
-
-  def current_user
-    context.current_user
-  end
-
-  def current_player
-    context.current_player
-  end
-
-  def current_player_context
-    current_player.try(&.player_context)
-  end
-
-  def signed_in?
-    current_user && current_player ? true : false
   end
 
   private def redirect_signed_out_user
@@ -46,5 +40,21 @@ class ApplicationController < Amber::Controller::Base
     else
       "/leagues"
     end
+  end
+
+  private def root_path
+    "/"
+  end
+
+  private def user_path(user : User)
+    "/profile/#{user.player!.tag}"
+  end
+
+  private def redirect_back
+    redirect_to request.headers["Referer"]? || root_path
+  end
+
+  private def t(key, *args, **opts)
+    I18n.translate("#{key}", *args, **opts)
   end
 end

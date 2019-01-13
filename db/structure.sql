@@ -736,13 +736,15 @@ ALTER SEQUENCE public.tournaments_id_seq OWNED BY public.tournaments.id;
 CREATE TABLE public.users (
     id bigint NOT NULL,
     email character varying(255) NOT NULL,
-    hashed_password character varying(60),
+    password_digest character varying(60),
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
     receive_email_notifications boolean DEFAULT true NOT NULL,
     activated_at timestamp without time zone,
     verification_code character varying(16),
-    name character varying(128)
+    name character varying(128),
+    reset_digest character varying(254),
+    reset_sent_at timestamp without time zone
 );
 
 
@@ -1055,6 +1057,13 @@ ALTER TABLE ONLY public.users
 --
 
 CREATE INDEX notifications_player_id_idx ON public.notifications USING btree (player_id);
+
+
+--
+-- Name: users_reset_digest_index; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE UNIQUE INDEX users_reset_digest_index ON public.users USING btree (reset_digest);
 
 
 --

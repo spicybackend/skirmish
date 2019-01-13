@@ -38,13 +38,20 @@ authentication:
 registration:
   registered: "Account Created"
   content: "Thanks for creating your account. Before you get started there's just one more step!"
-  verification: "An email has been sent to %{email_address} with instructions to confirm and verify your account"
+  verification: "An email has been sent to %{email_address} with instructions to verify your account"
 
 session:
   already_signed_in: "Already signed in"
   logged_in_successfully: "Successfully logged in"
   authentication_failed: "Invalid email or password"
   logged_out: "Logged out. See ya later!"
+
+password_reset:
+  reset_sent: "An email has been sent to %{email_address} with instructions to reset your password"
+  email_mismatch: "We couldn't find an account for %{email_address}"
+  success: "Your password has been reset successfully"
+  already_sent: "An email has been sent to %{email_address} with instructions to verify your account"
+  check_expiration: "The password reset has expired"
 
 profile:
   actions:
@@ -79,6 +86,16 @@ mailer:
       lose_content: "Awh, shucks. Follow the link below to confirm the game, and better luck next time!"
       action: "Confirm"
 
+  password_reset:
+    subject: "Password reset request"
+    title: "Password reset"
+    subtitle: "A request to change your password has been made"
+    content: |
+      Your Skirmish password was requested to be reset.
+      If this is the case, please reset your password by following the link below.
+      If you have not requested to change your password, you can safely ignore this email.
+    action: "Reset Password"
+
 verification:
   activated_successfully: "Activated successfully"
   already_activated: "User has already been activated"
@@ -97,8 +114,8 @@ admin:
 
 league:
   actions:
-    join: "Join"
-    leave: "Leave"
+    join: "Join League"
+    leave: "Leave League"
     log_game: "Log Game"
 
 tournament:
@@ -108,8 +125,8 @@ tournament:
   actions:
     open: "Open Tournament"
     start: "Start Tournament"
-    join: "Join"
-    leave: "Leave"
+    join: "Join Tournament"
+    leave: "Leave Tournament"
 
 invitation:
   actions:
@@ -124,10 +141,9 @@ game:
   won: "Won"
   lost: "Lost"
   already_confirmed: "This game has already been confirmed"
-
   actions:
     log_game: "Log Game"
-    confirm: "Confirm"
+    confirm: "Confirm Game"
 
   status:
     pending: "Pending"

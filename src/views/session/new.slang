@@ -27,4 +27,9 @@
     == render(partial: "_google_auth_button.slang")
 
     small
+      == link_to("Forgot your password?", new_password_reset_path)
+
+    br
+
+    small
       == link_to("Don't have an account yet?", "/signup")

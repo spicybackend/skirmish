@@ -27,6 +27,11 @@
 
   hr
 
+  .form-group
+    == link_to("Reset password", new_password_reset_path, class: "btn btn-warning")
+
+  hr
+
   == render(partial: "_add_google_auth_button.slang")
 
   == submit("Update", class: "btn btn-primary")
