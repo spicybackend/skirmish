@@ -77,6 +77,8 @@ exit
 ```
 </details>
 
+<br>
+
 To change the authentication with postgres to use a simple password 'trust' authentication method, we'll need to edit the `pg_hba.conf` file.
 
 <details><summary>For Ubuntu</summary>
@@ -99,6 +101,8 @@ host    all             all             127.0.0.1/32            trust
 host    all             all             ::1/128                 trust
 ```
 </details>
+
+<br>
 
 And finally, ensure the settings for postgres have been applied by restarting the service
 
