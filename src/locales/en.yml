@@ -114,8 +114,8 @@ admin:
 
 league:
   actions:
-    join: "Join"
-    leave: "Leave"
+    join: "Join League"
+    leave: "Leave League"
     log_game: "Log Game"
 
 tournament:
@@ -125,8 +125,8 @@ tournament:
   actions:
     open: "Open Tournament"
     start: "Start Tournament"
-    join: "Join"
-    leave: "Leave"
+    join: "Join Tournament"
+    leave: "Leave Tournament"
 
 invitation:
   actions:
@@ -141,10 +141,9 @@ game:
   won: "Won"
   lost: "Lost"
   already_confirmed: "This game has already been confirmed"
-
   actions:
     log_game: "Log Game"
-    confirm: "Confirm"
+    confirm: "Confirm Game"
 
   status:
     pending: "Pending"
