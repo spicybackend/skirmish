@@ -1,9 +1,9 @@
 # Skirmish
 
+<img src="https://gitlab.com/yumoose/skirmish/raw/master/public/dist/images/logo-dark.svg" width="250" height="250">
+
 [![using Amber framework](https://img.shields.io/badge/using-amber_framework-orange.svg)](https://amberframework.org)
 [![pipeline status](https://gitlab.com/yumoose/skirmish/badges/master/pipeline.svg)](https://gitlab.com/yumoose/skirmish/commits/master)
-
-This is a project written using [Amber](https://amberframework.org). Enjoy!
 
 ## Getting Started
 
