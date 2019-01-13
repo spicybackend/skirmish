@@ -14,28 +14,34 @@ These instructions will get a copy of this project running on your machine for d
 This project requires [Crystal](https://crystal-lang.org/)
 The version of Crystal used is defined inside `.crystal-version`.
 I'd recommend using [crenv](https://github.com/pine/crenv) to install the current version of Crystal, which is as simple as the following command inside the project folder.
+
 ```shell
 crenv install
 ```
 
 There are also some other dependencies required for some extensions of Crystal and Amber, as well as PostgresQL.
 
-For Linux(Ubuntu)
+<details><summary>For Ubuntu</summary>
+
 ```shell
 sudo apt install -y postgresql libssl-dev libxml2-dev libyaml-dev libgmp-dev libreadline-dev libevent-dev libsqlite3-dev
 ```
+</details>
 
-For Mac
+<details><summary>For OSX</summary>
+
 ```shell
 brew tap amberframework/amber
 brew install amber
 brew install postgresql
 ```
+</details>
 
 ### Postgres
 Unless you've used Postgres before, or know your way around configuring it already, you'll probably want to follow this quick guide to setting up users for development.
 
-For Linux(Ubuntu)
+<details><summary>For Ubuntu</summary>
+
 ```shell
 # start a session as the postgres user
 sudo su - postgres;
@@ -52,8 +58,10 @@ create user <username> --pwprompt;
 # exit the session as postgres
 exit
 ```
+</details>
 
-For Mac
+<details><summary>For OSX</summary>
+
 ```shell
 # start a session as the postgres user
 psql postgres
@@ -67,14 +75,19 @@ alter user postgres with superuser;
 # exit the session as postgres
 exit
 ```
+</details>
 
 To change the authentication with postgres to use a simple password 'trust' authentication method, we'll need to edit the `pg_hba.conf` file.
 
-For Linux(Ubuntu)
+<details><summary>For Ubuntu</summary>
+
 ```shell
 sudo vim /etc/postgresql/9.5/main/pg_hba.conf
 ```
-For Mac
+</details>
+
+<details><summary>For OSX</summary>
+
 ```shell
 vim /usr/local/var/postgres/pg_hba.conf
 ```
@@ -85,17 +98,23 @@ host    all             all             127.0.0.1/32            trust
 # IPv6 local connections:
 host    all             all             ::1/128                 trust
 ```
+</details>
 
 And finally, ensure the settings for postgres have been applied by restarting the service
 
-For Linux(Ubuntu)
+<details><summary>For Ubuntu</summary>
+
 ```shell
 sudo service postgresql restart
 ```
-For Mac
+</details>
+
+<details><summary>For OSX</summary>
+
 ```shell
 brew services restart postgresql
 ```
+</details>
 
 ## Development
 
@@ -155,6 +174,7 @@ Rerun with --error-trace to show a complete error trace.
 Open the breaking file `/skirmish/lib/amber/src/amber/server/server.cr`
 
 And comment out lines 60-63 and 65
+
 ```crystal
 #  if ssl_enabled?
 #    ssl_config = Amber::SSL.new(settings.ssl_key_file.not_nil!, settings.ssl_cert_file.not_nil!).generate_tls
