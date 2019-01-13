@@ -7,7 +7,14 @@ class PasswordResetController < ApplicationController
   end
 
   def new
-    page(PasswordReset::NewView)
+    if logged_in_user = current_user
+      PasswordReset::Init.call(logged_in_user)
+
+      flash[:info] = t("password_reset.reset_sent", { email_address: logged_in_user.email })
+      redirect_to user_path(logged_in_user)
+    else
+      page(PasswordReset::NewView)
+    end
   end
 
   def edit
