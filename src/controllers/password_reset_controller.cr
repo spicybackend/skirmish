@@ -59,7 +59,7 @@ class PasswordResetController < ApplicationController
   private def validate_user
     return if user && user!.activated? && user!.reset_valid?(params[:id])
 
-    flash[:danger] = t("password_reset.already_sent")
+    flash[:danger] = t("password_reset.already_sent", { email_address: params["email"]? || params["password_reset[email]"]? })
     redirect_to root_path
   end
 
