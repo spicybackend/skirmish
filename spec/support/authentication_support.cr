@@ -34,14 +34,13 @@ def admin_authenticated_headers(league : League)
     user = player.user.not_nil!
   else
     # failing that, create one
-    user = User.new({
+    user = User.create!(
       name: "#{league.name} Admin",
       email: "#{league.name}.admin@example.com",
       receive_email_notifications: false,
-      verification_code: Random::Secure.hex(8)
-    })
-    user.password = "password"
-    user.save!
+      verification_code: Random::Secure.hex(8),
+      password_digest: "$2y$10$2usLfyPcXzxmM4prDXg/J.qXlqbijcpVj5eHcYR0CBp7p38Ts8PEe"  # "password"
+    )
 
     player = Player.create!(
       tag: "admin_#{league.name}"[0, 16],

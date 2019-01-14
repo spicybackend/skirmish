@@ -5,71 +5,66 @@ Jennifer::Migration::Runner.migrate
 
 Jennifer::Adapter.adapter.transaction do
   if Amber.env.development?
-    alice_user = User.build(
+    alice_user = User.create(
       name: "Alice",
       email: "alice@skirmish.online",
       receive_email_notifications: false,
       verification_code: Random::Secure.hex(8),
-      activated_at: Time.now
+      activated_at: Time.now,
+      password_digest: "$2y$10$2usLfyPcXzxmM4prDXg/J.qXlqbijcpVj5eHcYR0CBp7p38Ts8PEe"  # "password"
     )
-    alice_user.password = "password"
-    alice_user.save!
     alice = Player.create!(
       tag: "Alice",
       user_id: alice_user.id
     )
 
-    bob_user = User.build(
+    bob_user = User.create(
       name: "Bob",
       email: "bob@skirmish.online",
       receive_email_notifications: false,
       verification_code: Random::Secure.hex(8),
-      activated_at: Time.now
+      activated_at: Time.now,
+      password_digest: "$2y$10$2usLfyPcXzxmM4prDXg/J.qXlqbijcpVj5eHcYR0CBp7p38Ts8PEe"  # "password"
     )
-    bob_user.password = "password"
-    bob_user.save!
     bob = Player.create!(
       tag: "Bob",
       user_id: bob_user.id
     )
 
-    charlie_user = User.build(
+    charlie_user = User.create(
       name: "Charlie",
       email: "charlie@skirmish.online",
       receive_email_notifications: false,
       verification_code: Random::Secure.hex(8),
-      activated_at: Time.now
+      activated_at: Time.now,
+      password_digest: "$2y$10$2usLfyPcXzxmM4prDXg/J.qXlqbijcpVj5eHcYR0CBp7p38Ts8PEe"  # "password"
     )
-    charlie_user.password = "password"
-    charlie_user.save!
     charlie = Player.create!(
       tag: "Charlie",
       user_id: charlie_user.id
     )
 
-    danielle_user = User.build(
+    danielle_user = User.create(
       name: "Danielle",
       email: "danielle@skirmish.online",
       receive_email_notifications: false,
       verification_code: Random::Secure.hex(8),
-      activated_at: Time.now
+      activated_at: Time.now,
+      password_digest: "$2y$10$2usLfyPcXzxmM4prDXg/J.qXlqbijcpVj5eHcYR0CBp7p38Ts8PEe"  # "password"
     )
-    danielle_user.password = "password"
-    danielle_user.save!
     danielle = Player.create!(
       tag: "Danielle",
       user_id: danielle_user.id
     )
 
-    erik_user = User.build(
+    erik_user = User.create(
       name: "Erik",
       email: "erik@skirmish.online",
       receive_email_notifications: false,
       verification_code: Random::Secure.hex(8),
-      activated_at: Time.now
+      activated_at: Time.now,
+      password_digest: "$2y$10$2usLfyPcXzxmM4prDXg/J.qXlqbijcpVj5eHcYR0CBp7p38Ts8PEe"  # "password"
     )
-    erik_user.password = "password"
-    erik_user.save!
     erik = Player.create!(
       tag: "Erik",
       user_id: erik_user.id
