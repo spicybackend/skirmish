@@ -14,5 +14,9 @@
         input checked="checked" type="radio" name="type" id="type-single-elimination" autocomplete="off" value="single-elimination"
           = I18n.translate("tournament.types.single-elimination")
 
+  .form-group
+    label for="invite-content" Invitation content
+    textarea class="form-control bg-dark" rows="4" name="invite" id="invite-content" = t("mailer.open_tournament.content")
+
   == submit("Submit", class: "btn btn-primary")
   == link_to(t("general.actions.back"), "/leagues/#{league.id}", class: "btn btn-dark")

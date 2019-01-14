@@ -86,6 +86,13 @@ mailer:
       lose_content: "Awh, shucks. Follow the link below to confirm the game, and better luck next time!"
       action: "Confirm"
 
+  open_tournament:
+    subject: "A new tournament is open for %{league_name}"
+    title: "New tournament open"
+    subtitle: "A new tournament is open for %{league_name}"
+    content: "Join now before the tournament kicks off!"
+    action: "View Tournament"
+
   password_reset:
     subject: "Password reset request"
     title: "Password reset"
