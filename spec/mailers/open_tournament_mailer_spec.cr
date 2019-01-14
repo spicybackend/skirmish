@@ -53,11 +53,27 @@ describe OpenTournamentMailer do
       mailer.subject.should eq I18n.translate("mailer.open_tournament.subtitle", { league_name: tournament.league!.name })
     end
 
-    it "contains the mailer text" do
-      mailer = OpenTournamentMailer.new(player, tournament)
+    context "when no custom mailer content is given" do
+      it "contains the mailer text" do
+        mailer = OpenTournamentMailer.new(player, tournament)
 
-      mailer.html.should contain HTML.escape(I18n.translate("mailer.open_tournament.content"))
-      mailer.text.should contain I18n.translate("mailer.open_tournament.content")
+        mailer.html.should contain HTML.escape(I18n.translate("mailer.open_tournament.content"))
+        mailer.text.should contain I18n.translate("mailer.open_tournament.content")
+      end
+    end
+
+    context "when custom mailer content is given" do
+      it "uses the custom content instead of the default mailer text" do
+        custom_content = "Woohoo! A new tournament!"
+
+        mailer = OpenTournamentMailer.new(player, tournament, custom_content)
+
+        mailer.html.should contain HTML.escape(custom_content)
+        mailer.text.should contain custom_content
+
+        mailer.html.should_not contain HTML.escape(I18n.translate("mailer.open_tournament.content"))
+        mailer.text.should_not contain I18n.translate("mailer.open_tournament.content")
+      end
     end
 
     it "contains a link to the tournament" do

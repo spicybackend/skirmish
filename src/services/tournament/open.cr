@@ -1,10 +1,9 @@
 class Tournament::Open
-  getter :league
+  getter :league, :invite_content
 
   class OpenError < Exception; end
 
-  def initialize(league : League)
-    @league = league
+  def initialize(@league : League, @invite_content : String? = nil)
   end
 
   def call
@@ -25,7 +24,7 @@ class Tournament::Open
 
   private def notify_players(tournament)
     league.players.each do |player|
-      OpenTournamentMailer.new(player, tournament, nil).send
+      OpenTournamentMailer.new(player, tournament, invite_content).send
     end
   end
 end

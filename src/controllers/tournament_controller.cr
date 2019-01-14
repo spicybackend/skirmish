@@ -49,7 +49,10 @@ class TournamentController < ApplicationController
   def create
     if league = League.find(params[:league_id])
       begin
-        tournament = Tournament::Open.new(league: league).call.not_nil!
+        tournament = Tournament::Open.new(
+          league: league,
+          invite_content: sanitize_invite_content(params["invite"]?)
+        ).call.not_nil!
 
         flash[:success] = "The new tournament is open for entry"
         redirect_to "/leagues/#{league.id}/tournaments/#{tournament.id}"
@@ -106,5 +109,11 @@ class TournamentController < ApplicationController
       flash[:danger] = "Unable to find league"
       redirect_to "/leagues"
     end
+  end
+
+  private def sanitize_invite_content(content)
+    return unless content
+
+    content.blank? ? nil : content
   end
 end

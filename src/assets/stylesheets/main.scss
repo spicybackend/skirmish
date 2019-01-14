@@ -85,7 +85,7 @@ h6.section-header {
 }
 
 a.nav-link {
-  background-image: linear-gradient($brand-primary, $brand-primary); //, linear-gradient(silver, silver);
+  background-image: linear-gradient($brand-primary, $brand-primary);
   background-size: 0 2px, auto;
   background-repeat: no-repeat;
   background-position: center bottom;
@@ -117,6 +117,16 @@ a.nav-link {
   &:hover {
     color: white;
     background-color: rgba(0, 0, 0, 0.2);
+  }
+}
+
+textarea.bg-dark {
+  color: white;
+  border: none;
+  background-color: darken($dark-grey, 5%) !important;
+
+  &:focus {
+    color: white;
   }
 }
 
