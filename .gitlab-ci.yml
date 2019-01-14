@@ -23,8 +23,8 @@ before_script:
   - apt-get update -qq
   - apt-get install -y -qq libxml2-dev libreadline-dev libsqlite3-dev libpq-dev libssl-dev libyaml-dev postgresql-client
   - crystal -v # Print out Crystal version for debugging
-  - shards && shards build amber ameba
-  - bin/amber db drop create
+  - shards install
+  - crystal src/sam.cr -- db:drop @ db:setup
 
 spec:
   script:
@@ -32,6 +32,7 @@ spec:
 
 lint:
   script:
+    - shards build ameba
     - bin/ameba
 
 seed:
