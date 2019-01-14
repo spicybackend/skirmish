@@ -1,14 +1,13 @@
 def create_player_with_mock_user(tag : String? = nil, password : String? = nil, verified : Bool = true)
   name = Random::Secure.hex
-  user = User.new({
+  user = User.create!(
     name: name,
     email: "#{name}@test.com",
     receive_email_notifications: false,
     verification_code: Random::Secure.hex(8),
-    activated_at: verified ? Time.now : nil
-  })
-  user.password = password || Random::Secure.hex
-  user.save!
+    activated_at: verified ? Time.now : nil,
+    password_digest: password ? Crypto::Bcrypt::Password.create(password, cost: 10).to_s : "$2y$10$2usLfyPcXzxmM4prDXg/J.qXlqbijcpVj5eHcYR0CBp7p38Ts8PEe"  # "password"
+  )
 
   Player.create!(
     user_id: user.id,
