@@ -1,9 +1,8 @@
 # Skirmish
 
-<img src="https://gitlab.com/yumoose/skirmish/raw/master/public/dist/images/logo-dark.svg" width="250" height="250">
+<img src="https://skirmish.online/dist/images/logo-dark.svg" width="200px" height="200px" alt="Skirmish logo">
 
-[![using Amber framework](https://img.shields.io/badge/using-amber_framework-orange.svg)](https://amberframework.org)
-[![pipeline status](https://gitlab.com/yumoose/skirmish/badges/master/pipeline.svg)](https://gitlab.com/yumoose/skirmish/commits/master)
+[![Using Amber framework](https://img.shields.io/badge/using-amber_framework-orange.svg)](https://amberframework.org)
 
 ## Getting Started
 
