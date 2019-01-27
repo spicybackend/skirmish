@@ -1,21 +1,95 @@
-version: 2 # use CircleCI 2.0
-jobs: # a collection of jobs
-  build:
-    working_directory: ~/demo_app
-    docker: # run build steps with docker
-      - image: crystallang/crystal:0.27.0 # primary docker container; all `steps` will run here.
-    steps: # a collection of executable steps
-      - checkout # checks out source code to working directory
-      - restore_cache: # Restore dependency cache
-      # Read about caching dependencies: https://circleci.com/docs/2.0/caching/
+version: 2.1
+
+executors:
+  default_executor:
+    docker:
+      - image: crystallang/crystal:0.27.0
+        environment:
+          DATABASE_URL: postgres://runner:@localhost:5432/skirmish_test
+      - image: circleci/postgres:9.6.2-alpine
+        environment:
+          POSTGRES_USER: runner
+          POSTGRES_DB: skirmish_test
+
+commands:
+  checkout_and_install_dependencies:
+    steps:
+      - checkout
+      - restore_cache:
           key: dependency-cache-{{ checksum "shard.lock" }}
       - run:
-          name: Install dependencies.
+          name: Install dependencies
           command: shards install
-      - save_cache: # Step to save dependency cache
+      - run:
+          name: Install PostgreSQL Client
+          command: |
+              apt-get update
+              apt-get install -y wget
+              echo "deb http://apt.postgresql.org/pub/repos/apt/ jessie-pgdg main" | tee /etc/apt/sources.list.d/pgdg.list
+              wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
+              apt-get install -y postgresql-client
+      - save_cache:
           key: dependency-cache-{{ checksum "shard.lock" }}
           paths:
             - ./lib
+
+jobs:
+  # test:
+  #   working_directory: ~/skirmish
+  #   executor: default_executor
+  #   steps:
+  #     - checkout_and_install_dependencies
+  #     - run:
+  #         name: Run Crystal specs
+  #         command: crystal spec
+
+  # lint:
+  #   working_directory: ~/skirmish
+  #   executor: default_executor
+  #   steps:
+  #     - checkout
+  #     - run:
+  #         name: Install Ameba
+  #         command: shards build ameba
+  #     - run:
+  #         name: Run Ameba linter
+  #         command: bin/ameba
+
+  # seed:
+  #   working_directory: ~/skirmish
+  #   executor: default_executor
+  #   steps:
+  #     - checkout_and_install_dependencies
+  #     - run:
+  #         name: Run Seeds
+  #         command: crystal db/seeds.cr
+
+  # A combined job that only needs to set up the projects and dependencies once.
+  # Only one cicle ci container is used, so there's no point running a workflow with multiple jobs as these will execute sequencially.
+  # If there are more containers added to the project to allow parallel execution of multiple jobs, the independent jobs and workflow should be used.
+  test_lint_and_seed:
+    working_directory: ~/skirmish
+    executor: default_executor
+    steps:
+      - checkout_and_install_dependencies
       - run:
-          name: test
+          name: Run Crystal specs
           command: crystal spec
+      - run:
+          name: Install Ameba
+          command: shards build ameba
+      - run:
+          name: Run Ameba linter
+          command: bin/ameba
+      - run:
+          name: Run Seeds
+          command: crystal db/seeds.cr
+
+workflows:
+  version: 2
+  test_lint_and_seed:
+    jobs:
+      # - test
+      # - lint
+      # - seed
+      - test_lint_and_seed
