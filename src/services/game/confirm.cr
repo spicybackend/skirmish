@@ -47,6 +47,7 @@ class Game::Confirm
   end
 
   private def update_game
+    game.rating_delta = rating_delta
     game.confirmed_by_id = confirming_player.id
     game.confirmed_at = Time.now
   end
@@ -71,17 +72,24 @@ class Game::Confirm
     [winner.rating_for(league), loser.rating_for(league)]
   end
 
+  @rating_delta : Int32?
+  private def rating_delta
+    @rating_delta ||= begin
+      old_winner_rating, old_loser_rating = old_ratings
+
+      Rating::DetermineDelta.new(
+        winner_rating: old_winner_rating,
+        loser_rating: old_loser_rating,
+        league: league
+      ).call
+    end
+  end
+
   private def new_ratings
     old_winner_rating, old_loser_rating = old_ratings
 
-    delta = Rating::DetermineDelta.new(
-          winner_rating: old_winner_rating,
-          loser_rating: old_loser_rating,
-          league: league
-        ).call
-
-    new_winner_rating = old_winner_rating + delta
-    new_loser_rating = old_loser_rating - delta
+    new_winner_rating = old_winner_rating + rating_delta
+    new_loser_rating = old_loser_rating - rating_delta
 
     [new_winner_rating.abs, new_loser_rating.abs]
   end

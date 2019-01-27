@@ -1,4 +1,4 @@
-class AddDeltaToGames < Jennifer::Migration::Base
+class AddRatingDeltaToGames < Jennifer::Migration::Base
   def up
     change_table(:games) do |t|
       t.add_column(:rating_delta, :integer)
