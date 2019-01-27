@@ -67,7 +67,7 @@ class League < Jennifer::Model::Base
   end
 
   def recent_games
-    games_query.order(confirmed_at: :desc, created_at: :desc).limit(RECENT_GAMES_LIMIT)
+    games_query.order(created_at: :desc).limit(RECENT_GAMES_LIMIT)
   end
 
   def active_memberships_query
