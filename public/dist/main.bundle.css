@@ -17,12 +17,12 @@ div.game-logger {
   display: flex;
   justify-content: space-between;
   margin-bottom: 32px; }
-  .game-results img.versus {
-    width: 120px;
-    height: 180px;
+  .game-results .versus {
     align-self: center;
-    background-image: url(/dist/images/versus.png);
-    background-size: contain; }
+    opacity: 0.5; }
+    .game-results .versus img {
+      width: 120px;
+      height: 180px; }
   .game-results .loser-avatar {
     z-index: -1; }
     .game-results .loser-avatar span.droplet {
@@ -51,7 +51,7 @@ div.game-logger {
     font-size: 28px; }
 
 @media only screen and (max-width: 768px) {
-  .game-results img.versus {
+  .game-results .versus img {
     width: 60px;
     height: 90px; }
   .game-results .winner-avatar, .game-results .loser-avatar, .game-results img.gravatar {

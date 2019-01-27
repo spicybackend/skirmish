@@ -28,7 +28,8 @@ p.description
     .winner-avatar.animated.bounceInLeft
       img.gravatar src="#{gravatar_src_for(game.winner)}"
 
-    img.versus.animated.rotateIn.faster
+    .versus
+      img.animated.rotateIn.faster src="/dist/images/versus.png"
 
     .loser-avatar.animated.bounceInRight
       img.gravatar src="#{gravatar_src_for(game.loser)}"
@@ -48,7 +49,7 @@ p.description
   .game-stats
     table.player-stats
       tr
-        td Winner
+        td Winner 👑
         td Loser
       tr
         td.name = game.winner.display_name

@@ -27,12 +27,14 @@ div.game-logger {
   justify-content: space-between;
   margin-bottom: 32px;
 
-  img.versus {
-    width: 120px;
-    height: 180px;
+  .versus {
+    img {
+      width: 120px;
+      height: 180px;
+    }
+
     align-self: center;
-    background-image: url("../images/versus.png");
-    background-size: contain;
+    opacity: 0.5;
   }
 
   .loser-avatar {
@@ -75,9 +77,11 @@ div.game-logger {
 
 @media only screen and (max-width: 768px) {
   .game-results {
-    img.versus {
-      width: 60px;
-      height: 90px;
+    .versus {
+      img {
+        width: 60px;
+        height: 90px;
+      }
     }
 
     .winner-avatar, .loser-avatar, img.gravatar {
