@@ -348,6 +348,12 @@ tr.clickable-row {
     background-color: $pumpkin;
   }
 
+  &.github {
+    -webkit-mask: url(../images/github.svg) no-repeat center;
+    mask: url(../images/github.svg) no-repeat center;
+    background-color: white;
+  }
+
   &.gmail {
     -webkit-mask: url(../images/gmail.svg) no-repeat center;
     mask: url(../images/gmail.svg) no-repeat center;

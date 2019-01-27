@@ -742,6 +742,10 @@ tr.clickable-row {
     -webkit-mask: url(/dist/images/gitlab.svg) no-repeat center;
     mask: url(/dist/images/gitlab.svg) no-repeat center;
     background-color: #ffa039; }
+  .social-icon.github {
+    -webkit-mask: url(/dist/images/github.svg) no-repeat center;
+    mask: url(/dist/images/github.svg) no-repeat center;
+    background-color: white; }
   .social-icon.gmail {
     -webkit-mask: url(/dist/images/gmail.svg) no-repeat center;
     mask: url(/dist/images/gmail.svg) no-repeat center;
