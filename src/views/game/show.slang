@@ -41,9 +41,9 @@ p.description
         p Game confirmed #{time_units_since(game.confirmed_at).downcase}
     - else
       .centered
+        p Game not yet confirmed
         - if show_game_confirmation
           p == render(partial: "_confirmation_form.slang")
-        p Game not yet confirmed
 
   .game-stats
     table.player-stats.winner
