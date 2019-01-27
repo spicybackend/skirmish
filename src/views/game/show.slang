@@ -52,7 +52,7 @@ p.description
         td 2nd -> 1st
       tr
         td = game.winner.display_name
-        td 1000 + 20
+        td = game.confirmed? ? "Gained #{rating_delta} points (#{winner_rating})" : "Will gain #{rating_delta} points (#{winner_rating + rating_delta})"
 
     table.player-stats.loser
       tr
@@ -60,4 +60,4 @@ p.description
         td 1st -> 3rd
       tr
         td = game.loser.display_name
-        td 1000 - 20
+        td = game.confirmed? ? "Lost #{rating_delta} points (#{loser_rating})" : "Will lose #{rating_delta} points (#{loser_rating - rating_delta})"

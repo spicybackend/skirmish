@@ -21,15 +21,13 @@ class GameController < ApplicationController
       winner_rating = game.winner.rating_for(league)
       loser_rating = game.loser.rating_for(league)
 
-      delta = 0
+      rating_delta = game.rating_delta || Rating::DetermineDelta.new(
+        winner_rating: winner_rating,
+        loser_rating: loser_rating,
+        league: game.league!
+      ).call
 
       if !game.confirmed?
-        delta = Rating::DetermineDelta.new(
-          winner_rating: winner_rating,
-          loser_rating: loser_rating,
-          league: game.league!
-        ).call
-
         read_game_logged_notification(game)
       end
 
