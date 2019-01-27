@@ -65,8 +65,8 @@ div.game-logger {
   background-color: rgba(0, 0, 0, 0.05);
   color: white;
   margin-bottom: 6px; }
-  .game-stats table.player-stats td {
-    width: 50%; }
+  .game-stats table.player-stats td.name {
+    font-size: 28px; }
 
 @media only screen and (max-width: 768px) {
   .game-results img.versus {

@@ -46,18 +46,13 @@ p.description
           p == render(partial: "_confirmation_form.slang")
 
   .game-stats
-    table.player-stats.winner
+    table.player-stats
       tr
         td Winner
-        td 2nd -> 1st
-      tr
-        td = game.winner.display_name
-        td = game.confirmed? ? "Gained #{rating_delta} points (#{winner_rating})" : "Will gain #{rating_delta} points (#{winner_rating + rating_delta})"
-
-    table.player-stats.loser
-      tr
         td Loser
-        td 1st -> 3rd
       tr
-        td = game.loser.display_name
+        td.name = game.winner.display_name
+        td.name = game.loser.display_name
+      tr
+        td = game.confirmed? ? "Gained #{rating_delta} points (#{winner_rating})" : "Will gain #{rating_delta} points (#{winner_rating + rating_delta})"
         td = game.confirmed? ? "Lost #{rating_delta} points (#{loser_rating})" : "Will lose #{rating_delta} points (#{loser_rating - rating_delta})"
