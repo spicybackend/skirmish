@@ -8,6 +8,7 @@ class Game < Jennifer::Model::Base
     logged_by_id: Int64?,
     confirmed_by_id: Int64?,
     confirmed_at: Time?,
+    rating_delta: Int32?,
 
     created_at: { type: Time, default: Time.now },
     updated_at: { type: Time, default: Time.now }
