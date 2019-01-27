@@ -650,9 +650,10 @@ nav img.gravatar {
 
 #logo {
   width: 200px;
-  height: 278px;
+  height: 200px;
+  margin-top: -25px;
   background-color: #343a40;
-  background-image: url(/dist/images/logo.png);
+  background-image: url(/dist/images/logo-transparent.svg);
   background-size: contain; }
 
 .image-content {

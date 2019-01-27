@@ -258,9 +258,10 @@ nav {
 
 #logo {
   width: 200px;
-  height: 278px;
+  height: 200px;
+  margin-top: -25px;
   background-color: $dark-grey;
-  background-image: url("../images/logo.png");
+  background-image: url("../images/logo-transparent.svg");
   background-size: contain;
 }
 
