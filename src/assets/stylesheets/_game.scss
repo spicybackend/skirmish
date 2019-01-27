@@ -24,104 +24,76 @@ div.game-logger {
 
 .game-results {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   margin-bottom: 32px;
 
-  span.versus {
-    font-size: 28px;
-    font-weight: bolder;
-    height: inherit;
-    margin-top: auto;
-    margin-bottom: auto;
-    padding: 20px;
-  }
-
-  span.rating {
-    height: inherit;
-    margin-top: auto;
-    margin-bottom: auto;
-    padding: 10px 20px;
-    font-size: 20px;
-  }
-
-  span.rating.delta::before {
-    content: "";
-    background-size: contain !important;
-    background-repeat: no-repeat !important;
-    padding: 16px;
-  }
-
-  .winning-result {
-    display: flex;
-    text-align: center;
-    width: 30%;
-
-    span.rating {
-      order: -1;  // left
+  .versus {
+    img {
+      width: 120px;
+      height: 180px;
     }
 
-    span.rating.delta::before {
-      background: url("https://png.icons8.com/metro/200/7bc950/sort-up.png");
-      background-position-y: 12px;
+    align-self: center;
+    opacity: 0.5;
+  }
+
+  .loser-avatar {
+    z-index: -1;
+
+    span.droplet {
+      font-size: 48px;
+      position: relative;
+      top: -20%;
+      left: -20%;
     }
   }
 
-  .losing-result {
-    display: flex;
-    text-align: center;
-    justify-content: flex-end;
-    width: 30%;
-
-    span.rating {
-      order: 9999;  // right
-    }
-
-    span.rating.delta::before {
-      background: url("https://png.icons8.com/metro/200/db2b39/sort-down.png");
-      background-position-y: 10px;
-    }
+  img.gravatar {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background-clip: padding-box;
+    -webkit-border-radius: 50%;
+    -webkit-background-clip: padding-box;
   }
+}
 
-  .player-result {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.game-stats {
+  table.player-stats {
+    width: 100%;
+    border-collapse: separate;
+    border-radius: 6px;
+    overflow: hidden;
+    border: 1px solid darken($dark-grey, 10%);
+    background-color: rgba(0, 0, 0, 0.05);
+    color: white;
+    margin-bottom: 6px;
 
-    img.gravatar {
-      width: 200px;
-      height: 200px;
-      padding: 14px;
-      border-radius: 50%;
-      background-clip: padding-box;
-      -webkit-border-radius: 50%;
-      -webkit-background-clip: padding-box;
-    }
-
-    .name {
-      font-size: 24px;
-      text-align: center;
+    td.name {
+      font-size: 28px;
     }
   }
 }
 
 @media only screen and (max-width: 768px) {
   .game-results {
-    span.versus {
-      font-size: 18px;
-    }
-
-    .losing-result, .winning-result {
-      flex-direction: column;
-
-      span.rating {
-        order: 9999;
+    .versus {
+      img {
+        width: 60px;
+        height: 90px;
       }
     }
 
-    .player-result {
-      img.gravatar {
-        width: 100px;
-        height: 100px;
+    .winner-avatar, .loser-avatar, img.gravatar {
+      width: 120px;
+      height: 120px;
+    }
+
+    .loser-avatar {
+      span.droplet {
+        font-size: 32px;
+        top: -120px;
+        left: 50px;
       }
     }
   }

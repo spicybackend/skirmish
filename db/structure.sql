@@ -195,7 +195,8 @@ CREATE TABLE public.games (
     confirmed_by_id bigint,
     confirmed_at timestamp without time zone,
     created_at timestamp without time zone,
-    updated_at timestamp without time zone
+    updated_at timestamp without time zone,
+    rating_delta integer
 );
 
 

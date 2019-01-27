@@ -23,32 +23,37 @@ p.description
     | For
   == link_to(league.name, "/leagues/#{league.id}")
 
-.game-results
-  .winning-result
-    .player-result
+.col-sm-9.centered
+  .game-results
+    .winner-avatar.animated.bounceInLeft
       img.gravatar src="#{gravatar_src_for(game.winner)}"
-      span.name = game.winner.tag
-    - if game.confirmed?
-      span.rating = winner_rating
-    - else
-      span.rating.delta = delta
-  span.versus VS
-  .losing-result
-    .player-result
-      img.gravatar src="#{gravatar_src_for(game.loser)}"
-      span.name = game.loser.tag
-    - if game.confirmed?
-      span.rating = loser_rating
-    - else
-      span.rating.delta = delta
 
-.centered
-  h3 #{game.winner.tag} won against #{game.loser.tag}
-  - if game.confirmed?
-    .centered
-      p Game confirmed #{time_units_since(game.confirmed_at).downcase}
-  - else
-    .centered
-      - if show_game_confirmation
-        p == render(partial: "_confirmation_form.slang")
-      p Game not yet confirmed
+    .versus
+      img.animated.rotateIn.faster src="/dist/images/versus.png"
+
+    .loser-avatar.animated.bounceInRight
+      img.gravatar src="#{gravatar_src_for(game.loser)}"
+      span.droplet.animated.fadeInDown.delay-2s 💧
+
+  .centered
+    h3 #{game.winner.tag} won against #{game.loser.tag}
+    - if game.confirmed?
+      .centered
+        p Game confirmed #{time_units_since(game.confirmed_at).downcase}
+    - else
+      .centered
+        p Game not yet confirmed
+        - if show_game_confirmation
+          p == render(partial: "_confirmation_form.slang")
+
+  .game-stats
+    table.player-stats
+      tr
+        td Winner 👑
+        td Loser
+      tr
+        td.name = game.winner.display_name
+        td.name = game.loser.display_name
+      tr
+        td = game.confirmed? ? "Gained #{rating_delta} points (#{winner_rating})" : "Will gain #{rating_delta} points (#{winner_rating + rating_delta})"
+        td = game.confirmed? ? "Lost #{rating_delta} points (#{loser_rating})" : "Will lose #{rating_delta} points (#{loser_rating - rating_delta})"
