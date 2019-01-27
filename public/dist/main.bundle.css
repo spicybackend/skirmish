@@ -56,6 +56,18 @@ div.game-logger {
     -webkit-border-radius: 50%;
     -webkit-background-clip: padding-box; }
 
+.game-stats table.player-stats {
+  width: 100%;
+  border-collapse: separate;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid #1d2124;
+  background-color: rgba(0, 0, 0, 0.05);
+  color: white;
+  margin-bottom: 6px; }
+  .game-stats table.player-stats td {
+    width: 50%; }
+
 @media only screen and (max-width: 768px) {
   .game-results img.versus {
     width: 60px;

@@ -34,13 +34,30 @@ p.description
       img.gravatar src="#{gravatar_src_for(game.loser)}"
       span.droplet.animated.fadeInDown.delay-2s 💧
 
-.centered
-  h3 #{game.winner.tag} won against #{game.loser.tag}
-  - if game.confirmed?
-    .centered
-      p Game confirmed #{time_units_since(game.confirmed_at).downcase}
-  - else
-    .centered
-      - if show_game_confirmation
-        p == render(partial: "_confirmation_form.slang")
-      p Game not yet confirmed
+  .centered
+    h3 #{game.winner.tag} won against #{game.loser.tag}
+    - if game.confirmed?
+      .centered
+        p Game confirmed #{time_units_since(game.confirmed_at).downcase}
+    - else
+      .centered
+        - if show_game_confirmation
+          p == render(partial: "_confirmation_form.slang")
+        p Game not yet confirmed
+
+  .game-stats
+    table.player-stats.winner
+      tr
+        td Winner
+        td 2nd -> 1st
+      tr
+        td = game.winner.display_name
+        td 1000 + 20
+
+    table.player-stats.loser
+      tr
+        td Loser
+        td 1st -> 3rd
+      tr
+        td = game.loser.display_name
+        td 1000 - 20
