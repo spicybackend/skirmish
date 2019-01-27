@@ -34,40 +34,7 @@ commands:
             - ./lib
 
 jobs:
-  # test:
-  #   working_directory: ~/skirmish
-  #   executor: default_executor
-  #   steps:
-  #     - checkout_and_install_dependencies
-  #     - run:
-  #         name: Run Crystal specs
-  #         command: crystal spec
-
-  # lint:
-  #   working_directory: ~/skirmish
-  #   executor: default_executor
-  #   steps:
-  #     - checkout
-  #     - run:
-  #         name: Install Ameba
-  #         command: shards build ameba
-  #     - run:
-  #         name: Run Ameba linter
-  #         command: bin/ameba
-
-  # seed:
-  #   working_directory: ~/skirmish
-  #   executor: default_executor
-  #   steps:
-  #     - checkout_and_install_dependencies
-  #     - run:
-  #         name: Run Seeds
-  #         command: crystal db/seeds.cr
-
-  # A combined job that only needs to set up the projects and dependencies once.
-  # Only one cicle ci container is used, so there's no point running a workflow with multiple jobs as these will execute sequencially.
-  # If there are more containers added to the project to allow parallel execution of multiple jobs, the independent jobs and workflow should be used.
-  test_lint_and_seed:
+  build:
     working_directory: ~/skirmish
     executor: default_executor
     steps:
@@ -85,11 +52,24 @@ jobs:
           name: Run Seeds
           command: crystal db/seeds.cr
 
+  deploy:
+    docker:
+      - image: buildpack-deps:trusty
+    steps:
+      - checkout
+      - run:
+          name: Deploy Master to Heroku
+          command: |
+            git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git master
+
 workflows:
   version: 2
-  test_lint_and_seed:
+  build-and-deploy:
     jobs:
-      # - test
-      # - lint
-      # - seed
-      - test_lint_and_seed
+      - build
+      - deploy:
+          requires:
+            - build
+          filters:
+            branches:
+              only: master
