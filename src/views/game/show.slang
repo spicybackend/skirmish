@@ -23,24 +23,16 @@ p.description
     | For
   == link_to(league.name, "/leagues/#{league.id}")
 
-.game-results
-  .winning-result
-    .player-result
+.col-sm-9.centered
+  .game-results
+    .winner-avatar.animated.bounceInLeft
       img.gravatar src="#{gravatar_src_for(game.winner)}"
-      span.name = game.winner.tag
-    - if game.confirmed?
-      span.rating = winner_rating
-    - else
-      span.rating.delta = delta
-  span.versus VS
-  .losing-result
-    .player-result
+
+    img.versus.animated.rotateIn.faster
+
+    .loser-avatar.animated.bounceInRight
       img.gravatar src="#{gravatar_src_for(game.loser)}"
-      span.name = game.loser.tag
-    - if game.confirmed?
-      span.rating = loser_rating
-    - else
-      span.rating.delta = delta
+      span.droplet.animated.fadeInDown.delay-2s 💧
 
 .centered
   h3 #{game.winner.tag} won against #{game.loser.tag}

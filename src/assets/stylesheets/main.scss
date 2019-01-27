@@ -40,6 +40,8 @@ a.dropdown-item {
 
 .centered {
   text-align: center;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 a {
@@ -81,6 +83,21 @@ h6.section-header {
       -ms-transform: scale(1.25) rotateZ(-15deg);
       transform: scale(1.25) rotateZ(-15deg);
     }
+  }
+}
+
+.party-popper {
+  cursor: pointer;
+  display: inline-block;
+
+  .party-popper-effects {
+    position: absolute;
+    transform: rotate(30deg) translate(1em, -3em);
+    z-index: 1;
+  }
+  .party-popper-emoji {
+    font-size: 1.5em;
+    z-index: 2;
   }
 }
 

@@ -15,71 +15,58 @@ div.game-logger {
 
 .game-results {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   margin-bottom: 32px; }
-  .game-results span.versus {
-    font-size: 28px;
-    font-weight: bolder;
-    height: inherit;
-    margin-top: auto;
-    margin-bottom: auto;
-    padding: 20px; }
-  .game-results span.rating {
-    height: inherit;
-    margin-top: auto;
-    margin-bottom: auto;
-    padding: 10px 20px;
-    font-size: 20px; }
-  .game-results span.rating.delta::before {
-    content: "";
-    background-size: contain !important;
-    background-repeat: no-repeat !important;
-    padding: 16px; }
-  .game-results .winning-result {
-    display: flex;
-    text-align: center;
-    width: 30%; }
-    .game-results .winning-result span.rating {
-      order: -1; }
-    .game-results .winning-result span.rating.delta::before {
-      background: url("https://png.icons8.com/metro/200/7bc950/sort-up.png");
-      background-position-y: 12px; }
-  .game-results .losing-result {
-    display: flex;
-    text-align: center;
-    justify-content: flex-end;
-    width: 30%; }
-    .game-results .losing-result span.rating {
-      order: 9999; }
-    .game-results .losing-result span.rating.delta::before {
-      background: url("https://png.icons8.com/metro/200/db2b39/sort-down.png");
-      background-position-y: 10px; }
-  .game-results .player-result {
-    display: flex;
-    flex-direction: column;
-    align-items: center; }
-    .game-results .player-result img.gravatar {
-      width: 200px;
-      height: 200px;
-      padding: 14px;
-      border-radius: 50%;
-      background-clip: padding-box;
-      -webkit-border-radius: 50%;
-      -webkit-background-clip: padding-box; }
-    .game-results .player-result .name {
-      font-size: 24px;
-      text-align: center; }
+  .game-results img.versus {
+    width: 120px;
+    height: 180px;
+    align-self: center;
+    background-image: url(/dist/images/versus.png);
+    background-size: contain; }
+  .game-results .loser-avatar {
+    z-index: -1; }
+    .game-results .loser-avatar img.gravatar {
+      filter: brightness(50%);
+      -webkit-animation: fadeOpacityOut 2s ease-out;
+      -moz-animation: fadeOpacityOut 2s ease-out;
+      -o-animation: fadeOpacityOut 2s ease-out;
+      animation: fadeOpacityOut 2s ease-out; }
+    .game-results .loser-avatar span.droplet {
+      font-size: 48px;
+      position: relative;
+      top: -20%;
+      left: -20%; }
+
+@keyframes fadeOpacityOut {
+  0% {
+    filter: brightness(100%); }
+  100% {
+    filter: brightness(50%); } }
+
+@-webkit-keyframes fadeOpacityOut {
+  0% {
+    opacity: 1; }
+  100% {
+    opacity: 0.5; } }
+  .game-results img.gravatar {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background-clip: padding-box;
+    -webkit-border-radius: 50%;
+    -webkit-background-clip: padding-box; }
 
 @media only screen and (max-width: 768px) {
-  .game-results span.versus {
-    font-size: 18px; }
-  .game-results .losing-result, .game-results .winning-result {
-    flex-direction: column; }
-    .game-results .losing-result span.rating, .game-results .winning-result span.rating {
-      order: 9999; }
-  .game-results .player-result img.gravatar {
-    width: 100px;
-    height: 100px; } }
+  .game-results img.versus {
+    width: 60px;
+    height: 90px; }
+  .game-results .winner-avatar, .game-results .loser-avatar, .game-results img.gravatar {
+    width: 120px;
+    height: 120px; }
+  .game-results .loser-avatar span.droplet {
+    font-size: 32px;
+    top: -120px;
+    left: 50px; } }
 
 .management.nav-tabs {
   margin-bottom: 16px;
@@ -494,23 +481,15 @@ form.main {
   color: white;
   font-size: 1.25em;
   margin-bottom: 0.5em; }
-  .tournament-closure .party-popper {
-    cursor: pointer;
-    display: inline-block; }
-    .tournament-closure .party-popper .party-popper-effects {
-      position: absolute;
-      transform: rotate(30deg) translate(1em, -3em);
-      z-index: 1; }
-    .tournament-closure .party-popper .party-popper-emoji {
-      font-size: 1.5em;
-      z-index: 2; }
 
 a.dropdown-item {
   display: flex;
   justify-content: space-between; }
 
 .centered {
-  text-align: center; }
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto; }
 
 a {
   color: #ef4b62;
@@ -539,6 +518,17 @@ h6.section-header {
   -webkit-transform: scale(1.25) rotateZ(-15deg);
   -ms-transform: scale(1.25) rotateZ(-15deg);
   transform: scale(1.25) rotateZ(-15deg); }
+
+.party-popper {
+  cursor: pointer;
+  display: inline-block; }
+  .party-popper .party-popper-effects {
+    position: absolute;
+    transform: rotate(30deg) translate(1em, -3em);
+    z-index: 1; }
+  .party-popper .party-popper-emoji {
+    font-size: 1.5em;
+    z-index: 2; }
 
 a.nav-link {
   background-image: linear-gradient(#ef4b62, #ef4b62);

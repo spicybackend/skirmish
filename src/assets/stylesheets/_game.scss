@@ -24,104 +24,83 @@ div.game-logger {
 
 .game-results {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   margin-bottom: 32px;
 
-  span.versus {
-    font-size: 28px;
-    font-weight: bolder;
-    height: inherit;
-    margin-top: auto;
-    margin-bottom: auto;
-    padding: 20px;
+  img.versus {
+    width: 120px;
+    height: 180px;
+    align-self: center;
+    background-image: url("../images/versus.png");
+    background-size: contain;
   }
 
-  span.rating {
-    height: inherit;
-    margin-top: auto;
-    margin-bottom: auto;
-    padding: 10px 20px;
-    font-size: 20px;
-  }
-
-  span.rating.delta::before {
-    content: "";
-    background-size: contain !important;
-    background-repeat: no-repeat !important;
-    padding: 16px;
-  }
-
-  .winning-result {
-    display: flex;
-    text-align: center;
-    width: 30%;
-
-    span.rating {
-      order: -1;  // left
-    }
-
-    span.rating.delta::before {
-      background: url("https://png.icons8.com/metro/200/7bc950/sort-up.png");
-      background-position-y: 12px;
-    }
-  }
-
-  .losing-result {
-    display: flex;
-    text-align: center;
-    justify-content: flex-end;
-    width: 30%;
-
-    span.rating {
-      order: 9999;  // right
-    }
-
-    span.rating.delta::before {
-      background: url("https://png.icons8.com/metro/200/db2b39/sort-down.png");
-      background-position-y: 10px;
-    }
-  }
-
-  .player-result {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  .loser-avatar {
+    z-index: -1;
 
     img.gravatar {
-      width: 200px;
-      height: 200px;
-      padding: 14px;
-      border-radius: 50%;
-      background-clip: padding-box;
-      -webkit-border-radius: 50%;
-      -webkit-background-clip: padding-box;
+      filter: brightness(50%);
+      -webkit-animation: fadeOpacityOut 2s ease-out;
+      -moz-animation: fadeOpacityOut 2s ease-out;
+      -o-animation: fadeOpacityOut 2s ease-out;
+      animation: fadeOpacityOut 2s ease-out;
     }
 
-    .name {
-      font-size: 24px;
-      text-align: center;
+    span.droplet {
+      font-size: 48px;
+      position: relative;
+      top: -20%;
+      left: -20%;
     }
+  }
+
+  @keyframes fadeOpacityOut {
+    0% {
+      filter: brightness(100%);
+    }
+
+    100% {
+      filter: brightness(50%);
+    }
+  }
+
+  @-webkit-keyframes fadeOpacityOut {
+    0% {
+      opacity: 1;
+    }
+
+    100% {
+      opacity: 0.5;
+    }
+  }
+
+  img.gravatar {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background-clip: padding-box;
+    -webkit-border-radius: 50%;
+    -webkit-background-clip: padding-box;
   }
 }
 
 @media only screen and (max-width: 768px) {
   .game-results {
-    span.versus {
-      font-size: 18px;
+    img.versus {
+      width: 60px;
+      height: 90px;
     }
 
-    .losing-result, .winning-result {
-      flex-direction: column;
-
-      span.rating {
-        order: 9999;
-      }
+    .winner-avatar, .loser-avatar, img.gravatar {
+      width: 120px;
+      height: 120px;
     }
 
-    .player-result {
-      img.gravatar {
-        width: 100px;
-        height: 100px;
+    .loser-avatar {
+      span.droplet {
+        font-size: 32px;
+        top: -120px;
+        left: 50px;
       }
     }
   }
