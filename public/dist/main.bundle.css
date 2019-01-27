@@ -25,29 +25,11 @@ div.game-logger {
     background-size: contain; }
   .game-results .loser-avatar {
     z-index: -1; }
-    .game-results .loser-avatar img.gravatar {
-      filter: brightness(50%);
-      -webkit-animation: fadeOpacityOut 2s ease-out;
-      -moz-animation: fadeOpacityOut 2s ease-out;
-      -o-animation: fadeOpacityOut 2s ease-out;
-      animation: fadeOpacityOut 2s ease-out; }
     .game-results .loser-avatar span.droplet {
       font-size: 48px;
       position: relative;
       top: -20%;
       left: -20%; }
-
-@keyframes fadeOpacityOut {
-  0% {
-    filter: brightness(100%); }
-  100% {
-    filter: brightness(50%); } }
-
-@-webkit-keyframes fadeOpacityOut {
-  0% {
-    opacity: 1; }
-  100% {
-    opacity: 0.5; } }
   .game-results img.gravatar {
     width: 200px;
     height: 200px;
