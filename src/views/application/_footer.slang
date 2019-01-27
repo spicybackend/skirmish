@@ -15,8 +15,8 @@ footer class="page-footer font-small"
 
         ul.list-unstyled
           li
-            a href="https://gitlab.com/yumoose/skirmish" GitLab
-              img.social-icon.gitlab
+            a href="https://github.com/yumoose/skirmish" GitHub
+              img.social-icon.github
           li
             a href="mailto:#{ApplicationMailer::SUPPORT_EMAIL_ADDRESS}?Subject=Enquiry" Email
               img.social-icon.gmail
