@@ -1,5 +1,6 @@
 require "./initializers/**"
 
+require "dotenv"
 require "amber"
 require "jennifer"
 require "form_object"

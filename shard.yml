@@ -61,6 +61,9 @@ dependencies:
     github: imdrasil/view_model.cr
     version: ~> 0.2.0
 
+  dotenv:
+    github: gdotdesign/cr-dotenv
+
 development_dependencies:
   garnet_spec:
     github: amberframework/garnet-spec
