@@ -309,7 +309,7 @@ nav img.gravatar {
 
 #logo {
   background-color: #333;
-  background-image: url(/dist/images/logo.png);
+  background-image: url(/dist/images/logo-transparent.svg);
   background-size: contain;
   width: 200px;
   height: 278px; }
