@@ -7,15 +7,8 @@
     span.text-right = "Rated #{player.rating_for(league)}"
 
   .card-body
-    p.card-text Some info about the league. Maybe just get rid of it?
     canvas.league-graph data-league-stats-url="/leagues/#{league.id}/stats"
 
-  .list-group.list-group-flush
-    li.list-group-item Has won 9 games of 16
-    li.list-group-item Has won 2 tournaments
-    - membership_time = player.membership_for(league).try(&.created_at)
-    li.list-group-item = "Has been a member since #{membership_time ? Time::Format.new("%-d %b %Y").format(membership_time) : "ages ago"}"
-
-  .card-body
+  .card-footer
     a.card-link href="/leagues/#{league.id}" View League
     a.card-link href="/leagues/#{league.id}/games/new?against=#{player.tag}" Log Game
