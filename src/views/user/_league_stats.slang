@@ -8,7 +8,7 @@
 
   .card-body
     p.card-text Some info about the league. Maybe just get rid of it?
-    canvas.league-graph data-league-id="#{league.id}"
+    canvas.league-graph data-league-stats-url="/leagues/#{league.id}/stats"
 
   .list-group.list-group-flush
     li.list-group-item Has won 9 games of 16
