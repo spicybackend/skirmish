@@ -1,6 +1,7 @@
 import Amber from 'amber'
 
 import "./tournament-graph.js"
+import "./league-rating-graph"
 import "./party-popper.js"
 
 /*

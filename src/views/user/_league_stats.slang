@@ -7,11 +7,12 @@
     span.text-right = "Rated #{player.rating_for(league)}"
 
   .card-body
-    p.card-text Some quick example text to build on the card title and make up the bulk of the card's content.
+    p.card-text Some info about the league. Maybe just get rid of it?
+    canvas.league-graph data-league-id="#{league.id}"
 
   .list-group.list-group-flush
     li.list-group-item Has won 9 games of 16
-    li.list-group-item Has won 1 tournaments
+    li.list-group-item Has won 2 tournaments
     - membership_time = player.membership_for(league).try(&.created_at)
     li.list-group-item = "Has been a member since #{membership_time ? Time::Format.new("%-d %b %Y").format(membership_time) : "ages ago"}"
 
