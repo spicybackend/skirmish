@@ -44,6 +44,34 @@ a.dropdown-item {
   margin-right: auto;
 }
 
+.text-right {
+  text-align: right;
+}
+
+.flex-spread {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.icon-card-header {
+  display: flex;
+  align-items: center;
+
+  img {
+    border-radius: 50%;
+    width: 42px;
+    height: 42px;
+    object-fit: cover;
+    overflow: hidden;
+    margin-right: 16px;
+
+    &.glyph {
+      padding: 15%;
+    }
+  }
+}
+
 a {
   color: $brand-primary;
   transition:all 0.2s ease;

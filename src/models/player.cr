@@ -49,6 +49,10 @@ class Player < Jennifer::Model::Base
     memberships_query.where { _league_id == league.id }.where { _left_at == nil }.exists?
   end
 
+  def membership_for(league : League)
+    memberships_query.where { _league_id == league.id }.where { _left_at == nil }.try(&.first)
+  end
+
   def rating_for(league : League)
     latest_participation = participations_query.
       join(Game) { Participation._game_id == _id }.
