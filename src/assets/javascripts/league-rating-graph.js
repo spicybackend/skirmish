@@ -41,6 +41,11 @@ leagueGraphs.forEach((canvas) => {
           xAxes: [{
             type: 'time',
           }]
+        },
+        elements: {
+          line: {
+            tension: 0.2
+          }
         }
       }
     });
