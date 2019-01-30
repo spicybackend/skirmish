@@ -51,7 +51,7 @@ Amber::Server.configure do
     get "/leagues/:league_id/inactive_players", LeagueController, :inactive_players
     get "/leagues/:league_id/requests", LeagueController, :requests
     get "/leagues/:league_id/invites", LeagueController, :invites
-    get "/leagues/:league_id/stats/", LeagueController, :stats
+    get "/leagues/:league_id/stats/:player_tag", LeagueController, :stats
     resources "/leagues/:league_id/admins", LeagueAdministratorController, only: [:index, :create, :destroy]
 
     resources "/leagues/:league_id/invites/", InvitationController, only: [:create, :update, :destroy]

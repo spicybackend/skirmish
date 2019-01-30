@@ -19,5 +19,5 @@
 
 h3 Leagues
 .leagues
-  - leagues.each do |league|
+  - player.leagues_query.where { _id.in(League.visible_to(current_player.not_nil!).pluck(:id)) }.each do |league|
     == render(partial: "_league_stats.slang")

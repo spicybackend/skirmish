@@ -84,40 +84,49 @@ class LeagueController < ApplicationController
   end
 
   def stats
-    player = current_player.not_nil!
+    if player = Player.where { _tag == params[:player_tag] }.try(&.first)
+      if league = League.find(params[:league_id])
+        if league.secret? && !Membership.where { _league_id == league.id && _player_id == current_player.try(&.id) }.exists?
+          # a logged in player should only be able to see graphs for leagues they can also see
+          flash[:danger] = "Unable to find league"
+          redirect_to "/leagues"
+        else
+          membership = player.membership_for(league).not_nil!
 
-    if league = League.find(params[:league_id])
-      membership = player.membership_for(league).not_nil!
+          player_game_ids = player.games_query.confirmed.where { _league_id == league.id }.pluck(:id)
 
-      player_game_ids = player.games_query.confirmed.where { _league_id == league.id }.pluck(:id)
+          participations = if player_game_ids.any?
+            Participation.where { _player_id == player.id }.
+              where { sql("participations.game_id in (#{player_game_ids.join(", ")})") }.
+              order(created_at: :asc)
+          else
+            [] of Participation
+          end
 
-      participations = if player_game_ids.any?
-        Participation.where { _player_id == player.id }.
-          where { sql("participations.game_id in (#{player_game_ids.join(", ")})") }.
-          order(created_at: :asc)
+          isoFormat = Time::Format.new("%F %T")
+
+          rating_history = { isoFormat.format(membership.created_at) => league.start_rating }
+          participations.to_a.each do |participation|
+            rating_history[isoFormat.format(participation.created_at)] = participation.rating.not_nil!  # not_nil! as the game was confirmed
+          end
+
+          stats = {
+            league_name: league.name,
+            league_color: league.accent_color,
+            ratings: rating_history
+          }
+
+          respond_with do
+            json stats.to_h.to_json
+          end
+        end
       else
-        [] of Participation
-      end
-
-      isoFormat = Time::Format.new("%F %T")
-
-      rating_history = { isoFormat.format(membership.created_at) => league.start_rating }
-      participations.to_a.each do |participation|
-        rating_history[isoFormat.format(participation.created_at)] = participation.rating.not_nil!  # not_nil! as the game was confirmed
-      end
-
-      stats = {
-        league_name: league.name,
-        league_color: league.accent_color,
-        ratings: rating_history
-      }
-
-      respond_with do
-        json stats.to_h.to_json
+        flash[:danger] = "Unable to find league"
+        redirect_to "/leagues"
       end
     else
-      flash[:danger] = "Unable to find league"
-      redirect_to "/leagues"
+      flash[:danger] = "Unable to find player"
+      redirect_to "/"
     end
   end
 
