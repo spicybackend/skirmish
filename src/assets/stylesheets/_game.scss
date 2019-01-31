@@ -22,6 +22,10 @@ div.game-logger {
   }
 }
 
+.game-overview {
+  margin-bottom: 32px;
+}
+
 .game-results {
   display: flex;
   justify-content: space-between;
@@ -58,24 +62,7 @@ div.game-logger {
   }
 }
 
-.game-stats {
-  table.player-stats {
-    width: 100%;
-    border-collapse: separate;
-    border-radius: 6px;
-    overflow: hidden;
-    border: 1px solid darken($dark-grey, 10%);
-    background-color: rgba(0, 0, 0, 0.05);
-    color: white;
-    margin-bottom: 6px;
-
-    td.name {
-      font-size: 28px;
-    }
-  }
-}
-
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 992px) {
   .game-results {
     .versus {
       img {
