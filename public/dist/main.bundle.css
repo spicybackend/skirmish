@@ -102,7 +102,7 @@ div.leagues {
     transition: background-color 0.15s;
     color: white;
     border-radius: 6px;
-    border: 1px solid #1d2124;
+    border: 1px solid rgba(0, 0, 0, 0.125);
     background-color: rgba(0, 0, 0, 0.05); }
     div.leagues .league:first-child {
       margin-left: 0; }
@@ -147,10 +147,12 @@ div.leagues {
     padding: 12px 16px;
     min-height: 68px;
     color: white;
-    background-color: rgba(0, 0, 0, 0.05);
+    background-color: rgba(0, 0, 0, 0.03);
     transition: background-color 0.15s;
-    border: 1px solid #1d2124;
+    border: 1px solid rgba(0, 0, 0, 0.125);
     margin-bottom: -1px; }
+    .tiles .tile + .tile {
+      border-top: none; }
     .tiles .tile .icon {
       z-index: 2;
       width: 42px;
@@ -172,7 +174,7 @@ div.leagues {
       flex-grow: 1;
       text-align: right; }
     .tiles .tile:hover {
-      background-color: rgba(0, 0, 0, 0.2);
+      background-color: rgba(0, 0, 0, 0.1);
       text-decoration: none; }
     .tiles .tile * {
       margin: 0px 8px; }
@@ -243,7 +245,7 @@ table.body.mailer table.button table td {
   .authentication .account-box {
     background-color: #343a40;
     padding: 32px 48px;
-    border: 1px solid #1d2124;
+    border: 1px solid rgba(0, 0, 0, 0.125);
     align-self: center;
     color: #828282;
     -webkit-border-radius: 6px;
@@ -309,7 +311,7 @@ form.main {
     font-weight: 400;
     margin-bottom: 2px; }
   form.main input.form-control {
-    border: 1px solid #1d2124;
+    border: 1px solid rgba(0, 0, 0, 0.125);
     background-color: rgba(0, 0, 0, 0.05);
     color: white; }
     form.main input.form-control:focus {
@@ -428,8 +430,8 @@ form.main {
   height: 400px;
   width: 100%;
   margin-bottom: 1rem;
-  background-color: rgba(0, 0, 0, 0.05);
-  border: 1px solid #1d2124;
+  background-color: rgba(0, 0, 0, 0.03);
+  border: 1px solid rgba(0, 0, 0, 0.125);
   border-radius: 6px; }
 
 .tournament-graph-legend {
@@ -557,11 +559,11 @@ a.nav-link {
 
 .list-group-item {
   color: white;
-  background-color: rgba(0, 0, 0, 0.05);
-  border: 1px solid #1d2124; }
+  background-color: rgba(0, 0, 0, 0.03);
+  border: 1px solid rgba(0, 0, 0, 0.125); }
   .list-group-item:hover {
     color: white;
-    background-color: rgba(0, 0, 0, 0.2); }
+    background-color: rgba(0, 0, 0, 0.1); }
 
 textarea.bg-dark {
   color: white;
@@ -615,7 +617,7 @@ h6, .h6 {
 
 hr {
   border: 0;
-  border-top: 1px solid #1d2124; }
+  border-top: 1px solid rgba(0, 0, 0, 0.125); }
 
 pre {
   color: #828282; }
@@ -751,7 +753,7 @@ tr.clickable-row {
 @media only screen and (max-width: 768px) {
   .masthead {
     background: #343a40;
-    border-top: 1px solid #1d2124;
+    border-top: 1px solid rgba(0, 0, 0, 0.125);
     padding: 4px;
     position: fixed;
     left: 0px;

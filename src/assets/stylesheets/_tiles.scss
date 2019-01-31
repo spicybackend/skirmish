@@ -8,11 +8,14 @@
     min-height: 68px;
 
     color: white;
-    background-color: rgba(0, 0, 0, 0.05);
+    background-color: rgba(0, 0, 0, 0.03);
     transition: background-color 0.15s;
 
-    border: 1px solid darken($dark-grey, 10%);
+    border: 1px solid rgba(0,0,0,.125);
     margin-bottom: -1px;  // align the top and bottom borders of adjascent children
+    & + .tile {
+      border-top: none;
+    }
 
     .icon {
       z-index: 2;
@@ -45,7 +48,7 @@
     }
 
     &:hover {
-      background-color: rgba(0, 0, 0, 0.2);
+      background-color: rgba(0, 0, 0, 0.1);
       text-decoration: none;
     }
 
