@@ -66,7 +66,7 @@ div.leagues {
     transition: background-color 0.15s;
     color: white;
     border-radius: 6px;
-    border: 1px solid darken($dark-grey, 10%);
+    border: 1px solid rgba(0,0,0,.125);
     background-color: rgba(0, 0, 0, 0.05);
 
     &:first-child {

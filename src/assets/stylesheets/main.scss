@@ -156,12 +156,12 @@ a.nav-link {
 
 .list-group-item {
   color: white;
-  background-color: rgba(0, 0, 0, 0.05);
-  border: 1px solid darken($dark-grey, 10%);
+  background-color: rgba(0, 0, 0, 0.03);
+  border: 1px solid rgba(0,0,0,.125);
 
   &:hover {
     color: white;
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color: rgba(0, 0, 0, 0.1);
   }
 }
 
@@ -227,7 +227,7 @@ h6, .h6 {
 
 hr {
   border: 0;
-  border-top: 1px solid darken($dark-grey, 10%);
+  border-top: 1px solid rgba(0,0,0,.125);
 }
 
 pre {
@@ -410,7 +410,7 @@ tr.clickable-row {
 @media only screen and (max-width: 768px) {
   .masthead {
     background: $dark-grey;
-    border-top: 1px solid darken($dark-grey, 10%);
+    border-top: 1px solid rgba(0,0,0,.125);
     padding: 4px;
     position: fixed;
     left: 0px;

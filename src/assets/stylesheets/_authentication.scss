@@ -39,7 +39,7 @@
   .account-box {
     background-color: $dark-grey;
     padding: 32px 48px;
-    border: 1px solid darken($dark-grey, 10%);
+    border: 1px solid rgba(0,0,0,.125);
     align-self: center;
     color: $thundergrey;
 
