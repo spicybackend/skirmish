@@ -112,6 +112,55 @@ describe LeagueControllerTest do
     end
   end
 
+  describe "#stats" do
+    league = create_league
+    player = create_player_with_mock_user
+
+    it "returns json" do
+      response = subject.get "/leagues/#{league.id}/stats/#{player.tag}", headers: basic_authenticated_headers
+
+      response.status_code.should eq(200)
+      parsed_body = JSON.parse(response.body)
+
+      parsed_body["league_name"].should eq league.name
+      parsed_body["league_color"].should eq league.accent_color
+    end
+
+    context "when the league doesn't exist" do
+      response = subject.get "/leagues/-1/stats/#{player.tag}", headers: basic_authenticated_headers
+
+      response.status_code.should eq(302)
+      response.headers["Location"].should match(/\/leagues/)
+    end
+
+    context "when the player doesn't exist" do
+      response = subject.get "/leagues/#{league.id}/stats/mr.nobody", headers: basic_authenticated_headers
+
+      response.status_code.should eq(302)
+      response.headers["Location"].should match(/\//)
+    end
+
+    context "when the current player doesn't have visibility of the league" do
+      league = create_league(visibility: League::SECRET)
+
+      response = subject.get "/leagues/#{league.id}/stats/mr.nobody", headers: basic_authenticated_headers
+
+      response.status_code.should eq(302)
+      response.headers["Location"].should match(/\//)
+    end
+
+    context "when logged out" do
+      league = create_league
+
+      it "redirects to the login page" do
+        response = subject.get "/leagues/#{league.id}/stats/#{player.tag}"
+
+        response.status_code.should eq(302)
+        response.headers["Location"].should match(/\/signin/)
+      end
+    end
+  end
+
   describe "#create" do
     league_props = {
       name: "new league",

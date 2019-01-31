@@ -85,4 +85,13 @@ class League < Jennifer::Model::Base
   def secret?
     visibility == SECRET
   end
+
+  def self.visible_to(player : Player)
+    League.all
+      .left_join(Membership) { League._id == _league_id }
+      .left_join(Invitation) { League._id == _league_id }
+      .where { (Membership._left_at == nil) }
+      .where { (_visibility != League::SECRET) | (Invitation._player_id == player.id) | (Membership._player_id == player.id) }
+      .group("leagues.id")
+  end
 end

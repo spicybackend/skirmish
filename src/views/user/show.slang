@@ -17,10 +17,7 @@
     - player.unconfirmed_games.each do |game|
       == render(partial: "_game_tile.slang")
 
-h3 Recent Games
-.recent_games.tiles
-  - player.recent_games.each do |game|
-    == render(partial: "_game_tile.slang")
-
-h3 Memberships
-== render(partial: "_memberships.slang")
+h3 Leagues
+.leagues
+  - player.leagues_query.where { _id.in(League.visible_to(current_player.not_nil!).pluck(:id)) }.each do |league|
+    == render(partial: "_league_stats.slang")
