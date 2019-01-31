@@ -15,11 +15,11 @@ def create_player_with_mock_user(tag : String? = nil, password : String? = nil, 
   )
 end
 
-def create_league(name : String? = nil, description : String? = nil, start_rating : Int32? = nil, k_factor : Float64? = nil)
+def create_league(name : String? = nil, description : String? = nil, visibility : String = League::OPEN, start_rating : Int32? = nil, k_factor : Float64? = nil)
   League.create!(
     name: name || Random::Secure.hex,
     description: description || Random::Secure.hex,
-    visibility: League::OPEN,
+    visibility: visibility,
     start_rating: start_rating || League::DEFAULT_START_RATING,
     k_factor: k_factor || League::DEFAULT_K_FACTOR
   )

@@ -84,8 +84,8 @@ class LeagueController < ApplicationController
   end
 
   def stats
-    if player = Player.where { _tag == params[:player_tag] }.try(&.first)
-      if league = League.find(params[:league_id])
+    if league = League.find(params[:league_id])
+      if player = Player.where { _tag == params[:player_tag] }.try(&.first)
         if league.secret? && !Membership.where { _league_id == league.id && _player_id == current_player.try(&.id) }.exists?
           # a logged in player should only be able to see graphs for leagues they can also see
           flash[:danger] = "Unable to find league"
@@ -98,12 +98,12 @@ class LeagueController < ApplicationController
           end
         end
       else
-        flash[:danger] = "Unable to find league"
-        redirect_to "/leagues"
+        flash[:danger] = "Unable to find player"
+        redirect_to "/"
       end
     else
-      flash[:danger] = "Unable to find player"
-      redirect_to "/"
+      flash[:danger] = "Unable to find league"
+      redirect_to "/leagues"
     end
   end
 
