@@ -103,14 +103,14 @@ class LeagueController < ApplicationController
             [] of Participation
           end
 
-          isoFormat = Time::Format.new("%F %T")
+          iso_format = Time::Format.new("%F %T")
 
-          rating_history = { isoFormat.format(membership.created_at) => league.start_rating }
+          rating_history = { iso_format.format(membership.created_at) => league.start_rating }
           participations.each do |participation|
-            rating_history[isoFormat.format(participation.created_at)] = participation.rating.not_nil!  # not_nil! as the game was confirmed
+            rating_history[iso_format.format(participation.created_at)] = participation.rating.not_nil!  # not_nil! as the game was confirmed
           end
 
-          rating_history[isoFormat.format(Time.now)] = if participations.empty?
+          rating_history[iso_format.format(Time.now)] = if participations.empty?
             league.start_rating
           else
             participations.to_a.max_by { |p| p.created_at }.rating.not_nil!
