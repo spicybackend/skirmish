@@ -35,7 +35,7 @@ p.description
       img.gravatar src="#{gravatar_src_for(game.loser)}"
       span.droplet.animated.fadeInDown.delay-2s 💧
 
-  .centered
+  .game-overview.centered
     h3 #{game.winner.tag} won against #{game.loser.tag}
     - if game.confirmed?
       .centered
@@ -46,14 +46,29 @@ p.description
         - if show_game_confirmation
           p == render(partial: "_confirmation_form.slang")
 
-  .game-stats
-    table.player-stats
-      tr
-        td Winner 👑
-        td Loser
-      tr
-        td.name = game.winner.display_name
-        td.name = game.loser.display_name
-      tr
-        td = game.confirmed? ? "Gained #{rating_delta} points (#{winner_rating})" : "Will gain #{rating_delta} points (#{winner_rating + rating_delta})"
-        td = game.confirmed? ? "Lost #{rating_delta} points (#{loser_rating})" : "Will lose #{rating_delta} points (#{loser_rating - rating_delta})"
+  .game-stats.row
+    .col-sm-12.col-md-6
+      .card.text-white.bg-dark.mb-3
+        .card-header.flex-spread
+          span.icon-card-header Winner
+          span.text-right 👑
+
+        .card-body
+          h3 = game.winner.tag
+          p = game.confirmed? ? "Gained #{rating_delta} points (#{winner_rating})" : "Will gain #{rating_delta} points (#{winner_rating + rating_delta})"
+
+        .card-footer
+          a.card-link href="/profile/#{game.winner.tag}" View Profile
+
+    .col-sm-12.col-md-6
+      .card.text-white.bg-dark.mb-3
+        .card-header.flex-spread
+          span.icon-card-header Loser
+          span.text-right 💀
+
+        .card-body
+          h3 = game.loser.tag
+          p = game.confirmed? ? "Lost #{rating_delta} points (#{loser_rating})" : "Will lose #{rating_delta} points (#{loser_rating - rating_delta})"
+
+        .card-footer
+          a.card-link href="/profile/#{game.loser.tag}" View Profile
