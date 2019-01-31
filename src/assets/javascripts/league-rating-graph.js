@@ -16,7 +16,7 @@ leagueGraphs.forEach((canvas) => {
         y: leagueStats.ratings[rating]
       })
     }
-    ratingPlots.sort((a, b) => a[0] - b[0])
+    ratingPlots = ratingPlots.sort((a, b) => a[0] - b[0])
 
     let leagueDataset = {
       datasets:
