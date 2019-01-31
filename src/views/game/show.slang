@@ -29,7 +29,7 @@ p.description
       img.gravatar src="#{gravatar_src_for(game.winner)}"
 
     .versus
-      img.animated.rotateIn.faster src="/dist/images/versus.png"
+      img.animated.rotateIn.faster src="/dist/images/versus.svg"
 
     .loser-avatar.animated.bounceInRight
       img.gravatar src="#{gravatar_src_for(game.loser)}"
