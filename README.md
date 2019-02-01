@@ -188,9 +188,7 @@ And comment out lines 60-63 and 65
 ```
 </details>
 
-
 ## Contributing
-
 1. Fork it
 2. Create your feature branch ( `git checkout -b my-new-feature` )
 3. Commit your changes ( `git commit -am 'Add some feature'` )
@@ -198,8 +196,8 @@ And comment out lines 60-63 and 65
 5. Create a new Pull Request
 
 ## Contributors
-
-- [yumoose](https://gitlab.com/yumoose) | Jordane Lew - creator, maintainer
-- [nandahibatullah](https://gitlab.com/nandahibatullah) | Nanda Hibatullah - developer
-- [ricky.mcmillen](https://gitlab.com/ricky.mcmillen) | Ricky McMillen - developer
-- [HookyQR](https://github.com/HookyQR) - developer
+- [yumoose](https://github.com/yumoose) | Jordane Lew
+- [nandahibatullah](https://github.com/nandahibatullah) | Nanda Hibatullah
+- [richardmcmillen](https://github.com/richardmcmillen) | Ricky McMillen
+- [HookyQR](https://github.com/HookyQR)
+- [Dhamsoft](https://github.com/Dhamsoft) | Dhamodharan
