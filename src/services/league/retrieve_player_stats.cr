@@ -32,7 +32,7 @@ class League::RetrievePlayerStats
         end
 
         # add a rating as at today
-        ratings[time_formatter.format(Time.now)] = latest_rating
+        ratings[time_formatter.format(Time.now)] = participations.last?.try(&.rating) || league.start_rating
       end
 
       ratings
@@ -48,7 +48,8 @@ class League::RetrievePlayerStats
         Participation.where { _player_id == player.id }.
           where { sql("participations.game_id in (#{game_ids_for_player.join(", ")})") }.
           where { _rating != nil }.
-          order(created_at: :asc).to_a
+          join(Game) { Participation._game_id == _id }.
+          order(Game._confirmed_at.asc).to_a
       else
         [] of Participation
       end
