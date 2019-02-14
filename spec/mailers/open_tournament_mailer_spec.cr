@@ -64,11 +64,22 @@ describe OpenTournamentMailer do
 
     context "when custom mailer content is given" do
       it "uses the custom content instead of the default mailer text" do
-        custom_content = "Woohoo! A new tournament!"
+        custom_content = <<-CONTENT
+          Woohoo!
+
+          A new tournament is open!"
+        CONTENT
 
         mailer = OpenTournamentMailer.new(player, tournament, custom_content)
 
-        mailer.html.should contain HTML.escape(custom_content)
+        custom_content.split("\n").each do |content_paragraph|
+          p content_paragraph
+          p (/\<p.*\>.*(#{content_paragraph.strip}).*\<\/p\>/.match(mailer.html))
+          p (mailer.html.match(/\<p.*\>.*(#{content_paragraph.strip}).*\<\/p\>/))
+
+          /\<p.*\>.*#{content_paragraph.strip}.*\<\/p\>/.match(mailer.html).should_not be_nil
+        end
+
         mailer.text.should contain custom_content
 
         mailer.html.should_not contain HTML.escape(I18n.translate("mailer.open_tournament.content"))

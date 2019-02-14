@@ -2,17 +2,23 @@
   h2.col.justify-content-between.btn-toolbar
     span.heading-text Game Results
     - player = current_player
-    - if current_player.try(&.admin_of?(league)) && game.unconfirmed?
-      .btn-group
-        button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-          | Admin Tools
-        .dropdown-menu.dropdown-menu-right
-          == form(action: "/leagues/#{game.league_id}/games/#{game.id}/confirm", method: :patch) do
-            == csrf_tag
-            == submit("#{t("game.actions.confirm")} on behalf", "data-confirm": "Are you sure you want to confirm this game on behalf of the unconfirmed?", class: "dropdown-item primary")
+    - if game.unconfirmed?
+      - if (current_player.try(&.admin_of?(league)))
+        .btn-group
+          button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+            | Admin Tools
+          .dropdown-menu.dropdown-menu-right
+            == form(action: "/leagues/#{game.league_id}/games/#{game.id}/confirm", method: :patch) do
+              == csrf_tag
+              == submit("#{t("game.actions.confirm")} on behalf", "data-confirm": "Are you sure you want to confirm this game on behalf of the unconfirmed?", class: "dropdown-item primary")
+            == form(action: "/leagues/#{game.league_id}/games/#{game.id}", method: :delete) do
+              == csrf_tag
+              == submit(t("general.actions.delete"), "data-confirm": "Are you sure you want to delete this unconfirmed game?", class: "dropdown-item danger")
+      - elsif game.logger == current_player
+        .btn-group
           == form(action: "/leagues/#{game.league_id}/games/#{game.id}", method: :delete) do
             == csrf_tag
-            == submit(t("general.actions.delete"), "data-confirm": "Are you sure you want to delete this unconfirmed game?", class: "dropdown-item danger")
+            == submit(t("general.actions.delete"), "data-confirm": "Are you sure you want to delete this unconfirmed game?", class: "btn btn-warning")
 
 p.description
   - if match = game.match
