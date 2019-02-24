@@ -76,12 +76,12 @@
 }
 
 .btn-light {
-  background-color: #fff;
-  border-color: #fff;
+  background-color: white;
+  border-color: white;
 
   &:hover {
-    background-color: darken(#fff, 10%);
-    border-color: darken(#fff, 10%);
+    background-color: darken(white, 10%);
+    border-color: darken(white, 10%);
   }
 }
 
@@ -89,7 +89,8 @@
   background-color: darken($dark-grey, 5%);
   border-color: darken($dark-grey, 5%);
 
-  &:hover {
+  &:hover, &:focus {
+    color: white;
     background-color: darken($dark-grey, 10%);
     border-color: darken($dark-grey, 10%);
   }

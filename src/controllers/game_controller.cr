@@ -44,15 +44,8 @@ class GameController < ApplicationController
     player_id_preselect = nil
 
     if league
-      if tournament = Tournament.for_league(league).order(created_at: :desc).first
-        if tournament.in_progress?
-          current_player_id = current_player.not_nil!.id
-          next_tournament_match = tournament.matches_query.where { (_winner_id == nil) & g((_player_a_id == current_player_id) | (_player_b_id == current_player_id)) }.order(level: :asc).limit(1).first
-
-          player_id_preselect = [next_tournament_match.try(&.player_a_id), next_tournament_match.try(&.player_b_id)].reject { |player_id| player_id == current_player_id }.first
-        end
-      end
-
+      player_id_preselect = opponent_for_current_tournament(league)
+      players_with_existing_games = players_with_existing_games(league)
       other_players = available_opponents(league)
 
       if other_players.empty?
@@ -79,8 +72,10 @@ class GameController < ApplicationController
 
     unless other_player
       flash["danger"] = "Can't find opponent"
-      other_players = available_opponents(league)
       player_id_preselect = nil
+      players_with_existing_games = players_with_existing_games(league)
+      other_players = available_opponents(league)
+
       render("new.slang"); return
     end
 
@@ -100,8 +95,9 @@ class GameController < ApplicationController
       redirect_to "/leagues/#{league.id}/games/#{game.id}"
     else
       flash["danger"] = game_logger.errors.to_s
-      other_players = available_opponents(league)
       player_id_preselect = nil
+      players_with_existing_games = players_with_existing_games(league)
+      other_players = available_opponents(league)
 
       render("new.slang")
     end
@@ -212,13 +208,26 @@ class GameController < ApplicationController
     notifications.each(&.read!)
   end
 
-  private def available_opponents(league)
+  private def available_opponents(league) : Array(Player)
     league.active_players_query.where { _id != current_player.try(&.id) }.order(tag: :asc).to_a
-      .map do |player|
-        [
-          player.id,
-          player.display_name
-        ]
+  end
+
+  private def opponent_for_current_tournament(league)
+    if tournament = Tournament.for_league(league).order(created_at: :desc).first
+      if tournament.in_progress?
+        current_player_id = current_player.not_nil!.id
+        next_tournament_match = tournament.matches_query.where { (_winner_id == nil) & g((_player_a_id == current_player_id) | (_player_b_id == current_player_id)) }.order(level: :asc).limit(1).first
+
+        player_id_preselect = [next_tournament_match.try(&.player_a_id), next_tournament_match.try(&.player_b_id)].reject { |player_id| player_id == current_player_id }.first
       end
+    end
+  end
+
+  private def players_with_existing_games(league) : Array(Player)
+    games = current_player.not_nil!.games_query.unconfirmed.where { Game._league_id == league.id }.to_a
+
+    games.map do |game|
+      game.winner == current_player.not_nil! ? game.loser : game.winner
+    end
   end
 end

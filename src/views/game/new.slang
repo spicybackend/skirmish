@@ -1,5 +1,6 @@
-== form(action: "/leagues/#{league.id}/games", method: :post, class: "main") do
+== form(action: "/leagues/#{league.id}/games", method: :post, class: "main", id: "game-log-form") do
   == csrf_tag
+
   h2 New Game
 
   .form-group.game-logger
@@ -11,7 +12,7 @@
 
     .game-logger-field
       span class="sentence-part" against
-      == select_field( name: "opponent-id", collection: other_players, selected: player_id_preselect, class: "form-control btn-dark")
+      == select_field(name: "opponent-id", collection: other_players.map { |player| [player.id, player.display_name] }, selected: player_id_preselect, class: "form-control btn-dark")
 
     .game-logger-field
       span class="sentence-part" in #{league.name}

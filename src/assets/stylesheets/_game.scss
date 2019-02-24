@@ -1,5 +1,6 @@
 div.game-logger {
   display: flex;
+  justify-content: center;
 
   span.sentence-part {
     line-height: 1.5;
@@ -9,6 +10,10 @@ div.game-logger {
 
   .game-logger-field {
     display: flex;
+
+    select {
+      min-width: 8em;
+    }
   }
 }
 

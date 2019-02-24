@@ -1,11 +1,14 @@
 div.game-logger {
-  display: flex; }
+  display: flex;
+  justify-content: center; }
   div.game-logger span.sentence-part {
     line-height: 1.5;
     font-weight: 400;
     padding: .375rem .75rem; }
   div.game-logger .game-logger-field {
     display: flex; }
+    div.game-logger .game-logger-field select {
+      min-width: 8em; }
 
 @media only screen and (max-width: 768px) {
   div.game-logger {
@@ -387,8 +390,8 @@ form.main {
     border-color: #eb1c39; }
 
 .btn-light {
-  background-color: #fff;
-  border-color: #fff; }
+  background-color: white;
+  border-color: white; }
   .btn-light:hover {
     background-color: #e6e6e6;
     border-color: #e6e6e6; }
@@ -396,7 +399,8 @@ form.main {
 .btn-dark {
   background-color: #292d32;
   border-color: #292d32; }
-  .btn-dark:hover {
+  .btn-dark:hover, .btn-dark:focus {
+    color: white;
     background-color: #1d2124;
     border-color: #1d2124; }
 
