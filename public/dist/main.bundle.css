@@ -508,6 +508,9 @@ a {
 h2.btn-toolbar .heading-text {
   margin-right: 32px; }
 
+h2.btn-toolbar .header-content {
+  display: flex; }
+
 h3 {
   font-size: 28px;
   margin-top: 16px; }

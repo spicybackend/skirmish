@@ -1,6 +1,10 @@
 .row
   h2.col.justify-content-between.btn-toolbar
-    span.heading-text = league.name
+    .header-content
+      span.icon-card-header
+        .icon
+          img.glyph style="background-color: #{league.accent_color};" src="https://png.icons8.com/ios-glyphs/200/ffffff/trophy.png"
+      span.heading-text = league.name
     .btn-group
       span.toggle-button-group
         .btn-group
