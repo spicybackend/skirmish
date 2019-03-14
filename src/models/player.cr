@@ -70,11 +70,17 @@ class Player < Jennifer::Model::Base
   end
 
   def unconfirmed_games
-    games_query.unconfirmed.order(confirmed_at: :desc, created_at: :desc).to_a
+    games_query.
+      unconfirmed.
+      order(confirmed_at: :desc, created_at: :desc).
+      to_a
   end
 
   def recent_games
-    games_query.order(confirmed_at: :desc, created_at: :desc).limit(RECENT_GAMES_LIMIT).to_a
+    games_query.
+      order(confirmed_at: :desc, created_at: :desc).
+      limit(RECENT_GAMES_LIMIT).
+      to_a
   end
 
   def to_h
