@@ -51,7 +51,7 @@ class TournamentController < ApplicationController
       begin
         tournament = Tournament::Open.new(
           league: league,
-          invite_content: sanitize_invite_content(params["invite"]?)
+          description: sanitize_description(params["description"]?)
         ).call.not_nil!
 
         flash[:success] = "The new tournament is open for entry"
@@ -111,7 +111,7 @@ class TournamentController < ApplicationController
     end
   end
 
-  private def sanitize_invite_content(content)
+  private def sanitize_description(content)
     return unless content
 
     content.blank? ? nil : content

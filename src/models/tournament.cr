@@ -5,6 +5,7 @@ class Tournament < Jennifer::Model::Base
     id: Primary64,
     league_id: Int64?,
     finished_at: Time?, # get rid of this? can be calculated
+    description: String?,
 
     created_at: { type: Time, default: Time.now },
     updated_at: { type: Time, default: Time.now }

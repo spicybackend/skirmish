@@ -2,10 +2,12 @@ require "../spec_helper"
 
 describe Tournament::Open do
   league = create_league
+  description = "some description about the tournament"
 
   create_tournament = -> do
     Tournament::Open.new(
-      league: league
+      league: league,
+      description: description
     ).call
   end
 
@@ -52,6 +54,12 @@ describe Tournament::Open do
             tournament = create_tournament.call.not_nil!
 
             tournament.league!.id.should eq league.id
+          end
+
+          it "has the given description" do
+            tournament = create_tournament.call.not_nil!
+
+            tournament.league!.description.should eq league.description
           end
         end
       end
