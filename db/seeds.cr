@@ -99,7 +99,7 @@ Jennifer::Adapter.adapter.transaction do
     request = Invitation::Create.new(league: hotdog_league, player: erik).call.not_nil!
     Invitation::Approve.new(invitation: request, approver: alice).call
 
-    tournament = Tournament::Open.new(league: hotdog_league).call.not_nil!
+    tournament = Tournament::Open.new(league: hotdog_league, description: "A new hotdog league!").call.not_nil!
     [alice, bob, charlie, danielle, erik].each do |player|
       Tournament::Enter.new(player: player, tournament: tournament).call
     end
