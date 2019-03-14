@@ -1,9 +1,9 @@
 class Tournament::Open
-  getter :league, :invite_content
+  getter :league, :description
 
   class OpenError < Exception; end
 
-  def initialize(@league : League, @invite_content : String? = nil)
+  def initialize(@league : League, @description : String? = nil)
   end
 
   def call
@@ -12,7 +12,10 @@ class Tournament::Open
     end
 
     Jennifer::Adapter.adapter.transaction do
-      Tournament.create!(league_id: league.id).tap do |tournament|
+      Tournament.create!(
+        league_id: league.id,
+        description: description
+      ).tap do |tournament|
         notify_players(tournament)
       end
     end
@@ -24,7 +27,7 @@ class Tournament::Open
 
   private def notify_players(tournament)
     league.players.each do |player|
-      OpenTournamentMailer.new(player, tournament, invite_content).send
+      OpenTournamentMailer.new(player, tournament, description).send
     end
   end
 end
