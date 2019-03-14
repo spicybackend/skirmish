@@ -19,6 +19,8 @@ class Membership < Jennifer::Model::Base
   validates_presence :player_id
   validates_presence :league_id
 
+  scope :active { where { (_left_at == nil) & (_joined_at != nil) } }
+
   def active?
     !joined_at.nil? && left_at.nil?
   end

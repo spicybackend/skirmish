@@ -46,11 +46,15 @@ class Player < Jennifer::Model::Base
   end
 
   def member_of?(league : League)
-    memberships_query.where { _league_id == league.id }.where { _left_at == nil }.exists?
+    memberships_query.active.where { _league_id == league.id }.exists?
   end
 
   def membership_for(league : League)
-    memberships_query.where { _league_id == league.id }.where { _left_at == nil }.try(&.first)
+    memberships_query.active.where { _league_id == league.id }.try(&.first)
+  end
+
+  def active_leagues_query
+    leagues_query.where { (Membership._joined_at != nil) & (Membership._left_at == nil) }
   end
 
   def rating_for(league : League)
