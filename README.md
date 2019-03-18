@@ -92,6 +92,8 @@ sudo vim /etc/postgresql/9.5/main/pg_hba.conf
 ```shell
 vim /usr/local/var/postgres/pg_hba.conf
 ```
+</details>
+
 Replace `md5` with `trust` on the lines for local connections
 ```shell
 # IPv4 local connections:
@@ -99,7 +101,6 @@ host    all             all             127.0.0.1/32            trust
 # IPv6 local connections:
 host    all             all             ::1/128                 trust
 ```
-</details>
 
 <br>
 
@@ -125,7 +126,7 @@ To start your Amber server (Both Linux and Mac):
 
 ```shell
 # update the development environment settings to your liking
-mv config/environments/development.yml.example config/environments/development.yml
+cp config/environments/development.yml.example config/environments/development.yml
 
 shards install                    # install dependencies
 shards build                      # build executable binaries
