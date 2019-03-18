@@ -11,7 +11,6 @@ h6.section-header Unread
   - unread_notifications.each do |notification|
     == render(partial: "_notification_tile.slang")
 
-
 h6.section-header Read
 .notifications.tiles
   - read_notifications.each do |notification|

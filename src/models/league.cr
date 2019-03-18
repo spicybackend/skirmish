@@ -2,6 +2,7 @@ class League < Jennifer::Model::Base
   DEFAULT_START_RATING = 1000.to_i
   DEFAULT_K_FACTOR = 32.to_f64
   RECENT_GAMES_LIMIT = 3  # TODO Move to a presenter...
+  DEFAULT_ACCENT_COLOR = "#fd971f"
 
   OPEN = "open"
   CLOSED = "closed"
@@ -20,7 +21,7 @@ class League < Jennifer::Model::Base
 
     name: String,
     description: String?,
-    accent_color: { type: String, default: "#fd971f" },
+    accent_color: { type: String, default: DEFAULT_ACCENT_COLOR },
 
     visibility: { type: String, default: OPEN },
     start_rating: { type: Int32, default: DEFAULT_START_RATING },

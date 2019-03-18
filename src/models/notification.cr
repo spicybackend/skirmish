@@ -1,4 +1,6 @@
 class Notification < Jennifer::Model::Base
+  DEFAULT_NOTIFICATION_COLOR = "#fd971f"
+
   with_timestamps
 
   mapping(
@@ -42,5 +44,9 @@ class Notification < Jennifer::Model::Base
 
     self.read_at = Time.now
     save!
+  end
+
+  def color
+    DEFAULT_NOTIFICATION_COLOR
   end
 end

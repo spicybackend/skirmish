@@ -26,6 +26,10 @@ class GameLoggedNotification < Notification
     "/leagues/#{league.id}/games/#{game.id}"
   end
 
+  def color
+    league.accent_color
+  end
+
   private def game
     Game.find(source_id).not_nil!
   end

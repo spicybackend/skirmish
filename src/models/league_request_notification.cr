@@ -22,6 +22,10 @@ class LeagueRequestNotification < Notification
     Invitation.find(source_id).not_nil!
   end
 
+  def color
+    league.accent_color
+  end
+
   def league
     invitation.league!
   end
