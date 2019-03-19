@@ -34,7 +34,7 @@ dependencies:
 
   jennifer:
     github: imdrasil/jennifer.cr
-    version: "~> 0.7.0"
+    version: "~> 0.7.1"
 
   sam:
     github: imdrasil/sam.cr
