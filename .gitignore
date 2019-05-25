@@ -11,5 +11,5 @@ production.yml
 /bin/
 /node_modules
 
-/config/environments/development.*
-
+/config/environments/development.yml
+/config/environments/test.yml
