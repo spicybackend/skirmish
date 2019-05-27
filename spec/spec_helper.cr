@@ -1,6 +1,7 @@
 ENV["AMBER_ENV"] ||= "test"
 
 require "spec"
+require "spec2"
 require "jennifer"
 require "garnet_spec"
 
