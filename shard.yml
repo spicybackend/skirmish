@@ -4,7 +4,7 @@ version: 0.2.0
 authors:
   - Jordane Lew <jordane.lew@gmail.com>
 
-crystal: 0.26.1
+crystal: 0.27.0
 
 license: UNLICENSED
 
@@ -30,11 +30,11 @@ dependencies:
 
   amber:
     github: amberframework/amber
-    version: "~> 0.11.2"
+    version: ~> 0.11.2
 
   jennifer:
     github: imdrasil/jennifer.cr
-    version: "~> 0.7.1"
+    version: ~> 0.7.1
 
   sam:
     github: imdrasil/sam.cr
@@ -48,7 +48,7 @@ dependencies:
 
   citrine-i18n:
     github: amberframework/citrine-i18n
-    version: 0.3.2
+    version: ~> 0.3.2
 
   multi_auth:
     github: msa7/multi_auth
@@ -71,4 +71,4 @@ development_dependencies:
 
   ameba:
     github: veelenga/ameba
-    version: 0.8.0
+    version: ~> 0.8.0
