@@ -12,8 +12,8 @@ Jennifer::Config.from_uri(ENV["DATABASE_URL"]? || Amber.settings.database_url)
 Jennifer::Config.logger = Logger.new(nil)
 
 # Automatically load schema and run migrations on the test database
-Jennifer::Migration::Runner.drop
-Jennifer::Migration::Runner.create
+# Jennifer::Migration::Runner.drop
+# Jennifer::Migration::Runner.create
 # Jennifer::Migration::Runner.load_schema
 Jennifer::Migration::Runner.migrate
 
