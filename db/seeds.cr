@@ -1,17 +1,17 @@
 require "../config/application.cr"
 # Automatically load schema and run migrations on the test database
-Jennifer::Migration::Runner.load_schema
-Jennifer::Migration::Runner.migrate
 
 Jennifer::Adapter.adapter.transaction do
   if Amber.env.development?
+    default_password_digest = Crypto::Bcrypt::Password.create("password", cost: 10).to_s
+
     alice_user = User.create(
       name: "Alice",
       email: "alice@skirmish.online",
       receive_email_notifications: false,
       verification_code: Random::Secure.hex(8),
       activated_at: Time.now,
-      password_digest: "$2y$10$2usLfyPcXzxmM4prDXg/J.qXlqbijcpVj5eHcYR0CBp7p38Ts8PEe"  # "password"
+      password_digest: default_password_digest
     )
     alice = Player.create!(
       tag: "Alice",
@@ -24,7 +24,7 @@ Jennifer::Adapter.adapter.transaction do
       receive_email_notifications: false,
       verification_code: Random::Secure.hex(8),
       activated_at: Time.now,
-      password_digest: "$2y$10$2usLfyPcXzxmM4prDXg/J.qXlqbijcpVj5eHcYR0CBp7p38Ts8PEe"  # "password"
+      password_digest: default_password_digest
     )
     bob = Player.create!(
       tag: "Bob",
@@ -37,7 +37,7 @@ Jennifer::Adapter.adapter.transaction do
       receive_email_notifications: false,
       verification_code: Random::Secure.hex(8),
       activated_at: Time.now,
-      password_digest: "$2y$10$2usLfyPcXzxmM4prDXg/J.qXlqbijcpVj5eHcYR0CBp7p38Ts8PEe"  # "password"
+      password_digest: default_password_digest
     )
     charlie = Player.create!(
       tag: "Charlie",
@@ -50,7 +50,7 @@ Jennifer::Adapter.adapter.transaction do
       receive_email_notifications: false,
       verification_code: Random::Secure.hex(8),
       activated_at: Time.now,
-      password_digest: "$2y$10$2usLfyPcXzxmM4prDXg/J.qXlqbijcpVj5eHcYR0CBp7p38Ts8PEe"  # "password"
+      password_digest: default_password_digest
     )
     danielle = Player.create!(
       tag: "Danielle",
@@ -63,7 +63,7 @@ Jennifer::Adapter.adapter.transaction do
       receive_email_notifications: false,
       verification_code: Random::Secure.hex(8),
       activated_at: Time.now,
-      password_digest: "$2y$10$2usLfyPcXzxmM4prDXg/J.qXlqbijcpVj5eHcYR0CBp7p38Ts8PEe"  # "password"
+      password_digest: default_password_digest
     )
     erik = Player.create!(
       tag: "Erik",
