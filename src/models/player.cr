@@ -23,6 +23,7 @@ class Player < Jennifer::Model::Base
   has_many :memberships, Membership
   has_many :participations, Participation
   has_many :administrators, Administrator
+  has_many :notifications, Notification
 
   has_and_belongs_to_many :leagues, League, nil, nil, nil, "memberships", "league_id"
   has_and_belongs_to_many :games, Game, nil, nil, nil, "participations", "game_id"
