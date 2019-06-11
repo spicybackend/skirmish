@@ -13,7 +13,6 @@ module ProfileHelper
   end
 
   def notification_count_for(player : Player)
-    # TODO Optimise read_at by adding a where clause
-    Notification.where { _player_id == player.id }.to_a.count { |notification| notification.read? }
+    player.notifications_query.unread.count
   end
 end
