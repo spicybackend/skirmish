@@ -39,6 +39,9 @@ brew install postgresql
 ### Postgres
 Unless you've used Postgres before, or know your way around configuring it already, you'll probably want to follow this quick guide to setting up users for development.
 
+<details><summary>Postgres Quickstart</summary>
+
+### User creation
 <details><summary>For Ubuntu</summary>
 
 ```shell
@@ -46,10 +49,10 @@ Unless you've used Postgres before, or know your way around configuring it alrea
 sudo su - postgres;
 
 # create a user named postgres if it doesn't already exist
-create user postgres;
+create user skirmish;
 
 # then grant it super user access
-alter user postgres with superuser;
+alter user skirmish with superuser;
 
 # optionally create a user to login to postgres yourself
 create user <username> --pwprompt;
@@ -66,18 +69,17 @@ exit
 psql postgres
 
 # create a user named postgres if it doesn't already exist
-create user postgres;
+create user skirmish;
 
 # then grant it super user access
-alter user postgres with superuser;
+alter user skirmish with superuser;
 
 # exit the session as postgres
 exit
 ```
 </details>
 
-<br>
-
+### Authentication configuration
 To change the authentication with postgres to use a simple password 'trust' authentication method, we'll need to edit the `pg_hba.conf` file.
 
 <details><summary>For Ubuntu</summary>
@@ -102,7 +104,7 @@ host    all             all             127.0.0.1/32            trust
 host    all             all             ::1/128                 trust
 ```
 
-<br>
+### Restarting the Postgres service
 
 And finally, ensure the settings for postgres have been applied by restarting the service
 
@@ -118,6 +120,8 @@ sudo service postgresql restart
 ```shell
 brew services restart postgresql
 ```
+</details>
+
 </details>
 
 ## Development
