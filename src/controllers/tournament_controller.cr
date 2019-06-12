@@ -19,7 +19,13 @@ class TournamentController < ApplicationController
       tournament_id = params[:id].gsub(/\..*/, "")
 
       if tournament = Tournament.find(tournament_id)
-        current_entrant = tournament.entrants_query.where { _player_id == current_player.try(&.id) }.first
+        player = current_player.not_nil!
+
+        current_entrant = tournament.entrants_query.where { _player_id == player.id }.first
+        upcoming_match = Tournament::DetermineUpcomingMatch.new(player, tournament).call
+        upcoming_opponent = if upcoming_match
+          upcoming_match.opponent(player)
+        end
 
         respond_with do
           html render("show.slang")
