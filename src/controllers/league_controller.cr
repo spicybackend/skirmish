@@ -114,6 +114,14 @@ class LeagueController < ApplicationController
       membership = player.memberships_query.where { _league_id == league.id }.to_a.last? || Membership.build
       tournament = Tournament.for_league(league).order(created_at: :desc).first
 
+      if tournament
+        current_entrant = tournament.entrants_query.where { _player_id == player.id }.first
+        upcoming_match = Tournament::DetermineUpcomingMatch.new(player, tournament).call
+        upcoming_opponent = if upcoming_match
+          upcoming_match.opponent(player)
+        end
+      end
+
       unaccepted_invite = league.invites_query.where { (_player_id == player.id) & (_accepted_at == nil) & (_approved_at != nil) }.first
 
       render("show.slang")

@@ -1,4 +1,4 @@
-h3 Upcoming Opponent
+h3 Progression
 
 - opponent = upcoming_opponent
 
