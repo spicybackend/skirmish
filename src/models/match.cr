@@ -38,6 +38,14 @@ class Match < Jennifer::Model::Base
     Player.find(winner_id)
   end
 
+  def opponent(player : Player)
+    if player_a_id == player.id
+      player_b
+    else
+      player_a
+    end
+  end
+
   def to_h
     {
       id: id,
