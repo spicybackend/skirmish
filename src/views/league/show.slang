@@ -54,7 +54,7 @@ h3.justify-content-between.btn-toolbar Tournaments
   - if tournament.in_progress?
     p There's currently a tournament in progress.
     == render(partial: "tournament/_tournament_tree.slang")
-    == render(partial: "tournament/_upcoming_opponent.slang")
+    == render(partial: "tournament/_progression.slang")
   - elsif tournament.finished?
     p = "The winner of the last tournament was #{tournament.winner.try(&.tag)}."
   - else tournament.open?
