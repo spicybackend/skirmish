@@ -2,6 +2,8 @@
 
 <img src="https://skirmish.online/dist/images/logo-dark.svg" width="200px" height="200px" alt="Skirmish logo">
 
+[![CircleCI](https://circleci.com/gh/yumoose/skirmish.svg?style=svg)](https://circleci.com/gh/yumoose/skirmish)
+[![dependencies](https://david-dm.org/yumoose/skirmish.svg)](https://david-dm.org/yumoose/skirmish)
 [![Using Amber framework](https://img.shields.io/badge/using-amber_framework-orange.svg)](https://amberframework.org)
 
 ## Getting Started
