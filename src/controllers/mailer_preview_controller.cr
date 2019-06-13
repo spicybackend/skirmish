@@ -38,6 +38,25 @@ class MailerPreviewController < ApplicationController
       else
         render("mailers/game_logged.html.slang", layout: "mailer_layout.html.slang")
       end
+    elsif params[:mailer_name] == "new_tournament_match"
+      match = Match.all.where { (_player_a_id != nil) & (_player_b_id != nil) }.last!
+      player = match.player_a.not_nil!
+
+      user = player.user!
+
+      opponent = match.opponent(player).not_nil!
+      tournament = match.tournament!
+      league = tournament.league!
+
+      player_rating = player.rating_for(league)
+      opponent_rating = opponent.rating_for(league)
+      win_chance = (Rating::WinProbability.new(player_rating, opponent_rating).call * 100).round
+
+      if text_only_preview?
+        render("mailers/tournament_match.text.ecr")
+      else
+        render("mailers/tournament_match.html.slang", layout: "mailer_layout.html.slang")
+      end
     else
       flash["warning"] = "Can't find mailer"
       redirect_to "/"
