@@ -99,7 +99,7 @@ mailer:
     subtitle: "You're up against %{opponent} in %{league_name}"
     content: |
       Through a rigorous amount of simulation and testing we've determined that you have about %{win_chance}% chance of winning against %{opponent}.
-      Note; simluations and tests are totally BS. This number is based on current systematic rating and has nothing to do with the price of fish.
+      Note; simluations and tests are competely fictitious. This number is based on current systematic rating and has nothing to do with the price of fish.
     action: "View Tournament"
 
   password_reset:

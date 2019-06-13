@@ -2,6 +2,8 @@
 <%= "-" * I18n.translate("mailer.tournament_match.title").size %>
 <%= I18n.translate("mailer.tournament_match.subtitle", { opponent: opponent.tag, league_name: league.name }) %>
 
-<%= I18n.translate("mailer.tournament_match.content", { opponent: opponent.tag, win_chance: win_chance }) %>
+<% I18n.translate("mailer.tournament_match.content", { opponent: opponent.tag, win_chance: win_chance }).split("\n").each do |content_paragraph| %>
+  <%= content_paragraph %>
+<% end %>
 
 <%= ENV["BASE_URL"] %>/leagues/<%= league.id %>/tournaments/<%= tournament.id %>
