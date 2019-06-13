@@ -1,0 +1,7 @@
+<%= I18n.translate("mailer.tournament_match.title") %>
+<%= "-" * I18n.translate("mailer.tournament_match.title").size %>
+<%= I18n.translate("mailer.tournament_match.subtitle", { opponent: opponent.tag, league_name: league.name }) %>
+
+<%= I18n.translate("mailer.tournament_match.content", { opponent: opponent.tag, win_chance: win_chance }) %>
+
+<%= ENV["BASE_URL"] %>/leagues/<%= league.id %>/tournaments/<%= tournament.id %>

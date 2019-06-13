@@ -93,6 +93,15 @@ mailer:
     content: "Join now before the tournament kicks off!"
     action: "View Tournament"
 
+  tournament_match:
+    subject: "Tournament match with %{opponent}"
+    title: "New tournament match"
+    subtitle: "You're up against %{opponent} in %{league_name}"
+    content: |
+      Through a rigorous amount of simulation and testing we've determined that you have about %{win_chance}% chance of winning against %{opponent}.
+      Note; simluations and tests are totally BS. This number is based on current systematic rating and has nothing to do with the price of fish.
+    action: "View Tournament"
+
   password_reset:
     subject: "Password reset request"
     title: "Password reset"
