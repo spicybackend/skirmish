@@ -22,6 +22,7 @@ class League < Jennifer::Model::Base
     name: String,
     description: String?,
     accent_color: { type: String, default: DEFAULT_ACCENT_COLOR },
+    custom_icon_url: String?,
 
     visibility: { type: String, default: OPEN },
     start_rating: { type: Int32, default: DEFAULT_START_RATING },
