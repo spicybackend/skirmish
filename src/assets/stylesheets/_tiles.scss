@@ -82,4 +82,10 @@
       }
     }
   }
+
+  .notification {
+    &.unread {
+      font-weight: bold;
+    }
+  }
 }
