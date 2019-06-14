@@ -20,7 +20,10 @@
     == select_field(:visibility, collection: League::VISIBILITY_OPTIONS.map{ |o| [o, o.capitalize] }, selected: league.visibility, class: "form-control")
   .form-group
     == label :accent_color, content: "Accent Colour"
-    == text_field(:accent_color, value: league.accent_color, placeholder: "A splash of hex to make your league truly yours", class: "form-control")
+    == text_field(:accent_color, value: league.accent_color, placeholder: "A splash of hex to brighten up your league", class: "form-control")
+  .form-group
+    == label :custom_icon_url, content: "Icon URL"
+    == text_field(:custom_icon_url, value: league.custom_icon_url, placeholder: "An image to make your league truly yours", class: "form-control")
   .form-group
     == label :start_rating, content: "Initial Rating"
     == text_field(:start_rating, type: :number, value: league.start_rating || League::DEFAULT_START_RATING, placeholder: League::DEFAULT_START_RATING, class: "form-control")
