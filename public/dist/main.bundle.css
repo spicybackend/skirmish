@@ -190,6 +190,9 @@ div.leagues {
 .notifications .tile .icon img {
   background-color: #ffa039; }
 
+.notifications .notification.unread {
+  font-weight: bold; }
+
 table.body.mailer table.container p, table.body.mailer table.container a {
   font-family: "Muli", "Helvetica Neue", Helvetica, Arial, sans-serif; }
 
@@ -466,6 +469,20 @@ form.main {
   color: white;
   font-size: 1.25em;
   margin-bottom: 0.5em; }
+
+.pagination li.page-item.disabled a {
+  background-color: transparent;
+  border: 1px solid rgba(0, 0, 0, 0.125); }
+
+.pagination a {
+  color: #ef4b62;
+  background-color: rgba(0, 0, 0, 0.03);
+  transition: background-color 0.15s;
+  border: 1px solid rgba(0, 0, 0, 0.125); }
+  .pagination a:hover {
+    color: #ef4b62;
+    background-color: rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.125); }
 
 a.dropdown-item {
   display: flex;

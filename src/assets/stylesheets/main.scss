@@ -33,6 +33,28 @@ $dark-grey: #343a40;
 @import "home";
 @import "tournament";
 
+.pagination {
+  li.page-item.disabled {
+    a {
+      background-color: transparent;
+      border: 1px solid rgba(0,0,0,.125);
+    }
+  }
+
+  a {
+    color: $brand-primary;
+    background-color: rgba(0, 0, 0, 0.03);
+    transition: background-color 0.15s;
+    border: 1px solid rgba(0,0,0,.125);
+
+    &:hover {
+      color: $brand-primary;
+      background-color: rgba(0, 0, 0, 0.1);
+      border: 1px solid rgba(0,0,0,.125);
+    }
+  }
+}
+
 a.dropdown-item {
   display: flex;
   justify-content: space-between;

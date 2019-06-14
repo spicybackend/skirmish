@@ -13,16 +13,14 @@
     - notifications.each do |notification|
       == render(partial: "_notification_tile.slang")
 
-  nav aria-label="Page navigation example"
-    ul class="pagination"
-      - if page_number != 0
-        li class="page-item"
-          a class="page-link" href="/notifications?page=#{page_number - 1}" Previous
+  nav
+    ul class="pagination justify-content-center"
+      li class="page-item #{"disabled" if page_number == 1}"
+        a class="page-link" href="/notifications?page=#{[1, page_number - 1].max}" Previous
 
       - (1..(total_items / per_page)).to_a.each do |page_number|
         li class="page-item"
           a class="page-link" href="/notifications?page=#{page_number}" = page_number
 
-      - if page_number != last_page
-        li class="page-item"
-          a class="page-link" href="/notifications?page=#{page_number + 1}" Next
+      li class="page-item #{"disabled" if page_number == last_page}"
+        a class="page-link" href="/notifications?page=#{[last_page, page_number + 1].min}" Next
