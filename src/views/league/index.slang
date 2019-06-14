@@ -12,8 +12,7 @@ h6.section-header All Leagues
       .card.text-white.bg-dark.w-100.mb-3
         .card-header.flex-spread
           span.icon-card-header
-            .icon
-              img.glyph style="background-color: #{league.accent_color};" src="https://png.icons8.com/ios-glyphs/200/ffffff/trophy.png"
+            == render(partial: "league/_icon.slang")
             = league.name
           - if rating = current_player.try(&.rating_for(league))
             span.text-right = "Rated #{rating}"

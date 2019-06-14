@@ -1,5 +1,6 @@
 class Notification < Jennifer::Model::Base
   DEFAULT_NOTIFICATION_COLOR = "#fd971f"
+  DEFAULT_NOTIFICATION_ICON_URL = "https://png.icons8.com/ios-glyphs/200/ffffff/star.png"
 
   with_timestamps
 
@@ -48,5 +49,13 @@ class Notification < Jennifer::Model::Base
 
   def color
     DEFAULT_NOTIFICATION_COLOR
+  end
+
+  def icon_url
+    DEFAULT_NOTIFICATION_ICON_URL
+  end
+
+  def custom_icon?
+    false
   end
 end

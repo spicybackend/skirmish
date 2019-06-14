@@ -67,6 +67,22 @@ describe League do
       end
     end
 
+    describe "custom image URL" do
+      it "is optional" do
+        league.custom_icon_url = nil
+
+        league.valid?.should be_true
+      end
+
+      it "must be a valid URL" do
+        league.custom_icon_url = "not-a-url.com"
+        league.valid?.should be_false
+
+        league.custom_icon_url = "https://some-valid-looking-url.com/image"
+        league.valid?.should be_true
+      end
+    end
+
     describe "start rating" do
       it "must be between 100 and 3000" do
         league.start_rating = 99
@@ -131,6 +147,23 @@ describe League do
           league.active_players.size.should eq 0
         end
       end
+    end
+  end
+
+  describe "#icon_url" do
+    context "when the league has no custom icon URL set" do
+      it "is the default trophy image URL" do
+        league.custom_icon_url = nil
+
+        league.icon_url.should eq League::TROPHY_GLYPH_URL
+      end
+    end
+
+    context "when the league has a custom icon URL set" do
+      custom_image_url = "http://some.image/url"
+      league.custom_icon_url = custom_image_url
+
+      league.icon_url.should eq custom_image_url
     end
   end
 end

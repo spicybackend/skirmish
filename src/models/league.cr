@@ -3,6 +3,10 @@ class League < Jennifer::Model::Base
   DEFAULT_K_FACTOR = 32.to_f64
   RECENT_GAMES_LIMIT = 3  # TODO Move to a presenter...
   DEFAULT_ACCENT_COLOR = "#fd971f"
+  TROPHY_GLYPH_URL = "https://png.icons8.com/ios-glyphs/200/ffffff/trophy.png"
+
+  HEX_COLOR_REGEX = /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/
+  URL_REGEX = /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)/
 
   OPEN = "open"
   CLOSED = "closed"
@@ -53,7 +57,9 @@ class League < Jennifer::Model::Base
   validates_numericality :start_rating, greater_than_or_equal_to: 100, less_than_or_equal_to: 3000
   # TODO: Re-enable once Jennifer Numericality is fixed. Float64#even? and #odd? removed in 0.27.0.
   # validates_numericality :k_factor, greater_than_or_equal_to: 1, less_than_or_equal_to: 100
-  validates_format :accent_color, /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/
+
+  validates_format :accent_color, HEX_COLOR_REGEX
+  validates_format :custom_icon_url, URL_REGEX, if: :custom_icon_url
 
   scope :open { where { _visibility == OPEN } }
   scope :closed { where { _visibility == CLOSED } }
@@ -95,5 +101,13 @@ class League < Jennifer::Model::Base
       .where { (Membership._left_at == nil) }
       .where { (_visibility != League::SECRET) | (Invitation._player_id == player.id) | (Membership._player_id == player.id) }
       .group("leagues.id")
+  end
+
+  def icon_url
+    custom_icon_url || TROPHY_GLYPH_URL
+  end
+
+  def custom_icon?
+    custom_icon_url
   end
 end

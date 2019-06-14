@@ -65,10 +65,14 @@ a.dropdown-item {
     object-fit: cover;
     overflow: hidden;
     margin-right: 16px;
+  }
+}
 
-    &.glyph {
-      padding: 15%;
-    }
+img.glyph {
+  padding: 15%;
+
+  &.custom {
+    padding: 0;
   }
 }
 
