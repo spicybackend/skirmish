@@ -33,4 +33,12 @@ class LeagueInviteNotification < Notification
   def approver
     invitation.approver!
   end
+
+  def icon_url
+    league.icon_url
+  end
+
+  def custom_icon?
+    league.custom_icon?
+  end
 end

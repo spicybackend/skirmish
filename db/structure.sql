@@ -283,7 +283,8 @@ CREATE TABLE public.leagues (
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
     accent_color character varying(9) DEFAULT '#fd971f'::character varying,
-    visibility character varying(32)
+    visibility character varying(32),
+    custom_icon_url text
 );
 
 

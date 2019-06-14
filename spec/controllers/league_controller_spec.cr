@@ -166,6 +166,7 @@ describe LeagueControllerTest do
       name: "new league",
       description: "some description",
       accent_color: "#abc123",
+      custom_icon_url: "https://some.icon/url",
       visibility: League::OPEN,
       start_rating: League::DEFAULT_START_RATING,
       k_factor: League::DEFAULT_K_FACTOR
@@ -212,6 +213,8 @@ describe LeagueControllerTest do
 
           league.name.should eq league_props[:name]
           league.description.should eq league_props[:description]
+          league.accent_color.should eq league_props[:accent_color]
+          league.custom_icon_url.should eq league_props[:custom_icon_url]
           league.visibility.should eq league_props[:visibility]
           league.start_rating.should eq league_props[:start_rating]
           league.k_factor.should eq league_props[:k_factor]
@@ -260,6 +263,7 @@ describe LeagueControllerTest do
       name: "new league",
       description: "some description",
       accent_color: "#abc123",
+      custom_icon_url: "https://some.icon/url",
       visibility: League::OPEN,
       start_rating: League::DEFAULT_START_RATING,
       k_factor: League::DEFAULT_K_FACTOR
@@ -286,6 +290,8 @@ describe LeagueControllerTest do
 
           league.name.should eq league_props[:name]
           league.description.should eq league_props[:description]
+          league.accent_color.should eq league_props[:accent_color]
+          league.custom_icon_url.should eq league_props[:custom_icon_url]
           league.visibility.should eq league_props[:visibility]
           league.start_rating.should eq league_props[:start_rating]
           league.k_factor.should eq league_props[:k_factor]

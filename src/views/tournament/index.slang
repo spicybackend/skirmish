@@ -17,8 +17,7 @@ p.description
 .tournaments.tiles
   - tournaments.each do |tournament|
     a.tile href="/leagues/#{league.id}/tournaments/#{tournament.id}"
-      .icon
-        img.glyph style="background-color: #{league.accent_color};" src="https://png.icons8.com/ios-glyphs/200/ffffff/trophy.png"
+      == render(partial: "league/_icon.slang")
       - if tournament.open?
         content Open to join
       - elsif tournament.in_progress?

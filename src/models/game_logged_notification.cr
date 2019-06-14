@@ -30,6 +30,14 @@ class GameLoggedNotification < Notification
     league.accent_color
   end
 
+  def icon_url
+    league.icon_url
+  end
+
+  def custom_icon?
+    league.custom_icon?
+  end
+
   private def game
     Game.find(source_id).not_nil!
   end

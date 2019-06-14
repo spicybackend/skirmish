@@ -1,8 +1,7 @@
 .card.text-white.bg-dark.w-100.mb-3
   .card-header.flex-spread
     span.icon-card-header
-      .icon
-        img.glyph style="background-color: #{league.accent_color};" src="https://png.icons8.com/ios-glyphs/200/ffffff/trophy.png"
+      == render(partial: "league/_icon.slang")
       = league.name
     span.text-right = "Rated #{player.rating_for(league)}"
 

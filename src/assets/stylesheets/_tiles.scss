@@ -29,10 +29,6 @@
         height: 100%;
         object-fit: cover;
         overflow: hidden;
-
-        &.glyph {
-          padding: 15%;
-        }
       }
 
       & + .icon {

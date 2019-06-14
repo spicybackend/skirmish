@@ -164,8 +164,6 @@ div.leagues {
         height: 100%;
         object-fit: cover;
         overflow: hidden; }
-        .tiles .tile .icon img.glyph {
-          padding: 15%; }
       .tiles .tile .icon + .icon {
         margin-left: -16px;
         z-index: 1; }
@@ -496,8 +494,11 @@ a.dropdown-item {
     object-fit: cover;
     overflow: hidden;
     margin-right: 16px; }
-    .icon-card-header img.glyph {
-      padding: 15%; }
+
+img.glyph {
+  padding: 15%; }
+  img.glyph.custom {
+    padding: 0; }
 
 a {
   color: #ef4b62;
