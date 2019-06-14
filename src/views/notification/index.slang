@@ -6,12 +6,21 @@
         == csrf_tag
         == submit(t("notification.actions.mark_all_as_read"), class: "btn btn-dark")
 
-h6.section-header Unread
-.notifications.tiles
-  - unread_notifications.each do |notification|
-    == render(partial: "_notification_tile.slang")
+- if notifications.empty?
+  p No notifications to show
+- else
+  .notifications.tiles
+    - notifications.each do |notification|
+      == render(partial: "_notification_tile.slang")
 
-h6.section-header Read
-.notifications.tiles
-  - read_notifications.each do |notification|
-    == render(partial: "_notification_tile.slang")
+  nav
+    ul class="pagination justify-content-center"
+      li class="page-item #{"disabled" if page_number == 1}"
+        a class="page-link" href="/notifications?page=#{[1, page_number - 1].max}" Previous
+
+      - (1..(total_items / per_page)).to_a.each do |page_number|
+        li class="page-item"
+          a class="page-link" href="/notifications?page=#{page_number}" = page_number
+
+      li class="page-item #{"disabled" if page_number == last_page}"
+        a class="page-link" href="/notifications?page=#{[last_page, page_number + 1].min}" Next

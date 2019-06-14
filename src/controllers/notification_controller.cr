@@ -5,8 +5,10 @@ class NotificationController < ApplicationController
 
   def index
     player = current_player.not_nil!
-    unread_notifications = Notification.for_player(player).unread.order(created_at: :desc).to_a #.map(&.presented)
-    read_notifications = Notification.for_player(player).read.order(created_at: :desc).to_a #.map(&.presented)
+
+    total_items = Notification.for_player(player).count
+    last_page = total_items / per_page
+    notifications = Notification.for_player(player).order(created_at: :desc).limit(per_page).offset(offset)
 
     render("index.slang")
   end
@@ -49,5 +51,17 @@ class NotificationController < ApplicationController
     notifications.update(read_at: Time.now)
 
     redirect_to "/notifications"
+  end
+
+  private def page_number
+    (params[:page]? || 1).to_i
+  end
+
+  private def per_page
+    10
+  end
+
+  private def offset
+    (page_number - 1) * per_page
   end
 end
