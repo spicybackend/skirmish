@@ -10,6 +10,7 @@ executors:
         environment:
           POSTGRES_USER: runner
           POSTGRES_DB: skirmish_test
+      - image: redis
 
 commands:
   checkout_and_install_dependencies:
