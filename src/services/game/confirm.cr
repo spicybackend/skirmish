@@ -1,6 +1,6 @@
 class Game::Confirm
   getter :game, :confirming_player, league : League, winner : Player, loser : Player, winner_participation : Participation, loser_participation : Participation
-  property :errors
+  property :errors, :redis
 
   def initialize(@game : Game, @confirming_player : Player)
     @league = game.league!
@@ -11,6 +11,7 @@ class Game::Confirm
     @loser_participation = game.participations_query.where { _won == false }.to_a.first
 
     @errors = [] of String
+    @redis = nil
   end
 
   def call
@@ -27,6 +28,8 @@ class Game::Confirm
 
         if game_and_participations_valid?
           save_game_and_participations
+          update_league_leaderboard
+
           true
         else
           @errors += game_and_participation_errors.map(&.to_s).compact
@@ -104,5 +107,39 @@ class Game::Confirm
 
   private def game_and_participation_errors
     game.errors.full_messages + winner_participation.errors.full_messages + loser_participation.errors.full_messages
+  end
+
+  private def update_league_leaderboard
+    current_leaderboard = redis.lrange(leaderboard_redis_key, 0, -1).map(&.as(String))
+    new_leaderboard = current_leaderboard
+
+    winner_pos = current_leaderboard.index(winner.id.to_s)
+    loser_pos = current_leaderboard.index(loser.id.to_s)
+
+    if !winner_pos && loser_pos
+      new_leaderboard.push(winner.id.to_s)
+      winner_pos = new_leaderboard.size - 1
+    end
+
+    if winner_pos && loser_pos && winner_pos > loser_pos
+      new_leaderboard.delete_at(winner_pos)
+      new_leaderboard.insert(loser_pos, winner.id.to_s)
+
+      redis.del(leaderboard_redis_key)
+
+      new_leaderboard.each do |player_id|
+        redis.rpush(leaderboard_redis_key, player_id)
+      end
+    elsif !winner_pos && !loser_pos
+      redis.rpush(leaderboard_redis_key, winner.id.to_s)
+    end
+  end
+
+  private def redis
+    @redis ||= Redis.new
+  end
+
+  private def leaderboard_redis_key
+    "league-#{league.id}-leaderboard"
   end
 end
