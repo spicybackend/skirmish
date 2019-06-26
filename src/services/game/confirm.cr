@@ -140,6 +140,6 @@ class Game::Confirm
   end
 
   private def leaderboard_redis_key
-    "league-#{league.id}-leaderboard"
+    Leaderboard::KingOfTheHill.redis_lookup_key(league)
   end
 end
