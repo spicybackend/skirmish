@@ -61,9 +61,8 @@ h3.justify-content-between.btn-toolbar Tournaments
 - else
   p No tournament has been opened for #{league.name}
 
-h3 Leaderboard
-- leaderboard = Leaderboard::PureSkill.new(league: league)
-== render(partial: "_leaderboard.slang")
+h3 Leaderboards
+== render(partial: "_leaderboards.slang")
 
 h3 Recent Games
 == render(partial: "_recent_games.slang")
