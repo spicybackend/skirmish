@@ -2,7 +2,7 @@ require "./spec_helper"
 # require "../../../src/concepts/leaderboard/pure_skill.cr"
 
 describe Leaderboard::KingOfTheHill do
-  redis = Redis.new
+  redis = Leaderboard::KingOfTheHill.redis
 
   describe "#rankings" do
     context "when no games have been played" do

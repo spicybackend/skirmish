@@ -2,12 +2,16 @@ class Leaderboard::KingOfTheHill < Leaderboard::Base
   setter ranked_players_with_ratings : Array(NamedTuple(rating: Int32, player: Player, rank: Int32)) | Nil
   property leaderboard_player_ids : Array(Redis::RedisValue) | Nil
 
-  getter :redis
-
   def initialize(@league : League)
     super(league: league)
+  end
 
-    @redis = Redis.new
+  def self.redis
+    @@redis ||= if redis_url = ENV["REDIS_URL"]?
+      Redis.new(url: redis_url)
+    else
+      Redis.new
+    end
   end
 
   def self.redis_lookup_key(league : League)
@@ -33,7 +37,7 @@ class Leaderboard::KingOfTheHill < Leaderboard::Base
   end
 
   private def leaderboard_player_ids
-    @leaderboard_player_ids ||= redis.lrange(redis_lookup_key, 0, -1)
+    @leaderboard_player_ids ||= self.class.redis.lrange(redis_lookup_key, 0, -1)
   end
 
   private def ranked_players_with_ratings

@@ -136,7 +136,7 @@ class Game::Confirm
   end
 
   private def redis
-    @redis ||= Redis.new
+    @redis ||= Leaderboard::KingOfTheHill.redis
   end
 
   private def leaderboard_redis_key
