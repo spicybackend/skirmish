@@ -18,9 +18,9 @@
       li class="page-item #{"disabled" if page_number == 1}"
         a class="page-link" href="/notifications?page=#{[1, page_number - 1].max}" Previous
 
-      - (1..(total_items / per_page)).to_a.each do |page_number|
-        li class="page-item"
-          a class="page-link" href="/notifications?page=#{page_number}" = page_number
+      - (1..last_page).to_a.each do |page|
+        li class="page-item #{"current" if page_number == page}"
+          a class="page-link" href="/notifications?page=#{page}" = page
 
       li class="page-item #{"disabled" if page_number == last_page}"
         a class="page-link" href="/notifications?page=#{[last_page, page_number + 1].min}" Next
