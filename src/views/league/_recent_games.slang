@@ -7,4 +7,4 @@
     a.tile href="/leagues/#{league.id}/games/#{game.id}"
       == render(partial: "league/_icon.slang")
       .content = "#{winner.tag} won against #{other_player}"
-      .secondary = time_units_since(game.created_at)
+      .secondary = time_units_since(game.created_at).capitalize
