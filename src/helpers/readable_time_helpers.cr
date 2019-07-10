@@ -6,36 +6,36 @@ module ReadableTimeHelpers
 
     if span.total_weeks.to_i > 0
       if span.total_weeks.to_i == 1
-        "Last week"
+        "last week"
       else
         "#{span.total_weeks.to_i} weeks ago"
       end
     elsif span.total_days.to_i > 0
       if span.total_days.to_i == 1
-        "Yesterday"
+        "yesterday"
       else
         "#{span.total_days.to_i} days ago"
       end
     elsif span.total_hours.to_i > 0
       if span.total_hours.to_i == 1
-        "An hour ago"
+        "an hour ago"
       else
         "#{span.total_hours.to_i} hours ago"
       end
     elsif span.total_minutes.to_i > 0
       if span.total_minutes.to_i == 1
-        "A minute ago"
+        "a minute ago"
       else
         "#{span.total_minutes.to_i} minutes ago"
       end
     elsif span.total_seconds.to_i > 0
       if span.total_seconds.to_i == 1
-        "A second ago"
+        "a second ago"
       else
         "#{span.total_seconds.to_i} seconds ago"
       end
     else
-      "Now"
+      "now"
     end
   end
 end
