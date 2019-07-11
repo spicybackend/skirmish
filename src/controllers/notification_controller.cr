@@ -7,7 +7,7 @@ class NotificationController < ApplicationController
     player = current_player.not_nil!
 
     total_items = Notification.for_player(player).count
-    last_page = total_items / per_page
+    last_page = total_items / per_page + 1
     notifications = Notification.for_player(player).order(created_at: :desc).limit(per_page).offset(offset)
 
     render("index.slang")

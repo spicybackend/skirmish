@@ -41,6 +41,14 @@ $dark-grey: #343a40;
     }
   }
 
+  li.page-item.current {
+    a {
+      color: $brand-primary;
+      background-color: rgba(0, 0, 0, 0.1);
+      border: 1px solid rgba(0,0,0,.125);
+    }
+  }
+
   a {
     color: $brand-primary;
     background-color: rgba(0, 0, 0, 0.03);
