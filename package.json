@@ -26,7 +26,7 @@
   },
   "dependencies": {
     "chart.js": "^2.7.3",
-    "cytoscape": "^3.6.2",
+    "cytoscape": "^3.8.1",
     "mo-js": "^0.288.2"
   }
 }
