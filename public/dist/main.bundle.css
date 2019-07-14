@@ -474,6 +474,11 @@ form.main {
   background-color: transparent;
   border: 1px solid rgba(0, 0, 0, 0.125); }
 
+.pagination li.page-item.current a {
+  color: #ef4b62;
+  background-color: rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.125); }
+
 .pagination a {
   color: #ef4b62;
   background-color: rgba(0, 0, 0, 0.03);
