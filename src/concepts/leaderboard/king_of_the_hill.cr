@@ -41,14 +41,21 @@ class Leaderboard::KingOfTheHill < Leaderboard::Base
   end
 
   private def ranked_players_with_ratings
+    inactive_player_count = 0
+
     @ranked_players_with_ratings ||= leaderboard_player_ids.map_with_index do |player_id, index|
       player = Player.find(player_id.as(String).to_i64).not_nil!
 
-      {
-        rating: player.rating_for(league),
-        player: player,
-        rank: index + 1
-      }
-    end
+      if player.member_of?(league)
+        {
+          rating: player.rating_for(league),
+          player: player,
+          rank: index + 1 - inactive_player_count
+        }
+      else
+        inactive_player_count += 1
+        nil
+      end
+    end.compact
   end
 end
