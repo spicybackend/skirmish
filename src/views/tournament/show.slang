@@ -7,7 +7,7 @@
           - if tournament.open?
             - if current_entrant
               == link_to(t("tournament.actions.leave"), "/leagues/#{league.id}/tournaments/#{tournament.id}/leave?_csrf=#{csrf_token}", "data-method": "delete", "data-confirm": "Are you sure you want to leave the tournament?", class: "btn btn-warning")
-            - else
+            - elsif current_player.try(&.member_of?(league))
               == form(action: "/leagues/#{league.id}/tournaments/#{tournament.id}/join", method: :post) do
                 == csrf_tag
                 == submit(t("tournament.actions.join"), class: "btn btn-primary")

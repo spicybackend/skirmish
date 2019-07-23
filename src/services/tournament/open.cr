@@ -26,7 +26,7 @@ class Tournament::Open
   end
 
   private def notify_players(tournament)
-    league.players.each do |player|
+    league.active_players.each do |player|
       OpenTournamentMailer.new(player, tournament, description).send
     end
   end

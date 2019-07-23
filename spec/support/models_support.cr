@@ -48,7 +48,18 @@ def create_and_pit_players(league : League)
 end
 
 def set_player_rating(league : League, player : Player, rating : Int32)
-  participation = player.participations.last
+  if !player.participations_query.exists?
+    # if the player hasn't participated, make a new player, log a game and then remove the player
+    another_player = create_player_with_mock_user
+    membership = Membership.create!(player_id: another_player.id, league_id: league.id, joined_at: Time.now)
+    game_logger = League::LogGame.new(league: league, winner: player, loser: another_player, logger: player)
+    game_logger.call
+    game = game_logger.game
+    Game::Confirm.new(game: game, confirming_player: another_player).call
+    membership.update!(left_at: Time.now)
+  end
+
+  participation = player.participations_query.order(created_at: :desc).first.not_nil!
   participation.rating = rating
   participation.save
 end
