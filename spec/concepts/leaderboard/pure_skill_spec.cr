@@ -65,8 +65,8 @@ describe Leaderboard::PureSkill do
       leaderboard.ranking_for(player_three).should eq 3
 
       rating_for_player_two = player_two.rating_for(league)
-      set_player_rating(league, player_one, rating_for_player_two - 2)
-      set_player_rating(league, player_three, rating_for_player_two - 1)
+      set_player_rating(league, player_one, rating_for_player_two - 20)
+      set_player_rating(league, player_three, rating_for_player_two - 10)
 
       leaderboard = Leaderboard::PureSkill.new(league)
       leaderboard.ranking_for(player_one).should eq 3
