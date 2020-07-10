@@ -108,12 +108,15 @@ class LeagueController < ApplicationController
   end
 
   def show
+    puts "show league"
+
     if league = League.find(params[:id])
       player = current_player.not_nil!
 
       membership = player.memberships_query.where { _league_id == league.id }.to_a.last? || Membership.build
       tournament = Tournament.for_league(league).order(created_at: :desc).first
 
+      puts "found tourney"
       if tournament
         current_entrant = tournament.entrants_query.where { _player_id == player.id }.first
         upcoming_match = Tournament::DetermineUpcomingMatch.new(player, tournament).call
@@ -123,6 +126,8 @@ class LeagueController < ApplicationController
       end
 
       unaccepted_invite = league.invites_query.where { (_player_id == player.id) & (_accepted_at == nil) & (_approved_at != nil) }.first
+
+      puts "render"
 
       render("show.slang")
     else
@@ -140,6 +145,8 @@ class LeagueController < ApplicationController
   end
 
   def create
+    puts "league create"
+
     league = League.new({
       name: params[:name],
       description: params[:description],
@@ -217,7 +224,7 @@ class LeagueController < ApplicationController
   end
 
   def destroy
-    Jennifer::Adapter.adapter.transaction do
+    Jennifer::Adapter.default_adapter.transaction do
       if league = League.find params["id"]
         league.administrators_query.destroy
         league.memberships_query.destroy
@@ -245,6 +252,8 @@ class LeagueController < ApplicationController
   private def redirect_from_secret_league
     player = current_player
     league = League.find(params[:id])
+
+    puts "redirect from secret league"
 
     if player && league && league.secret? && !player.member_of?(league) && !league.invites_query.where { _player_id == player.try(&.id) }.exists?
       flash["warning"] = "Can't find league"

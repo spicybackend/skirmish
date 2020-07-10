@@ -13,8 +13,8 @@ class Player < Jennifer::Model::Base
 
     tag: String,
 
-    created_at: { type: Time, default: Time.now },
-    updated_at: { type: Time, default: Time.now }
+    created_at: { type: Time, default: Time.local },
+    updated_at: { type: Time, default: Time.local }
   )
 
   belongs_to :user, User
@@ -43,7 +43,9 @@ class Player < Jennifer::Model::Base
   end
 
   def admin_of?(league : League)
+    puts "admin of"
     administrators_query.where { _league_id == league.id }.exists?
+    puts "admin of passed"
   end
 
   def member_of?(league : League)

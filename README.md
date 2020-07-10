@@ -25,7 +25,7 @@ There are also some other dependencies required for some extensions of Crystal a
 <details><summary>For Ubuntu</summary>
 
 ```shell
-sudo apt install -y postgresql libssl-dev libxml2-dev libyaml-dev libgmp-dev libreadline-dev libevent-dev libsqlite3-dev
+sudo apt install -y postgresql libssl-dev libxml2-dev libyaml-dev libgmp-dev libreadline-dev libevent-dev libsqlite3-dev redis-server
 ```
 </details>
 
@@ -87,7 +87,7 @@ To change the authentication with postgres to use a simple password 'trust' auth
 <details><summary>For Ubuntu</summary>
 
 ```shell
-sudo vim /etc/postgresql/9.5/main/pg_hba.conf
+sudo vim /etc/postgresql/10/main/pg_hba.conf
 ```
 </details>
 
@@ -134,11 +134,11 @@ To start your Amber server (Both Linux and Mac):
 # update the development environment settings to your liking
 cp config/environments/development.yml.example config/environments/development.yml
 
-shards install                    # install dependencies
-shards build                      # build executable binaries
-crystal ./src/sam.cr -- db:setup  # create the database and bring it up to speed
-bin/amber db seed                 # optionally seed the database with some mock data
-bin/amber watch                   # start the server and watch for file changes
+shards install                # install dependencies
+shards build                  # build executable binaries
+crystal ./src/sam.cr db:setup # create the database and bring it up to speed
+bin/amber db seed             # optionally seed the database with some mock data
+bin/amber watch               # start the server and watch for file changes
 ```
 
 Now you can visit http://localhost:3000/ from your browser.
