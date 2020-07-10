@@ -27,16 +27,11 @@ class SessionController < ApplicationController
       else
         session[:user_id] = user.id
         session[:player_id] = Player.where { _user_id == user.id }.to_a.first.id
-        puts user.id
-        puts session[:player_id]
 
         flash[:info] = I18n.translate("session.logged_in_successfully")
         redirect_to redirect_url || landing_url
       end
     else
-      if user ;puts user.id; end
-      puts params["password"].to_s
-
       flash[:danger] = I18n.translate("session.authentication_failed")
       user = User.build({
         name: "",

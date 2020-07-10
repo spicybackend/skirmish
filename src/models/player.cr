@@ -43,9 +43,7 @@ class Player < Jennifer::Model::Base
   end
 
   def admin_of?(league : League)
-    puts "admin of"
     administrators_query.where { _league_id == league.id }.exists?
-    puts "admin of passed"
   end
 
   def member_of?(league : League)

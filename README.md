@@ -133,6 +133,7 @@ To start your Amber server (Both Linux and Mac):
 ```shell
 # update the development environment settings to your liking
 cp config/environments/development.yml.example config/environments/development.yml
+cp config/environments/test.yml.example config/environments/test.yml
 
 shards install                # install dependencies
 shards build                  # build executable binaries

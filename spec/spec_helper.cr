@@ -8,15 +8,45 @@ require "garnet_spec"
 require "../config/*"
 require "./support/*"
 
-handler = Amber::Server.instance.handler
-handler.prepare_pipelines
+# handler = Amber::Server.instance.handler
+# handler.build :web do
+#   plug Amber::Pipe::Error.new
+#   plug Amber::Pipe::Session.new
+#   plug Amber::Pipe::Flash.new
+#   plug FakeId.new
+#   plug Authenticate.new
+# end
+# handler.prepare_pipelines
+
+# handler = Amber::Pipe::Pipeline.new
+
+# handler.build :web do
+#   plug Amber::Pipe::Error.new
+#   plug Amber::Pipe::Session.new
+#   plug Amber::Pipe::Flash.new
+#   plug FakeId.new
+#   plug Authenticate.new
+# end
+
+# handler.prepare_pipelines
+
 
 module GarnetSpec
-  HANDLER = handler
+  HANDLER = Amber::Pipe::Pipeline.new
+
+  HANDLER.build :web do
+    plug Amber::Pipe::Error.new
+    plug Amber::Pipe::Session.new
+    plug Amber::Pipe::Flash.new
+    plug FakeId.new
+    plug Authenticate.new
+  end
+
+  HANDLER.prepare_pipelines
 end
 
 Jennifer::Config.from_uri(ENV["DATABASE_URL"]? || Amber.settings.database_url)
-Jennifer::Config.logger = Logger.new(nil)
+Jennifer::Config.logger = Log.for("db", :debug)
 
 # Automatically load schema and run migrations on the test database
 Jennifer::Migration::Runner.drop
