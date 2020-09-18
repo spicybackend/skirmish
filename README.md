@@ -153,6 +153,14 @@ crystal spec
 ```
 
 ## Possible Installation Issues
+<details><summary>WSL 1</summary>
+Services need manual startup
+
+```
+sudo service postgresql restart
+redis-server &
+```
+</details>
 <details><summary>Amber server.bind_ssl</summary>
 
 Some setups are hitting undefined `bind_ssl` method errors within Amber itself. The good news is that we don't actually need it.
