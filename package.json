@@ -25,7 +25,7 @@
     "webpack-merge": "^4.2.1"
   },
   "dependencies": {
-    "chart.js": "^2.7.3",
+    "chart.js": "^2.9.4",
     "cytoscape": "^3.8.1",
     "mo-js": "^0.288.2"
   }
