@@ -1,5 +1,5 @@
 name: skirmish
-version: 0.2.0
+version: 0.3.0
 
 authors:
   - Jordane Lew <jordane.lew@gmail.com>
@@ -22,15 +22,24 @@ targets:
     main: src/sam.cr
 
 dependencies:
-  pg:
-    github: will/crystal-pg
-    # version: ~> 0.15.0
-    # Just a couple of commits ahead of v0.15.0, this includes a fix for postgres bouncer
-    commit: cafe4b4a6b9dfedcd1b8c247b4d53cf0b794adcb
-
   amber:
     github: amberframework/amber
     version: ~> 0.11.2
+
+  # not used directly, locked for amber/crystal compatibility
+  exception_page:
+    github: crystal-loot/exception_page
+    version: ~> 0.1.5
+
+  # not used directly, locked for amber/crystal compatibility
+  pool:
+    github: ysbaddaden/pool
+    version: 0.2.4
+
+  # not used directly, locked for amber/crystal compatibility
+  markd:
+    github: icyleaf/markd
+    version: 0.1.1
 
   jennifer:
     github: imdrasil/jennifer.cr
